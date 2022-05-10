@@ -21,7 +21,7 @@ public class DrawingSurface extends PApplet {
 		OptionScreen screen2 = new OptionScreen(this);
 		screens.add(screen2);
 		
-		activeScreen = screens.get(0);
+		activeScreen = screens.get(1);
 	}
 	
 	public void setup()

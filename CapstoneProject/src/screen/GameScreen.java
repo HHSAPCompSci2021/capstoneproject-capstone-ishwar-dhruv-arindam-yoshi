@@ -10,7 +10,11 @@ import items.*;
 import game.*;
 
 
-
+/**
+ * This class represents the screen in which the user is interacting with the program to play the game.
+ * @author Ishwar S.
+ *
+ */
 public class GameScreen extends Screen {
 	
 	// has a haunted maze object and an info bar object
@@ -18,6 +22,10 @@ public class GameScreen extends Screen {
 	private HauntedMaze gameSetting;
 	private InfoBar bar;
 
+	/**
+	 * Constructs a new GameScreen object using a DrawingSurface object
+	 * @param surface the DrawingSurface object used to display the game and receive user input
+	 */
 	public GameScreen(DrawingSurface surface) {
 		super(800, 600);
 		this.surface = surface;

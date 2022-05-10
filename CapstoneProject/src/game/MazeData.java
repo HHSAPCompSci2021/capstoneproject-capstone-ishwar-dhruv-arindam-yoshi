@@ -14,4 +14,15 @@ public class MazeData {
 	{
 		
 	}
+	
+	/**
+	 * 
+	 * @param marker the PApplet object which is used to draw
+	 * @param x
+	 * @param y
+	 */
+	public void drawIcon(PApplet marker, int x, int y)
+	{
+		
+	}
 }
