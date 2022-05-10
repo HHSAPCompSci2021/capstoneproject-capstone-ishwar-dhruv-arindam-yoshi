@@ -2,8 +2,6 @@ package screen;
 import processing.core.*;
 
 import java.awt.geom.Rectangle2D;
-
-import ishwars.shapes.*;
 /**
  * 
  * @author all
