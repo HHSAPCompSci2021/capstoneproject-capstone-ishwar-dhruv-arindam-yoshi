@@ -4,12 +4,13 @@ package screen;
  */
 
 import processing.core.*;
+import core.*;
 
 public abstract class Screen {
 
 	public final int DRAWING_WIDTH, DRAWING_HEIGHT;
 	
-	PApplet marker;
+	protected DrawingSurface surface;
 	
 	public Screen(int width, int height) {
 		this.DRAWING_WIDTH = width;
