@@ -1,4 +1,5 @@
 package game;
+import characters.Officer;
 import items.*;
 import screen.*;
 import processing.core.*;
@@ -10,6 +11,30 @@ import processing.core.*;
 public class InfoBar extends ScreenObject {
 	
 	// has access to main officer 
+	private Officer officer;
+	
+	public InfoBar()
+	{
+		//x, y, width, height
+		super(0, 0, 100, 300);
+		officer = new Officer(10, 10);
+	}
+	
+	public void draw(PApplet marker)
+	{
+		marker.push();
+		
+		x = marker.width-w - 100;
+		y = 30;
+		
+		marker.rect((float)x, (float)y, (float)180, (float)70);
+		marker.fill(0, 0, 0);
+		marker.text("Info Bar", (float)(x + 3), (float)(y + 15));
+		
+		marker.text("Health: " + officer.getHealth(), (float)(x + 3), (float)(y + 30));
+		
+		marker.pop();
+	}
 	
 	
 }
