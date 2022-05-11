@@ -46,6 +46,13 @@ public class MazeData {
 		grid = new int[width][height]; 
 		this.readData(filename, grid); 	
 	}
+	
+	
+	
+	
+	public void generateMaze() {
+		
+	}
 
 	/**
 	 * (Graphical UI)
@@ -119,10 +126,21 @@ public class MazeData {
 
 	}
 	
-	public void draw(PApplet marker) {
-		marker.push(); 
+	public void draw(PApplet marker, float x, float y, float width, float height) {
+		marker.fill(255);
 		
+		float rw = width / grid[0].length;
+		float rh = height / grid.length;  
 		
+		for (int i=0;i<grid.length;i++) {
+			for (int j=0;j<grid[i].length;j++) {
+				float rx = x + j * rw; 
+				float ry = y + i * rh; 
+				
+				marker.rect(rx, ry, rw, rh);
+				
+			}
+		}
 	}
 	
 	/**
