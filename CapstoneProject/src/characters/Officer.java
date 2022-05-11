@@ -47,8 +47,14 @@ public class Officer extends Actor {
 	 * Returns the Officer's health level
 	 * @return the Officer's health level
 	 */
-	public boolean getHealth()
+	public int getHealth()
 	{
+		if (health > 0)
+			return health;
+		else return 0;
+	}
+	
+	public boolean isAlive() {
 		return health > 0;
 	}
 	
