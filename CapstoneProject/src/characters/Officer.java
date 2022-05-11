@@ -70,11 +70,17 @@ public class Officer extends Actor {
 	@Override
 	public void draw(PApplet marker)
 	{
+		marker.push();
 		
+		marker.fill(0);
+		marker.rect((float)x,  (float)y, (float)w, (float)h);
+		
+		marker.pop();
 	}
 	
 	public void act()
 	{
-		
+		x += vx;
+		y += vy;
 	}
 }

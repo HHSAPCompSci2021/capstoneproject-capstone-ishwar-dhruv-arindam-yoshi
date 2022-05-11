@@ -6,7 +6,6 @@ import java.awt.event.KeyEvent;
 
 import core.DrawingSurface;
 import processing.core.*;
-import screens.ScreenSwitcher;
 import characters.*;
 import items.*;
 import game.*;
@@ -47,12 +46,24 @@ public class GameScreen extends Screen {
 			surface.switchScreen(surface.OPTION);
 			return;
 		}
-		if (surface.isPressed(KeyEvent.VK_LEFT))
-			protagonist.setVx(-1)
-		if (surface.isPressed(KeyEvent.VK_RIGHT))
-			mario.walk(1);
-		if (surface.isPressed(KeyEvent.VK_UP))
-			mario.jump();
+		
+		if (surface.isPressed(KeyEvent.VK_A) && surface.isPressed(KeyEvent.VK_D))
+			gameSetting.protagonist.setVx(0);
+		else if (surface.isPressed(KeyEvent.VK_A))
+			gameSetting.protagonist.setVx(-1);
+		else if (surface.isPressed(KeyEvent.VK_D))
+			gameSetting.protagonist.setVx(1);
+		else
+			gameSetting.protagonist.setVx(0);
+			
+		if (surface.isPressed(KeyEvent.VK_W) && surface.isPressed(KeyEvent.VK_S))
+			gameSetting.protagonist.setVy(0);
+		else if (surface.isPressed(KeyEvent.VK_W))
+			gameSetting.protagonist.setVy(-1);
+		else if (surface.isPressed(KeyEvent.VK_S))
+			gameSetting.protagonist.setVy(1);
+		else
+			gameSetting.protagonist.setVy(0);
 	}
 }
 

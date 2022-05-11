@@ -25,6 +25,8 @@ public class DrawingSurface extends PApplet {
 		screens.add(screen2);
 		
 		activeScreen = screens.get(0);
+		
+		keys = new ArrayList<Integer>();
 	}
 	
 	public void setup()

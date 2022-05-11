@@ -15,6 +15,38 @@ public class Actor extends ScreenObject {
 		vx = 0; vy = 0;
 	}
 	
+	/**
+	 * Gets the horizontal velocity of the Actor
+	 * @return the horizontal velocity of the Actor
+	 */
+	public double getVx() {
+		return vx;
+	}
+	
+	/**
+	 * Gets the vertical velocity of the Actor
+	 * @return the vertical velocity of the Actor
+	 */
+	public double getVy() {
+		return vy;
+	}
+	
+	/**
+	 * Sets the horizontal velocity of the Actor
+	 * @param v the horizontal velocity of the Actor
+	 */
+	public void setVx(double v) {
+		vx = v;
+	}
+	
+	/**
+	 * Sets the vertical velocity of the Actor
+	 * @param v the vertical velocity of the Actor
+	 */
+	public void setVy(double v) {
+		vy = v;
+	}
+	
 	public void move()
 	{
 		
