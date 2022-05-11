@@ -26,9 +26,7 @@ public class MazeData {
 
 
 
-	private Grinch villain;
-	private MazeData data;
-	private ArrayList<Item> items;
+
 	private int grid[][]; 
 	
 	public MazeData()
@@ -49,6 +47,42 @@ public class MazeData {
 		this.readData(filename, grid); 	
 	}
 
+	/**
+	 * (Graphical UI)
+	 * Determines which element of the grid matches with a particular pixel coordinate.
+	 * This supports interaction with the grid using mouse clicks in the window.
+	 * 
+	 * @param p A Point object containing a graphical pixel coordinate.
+	 * @param x The x pixel coordinate of the upper left corner of the grid drawing. 
+	 * @param y The y pixel coordinate of the upper left corner of the grid drawing.
+	 * @param width The pixel width of the grid drawing.
+	 * @param height The pixel height of the grid drawing.
+	 * @return A Point object representing a coordinate within the grid, or null if the pixel coordinate
+	 * falls completely outside of the grid.
+	 */
+	public Point clickToIndex(Point p, float x, float y, float width, float height) {
+		Point gridP = new Point(); 
+		
+		float rw = width / grid[0].length;
+		float rh = height / grid.length; 
+		
+		if (p.x > x && p.x < x+width && p.y > y && p.y < y+height) {
+			for (int i=0;i<grid[0].length;i++) {
+				if (p.x>=i*rh && p.x<=(i+1)*rh) {
+					gridP.y = i;
+				}
+			}
+			
+			for (int j=0;j<grid.length;j++) {
+				if (p.y>=j*rw && p.y<=(j+1)*rw) {
+					gridP.x = j;
+				}
+			}
+			
+		}
+		return gridP; 
+	}
+	
 	
 	
 	public void readData(String filename, int grid[][]) {
@@ -108,12 +142,6 @@ public class MazeData {
 			
 		}
 		return out; 
-	}
-	
-	
-	public void addItem(Item e)
-	{
-		items.add(e);
 	}
 
 }
