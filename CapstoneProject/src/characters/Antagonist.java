@@ -9,8 +9,14 @@ public class Antagonist extends Grinch {
 	
 	public Antagonist(int x, double z)
 	{
+		super();
+		
 		health = x;
 		isAlive = health > 0;
 		proximity = z;
 	} 
+	
+	
+	
+	
 }
