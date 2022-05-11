@@ -15,11 +15,6 @@ public class Actor extends ScreenObject {
 		vx = 0; vy = 0;
 	}
 	
-	public void draw(PApplet marker)
-	{
-		
-	}
-	
 	public void move()
 	{
 		

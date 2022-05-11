@@ -10,6 +10,9 @@ public class DrawingSurface extends PApplet {
 	
 	private Screen activeScreen;
 	private ArrayList<Screen> screens;
+	public static final int GAME = 0, OPTION = 1;
+	
+	private ArrayList<Integer> keys;
 	
 	public DrawingSurface()
 	{
@@ -44,14 +47,22 @@ public class DrawingSurface extends PApplet {
 		pop();
 	}
 	
-	public void keyPressed()
-	{
-		
+	// taken from GamePhysicsDemo
+	public void keyPressed() {
+		keys.add(keyCode);
+		if (key == ESC)  // This prevents a processing program from closing on escape key
+			key = 0;
 	}
 
-	public void keyReleased()
-	{
-		
+	// taken from GamePhysicsDemo
+	public void keyReleased() {
+		while(keys.contains(keyCode))
+			keys.remove(new Integer(keyCode));
+	}
+
+	// taken from GamePhysicsDemo
+	public boolean isPressed(Integer code) {
+		return keys.contains(code);
 	}
 	
 

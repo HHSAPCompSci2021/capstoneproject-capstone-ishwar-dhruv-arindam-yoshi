@@ -2,9 +2,11 @@ package screen;
 import java.util.*;
 import java.awt.Point;
 import java.awt.Rectangle;
+import java.awt.event.KeyEvent;
 
 import core.DrawingSurface;
 import processing.core.*;
+import screens.ScreenSwitcher;
 import characters.*;
 import items.*;
 import game.*;
@@ -40,6 +42,17 @@ public class GameScreen extends Screen {
 		
 		gameSetting.draw(surface);
 		bar.draw(surface);
+		
+		if (surface.isPressed(KeyEvent.VK_ESCAPE)) {
+			surface.switchScreen(surface.OPTION);
+			return;
+		}
+		if (surface.isPressed(KeyEvent.VK_LEFT))
+			protagonist.setVx(-1)
+		if (surface.isPressed(KeyEvent.VK_RIGHT))
+			mario.walk(1);
+		if (surface.isPressed(KeyEvent.VK_UP))
+			mario.jump();
 	}
 }
 

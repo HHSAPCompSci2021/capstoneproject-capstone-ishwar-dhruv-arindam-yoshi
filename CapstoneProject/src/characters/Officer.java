@@ -66,4 +66,15 @@ public class Officer extends Actor {
 	{
 		return hasAllBlueprints() && (health > 0) && false;
 	}
+	
+	@Override
+	public void draw(PApplet marker)
+	{
+		
+	}
+	
+	public void act()
+	{
+		
+	}
 }

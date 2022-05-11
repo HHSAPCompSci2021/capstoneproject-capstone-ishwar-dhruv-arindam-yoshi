@@ -17,20 +17,20 @@ public class HauntedMaze extends ScreenObject {
 	
 	// has mazedata, actors, and items
 	
-	private Grinch villain;
-	private MazeData data;
-	private ArrayList<Item> items;
-	private int grid[][] ; 
+	public Officer protagonist;
+	public Grinch villain;
+	public MazeData data;
+	public ArrayList<Item> items;
 	
 	public HauntedMaze()
 	{
 		super(0, 0, 200, 200);
 		villain = new Grinch();
 		data = new MazeData();
-		items = new ArrayList<Item>();
-		grid = new int[20][20]; 
+		items = new ArrayList<Item>(); 
 		
 	}
+
 	
 	public HauntedMaze(int size)
 	{
@@ -38,7 +38,6 @@ public class HauntedMaze extends ScreenObject {
 		villain = new Grinch();
 		data = new MazeData();
 		items = new ArrayList<Item>();
-		grid = new int[size][size]; 
 		
 	}
 	
