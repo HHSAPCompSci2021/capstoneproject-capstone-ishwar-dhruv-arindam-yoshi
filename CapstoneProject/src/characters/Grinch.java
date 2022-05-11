@@ -8,7 +8,7 @@ public class Grinch extends Actor {
 	
 	public Grinch()
 	{
-		
+		super(null, 0, 0, 0, 0);
 	}
 	
 	public void setTrap(Trap e)
