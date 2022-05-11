@@ -8,8 +8,11 @@ import screen.*;
 
 public class DrawingSurface extends PApplet {
 	
-	private int screenIndex;
+	private Screen activeScreen;
 	private ArrayList<Screen> screens;
+	public static final int GAME = 0, OPTION = 1;
+	
+	private ArrayList<Integer> keys;
 	
 	public DrawingSurface()
 	{
@@ -21,7 +24,9 @@ public class DrawingSurface extends PApplet {
 		OptionScreen screen2 = new OptionScreen(this);
 		screens.add(screen2);
 		
-		screenIndex = 0;
+		activeScreen = screens.get(0);
+		
+		keys = new ArrayList<Integer>();
 	}
 	
 	public void setup()
@@ -30,48 +35,53 @@ public class DrawingSurface extends PApplet {
 			s.setup();
 	}
 	
-	public void switchScreen()
+	public void switchScreen(int i)
 	{
-		screenIndex = 1 - screenIndex;
+		activeScreen = screens.get(i);
 	}
 	
 	public void draw()
 	{
 		push();
 		
-		screens.get(screenIndex).draw();
+		activeScreen.draw();
 		
 		pop();
 	}
 	
-	public void keyPressed()
-	{
-		
+	// taken from GamePhysicsDemo
+	public void keyPressed() {
+		keys.add(keyCode);
+		if (key == ESC)  // This prevents a processing program from closing on escape key
+			key = 0;
 	}
 
-	public void keyReleased()
-	{
-		
+	// taken from GamePhysicsDemo
+	public void keyReleased() {
+		while(keys.contains(keyCode))
+			keys.remove(new Integer(keyCode));
+	}
+
+	// taken from GamePhysicsDemo
+	public boolean isPressed(Integer code) {
+		return keys.contains(code);
 	}
 	
-	public void mousePressed()
-	{
-		
+
+	public void mousePressed() {
+		activeScreen.mousePressed();
 	}
 	
-	public void mouseMoved()
-	{
-		
+	public void mouseMoved() {
+		activeScreen.mouseMoved();
 	}
 	
-	public void mouseDragged()
-	{
-		
+	public void mouseDragged() {
+		activeScreen.mouseDragged();
 	}
 	
-	public void mouseReleased()
-	{
-		
+	public void mouseReleased() {
+		activeScreen.mouseReleased();
 	}
 
 }
