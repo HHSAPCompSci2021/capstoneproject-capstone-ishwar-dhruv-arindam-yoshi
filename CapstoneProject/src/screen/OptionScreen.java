@@ -38,9 +38,9 @@ public class OptionScreen extends Screen {
 
 	
 	public void mousePressed() {
-		Point p = surface.actualCoordinatesToAssumed(new Point(surface.mouseX,surface.mouseY));
+		Point p = (new Point(surface.mouseX,surface.mouseY));
 		if (button.contains(p))
-			surface.switchScreen(ScreenSwitcher.GAME_SCREEN);
+			surface.switchScreen(GAME_SCREEN);
 	}
 	
 
