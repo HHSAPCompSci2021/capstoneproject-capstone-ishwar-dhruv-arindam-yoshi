@@ -21,8 +21,14 @@ public class MazeData {
 	 * @param x
 	 * @param y
 	 */
-	public void drawIcon(PApplet marker, int x, int y)
+	public void drawIcon(PApplet marker, double x, double y, double s)
 	{
+		marker.push();
 		
+		marker.fill(255, 255, 255);
+		marker.stroke(0, 0, 0);
+		marker.rect((float)(x - s/2), (float)(y - s/2), (float)s, (float)s);
+		
+		marker.pop();
 	}
 }

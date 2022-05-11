@@ -13,10 +13,10 @@ public abstract class ScreenObject {
 	
 	protected double x, y, w, h;
 	
-	public ScreenObject()
-	{
-		x = 0; y = 0; w = 0; h = 0;
-	}
+	// public ScreenObject()
+	// {
+	// 	x = 0; y = 0; w = 0; h = 0;
+	// }
 	
 	public ScreenObject(double x, double y, double w, double h)
 	{

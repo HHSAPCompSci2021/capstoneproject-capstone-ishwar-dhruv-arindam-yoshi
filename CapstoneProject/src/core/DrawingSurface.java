@@ -8,7 +8,7 @@ import screen.*;
 
 public class DrawingSurface extends PApplet {
 	
-	private Screen activeScreen;
+	private int screenIndex;
 	private ArrayList<Screen> screens;
 	
 	public DrawingSurface()
@@ -21,7 +21,7 @@ public class DrawingSurface extends PApplet {
 		OptionScreen screen2 = new OptionScreen(this);
 		screens.add(screen2);
 		
-		activeScreen = screens.get(1);
+		screenIndex = 0;
 	}
 	
 	public void setup()
@@ -30,11 +30,16 @@ public class DrawingSurface extends PApplet {
 			s.setup();
 	}
 	
+	public void switchScreen()
+	{
+		screenIndex = 1 - screenIndex;
+	}
+	
 	public void draw()
 	{
 		push();
 		
-		activeScreen.draw();
+		screens.get(screenIndex).draw();
 		
 		pop();
 	}

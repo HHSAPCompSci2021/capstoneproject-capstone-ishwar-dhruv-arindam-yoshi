@@ -6,7 +6,7 @@ public abstract class Item extends ScreenObject {
 
 	public Item()
 	{
-		
+		super(0, 0, 0, 0);
 	}
 	
 	public abstract Object use();
