@@ -11,6 +11,7 @@ import processing.core.*;
 public class InfoBar extends ScreenObject {
 	
 	// has access to main officer 
+	// will print important things about officer
 	private Officer officer;
 	
 	public InfoBar()
