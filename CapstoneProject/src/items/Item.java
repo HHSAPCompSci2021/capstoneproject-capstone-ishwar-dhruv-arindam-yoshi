@@ -4,9 +4,9 @@ import processing.core.*;
 
 public abstract class Item extends ScreenObject {
 
-	public Item()
+	public Item(int x, int y, int width, int height)
 	{
-		super(0, 0, 0, 0);
+		super(x, y, width, height);
 	}
 	
 	public abstract Object use();

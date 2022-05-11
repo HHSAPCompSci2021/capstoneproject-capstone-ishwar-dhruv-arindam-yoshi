@@ -6,9 +6,9 @@ public class GeigerCounter extends Item {
 	
 	// has damage intensity
 
-	public GeigerCounter()
+	public GeigerCounter(int x, int y, int width, int height)
 	{
-		
+		super(x, y, width, height);
 	}
 	
 	public Object use()

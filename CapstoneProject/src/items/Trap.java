@@ -6,9 +6,9 @@ public class Trap extends Item {
 	
 	// has damage intensity
 
-	public Trap()
+	public Trap(int x, int y, int width, int height)
 	{
-		
+		super(x, y, width, height);
 	}
 	
 	public Object use()

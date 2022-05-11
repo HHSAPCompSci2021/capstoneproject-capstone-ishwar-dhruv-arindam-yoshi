@@ -6,9 +6,9 @@ public class Blueprint extends Item {
 	
 	// has identifier
 
-	public Blueprint()
+	public Blueprint(int x, int y, int width, int height)
 	{
-		
+		super(x, y, width, height);
 	}
 	
 	public Object use()
