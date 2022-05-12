@@ -25,10 +25,10 @@ public class OptionScreen extends Screen {
 	public void draw() {
 
 		surface.background(255,255,255);
-		
+		surface.fill(137, 207, 240);
 		surface.rect(button.x, button.y, button.width, button.height, 10, 10, 10, 10);
 		surface.fill(0);
-		String str = "Click me!";
+		String str = "Play game!";
 		float w = surface.textWidth(str);
 		surface.text(str, button.x+button.width/2-w/2, button.y+button.height/2);
 		
@@ -39,9 +39,7 @@ public class OptionScreen extends Screen {
 	
 	public void mousePressed() {
 		Point p = (new Point(surface.mouseX,surface.mouseY));
-		System.out.println(surface.mouseX + "   " + surface.mouseY);
 		if (button.contains(p))
-			System.out.println("CONTAINED");
 			surface.switchScreen(0);
 	}
 	
