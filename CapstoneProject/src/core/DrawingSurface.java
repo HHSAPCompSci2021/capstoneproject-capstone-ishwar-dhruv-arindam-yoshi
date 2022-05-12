@@ -6,6 +6,7 @@ import processing.core.PApplet;
 import screen.*;
 
 
+
 public class DrawingSurface extends PApplet {
 	
 	private Screen activeScreen;
@@ -26,7 +27,7 @@ public class DrawingSurface extends PApplet {
 		OptionScreen screen2 = new OptionScreen(this);
 		screens.add(screen2);
 		
-		activeScreen = screens.get(0);
+		activeScreen = screens.get(1);
 		
 		keys = new ArrayList<Integer>();
 	}
