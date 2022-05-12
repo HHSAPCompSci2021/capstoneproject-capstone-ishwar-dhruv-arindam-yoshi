@@ -23,9 +23,9 @@ public class HauntedMaze extends ScreenObject {
 	public ArrayList<Item> items;
 	
 	public double direction; // direction with respect to the horizontal (pointing right, clockwise) 
-	public static final double LIGHT_ANGLE = Math.PI*50/360;
+	public static final double LIGHT_ANGLE = Math.PI*80/180;
 	public static final double LIGHT_DIST = 200;
-	public static final int LIGHT_RES = 10;
+	public static final int LIGHT_RES = 4;
 	
 	public HauntedMaze()
 	{
@@ -65,7 +65,7 @@ public class HauntedMaze extends ScreenObject {
 	{
 		marker.push();
 		
-		// marker.noStroke();
+		marker.noStroke();
 		
 		
 		double px = protagonist.getX() + protagonist.getW()/2;
@@ -102,28 +102,32 @@ public class HauntedMaze extends ScreenObject {
 		maxY = Math.max(py, maxY); minY = Math.min(py, minY);
 		
 		double[][] boxArr = new double[LIGHT_RES+1][2];
-		int cornerIndex = -1;
 		double[] corner = new double[2];
 		
 		for (int i = 0; i < LIGHT_RES+1; i++)
 		{
 			boxArr[i] = findEndPt(px, py, pointArr[i], minX, maxX, minY, maxY);
 			
-			if ((i > 0) && (cornerIndex == -1))
+			if (i > 0)
 			{
 				boolean ifEither = true;
 				if (equal(boxArr[i-1][0], maxX) && equal(boxArr[i][1], maxY))
-					{corner[0] = maxX; corner[1] = maxY; System.out.println("1");}
+					{corner[0] = maxX; corner[1] = maxY;}
 				else if (equal(boxArr[i-1][1], maxY) && equal(boxArr[i][0], minX))
-					{corner[0] = minX; corner[1] = maxY; System.out.println("2");}
+					{corner[0] = minX; corner[1] = maxY;}
 				else if (equal(boxArr[i-1][0], minX) && equal(boxArr[i][1], minY))
-					{corner[0] = minX; corner[1] = minY; System.out.println("3");}
+					{corner[0] = minX; corner[1] = minY;}
 				else if (equal(boxArr[i-1][1], minY) && equal(boxArr[i][0], maxX))
-					{corner[0] = maxX; corner[1] = minY; System.out.println("4");}
+					{corner[0] = maxX; corner[1] = minY;}
 				else
 					ifEither = false;
 				if (ifEither)
-					cornerIndex = i;
+				{
+					marker.fill(0, 0, 0, 50);
+					marker.triangle((float)corner[0], (float)corner[1],
+							(float)boxArr[i-1][0], (float)boxArr[i-1][1],
+							(float)boxArr[i][0], (float)boxArr[i][1]);
+				}
 			}
 			
 		}
@@ -143,14 +147,66 @@ public class HauntedMaze extends ScreenObject {
 					(float)pointArr[i][0], (float)pointArr[i][1],
 					(float)pointArr[i+1][0], (float)pointArr[i+1][1],
 					(float)boxArr[i+1][0], (float)boxArr[i+1][1]);
-			
-			if (i+1 == cornerIndex)
+		}
+		
+		double leftX = 0, leftY = 0;
+		double rightX = 0, rightY = 0;
+		
+		if (equal(minX, px))
+		{
+			if (equal(minY, py))
 			{
-				marker.triangle((float)corner[0], (float)corner[1],
-								(float)boxArr[i+1][0], (float)boxArr[i+1][1],
-								(float)boxArr[i][0], (float)boxArr[i][1]);
+				leftX = maxX;
+				rightX = minX;
+			}
+			else if (equal(maxY, py))
+			{
+				leftX = minX;
+				rightX = maxX;
+			}
+			else
+			{
+				leftX = minX;
+				rightX = minX;
+			}
+			leftY = minY;
+			rightY = maxY;
+		}
+		else if (equal(maxX, px))
+		{
+			if (equal(minY, py))
+			{
+				leftX = maxX;
+				rightX = minX;
+			}
+			else if (equal(maxY, py))
+			{
+				leftX = minX;
+				rightX = maxX;
+			}
+			else
+			{
+				leftX = maxX;
+				rightX = maxX;
+			}
+			leftY = maxY;
+			rightY = minY;
+		}
+		else
+		{
+			if (equal(minY, py))
+			{
+				leftX = maxX; leftY = minY;
+				rightX = minX; rightY = minY;
+			}
+			else if (equal(maxY, py))
+			{
+				leftX = minX; leftY = maxY;
+				rightX = maxX; rightY = maxY;
 			}
 		}
+		marker.triangle((float)px, (float)py, (float)leftX, (float)leftY, (float)boxArr[0][0], (float)boxArr[0][1]);
+		marker.triangle((float)px, (float)py, (float)rightX, (float)rightY, (float)boxArr[LIGHT_RES][0], (float)boxArr[LIGHT_RES][1]);
 		
 		marker.fill(0, 0, 0, 40);
 		marker.rect((float)x, (float)y, (float)w, (float)h);
