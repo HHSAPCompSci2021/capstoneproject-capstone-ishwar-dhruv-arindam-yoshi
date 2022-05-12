@@ -14,11 +14,11 @@ public class InfoBar extends ScreenObject {
 	// will print important things about officer
 	private Officer officer;
 	
-	public InfoBar()
+	public InfoBar(Officer o)
 	{
 		//x, y, width, height
 		super(0, 0, 100, 300);
-		officer = new Officer(10, 10);
+		officer = o;
 	}
 	
 	public void draw(PApplet marker)

@@ -32,11 +32,18 @@ public class GameScreen extends Screen {
 		this.surface = surface;
 		System.out.println(surface.width + " " + surface.height);
 		gameSetting = new HauntedMaze();
-		bar = new InfoBar();
+		bar = new InfoBar(gameSetting.protagonist);
+	}
+	
+	public void setup()
+	{
+		gameSetting.protagonist.setImage(surface.loadImage(Officer.IMG_PATH));
 	}
 	
 	public void draw()
 	{
+		gameSetting.update(surface.mouseX, surface.mouseY);
+		
 		surface.background(255, 255, 255);
 		
 		gameSetting.draw(surface);
@@ -50,18 +57,18 @@ public class GameScreen extends Screen {
 		if (surface.isPressed(KeyEvent.VK_A) && surface.isPressed(KeyEvent.VK_D))
 			gameSetting.protagonist.setVx(0);
 		else if (surface.isPressed(KeyEvent.VK_A))
-			gameSetting.protagonist.setVx(-1);
+			gameSetting.protagonist.setVx(-Officer.AXIS_V);
 		else if (surface.isPressed(KeyEvent.VK_D))
-			gameSetting.protagonist.setVx(1);
+			gameSetting.protagonist.setVx(Officer.AXIS_V);
 		else
 			gameSetting.protagonist.setVx(0);
 			
 		if (surface.isPressed(KeyEvent.VK_W) && surface.isPressed(KeyEvent.VK_S))
 			gameSetting.protagonist.setVy(0);
 		else if (surface.isPressed(KeyEvent.VK_W))
-			gameSetting.protagonist.setVy(-1);
+			gameSetting.protagonist.setVy(-Officer.AXIS_V);
 		else if (surface.isPressed(KeyEvent.VK_S))
-			gameSetting.protagonist.setVy(1);
+			gameSetting.protagonist.setVy(Officer.AXIS_V);
 		else
 			gameSetting.protagonist.setVy(0);
 	}

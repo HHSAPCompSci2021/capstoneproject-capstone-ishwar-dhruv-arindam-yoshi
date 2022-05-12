@@ -24,6 +24,26 @@ public abstract class ScreenObject {
 		this.w = w; this.h = h;
 	}
 	
+	public double getX()
+	{
+		return x;
+	}
+	
+	public double getY()
+	{
+		return y;
+	}
+	
+	public double getW()
+	{
+		return w;
+	}
+	
+	public double getH()
+	{
+		return h;
+	}
+	
 	public void setPos(double newX, double newY)
 	{
 		this.x = newX; this.y = newY;

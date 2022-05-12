@@ -14,6 +14,8 @@ public class DrawingSurface extends PApplet {
 	
 	private ArrayList<Integer> keys;
 	
+	public static double DT = 1.0/60;
+	
 	public DrawingSurface()
 	{
 		screens = new ArrayList<Screen>();
