@@ -9,7 +9,7 @@ import core.*;
 public class Screen {
 
 	public final int DRAWING_WIDTH, DRAWING_HEIGHT;
-	public static final int MENU_SCREEN = 0;
+	public static final int OPTION_SCREEN = 0;
 	public static final int GAME_SCREEN = 1;
 	protected DrawingSurface surface;
 	
