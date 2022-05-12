@@ -24,12 +24,15 @@ public class HauntedMaze extends ScreenObject {
 	
 	public double direction; // direction with respect to the horizontal (pointing right, clockwise) 
 	public static final double LIGHT_ANGLE = Math.PI*80/180;
-	public static final double LIGHT_DIST = 200;
+	public static final double LIGHT_DIST = 100;
 	public static final int LIGHT_RES = 4;
+	
+	public static final int[] SHADE_COLOR = {0, 0, 0, 230};
+	public static final int[] LIGHT_COLOR = {252, 252, 38, 100};
 	
 	public HauntedMaze()
 	{
-		super(0, 0, 200, 200);
+		super(0, 0, 300, 300);
 		protagonist = new Officer(null, 10, 10);
 		villain = new Grinch();
 		settingData = new MazeData();
@@ -64,9 +67,6 @@ public class HauntedMaze extends ScreenObject {
 	public void drawLighting(PApplet marker)
 	{
 		marker.push();
-		
-		marker.noStroke();
-		
 		
 		double px = protagonist.getX() + protagonist.getW()/2;
 		double py = protagonist.getY() + protagonist.getH()/2;
@@ -104,6 +104,8 @@ public class HauntedMaze extends ScreenObject {
 		double[][] boxArr = new double[LIGHT_RES+1][2];
 		double[] corner = new double[2];
 		
+		marker.fill(SHADE_COLOR[0], SHADE_COLOR[1], SHADE_COLOR[2], SHADE_COLOR[3]);
+		marker.stroke(SHADE_COLOR[0], SHADE_COLOR[1], SHADE_COLOR[2], SHADE_COLOR[3]/3);
 		for (int i = 0; i < LIGHT_RES+1; i++)
 		{
 			boxArr[i] = findEndPt(px, py, pointArr[i], minX, maxX, minY, maxY);
@@ -123,7 +125,6 @@ public class HauntedMaze extends ScreenObject {
 					ifEither = false;
 				if (ifEither)
 				{
-					marker.fill(0, 0, 0, 50);
 					marker.triangle((float)corner[0], (float)corner[1],
 							(float)boxArr[i-1][0], (float)boxArr[i-1][1],
 							(float)boxArr[i][0], (float)boxArr[i][1]);
@@ -131,18 +132,17 @@ public class HauntedMaze extends ScreenObject {
 			}
 			
 		}
-		// System.out.println(cornerIndex);
-		// System.out.println(corner[0] + " " + corner[1]);
 		
 		for (int i = 0; i < LIGHT_RES; i++)
 		{
-			marker.fill(252, 252, 38, 100);
+			marker.fill(LIGHT_COLOR[0], LIGHT_COLOR[1], LIGHT_COLOR[2], LIGHT_COLOR[3]);
+			marker.noStroke();
 			marker.triangle((float)px, (float)py,
 							(float)pointArr[i][0], (float)pointArr[i][1],
 							(float)pointArr[i+1][0], (float)pointArr[i+1][1]);
 			
-			marker.fill(0, 0, 0, 50);
-			
+			marker.fill(SHADE_COLOR[0], SHADE_COLOR[1], SHADE_COLOR[2], SHADE_COLOR[3]);
+			marker.stroke(SHADE_COLOR[0], SHADE_COLOR[1], SHADE_COLOR[2], SHADE_COLOR[3]/3);
 			marker.quad((float)boxArr[i][0], (float)boxArr[i][1],
 					(float)pointArr[i][0], (float)pointArr[i][1],
 					(float)pointArr[i+1][0], (float)pointArr[i+1][1],
@@ -208,8 +208,22 @@ public class HauntedMaze extends ScreenObject {
 		marker.triangle((float)px, (float)py, (float)leftX, (float)leftY, (float)boxArr[0][0], (float)boxArr[0][1]);
 		marker.triangle((float)px, (float)py, (float)rightX, (float)rightY, (float)boxArr[LIGHT_RES][0], (float)boxArr[LIGHT_RES][1]);
 		
-		marker.fill(0, 0, 0, 40);
-		marker.rect((float)x, (float)y, (float)w, (float)h);
+		double[] posX = {x, minX, maxX, x+w};
+		double[] posY = {y, minY, maxY, y+h};
+		
+		marker.fill(SHADE_COLOR[0], SHADE_COLOR[1], SHADE_COLOR[2], SHADE_COLOR[3]);
+		marker.stroke(SHADE_COLOR[0], SHADE_COLOR[1], SHADE_COLOR[2], SHADE_COLOR[3]/3);
+		for (int i = 0; i < 3; i++)
+		{
+			for (int j = 0; j < 3; j++)
+			{
+				if (equal(posX[i], minX) && equal(posY[j], minY))
+					continue;
+				marker.rect((float)posX[i], (float)posY[j], (float)(posX[i+1]-posX[i]), (float)(posY[j+1]-posY[j]));
+			}
+		}
+		
+		// marker.rect((float)x, (float)y, (float)w, (float)h);
 		
 		marker.pop();
 	}
