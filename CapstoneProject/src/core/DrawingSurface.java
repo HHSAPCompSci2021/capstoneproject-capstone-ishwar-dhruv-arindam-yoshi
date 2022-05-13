@@ -6,17 +6,28 @@ import processing.core.PApplet;
 import screen.*;
 
 
-
+/**
+ * Represents the drawing surface for the game
+ * @author akulkarni174
+ *
+ */
 public class DrawingSurface extends PApplet {
 	
 	private Screen activeScreen;
 	private ArrayList<Screen> screens;
+	
+	/**
+	 * Represents an int for a certain screen
+	 */
 	public static final int GAME = 0, OPTION = 1;
 	
 	private ArrayList<Integer> keys;
 	
 	public static double DT = 1.0/60;
 	
+	/**
+	 * Initializes the drawing surface for the game
+	 */
 	public DrawingSurface()
 	{
 		screens = new ArrayList<Screen>();
@@ -32,17 +43,28 @@ public class DrawingSurface extends PApplet {
 		keys = new ArrayList<Integer>();
 	}
 	
+	/**
+	 * Sets up each screen
+	 */
 	public void setup()
 	{
 		for (Screen s : screens)
 			s.setup();
 	}
 	
+	/**
+	 * Sets a specific active screen
+	 * @param i is the index for screen intended to change to 
+	 * @post a change in screen might occur
+	 */
 	public void switchScreen(int i)
 	{
 		activeScreen = screens.get(i);
 	}
 	
+	/**
+	 * draws the active screen
+	 */
 	public void draw()
 	{
 		push();
@@ -53,6 +75,9 @@ public class DrawingSurface extends PApplet {
 	}
 	
 	// taken from GamePhysicsDemo
+	/**
+	 * takes into account keys pressed, prevents processing from closing on escape key
+	 */
 	public void keyPressed() {
 		keys.add(keyCode);
 		if (key == ESC)  // This prevents a processing program from closing on escape key
@@ -60,33 +85,56 @@ public class DrawingSurface extends PApplet {
 	}
 
 	// taken from GamePhysicsDemo
+	/**
+	 * takes into account keys released
+	 */
 	public void keyReleased() {
 		while(keys.contains(keyCode))
 			keys.remove(new Integer(keyCode));
 	}
 
 	// taken from GamePhysicsDemo
+	/**
+	 * Checks if a key is pressed
+	 * @param code is a certain code for a key
+	 * @return whether the keys contains code
+	 */
 	public boolean isPressed(Integer code) {
 		return keys.contains(code);
 	}
 	
 
+	/**
+	 * Presses the mouse
+	 */
 	public void mousePressed() {
 		activeScreen.mousePressed();
 	}
 	
+	/**
+	 * Moves the mouse
+	 */
 	public void mouseMoved() {
 		activeScreen.mouseMoved();
 	}
 	
+	/**
+	 * Drags the mouse
+	 */
 	public void mouseDragged() {
 		activeScreen.mouseDragged();
 	}
 	
+	/**
+	 * Releases the mouse
+	 */
 	public void mouseReleased() {
 		activeScreen.mouseReleased();
 	}
 	
+	/**
+	 * Acts on which key is typed
+	 */
 	public void keyTyped()
 	{
 		activeScreen.keyTyped();
