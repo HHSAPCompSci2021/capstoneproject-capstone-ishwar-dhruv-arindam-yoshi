@@ -1,7 +1,14 @@
 package items;
 import screen.ScreenObject;
+
 import processing.core.*;
 import game.HauntedMaze;
+
+/**
+ * Represents any item used in the game
+ * @author akulkarni174
+ *
+ */
 public abstract class Item extends ScreenObject {
 	
 	/**

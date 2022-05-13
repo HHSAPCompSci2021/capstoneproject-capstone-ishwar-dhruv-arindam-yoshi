@@ -5,6 +5,7 @@ import screen.*;
 import processing.core.*;
 
 /**
+ * Represents the infobar with information about the officer and blueprints collected
  * @author Arindam
  *
  */
