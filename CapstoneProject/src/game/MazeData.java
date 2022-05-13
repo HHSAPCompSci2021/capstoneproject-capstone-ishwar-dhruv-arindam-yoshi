@@ -1,5 +1,6 @@
 package game;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Random;
 
 import characters.Grinch;
@@ -98,7 +99,6 @@ public class MazeData {
 		while (!(visitedCells >= 100)) {
 			if (prune(currentCell) != 0) {
 				gridP neighbor = null;
-
 				Random generator = new Random();
 				int random = generator.nextInt(prune(currentCell));
 				neighbor = currentCell.adjlist.get(random);
@@ -122,6 +122,18 @@ public class MazeData {
 				}
 			}
 		}
+	}
+	public int prune(gridP currentCell) {
+		Iterator<gridP> it = currentCell.adjlist.iterator();
+		while (it.hasNext()) {
+			gridP cell = it.next();
+			if (cell.visited == 1) it.remove();
+			
+		}
+		int neighbors = 0;
+		for (int x = 0; x < currentCell.adjlist.size(); x++) 
+			if (currentCell.adjlist.get(x).visited == 0) neighbors++;
+		return neighbors;
 	}
 }
 
