@@ -2,7 +2,7 @@ package items;
 import screen.ScreenObject;
 import processing.core.*;
 
-public class Blueprint extends Item {
+public class Blueprint extends Item<Object> {
 	
 	// has identifier
 
