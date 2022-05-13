@@ -42,8 +42,17 @@ public class GeigerCounter extends Item {
 	
 
 	@Override
-	public void drawInfo(PApplet marker, int x, int y) {
+	public void drawInfo(PApplet marker, double x, double y) {
 		// TODO Auto-generated method stub
+		marker.push();
 		
+		marker.stroke(0);
+		marker.noFill();
+		
+		marker.rect((float)x, (float)y, (float)w, (float)h);
+		String readingStr = "" + getReading();
+		marker.text(readingStr, (float)x, (float)y);
+		
+		marker.pop();
 	}
 }

@@ -8,7 +8,7 @@ public abstract class Item extends ScreenObject {
 	}
 	public abstract void use(HauntedMaze maze);
 
-	public abstract void drawInfo(PApplet marker, int x, int y); 
+	public abstract void drawInfo(PApplet marker, double x, double y); 
 	
 	
 }

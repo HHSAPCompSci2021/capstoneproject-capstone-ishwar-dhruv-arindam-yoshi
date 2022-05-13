@@ -20,7 +20,7 @@ public class Blueprint extends Item {
 		
 	}
 	
-	public void drawInfo(PApplet marker, int x, int y)
+	public void drawInfo(PApplet marker, double x, double y)
 	{
 		
 		marker.push();
