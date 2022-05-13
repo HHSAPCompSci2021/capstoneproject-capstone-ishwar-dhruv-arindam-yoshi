@@ -1,5 +1,6 @@
 package game;
 import java.util.ArrayList;
+import java.util.Random;
 
 import characters.Grinch;
 import characters.Officer;
@@ -95,7 +96,31 @@ public class MazeData {
 		int visitedCells = 1;
 
 		while (!(visitedCells >= 100)) {
-			
+			if (prune(currentCell) != 0) {
+				gridP neighbor = null;
+
+				Random generator = new Random();
+				int random = generator.nextInt(prune(currentCell));
+				neighbor = currentCell.adjlist.get(random);
+				
+				if (currentCell.num + 10 == neighbor.num) currentCell.s = neighbor.n = 0;
+				else if (currentCell.num + 1 == neighbor.num) currentCell.e = neighbor.w = 0;
+				else if (currentCell.num - 1 == neighbor.num) currentCell.w = neighbor.e = 0 ;
+				else if (currentCell.num - 10 == neighbor.num) currentCell.n = neighbor.s = 0;
+				
+				currentCell.adjlist.remove(neighbor);
+				neighbor.adjlist.remove(currentCell);
+				
+				cList.add(currentCell);
+				currentCell = neighbor;
+				currentCell.visited = 1;
+				visitedCells+=1;
+			}else {
+				if (!cList.isEmpty()) {
+					gridP newCell = cList.remove(cList.size() - 1);
+					currentCell = newCell;
+				}
+			}
 		}
 	}
 }
