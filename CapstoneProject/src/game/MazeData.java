@@ -89,7 +89,14 @@ public class MazeData {
 	}
 	
 	public void generateMaze() {
-		
+		this.assignLocations(); 
+		gridP currentCell = myBoard[0][0];
+		currentCell.visited = 1;
+		int visitedCells = 1;
+
+		while (!(visitedCells >= 100)) {
+			
+		}
 	}
 }
 
