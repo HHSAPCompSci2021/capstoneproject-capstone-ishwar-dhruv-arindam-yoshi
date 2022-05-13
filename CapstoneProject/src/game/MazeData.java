@@ -135,6 +135,10 @@ public class MazeData {
 			if (currentCell.adjlist.get(x).visited == 0) neighbors++;
 		return neighbors;
 	}
+	
+	public void draw(PApplet marker, float x, float y, float w, float h) {
+		
+	}
 }
 
 
