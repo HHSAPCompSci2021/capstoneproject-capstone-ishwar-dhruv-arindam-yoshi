@@ -22,7 +22,7 @@ public class GeigerCounter extends Item {
 
 	public GeigerCounter(double x, double y)
 	{
-		super(x, y, 50, 30);
+		super(x, y, 205, 50);
 	}
 	
 	/**
@@ -55,8 +55,10 @@ public class GeigerCounter extends Item {
 		marker.noFill();
 		
 		marker.rect((float)x, (float)y, (float)w, (float)h);
+		
+		marker.text("Radiation reading:", (float)(x+3), (float)(y+15));
 		String readingStr = "" + getReading() + " Bq";
-		marker.text(readingStr, (float)x, (float)y);
+		marker.text(readingStr, (float)(x+3), (float)(y+35));
 		
 		marker.pop();
 	}
