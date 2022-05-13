@@ -12,9 +12,8 @@ public class Trap extends Item {
 		super(x, y, width, height);
 	}
 	
-	public Object use(HauntedMaze h)
+	public void use(HauntedMaze h)
 	{
-		return null;
 	}
 	
 	public void drawInfo(PApplet marker, int x, int y)
