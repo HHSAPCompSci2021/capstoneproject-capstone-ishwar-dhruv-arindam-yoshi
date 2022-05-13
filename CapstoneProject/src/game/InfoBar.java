@@ -14,6 +14,10 @@ public class InfoBar extends ScreenObject {
 	// will print important things about officer
 	private Officer officer;
 	
+	/**
+	 * Initializes an InfoBar object
+	 * @param o is the officer playing
+	 */
 	public InfoBar(Officer o)
 	{
 		//x, y, width, height
@@ -21,6 +25,10 @@ public class InfoBar extends ScreenObject {
 		officer = o;
 	}
 	
+	/**
+	 * draws the infobar on the top right corner of the game
+	 * @param marker is the marker used to draw
+	 */
 	public void draw(PApplet marker)
 	{
 		marker.push();
