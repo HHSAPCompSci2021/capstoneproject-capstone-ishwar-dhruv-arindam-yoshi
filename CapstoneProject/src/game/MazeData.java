@@ -22,10 +22,6 @@ import processing.core.PApplet;
 public class MazeData {
 	
 	// has mazedata, actors, and items
-	
-
-
-
 
 	private int grid[][]; 
 	
@@ -161,6 +157,8 @@ public class MazeData {
 		}
 		return out; 
 	}
+	
+	
 
 }
 

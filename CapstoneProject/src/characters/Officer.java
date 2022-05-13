@@ -8,6 +8,9 @@ import items.*;
 
 public class Officer extends Actor {
 	
+	// TO-DO
+	// collision with maze
+	
 	// has blueprints and health level (# of lives)
 	
 	public static final String IMG_PATH = "assets/badge.png";

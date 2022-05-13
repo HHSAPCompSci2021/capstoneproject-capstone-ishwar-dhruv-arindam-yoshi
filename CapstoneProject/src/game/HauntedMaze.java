@@ -10,10 +10,14 @@ import processing.core.*;
 
 /**
  * has characters, items, maze walls
- * @author dhruv
+ * @author Ishwar S.
  *
  */
 public class HauntedMaze extends ScreenObject {
+	
+	// TO-DO
+		// should set Blueprints to collect
+		// should set Traps in the beginning
 	
 	// has mazedata, actors, and items
 	
