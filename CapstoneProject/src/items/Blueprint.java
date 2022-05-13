@@ -34,11 +34,10 @@ public class Blueprint extends Item {
 		marker.pop();
 	}
 	
-	public void draw(PApplet marker, int x, int y) {
+	public void draw(PApplet marker) {
 		marker.push();
 		
 		marker.fill(0);
-		// marker.rect((float)x,  (float)y, (float)w, (float)h);
 		marker.image(pin, (float)x, (float)y, (float)w, (float)h);
 		
 		marker.pop();
