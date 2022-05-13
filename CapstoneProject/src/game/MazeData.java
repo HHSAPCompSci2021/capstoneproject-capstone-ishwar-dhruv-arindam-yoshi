@@ -27,21 +27,32 @@ public class MazeData {
 	private gridP[][] myBoard ;
 	private int size; 
 	private ArrayList<gridP> cList;
+	private String output[][]; 
 	
+	/**
+	 * contructs the maze. 
+	 */
 	public MazeData() {
 		myBoard = new gridP[10][10]; 
 		cList = new ArrayList<gridP>();; 
 		size = 10; 
+		output = new String[20][20]; 
 	}
 	
-	
+	/**
+	 * Creates a MazeData object with parameter size which is the size of the maze
+	 * @param size size which is the size of the maze
+	 */
 	public MazeData(int size) {
 		myBoard = new gridP[size][size]; 
 		cList = new ArrayList<gridP>();; 
 		this.size = size; 
+		output = new String[20][40]; 
 	}
 	
-	
+	/**
+	 * Generates a random maze, and populates the maze in the myBoard field. 
+	 */
 	public void generateMaze() {
 		this.assignLocations(); 
 		gridP currentCell = myBoard[0][0];
@@ -119,11 +130,20 @@ public class MazeData {
 		return neighbors;
 	}
 	
+	
+	/**
+	 * Draws the maze on the PApplet
+	 * @param marker the marker where the PApplet is draw
+	 * @param x the upper x coord of the maze
+	 * @param y the upper y coord of the maze
+	 * @param w the width of the maze
+	 * @param h the height of the maze
+	 */
 	public void draw(PApplet marker, float x, float y, float w, float h) {
 		
 	}
 	
-	public void display() {
+	private void display() {
 		for (int i = 0; i < size; i++) {
 			for (int j = 0; j < size; j++) {
 				if (myBoard[j][i].n == 1) {
