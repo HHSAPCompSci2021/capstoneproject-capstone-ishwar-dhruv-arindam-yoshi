@@ -87,7 +87,10 @@ public class DrawingSurface extends PApplet {
 		activeScreen.mouseReleased();
 	}
 	
-	
+	public void keyTyped()
+	{
+		activeScreen.keyTyped();
+	}
 
 	
 

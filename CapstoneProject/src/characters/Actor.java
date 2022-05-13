@@ -1,5 +1,6 @@
 package characters;
 import processing.core.*;
+import game.*;
 import screen.ScreenObject;
 
 public class Actor extends ScreenObject {
@@ -57,7 +58,7 @@ public class Actor extends ScreenObject {
 		
 	}
 	
-	public void act()
+	public void act(HauntedMaze maze)
 	{
 		
 	}

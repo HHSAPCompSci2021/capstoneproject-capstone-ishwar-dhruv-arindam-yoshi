@@ -31,20 +31,37 @@ public class GameScreen extends Screen {
 		super(800, 600);
 		this.surface = surface;
 		System.out.println(surface.width + " " + surface.height);
-		gameSetting = new HauntedMaze();
+		gameSetting = new HauntedMaze(surface);
 		bar = new InfoBar(gameSetting.protagonist);
 	}
 	
 	public void setup()
 	{
 		gameSetting.protagonist.setImage(surface.loadImage(Officer.IMG_PATH));
+		gameSetting.setup();
 	}
 	
 	public void draw()
 	{
-		gameSetting.update(surface.mouseX, surface.mouseY);
-		
 		surface.background(255, 255, 255);
+		
+		if (!gameSetting.protagonist.isAlive())
+		{
+			surface.push();
+			surface.fill(0, 0, 0);
+			surface.text("Game over :/", 300, 200);
+			surface.pop();
+			return;
+		}
+		if (gameSetting.protagonist.isSuccessful(gameSetting))
+		{
+			surface.push();
+			surface.fill(0, 0, 0);
+			surface.text("You have won :)", 300, 200);
+			surface.pop();
+			return;
+		}
+		gameSetting.update(surface.mouseX, surface.mouseY);
 		
 		gameSetting.draw(surface);
 		bar.draw(surface);
@@ -71,6 +88,28 @@ public class GameScreen extends Screen {
 			gameSetting.protagonist.setVy(Officer.AXIS_V);
 		else
 			gameSetting.protagonist.setVy(0);
+		
+		
+		if (gameSetting.protagonist.nearBlueprint(gameSetting) != null)
+		{
+			surface.push();
+			surface.fill(0, 0, 0);
+			surface.text("Press E to pick up the blueprint", 300, 100);
+			surface.pop();
+			if (surface.isPressed(KeyEvent.VK_E))
+			{
+				System.out.println("here");
+				gameSetting.protagonist.takeBlueprint(gameSetting);
+			}
+		}	
+	}
+	
+	public void keyTyped()
+	{
+		if (surface.keyCode == KeyEvent.VK_B)
+		{
+			
+		}
 	}
 }
 

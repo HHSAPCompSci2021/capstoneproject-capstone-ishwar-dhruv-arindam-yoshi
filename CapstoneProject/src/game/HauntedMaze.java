@@ -6,7 +6,7 @@ import characters.Officer;
 import items.*;
 import screen.*;
 import processing.core.*;
-
+import core.*;
 
 /**
  * has characters, items, maze walls
@@ -26,18 +26,19 @@ public class HauntedMaze extends ScreenObject {
 	public MazeData settingData;
 	public ArrayList<Item> items;
 	
-	public double direction; // direction with respect to the horizontal (pointing right, clockwise) 
-	public static final double LIGHT_ANGLE = Math.PI*80/180;
-	public static final double LIGHT_DIST = 100;
+	public double direction; // direction with respect to the horizontal (pointing right, clockwise)
+	
+	public static final double LIGHT_ANGLE = Math.PI*50/180;
+	public static final double LIGHT_DIST = 70;
 	public static final int LIGHT_RES = 4;
 	
 	public static final int[] SHADE_COLOR = {0, 0, 0, 230};
 	public static final int[] LIGHT_COLOR = {252, 252, 38, 100};
 	
-	public HauntedMaze()
+	public HauntedMaze(PApplet marker)
 	{
-		super(0, 0, 300, 300);
-		protagonist = new Officer(null, 10, 10);
+		super(300, 200, 300, 300);
+		protagonist = new Officer(null, 100, 100);
 		villain = new Grinch();
 		settingData = new MazeData(20);
 		items = new ArrayList<Item>(); 
@@ -45,12 +46,15 @@ public class HauntedMaze extends ScreenObject {
 		direction = 0;
 	}
 	
-	public void draw(PApplet marker)
+	public void setup()
 	{
-		x = (marker.width-w)/2.0;
-		y = (marker.height-h)/2.0;
-		
-		
+		System.out.println(x + " " + y);
+		addItem(new Blueprint(310, 210, 20, 20));
+		addItem(new Blueprint(350, 250, 20, 20));
+	}
+	
+	public void draw(PApplet marker)
+	{	
 		marker.push();
 		
 		// marker.rect((float)x, (float)y, (float)w, (float)h);
@@ -272,8 +276,10 @@ public class HauntedMaze extends ScreenObject {
 		
 		direction = (relY > 0) ? Math.acos(relX/dist) : (2*Math.PI - Math.acos(relX/dist));
 		
-		protagonist.act();
-		villain.act();
+		protagonist.act(this);
+		villain.act(this);
 	}
+	
+	
 
 }
