@@ -37,93 +37,45 @@ class gridP {
 }
 
 
+
+
+
 public class MazeData {
+	private gridP[][] myBoard = new gridP[10][10];
+	private ArrayList<gridP> cList = new ArrayList<gridP>();
 	
-	// has mazedata, actors, and items
-
-	private int maze[][], size; 
-	
-	public MazeData()
-	{
-		maze = new int[25][25]; 
-		
-	}
-	
-	public MazeData(int dimensions) {
-		this.size = dimensions; 
-		maze = new int[dimensions][dimensions]; 
-		this.generateNewMaze(); 
-		
-	}
-	
-	public MazeData(int size, String filename) {
-		this.size = size; 
-		maze = new int[size][size]; 
-		this.readData(filename, maze); 	
-	}
-	
-	
-	public void readData(String filename, int grid[][]) {
-		File dataFile = new File(filename);
-
-		if (dataFile.exists()) {
-			int count = 0;
-
-			FileReader reader = null;
-			Scanner in = null;
-			try {
-					reader = new FileReader(dataFile);
-					in = new Scanner(reader);
-					
-					while (in.hasNext()) {
-						String line = in.nextLine();
-						for(int i = 0; i < line.length(); i++)
-							if (count < grid.length && i < grid[count].length)
-								grid[count][i] = line.charAt(i);
-
-						count++;
-					}
-
-			} catch (IOException ex) {
-				throw new IllegalArgumentException("Data file " + filename + " cannot be read.");
-			} finally {
-				if (in != null)
-					in.close();
+	public void assignLocations() {
+		int num = 0;
+		for (int j = 0; j <= 9; j++) {
+			for (int i = 0; i < 10; i++) {
+				gridP newCell = new gridP(i, j);
+				myBoard[i][j] = newCell;
 			}
-		} else {
-			throw new IllegalArgumentException("Data file " + filename + " does not exist.");
 		}
-	}
-	
-	
-	
-	public void draw(PApplet marker, float x, float y, float width, float height) {
-		
-	}
-	
-	
-	
-	public void generateNewMaze() {
-		
-	}
-	
-	
-	
-	public void clickToIndex(Point p) {
-		
-	}
-	
+		for (int j = 0; j <= 9; j++) {
+			for (int i = 0; i < 10; i++) {
+				myBoard[i][j].num = num;
+				num++;
+			}
+		}
 
+		for (int j = 0; j <= 9; j++) 
+			for (int i = 0; i < 10; i++) {
+				gridP cc = myBoard[i][j]; 
+				if (cc.vrow != 0)  cc.adjlist.add(myBoard[cc.hrow][cc.vrow - 1]);
+				
+				if (cc.vrow != 9) cc.adjlist.add(myBoard[cc.hrow][cc.vrow + 1]);
+				
+				if (cc.hrow != 0) cc.adjlist.add(myBoard[cc.hrow - 1][cc.vrow]);
+				
+				if (cc.hrow != 9) cc.adjlist.add(myBoard[cc.hrow + 1][cc.vrow]);	
+			}
+		generateMaze();
+	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-
+	public void generateMaze() {
+		
+	}
 }
 
 
