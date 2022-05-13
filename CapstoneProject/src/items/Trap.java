@@ -7,7 +7,7 @@ public class Trap extends Item {
 	
 	// has damage intensity
 
-	public Trap(int x, int y, int width, int height)
+	public Trap(double x, double y, double width, double height)
 	{
 		super(x, y, width, height);
 	}
@@ -16,7 +16,7 @@ public class Trap extends Item {
 	{
 	}
 	
-	public void drawInfo(PApplet marker, int x, int y)
+	public void drawInfo(PApplet marker, double x, double y)
 	{
 		
 	}

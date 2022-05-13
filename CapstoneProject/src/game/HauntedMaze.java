@@ -38,7 +38,7 @@ public class HauntedMaze extends ScreenObject {
 	public HauntedMaze(PApplet marker)
 	{
 		super(300, 200, 300, 300);
-		protagonist = new Officer(null, 100, 100);
+		protagonist = new Officer(null, x+70, y+60);
 		villain = new Grinch();
 		settingData = new MazeData(20);
 		items = new ArrayList<Item>(); 
@@ -49,8 +49,6 @@ public class HauntedMaze extends ScreenObject {
 	public void setup()
 	{
 		System.out.println(x + " " + y);
-		addItem(new Blueprint(x+10, y+10, "A"));
-		addItem(new Blueprint(x+50, y+50, "B"));
 	}
 	
 	public void draw(PApplet marker)
@@ -67,8 +65,9 @@ public class HauntedMaze extends ScreenObject {
 		protagonist.draw(marker);
 		villain.draw(marker);
 		for (Item i : items)
+		{
 			i.draw(marker);
-		
+		}
 		marker.pop();
 	}
 	
