@@ -28,7 +28,7 @@ public class Blueprint extends Item {
 		
 		String str = "BLUEPRINT" + identifier;
 		float w = marker.textWidth(str);
-		marker.text(str, (float) (x+getW()/2-w/2), (float) (y+getH()/2));
+		marker.text(str, (float) (x), (float) y);
 		marker.pop();
 	}
 	
