@@ -7,13 +7,21 @@ import processing.core.*;
 import screen.Screen;
 
 
-
+/**
+ * Represents the option screen class of the game 
+ * @author akulkarni174
+ *
+ */
 public class OptionScreen extends Screen {
 
 	private DrawingSurface surface;
 	
 	private Rectangle button;
 
+	/**
+	 * Represents the option screen for the game
+	 * @param surface is the surface which we draw on
+	 */
 	public OptionScreen(DrawingSurface surface) {
 		super(800,600);
 		this.surface = surface;
@@ -21,7 +29,9 @@ public class OptionScreen extends Screen {
 		button = new Rectangle(800/2-100,600/2-50,200,100);
 	}
 
-
+	/**
+	 * Draws the option screen 
+	 */
 	public void draw() {
 
 		surface.background(255,255,255);
@@ -42,7 +52,9 @@ public class OptionScreen extends Screen {
 
 
 
-	
+	/**
+	 * Checks whether the mouse presses in the button, and switches screen accordingly
+	 */
 	public void mousePressed() {
 		Point p = (new Point(surface.mouseX,surface.mouseY));
 		if (button.contains(p))
