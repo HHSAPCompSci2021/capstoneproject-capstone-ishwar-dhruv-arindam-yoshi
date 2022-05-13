@@ -1,5 +1,6 @@
 package items;
 import screen.ScreenObject;
+import game.HauntedMaze;
 import processing.core.*;
 
 public class Trap extends Item {
@@ -11,7 +12,7 @@ public class Trap extends Item {
 		super(x, y, width, height);
 	}
 	
-	public Object use()
+	public Object use(HauntedMaze h)
 	{
 		return null;
 	}

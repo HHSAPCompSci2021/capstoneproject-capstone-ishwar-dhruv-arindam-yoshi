@@ -1,5 +1,6 @@
 package items;
 import screen.ScreenObject;
+import game.HauntedMaze;
 import processing.core.*;
 
 public class GeigerCounter extends Item<Double> {
@@ -15,7 +16,7 @@ public class GeigerCounter extends Item<Double> {
 	}
 	
 	@Override
-	public Double use()
+	public Double use(HauntedMaze h)
 	{
 		return null;
 	}

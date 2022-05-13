@@ -19,73 +19,48 @@ import processing.core.PApplet;
  * @author dhruv
  *
  */
+
+class gridP {
+
+	int hrow, vrow, visited, n, s, e, w;
+	public int num;
+
+	public gridP(int x, int y) {
+		this.hrow = x;
+		this.vrow = y;
+		n = s = e = w = 1;
+		visited = 0;
+	}
+
+	ArrayList<gridP> adjlist = new ArrayList<gridP>();
+
+}
+
+
 public class MazeData {
 	
 	// has mazedata, actors, and items
 
-	private int grid[][]; 
+	private int maze[][], size; 
 	
 	public MazeData()
 	{
-		grid = new int[20][20]; 
+		maze = new int[25][25]; 
 		
 	}
 	
-	/**
-	 * Construct an empty 2D array with dimensions width and height, then fill it with data from the file filename.
-	 * 
-	 * @param width The width of the grid.
-	 * @param height The height of the grid.
-	 * @param filename The text file to read from.
-	 */
-	public MazeData(int width, int height, String filename) {
-		grid = new int[width][height]; 
-		this.readData(filename, grid); 	
-	}
-	
-	
-	
-	
-	public void generateMaze() {
+	public MazeData(int dimensions) {
+		this.size = dimensions; 
+		maze = new int[dimensions][dimensions]; 
+		this.generateNewMaze(); 
 		
 	}
-
-	/**
-	 * (Graphical UI)
-	 * Determines which element of the grid matches with a particular pixel coordinate.
-	 * This supports interaction with the grid using mouse clicks in the window.
-	 * 
-	 * @param p A Point object containing a graphical pixel coordinate.
-	 * @param x The x pixel coordinate of the upper left corner of the grid drawing. 
-	 * @param y The y pixel coordinate of the upper left corner of the grid drawing.
-	 * @param width The pixel width of the grid drawing.
-	 * @param height The pixel height of the grid drawing.
-	 * @return A Point object representing a coordinate within the grid, or null if the pixel coordinate
-	 * falls completely outside of the grid.
-	 */
-	public Point clickToIndex(Point p, float x, float y, float width, float height) {
-		Point gridP = new Point(); 
-		
-		float rw = width / grid[0].length;
-		float rh = height / grid.length; 
-		
-		if (p.x > x && p.x < x+width && p.y > y && p.y < y+height) {
-			for (int i=0;i<grid[0].length;i++) {
-				if (p.x>=i*rh && p.x<=(i+1)*rh) {
-					gridP.y = i;
-				}
-			}
-			
-			for (int j=0;j<grid.length;j++) {
-				if (p.y>=j*rw && p.y<=(j+1)*rw) {
-					gridP.x = j;
-				}
-			}
-			
-		}
-		return gridP; 
-	}
 	
+	public MazeData(int size, String filename) {
+		this.size = size; 
+		maze = new int[size][size]; 
+		this.readData(filename, maze); 	
+	}
 	
 	
 	public void readData(String filename, int grid[][]) {
@@ -115,48 +90,37 @@ public class MazeData {
 				if (in != null)
 					in.close();
 			}
-			
 		} else {
 			throw new IllegalArgumentException("Data file " + filename + " does not exist.");
 		}
-
 	}
+	
+	
 	
 	public void draw(PApplet marker, float x, float y, float width, float height) {
-		marker.fill(255);
 		
-		float rw = width / grid[0].length;
-		float rh = height / grid.length;  
-		
-		for (int i=0;i<grid.length;i++) {
-			for (int j=0;j<grid[i].length;j++) {
-				float rx = x + j * rw; 
-				float ry = y + i * rh; 
-				
-				marker.rect(rx, ry, rw, rh);
-				
-			}
-		}
 	}
 	
-	/**
-	 * This method nicely prints the grid to the commandline.
-	 */
-	public String toString() {
-		String out = ""; 
-		for (int i=0;i<grid.length;i++){
-			for (int j=0;j<grid[i].length;j++) {
-				if (grid[i][j] == '*') {
-					out += "* ";
-				}else {
-					out += "- ";
-				}
-			}
-			out = out + "\n"; 
-			
-		}
-		return out; 
+	
+	
+	public void generateNewMaze() {
+		
 	}
+	
+	
+	
+	public void clickToIndex(Point p) {
+		
+	}
+	
+
+	
+	
+	
+	
+	
+	
+	
 	
 	
 
