@@ -3,7 +3,7 @@ import screen.ScreenObject;
 import processing.core.*;
 import game.HauntedMaze;
 public abstract class Item<E> extends ScreenObject {
-	public Item(int x, int y, int width, int height) {
+	public Item(double x, double y, double width, double height) {
 		super(x, y, width, height);
 	}
 	public abstract E use(HauntedMaze maze);
