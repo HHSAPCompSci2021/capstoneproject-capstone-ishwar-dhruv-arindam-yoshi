@@ -2,7 +2,10 @@ package items;
 import screen.ScreenObject;
 import processing.core.*;
 
-public class GeigerCounter extends Item {
+public class GeigerCounter extends Item<Double> {
+	
+	// TO-DO
+		// should return distance between Grinch and Officer
 	
 	// has damage intensity
 
@@ -11,7 +14,8 @@ public class GeigerCounter extends Item {
 		super(x, y, width, height);
 	}
 	
-	public Object use()
+	@Override
+	public Double use()
 	{
 		return null;
 	}
