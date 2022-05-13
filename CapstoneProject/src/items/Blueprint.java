@@ -2,13 +2,15 @@ package items;
 import screen.ScreenObject;
 import processing.core.*;
 import game.HauntedMaze;
-public class Blueprint extends Item<Object> {
+public class Blueprint extends Item {
 	
 	// has identifier
 
-	public Blueprint(double x, double y, double width, double height)
+	private String identifier;
+	public Blueprint(double x, double y, String identify)
 	{
-		super(x, y, width, height);
+		super(x, y, 15, 15);
+		identifier = identify;
 	}
 	
 	public void use(HauntedMaze maze)
@@ -24,7 +26,7 @@ public class Blueprint extends Item<Object> {
 
 		marker.rect((float)x, (float)y, (float)getW(), (float)getH());
 		
-		String str = "BLUEPRINT";
+		String str = "BLUEPRINT" + identifier;
 		float w = marker.textWidth(str);
 		marker.text(str, (float) (x+getW()/2-w/2), (float) (y+getH()/2));
 		marker.pop();
