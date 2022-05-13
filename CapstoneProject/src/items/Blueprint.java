@@ -20,6 +20,12 @@ public class Blueprint extends Item {
 		
 	}
 	
+	/**
+	 * Draws a blue blueprint icon in the info bar
+	 * @param marker is what you draw on
+	 * @param x is x coordinate where it's drawn
+	 * @param y is y coordinate where it's drawn
+	 */
 	public void drawInfo(PApplet marker, double x, double y)
 	{
 		
@@ -34,6 +40,10 @@ public class Blueprint extends Item {
 		marker.pop();
 	}
 	
+	/**
+	 * Draws a blueprint pin in the info bar
+	 * @param marker is what you draw on
+	 */
 	public void draw(PApplet marker) {
 		marker.push();
 		
