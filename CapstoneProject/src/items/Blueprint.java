@@ -11,9 +11,9 @@ public class Blueprint extends Item<Object> {
 		super(x, y, width, height);
 	}
 	
-	public Object use(HauntedMaze maze)
+	public void use(HauntedMaze maze)
 	{
-		return null;
+		
 	}
 	
 	public void drawInfo(PApplet marker, int x, int y)
