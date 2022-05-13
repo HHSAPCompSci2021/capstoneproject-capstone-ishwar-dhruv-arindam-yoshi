@@ -18,6 +18,14 @@ public class Blueprint extends Item<Object> {
 	
 	public void drawInfo(PApplet marker, int x, int y)
 	{
+		marker.fill(137, 207, 240);
+
+		marker.rect((float)x, (float)y, (float)getW(), (float)getH());
 		
+		String str = "BLUEPRINT";
+		float w = marker.textWidth(str);
+		marker.text(str, (float) (x+getW()/2-w/2), (float) (y+getH()/2));
 	}
+	
+	
 }
