@@ -6,12 +6,12 @@ public class Blueprint extends Item<Object> {
 	
 	// has identifier
 
-	public Blueprint(int x, int y, int width, int height, HauntedMaze maze)
+	public Blueprint(int x, int y, int width, int height)
 	{
-		super(x, y, width, height, maze);
+		super(x, y, width, height);
 	}
 	
-	public Object use()
+	public Object use(HauntedMaze maze)
 	{
 		return null;
 	}
