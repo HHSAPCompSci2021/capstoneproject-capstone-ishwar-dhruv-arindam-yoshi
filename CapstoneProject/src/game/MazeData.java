@@ -22,25 +22,6 @@ import processing.core.PApplet;
  *
  */
 
-class gridP {
-
-	int hrow, vrow, visited, n, s, e, w;
-	public int num;
-
-	public gridP(int x, int y) {
-		this.hrow = x;
-		this.vrow = y;
-		n = s = e = w = 1;
-		visited = 0;
-	}
-
-	ArrayList<gridP> adjlist = new ArrayList<gridP>();
-
-}
-
-
-
-
 
 public class MazeData {
 	private gridP[][] myBoard ;
@@ -61,34 +42,6 @@ public class MazeData {
 		this.size = size; 
 	}
 	
-	public void assignLocations() {
-		int num = 0;
-		for (int j = 0; j <= 9; j++) {
-			for (int i = 0; i < 10; i++) {
-				gridP newCell = new gridP(i, j);
-				myBoard[i][j] = newCell;
-			}
-		}
-		for (int j = 0; j <= 9; j++) {
-			for (int i = 0; i < 10; i++) {
-				myBoard[i][j].num = num;
-				num++;
-			}
-		}
-
-		for (int j = 0; j <= 9; j++) 
-			for (int i = 0; i < 10; i++) {
-				gridP cc = myBoard[i][j]; 
-				if (cc.vrow != 0)  cc.adjlist.add(myBoard[cc.hrow][cc.vrow - 1]);
-				
-				if (cc.vrow != 9) cc.adjlist.add(myBoard[cc.hrow][cc.vrow + 1]);
-				
-				if (cc.hrow != 0) cc.adjlist.add(myBoard[cc.hrow - 1][cc.vrow]);
-				
-				if (cc.hrow != 9) cc.adjlist.add(myBoard[cc.hrow + 1][cc.vrow]);	
-			}
-		generateMaze();
-	}
 	
 	public void generateMaze() {
 		this.assignLocations(); 
@@ -123,7 +76,38 @@ public class MazeData {
 			}
 		}
 	}
-	public int prune(gridP currentCell) {
+	
+	private void assignLocations() {
+		int num = 0;
+		for (int j = 0; j <= size-1; j++) {
+			for (int i = 0; i < size; i++) {
+				gridP newCell = new gridP(i, j);
+				myBoard[i][j] = newCell;
+			}
+		}
+		for (int j = 0; j <= size-1; j++) {
+			for (int i = 0; i < size; i++) {
+				myBoard[i][j].num = num;
+				num++;
+			}
+		}
+
+		for (int j = 0; j <= size-1; j++) 
+			for (int i = 0; i < size; i++) {
+				gridP cc = myBoard[i][j]; 
+				if (cc.vrow != 0)  cc.adjlist.add(myBoard[cc.hrow][cc.vrow - 1]);
+				
+				if (cc.vrow != 9) cc.adjlist.add(myBoard[cc.hrow][cc.vrow + 1]);
+				
+				if (cc.hrow != 0) cc.adjlist.add(myBoard[cc.hrow - 1][cc.vrow]);
+				
+				if (cc.hrow != 9) cc.adjlist.add(myBoard[cc.hrow + 1][cc.vrow]);	
+			}
+		generateMaze();
+	}
+	
+	
+	private int prune(gridP currentCell) {
 		Iterator<gridP> it = currentCell.adjlist.iterator();
 		while (it.hasNext()) {
 			gridP cell = it.next();
@@ -138,6 +122,32 @@ public class MazeData {
 	
 	public void draw(PApplet marker, float x, float y, float w, float h) {
 		
+	}
+	
+	public void display() {
+		for (int i = 0; i < size; i++) {
+			for (int j = 0; j < size; j++) {
+				if (myBoard[j][i].n == 1) {
+					System.out.print("+---");
+				} else {
+					System.out.print("+   ");
+				}
+			}
+			System.out.println("+");
+			for (int j = 0; j < size; j++) {
+				if (myBoard[j][i].w == 1) {
+					System.out.print("|   ");
+				} else {
+					System.out.print("    ");
+				}
+			}
+			System.out.println("|");
+		}
+
+		for (int j = 0; j < size; j++) {
+			System.out.print("+---");
+		}
+		System.out.println("+");
 	}
 }
 
