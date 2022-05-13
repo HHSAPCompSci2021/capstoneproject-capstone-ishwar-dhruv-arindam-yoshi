@@ -5,7 +5,7 @@ import game.*;
 
 public class GeigerCounter extends Item<Object> {
 	
-	private static double PROP_CONST = 50*Math.pow(15, 2);
+	private static double PROP_CONST = 50*Math.pow(25, 1);
 	
 	// TO-DO
 		// should return distance between Grinch and Officer
@@ -34,9 +34,9 @@ public class GeigerCounter extends Item<Object> {
 		double px = maze.protagonist.getX(); double py = maze.protagonist.getY();
 		double gx = maze.villain.getX(); double gy = maze.villain.getY();
 		
-		double distsq = Math.pow(gx - px, 2) + Math.pow(gy - py, 2);
+		double dist = Math.sqrt(Math.pow(gx - px, 2) + Math.pow(gy - py, 2));
 		
-		radiationReading = PROP_CONST/distsq;
+		radiationReading = PROP_CONST/dist;
 		
 		return null; 
 	}

@@ -37,16 +37,19 @@ public class Officer extends Actor {
 		super(img, x, y, 30, 40);
 		blueprints = new ArrayList<Blueprint>();
 		gtool = new GeigerCounter(x, y);
+		health = 100;
 	}
 	
 	/**
 	 * Takes a blueprint on the officer's behalf
 	 * @param e the blueprint
 	 */
-	public void takeBlueprint(Blueprint e)
+	public void takeBlueprint(HauntedMaze maze)
 	{
-		blueprints.add(e);
-		
+		Blueprint e = nearBlueprint(maze);
+		if (e != null)
+			blueprints.add(e);
+		maze.items.remove(e);
 	}
 	
 	/**
@@ -71,8 +74,13 @@ public class Officer extends Actor {
 	 * Returns whether the Officer has all the blueprints in the maze
 	 * @return true if the Officer has all the blueprints in the maze; false otherwise
 	 */
-	public boolean hasAllBlueprints()
+	public boolean hasAllBlueprints(HauntedMaze maze)
 	{
+		for (Item i : maze.items)
+		{
+			if (i instanceof Blueprint)
+				return false;
+		}
 		return true;
 	}
 	
@@ -102,12 +110,22 @@ public class Officer extends Actor {
 	}
 	
 	/**
+	 * Returns whether the Officer is outside the maze
+	 * @return
+	 */
+	public boolean isOutsideMaze(HauntedMaze maze)
+	{
+		return true;
+	}
+	
+	/**
 	 * Returns whether the Officer has exited the maze with all the blueprints
 	 * @return true if the Officer has exited the maze with all the blueprints; false otherwise
 	 */
-	public boolean isSuccessful()
+	public boolean isSuccessful(HauntedMaze maze)
 	{
-		return hasAllBlueprints() && (health > 0) && false;
+		// System.out.println(hasAllBlueprints(maze));
+		return hasAllBlueprints(maze) && isAlive() && isOutsideMaze(maze);
 	}
 	
 	@Override

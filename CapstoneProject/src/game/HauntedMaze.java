@@ -28,8 +28,8 @@ public class HauntedMaze extends ScreenObject {
 	
 	public double direction; // direction with respect to the horizontal (pointing right, clockwise)
 	
-	public static final double LIGHT_ANGLE = Math.PI*80/180;
-	public static final double LIGHT_DIST = 100;
+	public static final double LIGHT_ANGLE = Math.PI*50/180;
+	public static final double LIGHT_DIST = 70;
 	public static final int LIGHT_RES = 4;
 	
 	public static final int[] SHADE_COLOR = {0, 0, 0, 230};
@@ -38,7 +38,7 @@ public class HauntedMaze extends ScreenObject {
 	public HauntedMaze(PApplet marker)
 	{
 		super(300, 200, 300, 300);
-		protagonist = new Officer(null, 10, 10);
+		protagonist = new Officer(null, 100, 100);
 		villain = new Grinch();
 		settingData = new MazeData();
 		items = new ArrayList<Item>(); 

@@ -43,9 +43,25 @@ public class GameScreen extends Screen {
 	
 	public void draw()
 	{
-		gameSetting.update(surface.mouseX, surface.mouseY);
-		
 		surface.background(255, 255, 255);
+		
+		if (!gameSetting.protagonist.isAlive())
+		{
+			surface.push();
+			surface.fill(0, 0, 0);
+			surface.text("Game over :/", 300, 200);
+			surface.pop();
+			return;
+		}
+		if (gameSetting.protagonist.isSuccessful(gameSetting))
+		{
+			surface.push();
+			surface.fill(0, 0, 0);
+			surface.text("You have won :)", 300, 200);
+			surface.pop();
+			return;
+		}
+		gameSetting.update(surface.mouseX, surface.mouseY);
 		
 		gameSetting.draw(surface);
 		bar.draw(surface);
@@ -78,10 +94,22 @@ public class GameScreen extends Screen {
 		{
 			surface.push();
 			surface.fill(0, 0, 0);
-			surface.text("Press B to pick up the blueprint", 300, 100);
+			surface.text("Press E to pick up the blueprint", 300, 100);
 			surface.pop();
-		}
+			if (surface.isPressed(KeyEvent.VK_E))
+			{
+				System.out.println("here");
+				gameSetting.protagonist.takeBlueprint(gameSetting);
+			}
+		}	
+	}
+	
+	public void keyTyped()
+	{
+		if (surface.keyCode == KeyEvent.VK_B)
+		{
 			
+		}
 	}
 }
 

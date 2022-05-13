@@ -37,6 +37,10 @@ public class Screen {
 		
 	}
 	
+	public void keyTyped() {
+		
+	}
+	
 	public void mousePressed() {
 		
 	}
