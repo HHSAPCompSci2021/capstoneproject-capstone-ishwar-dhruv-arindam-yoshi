@@ -31,13 +31,14 @@ public class GameScreen extends Screen {
 		super(800, 600);
 		this.surface = surface;
 		System.out.println(surface.width + " " + surface.height);
-		gameSetting = new HauntedMaze();
+		gameSetting = new HauntedMaze(surface);
 		bar = new InfoBar(gameSetting.protagonist);
 	}
 	
 	public void setup()
 	{
 		gameSetting.protagonist.setImage(surface.loadImage(Officer.IMG_PATH));
+		gameSetting.setup();
 	}
 	
 	public void draw()
@@ -71,6 +72,16 @@ public class GameScreen extends Screen {
 			gameSetting.protagonist.setVy(Officer.AXIS_V);
 		else
 			gameSetting.protagonist.setVy(0);
+		
+		
+		if (gameSetting.protagonist.nearBlueprint(gameSetting) != null)
+		{
+			surface.push();
+			surface.fill(0, 0, 0);
+			surface.text("Press B to pick up the blueprint", 300, 100);
+			surface.pop();
+		}
+			
 	}
 }
 

@@ -1,6 +1,7 @@
 package characters;
 
 import java.util.*;
+import game.*;
 
 import core.DrawingSurface;
 import processing.core.*;
@@ -14,11 +15,15 @@ public class Officer extends Actor {
 	// has blueprints and health level (# of lives)
 	
 	public static final String IMG_PATH = "assets/badge.png";
+	private static final double LETHAL_RAD = 50;
+	public static final double PICK_DIST = 20;
+	
 	// image taken from
 	// https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.istockphoto.com%2Fphotos%2Fpolice-badge-graphic&psig=AOvVaw3xpVBxMDAwHVxv8yK_jvxl&ust=1652402341678000&source=images&cd=vfe&ved=0CA0QjhxqFwoTCLi90tHc2PcCFQAAAAAdAAAAABAQ
 	
 	private int health;
-	private ArrayList<Blueprint> blueprints;
+	public ArrayList<Blueprint> blueprints;
+	public GeigerCounter gtool;
 	
 	public static double AXIS_V = 90; 
 	
@@ -31,6 +36,7 @@ public class Officer extends Actor {
 	{
 		super(img, x, y, 30, 40);
 		blueprints = new ArrayList<Blueprint>();
+		gtool = new GeigerCounter(x, y);
 	}
 	
 	/**
@@ -41,6 +47,24 @@ public class Officer extends Actor {
 	{
 		blueprints.add(e);
 		
+	}
+	
+	/**
+	 * Returns a blueprint that is within picking range of the officer
+	 * @return a blueprint that can be picked up by the officer
+	 */
+	public Blueprint nearBlueprint(HauntedMaze maze)
+	{
+		for (Item e : maze.items)
+		{
+			if (e instanceof Blueprint)
+			{
+				double dist = Math.sqrt(Math.pow(x-e.getX(), 2) + Math.pow(y-e.getY(), 2));
+				if (dist < PICK_DIST)
+					return (Blueprint)e;
+			}
+		}
+		return null;
 	}
 	
 	/**
@@ -61,6 +85,16 @@ public class Officer extends Actor {
 		if (health > 0)
 			return health;
 		else return 0;
+	}
+	
+	/**
+	 * Changes the health of the officer by the amount given
+	 * @param dh the amount by which to change the officer's health
+	 * @return
+	 */
+	public void changeHealth(int dh)
+	{
+		health += dh;
 	}
 	
 	public boolean isAlive() {
@@ -88,8 +122,15 @@ public class Officer extends Actor {
 		marker.pop();
 	}
 	
-	public void act()
+	public void act(HauntedMaze maze)
 	{
+		gtool.use(maze);
+		
+		changeHealth((int) Math.min(-0.1*gtool.getReading() + 2, 0));
+		
+		if (gtool.getReading() > LETHAL_RAD)
+			health = 0;
+		
 		x += vx*DrawingSurface.DT;
 		y += vy*DrawingSurface.DT;
 	}
