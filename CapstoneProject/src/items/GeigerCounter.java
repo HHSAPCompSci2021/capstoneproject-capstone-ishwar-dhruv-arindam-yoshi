@@ -4,7 +4,7 @@ import game.HauntedMaze;
 import processing.core.*;
 import game.*;
 
-public class GeigerCounter extends Item<Object> {
+public class GeigerCounter extends Item {
 	
 	private static double PROP_CONST = 50*Math.pow(25, 1);
 	
