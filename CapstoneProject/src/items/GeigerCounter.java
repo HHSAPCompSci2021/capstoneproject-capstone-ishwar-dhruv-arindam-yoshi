@@ -4,6 +4,11 @@ import game.HauntedMaze;
 import processing.core.*;
 import game.*;
 
+/**
+ * Represents a Geiger counter that detects the radiation level for the Officer
+ * @author isuriyaprakash686
+ *
+ */
 public class GeigerCounter extends Item {
 	
 	private static double PROP_CONST = 50*Math.pow(25, 1);
@@ -44,6 +49,13 @@ public class GeigerCounter extends Item {
 	@Override
 	public void drawInfo(PApplet marker, int x, int y) {
 		// TODO Auto-generated method stub
+		marker.stroke(0);
+		marker.noFill();
 		
+		marker.rect((float)x, (float)y, (float)w, (float)h);
+		String readingStr = "" + getReading() + " Bq";
+		marker.text(readingStr, (float)x, (float)y);
+		
+		marker.pop();
 	}
 }

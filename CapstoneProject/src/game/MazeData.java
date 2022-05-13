@@ -29,7 +29,6 @@ public class MazeData {
 	private ArrayList<gridP> cList;
 	private String output[][]; 
 	
-	
 	/**
 	 * contructs the maze. 
 	 */
