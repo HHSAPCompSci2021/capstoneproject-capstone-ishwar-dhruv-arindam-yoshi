@@ -41,7 +41,8 @@ public class InfoBar extends ScreenObject {
 		marker.fill(0, 0, 0);
 		marker.text("Info Bar", (float)(x + 3), (float)(y + 15));
 		marker.text("Health: " + officer.getHealth(), (float)(x + 3), (float)(y + 30));
-		marker.text("Blueprints taken:", (float)(x+3), (float)(y + 45));
+		officer.gtool.drawInfo(marker, x + 3, y + 45);
+		marker.text("Blueprints taken:", (float)(x+3), (float)(y + 75));
 		
 		for (Blueprint blueprint : officer.blueprints)
 			blueprint.drawInfo(marker, x+3, y+60);

@@ -28,7 +28,6 @@ public class MazeData {
 	private int size; 
 	private ArrayList<gridP> cList;
 	
-	
 	public MazeData() {
 		myBoard = new gridP[10][10]; 
 		cList = new ArrayList<gridP>();; 

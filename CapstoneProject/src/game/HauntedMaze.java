@@ -37,7 +37,7 @@ public class HauntedMaze extends ScreenObject {
 	
 	public HauntedMaze(PApplet marker)
 	{
-		super(300, 200, 300, 300);
+		super(200, 150, 300, 300);
 		protagonist = new Officer(null, x+70, y+60);
 		villain = new Grinch();
 		settingData = new MazeData(20);
@@ -71,6 +71,10 @@ public class HauntedMaze extends ScreenObject {
 		marker.pop();
 	}
 	
+	/**
+	 * Draws the lighting in the HauntedMaze (from the officer's flashlight).
+	 * @param marker
+	 */
 	public void drawLighting(PApplet marker)
 	{
 		marker.push();
@@ -235,6 +239,12 @@ public class HauntedMaze extends ScreenObject {
 		marker.pop();
 	}
 	
+	/**
+	 * Returns whether two doubles are equal
+	 * @param a first double
+	 * @param b second double
+	 * @return whether the given doubles are equal
+	 */
 	public boolean equal(double a, double b)
 	{
 		return Math.abs(a-b) <= 0.0000001;
@@ -260,11 +270,20 @@ public class HauntedMaze extends ScreenObject {
 		return endPt;
 	}
 	
+	/**
+	 * Adds an item to the maze
+	 * @param e the item to be added
+	 */
 	public void addItem(Item e)
 	{
 		items.add(e);
 	}
 	
+	/**
+	 * Updates the state of the HauntedMaze at each time instant.
+	 * @param mouseX the x-coordinate of the mouse in the window
+	 * @param mouseY the y-coordinate of the mouse in the window
+	 */
 	public void update(double mouseX, double mouseY)
 	{
 		double px = protagonist.getX() + protagonist.getW()/2;

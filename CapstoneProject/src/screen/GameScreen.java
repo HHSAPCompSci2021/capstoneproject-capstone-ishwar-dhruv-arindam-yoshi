@@ -105,13 +105,5 @@ public class GameScreen extends Screen {
 			}
 		}	
 	}
-	
-	public void keyTyped()
-	{
-		if (surface.keyCode == KeyEvent.VK_B)
-		{
-			
-		}
-	}
 }
 
