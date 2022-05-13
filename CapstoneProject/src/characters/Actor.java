@@ -10,7 +10,7 @@ public class Actor extends ScreenObject {
 	protected PImage image;
 	protected double vx, vy; 
 	
-	public Actor(PImage img, int x, int y, int w, int h) {
+	public Actor(PImage img, double x, double y, double w, double h) {
 		super(x, y, w, h);
 		vx = 0; vy = 0;
 		setImage(img);

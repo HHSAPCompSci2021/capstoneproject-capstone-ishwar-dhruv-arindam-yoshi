@@ -32,7 +32,7 @@ public class Officer extends Actor {
 	 * @param x the x-coordinate of the officer
 	 * @param y the y-coordinate of the officer
 	 */
-	public Officer(PImage img, int x, int y)
+	public Officer(PImage img, double x, double y)
 	{
 		super(img, x, y, 30, 40);
 		blueprints = new ArrayList<Blueprint>();

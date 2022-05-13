@@ -38,6 +38,8 @@ public class GameScreen extends Screen {
 	public void setup()
 	{
 		gameSetting.protagonist.setImage(surface.loadImage(Officer.IMG_PATH));
+		gameSetting.addItem(new Blueprint(gameSetting.getX()+10, gameSetting.getY()+10, "A", surface.loadImage(Blueprint.pin_PATH)));
+		gameSetting.addItem(new Blueprint(gameSetting.getX()+50, gameSetting.getY()+50, "B", surface.loadImage(Blueprint.pin_PATH)));
 		gameSetting.setup();
 	}
 	
