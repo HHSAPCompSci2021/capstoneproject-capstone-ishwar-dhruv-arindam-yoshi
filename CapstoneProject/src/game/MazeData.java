@@ -41,8 +41,23 @@ class gridP {
 
 
 public class MazeData {
-	private gridP[][] myBoard = new gridP[10][10];
-	private ArrayList<gridP> cList = new ArrayList<gridP>();
+	private gridP[][] myBoard ;
+	private int size; 
+	private ArrayList<gridP> cList;
+	
+	
+	public MazeData() {
+		myBoard = new gridP[10][10]; 
+		cList = new ArrayList<gridP>();; 
+		size = 10; 
+	}
+	
+	
+	public MazeData(int size) {
+		myBoard = new gridP[size][size]; 
+		cList = new ArrayList<gridP>();; 
+		this.size = size; 
+	}
 	
 	public void assignLocations() {
 		int num = 0;
