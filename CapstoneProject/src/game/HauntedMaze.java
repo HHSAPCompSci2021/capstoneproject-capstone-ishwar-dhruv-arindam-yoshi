@@ -9,7 +9,7 @@ import processing.core.*;
 import core.*;
 
 /**
- * has characters, items, maze walls
+ * Represents the environment in which the main objects of the game are housed (Officer, Grinch, Traps, Blueprints, etc.)
  * @author Ishwar S.
  *
  */
@@ -77,7 +77,7 @@ public class HauntedMaze extends ScreenObject {
 	 */
 	public void drawLighting(PApplet marker)
 	{
-		marker.push();
+		//marker.push();
 		
 		double px = protagonist.getX() + protagonist.getW()/2;
 		double py = protagonist.getY() + protagonist.getH()/2;
@@ -236,7 +236,7 @@ public class HauntedMaze extends ScreenObject {
 		
 		// marker.rect((float)x, (float)y, (float)w, (float)h);
 		
-		marker.pop();
+		// marker.pop();
 	}
 	
 	/**

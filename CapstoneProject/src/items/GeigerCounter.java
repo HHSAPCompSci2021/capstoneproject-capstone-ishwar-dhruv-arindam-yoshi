@@ -5,7 +5,7 @@ import processing.core.*;
 import game.*;
 
 /**
- * Represents a Geiger counter that detects the radiation level for the Officer
+ * This class represents a Geiger counter that detects the radiation level for the Officer.
  * @author isuriyaprakash686
  *
  */
@@ -47,8 +47,10 @@ public class GeigerCounter extends Item {
 	
 
 	@Override
-	public void drawInfo(PApplet marker, int x, int y) {
+	public void drawInfo(PApplet marker, double x, double y) {
 		// TODO Auto-generated method stub
+		marker.push();
+		
 		marker.stroke(0);
 		marker.noFill();
 		
