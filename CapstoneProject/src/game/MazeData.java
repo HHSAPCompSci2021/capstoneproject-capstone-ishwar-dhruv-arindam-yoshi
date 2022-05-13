@@ -27,12 +27,13 @@ public class MazeData {
 	private gridP[][] myBoard ;
 	private int size; 
 	private ArrayList<gridP> cList;
-	
+	private String output[][]; 
 	
 	public MazeData() {
 		myBoard = new gridP[10][10]; 
 		cList = new ArrayList<gridP>();; 
 		size = 10; 
+		output = new String[20][20]; 
 	}
 	
 	
@@ -40,6 +41,7 @@ public class MazeData {
 		myBoard = new gridP[size][size]; 
 		cList = new ArrayList<gridP>();; 
 		this.size = size; 
+		output = new String[20][40]; 
 	}
 	
 	
