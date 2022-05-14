@@ -14,14 +14,14 @@ public class Officer extends Actor {
 	
 	// has blueprints and health level (# of lives)
 	
-	public static final String IMG_PATH = "assets/badge.png";
+	public static final String IMG_PATH = "badge.png";
 	private static final double LETHAL_RAD = 50;
 	public static final double PICK_DIST = 20;
 	
 	// image taken from
 	// https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.istockphoto.com%2Fphotos%2Fpolice-badge-graphic&psig=AOvVaw3xpVBxMDAwHVxv8yK_jvxl&ust=1652402341678000&source=images&cd=vfe&ved=0CA0QjhxqFwoTCLi90tHc2PcCFQAAAAAdAAAAABAQ
 	
-	private int health;
+	private double health;
 	public ArrayList<Blueprint> blueprints;
 	public GeigerCounter gtool;
 	
@@ -88,7 +88,7 @@ public class Officer extends Actor {
 	 * Returns the Officer's health level
 	 * @return the Officer's health level
 	 */
-	public int getHealth()
+	public double getHealth()
 	{
 		if (health > 0)
 			return health;
@@ -100,7 +100,7 @@ public class Officer extends Actor {
 	 * @param dh the amount by which to change the officer's health
 	 * @return
 	 */
-	public void changeHealth(int dh)
+	public void changeHealth(double dh)
 	{
 		health += dh;
 	}
@@ -144,7 +144,7 @@ public class Officer extends Actor {
 	{
 		gtool.use(maze);
 		
-		changeHealth((int) Math.min(-0.1*gtool.getReading() + 2, 0));
+		changeHealth(Math.min(-0.01*gtool.getReading() + 0.1, 0));
 		
 		if (gtool.getReading() > LETHAL_RAD)
 			health = 0;

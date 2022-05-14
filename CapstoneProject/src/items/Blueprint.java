@@ -16,7 +16,7 @@ public class Blueprint extends Item {
 	/**
 	 * path to image used for blueprints
 	 */
-	public static final String pin_PATH = "assets/pin.png";
+	public static final String pin_PATH = "pin.png";
 	private String identifier;
 	
 	/**

@@ -30,7 +30,7 @@ public class GameScreen extends Screen {
 	public GameScreen(DrawingSurface surface) {
 		super(800, 600);
 		this.surface = surface;
-		System.out.println(surface.width + " " + surface.height);
+		// System.out.println(surface.width + " " + surface.height);
 		gameSetting = new HauntedMaze(surface);
 		bar = new InfoBar(gameSetting.protagonist);
 	}

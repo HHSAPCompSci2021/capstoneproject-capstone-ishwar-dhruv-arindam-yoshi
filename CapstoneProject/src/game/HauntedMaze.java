@@ -48,7 +48,7 @@ public class HauntedMaze extends ScreenObject {
 	
 	public void setup()
 	{
-		System.out.println(x + " " + y);
+		// System.out.println(x + " " + y);
 	}
 	
 	public void draw(PApplet marker)
