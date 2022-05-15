@@ -7,16 +7,45 @@ import processing.core.*;
 public class Trap extends Item {
 	
 	// has damage intensity
-
-	public Trap(double x, double y, double width, double height)
+	private int type; 
+	
+	/**
+	 * 
+	 * @param x the x coord of the trap
+	 * @param y the y coord of the trap
+	 * @param width the width of the trap
+	 * @param height the height of the trap
+	 * @param type the type of the trap. There are 4 types of traps. 
+	 * Traps of type 1 simply change the health of the officer by 25. 
+	 * Traps of type 2 decrease the speed of the officer by 2 units in the X and Y direction. 
+	 * Traps of type 3 set the position of the officer back to the start
+	 * Traps of type 4 makes the Grinch more powerful(not decided how). 
+	 */
+	public Trap(double x, double y, double width, double height, int type)
 	{
 		super(x, y, width, height);
+		this.type = type; 
+	}
+	
+	public int getType() {
+		return type; 
+	}
+	
+	public void setType(int newType) {
+		type = newType; 
 	}
 	
 	public void use(HauntedMaze maze)
 	{
 		Officer o = maze.protagonist; 
-		o.changeHealth(-10);
+		if (type == 1) {
+			o.changeHealth(-25);
+		}else if (type == 2) {
+			o.setVx(o.getVx()-2);
+			o.setVy(o.getVy()-2);
+		}else if (type == 3) {
+			o.setPos(0, 0);
+		}
 	}
 	
 	/**
