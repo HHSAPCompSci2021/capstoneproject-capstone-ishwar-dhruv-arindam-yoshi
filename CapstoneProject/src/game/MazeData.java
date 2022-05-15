@@ -110,7 +110,6 @@ public class MazeData {
 				
 				if (cc.hrow != 9) cc.adjlist.add(myBoard[cc.hrow + 1][cc.vrow]);	
 			}
-		generateMaze();
 	}
 	
 	
@@ -137,22 +136,51 @@ public class MazeData {
 	 * @param h the height of the maze
 	 */
 	public void draw(PApplet marker, float x, float y, float w, float h) {
+		String[][] mazeGrid = this.toStringArr(); 
+		int lengthMaze = 4 * size + 1; 
+		int heightMaze = 2 * size + 1;
+		double xLen = (x + (x+w))/lengthMaze; 
+		double yLen = (y + (y+h))/heightMaze; 
 		
+		for (int i=0;i<heightMaze;i++) {
+			char[] currRow = mazeGrid[i][0].toCharArray(); 
+			double yCoord = y + i * yLen; 
+			if (i % 2 == 0) {
+				for (int j=0;j<currRow.length-1;j+=4) {
+					double xCoord = x + j * xLen;
+					double xCoordSec = x + (j+4) * xLen;
+					if (currRow[j] == '+' && currRow[j+1] == '-') {
+						marker.line((float)xCoord, (float)yCoord, (float)xCoordSec, (float)yCoord);
+					}
+					marker.circle((float)xCoord, (float)yCoord, 5);
+					marker.circle((float)xCoordSec, (float)yCoord, 5);
+				}
+			}else {
+				for (int j=0;j<currRow.length;j++) {
+					if (currRow[j] == '|') {
+						double xCoord = x + j * xLen;
+						double yCoordFirst = yCoord - yLen; 
+						double yCoordSecond = yCoord + yLen; 
+						marker.line((float)xCoord, (float)yCoordFirst, (float)xCoord, (float)yCoordSecond);
+					}
+				}
+			}	
+		}
 	}
-	
+
 	public String[][] toStringArr() {
-		String[][] out = new String[size + size + 1][1]; 
+		String[][] out = new String[21][1]; 
 		int counter = 0; 
-		for (int i = 0; i < size; i++) {
+		for (int i = 0; i < 10; i++) {
 			String s = ""; 
-			for (int j = 0; j < size; j++) 
+			for (int j = 0; j < 10; j++) 
 				if (myBoard[j][i].n == 1) s += "+---"; 
 				else  s += "+   "; 
 			
 			s += "+"; 
 			out[counter++][0] = s; 
 			s = ""; 
-			for (int j = 0; j < size; j++) 
+			for (int j = 0; j < 10; j++) 
 				if (myBoard[j][i].w == 1) s += "|   "; 
 				else s += "    ";
 			s += "|"; 
@@ -160,11 +188,13 @@ public class MazeData {
 			s = ""; 
 		}
 		String newS = ""; 
-		for (int j = 0; j < size; j++) 
-			newS += "+---";
+		for (int j = 0; j < 10; j++) {
+			newS += "+---"; 
+		}
 		newS += "+"; 
 		out[counter++][0] = newS; 
 		return out; 
+
 	}
 }
 
