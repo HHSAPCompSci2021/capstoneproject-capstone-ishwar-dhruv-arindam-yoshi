@@ -32,7 +32,7 @@ public class HauntedMaze extends ScreenObject {
 	public static final double LIGHT_DIST = 70;
 	public static final int LIGHT_RES = 4;
 	
-	public static final int[] SHADE_COLOR = {0, 0, 0, 230};
+	public static final int[] SHADE_COLOR = {0, 0, 0, 255};
 	public static final int[] LIGHT_COLOR = {252, 252, 38, 100};
 	
 	public HauntedMaze(PApplet marker)
