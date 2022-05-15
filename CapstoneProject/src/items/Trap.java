@@ -8,6 +8,7 @@ public class Trap extends Item {
 	
 	// has damage intensity
 	private int type; 
+	private boolean isActive = true; 
 	
 	/**
 	 * 
@@ -46,6 +47,15 @@ public class Trap extends Item {
 		}else if (type == 3) {
 			o.setPos(0, 0);
 		}
+		isActive = false; 
+	}
+	
+	public boolean isTrapActive() {
+		return isActive; 
+	}
+	
+	public void setInactive() {
+		isActive = false; 
 	}
 	
 	/**
