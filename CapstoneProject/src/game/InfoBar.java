@@ -34,7 +34,7 @@ public class InfoBar extends ScreenObject {
 	{
 		marker.push();
 		
-		x = marker.width-w - 20;
+		x = marker.width-w - 10;
 		y = 30;
 		
 		marker.rect((float)x, (float)y, (float)w, (float)h);
