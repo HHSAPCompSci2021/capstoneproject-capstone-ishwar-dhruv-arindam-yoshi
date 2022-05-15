@@ -139,8 +139,8 @@ public class MazeData {
 		String[][] mazeGrid = this.toStringArr(); 
 		int lengthMaze = 4 * size + 1; 
 		int heightMaze = 2 * size + 1;
-		double xLen = (x + (x+w))/lengthMaze; 
-		double yLen = (y + (y+h))/heightMaze; 
+		double xLen = ((w))/lengthMaze; 
+		double yLen = ((h))/heightMaze; 
 		
 		for (int i=0;i<heightMaze;i++) {
 			char[] currRow = mazeGrid[i][0].toCharArray(); 

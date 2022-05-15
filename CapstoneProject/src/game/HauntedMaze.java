@@ -37,13 +37,20 @@ public class HauntedMaze extends ScreenObject {
 	
 	public HauntedMaze(PApplet marker)
 	{
-		super(200, 150, 175, 175);
+		super(200, 150, 500, 400);
 		protagonist = new Officer(null, x+70, y+60);
 		villain = new Grinch(730, 580);
 		settingData = new MazeData();
 		settingData.generateMaze();
-		items = new ArrayList<Item>(); 
 		
+		for (String[] r : settingData.toStringArr())
+		{
+			for (String c : r)
+				System.out.println(c);
+			System.out.println();
+		}
+		
+		items = new ArrayList<Item>(); 
 		direction = 0;
 	}
 	
@@ -222,6 +229,8 @@ public class HauntedMaze extends ScreenObject {
 		
 		double[] posX = {x, minX, maxX, x+w};
 		double[] posY = {y, minY, maxY, y+h};
+		
+		System.out.println(x + " " + (x+h));
 		
 		marker.fill(SHADE_COLOR[0], SHADE_COLOR[1], SHADE_COLOR[2], SHADE_COLOR[3]);
 		marker.stroke(SHADE_COLOR[0], SHADE_COLOR[1], SHADE_COLOR[2], SHADE_COLOR[3]/3);
