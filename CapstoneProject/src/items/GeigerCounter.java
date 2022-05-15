@@ -2,11 +2,15 @@ package items;
 import screen.ScreenObject;
 import game.HauntedMaze;
 import processing.core.*;
+
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
+
 import game.*;
 
 /**
  * This class represents a Geiger counter that detects the radiation level for the Officer.
- * @author isuriyaprakash686
+ * @author isuriyaprakash686 and Dhruv Lohani
  *
  */
 public class GeigerCounter extends Item {
@@ -31,7 +35,9 @@ public class GeigerCounter extends Item {
 	 */
 	public double getReading()
 	{
-		return radiationReading;
+		DecimalFormat df = new DecimalFormat("#.####");
+		df.setRoundingMode(RoundingMode.CEILING);
+		return Double.parseDouble(df.format(radiationReading)); 
 	}
 	
 
@@ -58,6 +64,16 @@ public class GeigerCounter extends Item {
 		
 		marker.text("Radiation reading:", (float)(x+3), (float)(y+15));
 		String readingStr = "" + getReading() + " Bq";
+		if (getReading() >= 2) {
+			marker.textSize((float) 15);
+			marker.fill(124,252,0); 
+		}else if (getReading() >= 1.5) {
+			marker.textSize((float) 17);
+			marker.fill(255,140,0); 
+		}else {
+			marker.textSize((float) 19);
+			marker.fill(255,0,0); 
+		}
 		marker.text(readingStr, (float)(x+3), (float)(y+35));
 		
 		marker.pop();
