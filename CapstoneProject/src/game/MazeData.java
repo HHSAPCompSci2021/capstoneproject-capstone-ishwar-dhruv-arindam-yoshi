@@ -143,30 +143,31 @@ public class MazeData {
 		
 	}
 	
-	private void display() {
-		for (int i = 0; i < size; i++) {
-			for (int j = 0; j < size; j++) {
-				if (myBoard[j][i].n == 1) {
-					System.out.print("+---");
-				} else {
-					System.out.print("+   ");
-				}
-			}
-			System.out.println("+");
-			for (int j = 0; j < size; j++) {
-				if (myBoard[j][i].w == 1) {
-					System.out.print("|   ");
-				} else {
-					System.out.print("    ");
-				}
-			}
-			System.out.println("|");
+	public String[][] toStringArr() {
+		String[][] out = new String[21][1]; 
+		int counter = 0; 
+		for (int i = 0; i < 10; i++) {
+			String s = ""; 
+			for (int j = 0; j < 10; j++) 
+				if (myBoard[j][i].n == 1) s += "+---"; 
+				else  s += "+   "; 
+			
+			s += "+"; 
+			out[counter++][0] = s; 
+			s = ""; 
+			for (int j = 0; j < 10; j++) 
+				if (myBoard[j][i].w == 1) s += "|   "; 
+				else s += "    ";
+			s += "|"; 
+			out[counter++][0] = s; 
+			s = ""; 
 		}
-
-		for (int j = 0; j < size; j++) {
-			System.out.print("+---");
-		}
-		System.out.println("+");
+		String newS = ""; 
+		for (int j = 0; j < 10; j++) 
+			newS += "+---";
+		newS += "+"; 
+		out[counter++][0] = newS; 
+		return out; 
 	}
 }
 
