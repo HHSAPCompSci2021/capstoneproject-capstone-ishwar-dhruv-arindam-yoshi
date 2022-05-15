@@ -37,7 +37,7 @@ public class HauntedMaze extends ScreenObject {
 	
 	public HauntedMaze(PApplet marker)
 	{
-		super(200, 150, 300, 300);
+		super(200, 150, 150, 150);
 		protagonist = new Officer(null, x+70, y+60);
 		villain = new Grinch();
 		settingData = new MazeData();
