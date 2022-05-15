@@ -167,7 +167,15 @@ public class MazeData {
 			}	
 		}
 	}
-
+	
+	
+	/**
+	 * This method converts the maze into a array of strings in order to 
+	 * successfully display it on a graphing window. 
+	 * 
+	 * @return A string array representing the maze with the characters "+" representing a corner, a "-" representing a wall
+	 * and a " " representing an empty location. 
+	 */
 	public String[][] toStringArr() {
 		String[][] out = new String[21][1]; 
 		int counter = 0; 
@@ -195,6 +203,15 @@ public class MazeData {
 		out[counter++][0] = newS; 
 		return out; 
 
+	}
+	/**
+	 * This method converts the maze into a array of integers in order to 
+	 * successfully perform algorithms such as Depth First Search, and Breadth First Search. 
+	 * 
+	 * @return A integer array representing the maze where "1" represents a wall, and "0" represents a path. 
+	 */
+	public int[][] toIntArr(){
+		return null; 
 	}
 }
 
