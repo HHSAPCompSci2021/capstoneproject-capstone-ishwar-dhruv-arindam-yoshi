@@ -27,7 +27,6 @@ public class MazeData {
 	private gridP[][] myBoard ;
 	private int size; 
 	private ArrayList<gridP> cList;
-	private String output[][]; 
 	
 	/**
 	 * contructs the maze. 
@@ -36,7 +35,6 @@ public class MazeData {
 		myBoard = new gridP[10][10]; 
 		cList = new ArrayList<gridP>();; 
 		size = 10; 
-		output = new String[20][20]; 
 	}
 	
 	/**
@@ -47,7 +45,6 @@ public class MazeData {
 		myBoard = new gridP[size][size]; 
 		cList = new ArrayList<gridP>();; 
 		this.size = size; 
-		output = new String[20][40]; 
 	}
 	
 	/**
@@ -66,10 +63,10 @@ public class MazeData {
 				int random = generator.nextInt(prune(currentCell));
 				neighbor = currentCell.adjlist.get(random);
 				
-				if (currentCell.num + 10 == neighbor.num) currentCell.s = neighbor.n = 0;
+				if (currentCell.num + size == neighbor.num) currentCell.s = neighbor.n = 0;
 				else if (currentCell.num + 1 == neighbor.num) currentCell.e = neighbor.w = 0;
 				else if (currentCell.num - 1 == neighbor.num) currentCell.w = neighbor.e = 0 ;
-				else if (currentCell.num - 10 == neighbor.num) currentCell.n = neighbor.s = 0;
+				else if (currentCell.num - size == neighbor.num) currentCell.n = neighbor.s = 0;
 				
 				currentCell.adjlist.remove(neighbor);
 				neighbor.adjlist.remove(currentCell);
@@ -144,18 +141,18 @@ public class MazeData {
 	}
 	
 	public String[][] toStringArr() {
-		String[][] out = new String[21][1]; 
+		String[][] out = new String[size + size + 1][1]; 
 		int counter = 0; 
-		for (int i = 0; i < 10; i++) {
+		for (int i = 0; i < size; i++) {
 			String s = ""; 
-			for (int j = 0; j < 10; j++) 
+			for (int j = 0; j < size; j++) 
 				if (myBoard[j][i].n == 1) s += "+---"; 
 				else  s += "+   "; 
 			
 			s += "+"; 
 			out[counter++][0] = s; 
 			s = ""; 
-			for (int j = 0; j < 10; j++) 
+			for (int j = 0; j < size; j++) 
 				if (myBoard[j][i].w == 1) s += "|   "; 
 				else s += "    ";
 			s += "|"; 
@@ -163,7 +160,7 @@ public class MazeData {
 			s = ""; 
 		}
 		String newS = ""; 
-		for (int j = 0; j < 10; j++) 
+		for (int j = 0; j < size; j++) 
 			newS += "+---";
 		newS += "+"; 
 		out[counter++][0] = newS; 
