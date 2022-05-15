@@ -7,10 +7,9 @@ public class Antagonist extends Grinch {
 	private boolean isAlive;
 	private double proximity;
 	
-	public Antagonist(int x, double z)
+	public Antagonist(int x, double z, int xCoord, int yCoord)
 	{
-		super();
-		
+		super(xCoord, yCoord);
 		health = x;
 		isAlive = health > 0;
 		proximity = z;
