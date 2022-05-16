@@ -15,10 +15,11 @@ public class Grinch extends Actor {
 	public Grinch(double x, double y)
 	{
 		super(null, x, y, 30, 40);
-//		grinchTraps.add(new Trap(0,0,0,0,1));
-//		grinchTraps.add(new Trap(0,0,0,0,1));
-//		grinchTraps.add(new Trap(0,0,0,0,1));
-		
+		grinchTraps = new ArrayList<Trap>(); 
+//		grinchTraps.add(new Trap(0,0,1));
+//		grinchTraps.add(new Trap(0,0,1));
+//		grinchTraps.add(new Trap(0,0,1));
+//		
 	}
 	
 	public Grinch(double x, double y, ArrayList<Trap> grinchTraps)
