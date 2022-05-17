@@ -241,7 +241,7 @@ public class MazeData {
 		double widthMaze = h.getH(); 
 		double heightMaze = h.getW(); 
 		
-		Point p = null; 
+		Point p = new Point(); 
 		
 		
 		//true represents closer to top/left

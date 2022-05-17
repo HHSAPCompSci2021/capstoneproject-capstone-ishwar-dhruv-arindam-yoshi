@@ -144,6 +144,23 @@ public class Officer extends Actor {
 		marker.pop();
 	}
 	
+	private void wallImpacts(HauntedMaze maze)
+	{
+		boolean[] sidesBlocked = maze.settingData.isTouchingWall(maze);
+		for (int i = 0; i < 4; i++)
+			System.out.print(sidesBlocked[i] + " ");
+		System.out.println();
+		
+		if (sidesBlocked[0])
+			vx = (vx < 0) ? 0 : vx;
+		if (sidesBlocked[1])
+			vx = (vx > 0) ? 0 : vx;
+		if (sidesBlocked[2])
+			vy = (vy < 0) ? 0 : vy;
+		if (sidesBlocked[3])
+			vy = (vy > 0) ? 0 : vy;
+	}
+	
 	public void act(HauntedMaze maze)
 	{
 		gtool.use(maze);
@@ -152,6 +169,8 @@ public class Officer extends Actor {
 		
 		if (gtool.getReading() > LETHAL_RAD)
 			health = 0;
+		
+		wallImpacts(maze);
 		
 		x += vx*DrawingSurface.DT;
 		y += vy*DrawingSurface.DT;
