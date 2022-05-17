@@ -35,20 +35,24 @@ public class HauntedMaze extends ScreenObject {
 	public static final int[] SHADE_COLOR = {0, 0, 0, 255};
 	public static final int[] LIGHT_COLOR = {252, 252, 38, 100};
 	
-	public HauntedMaze(PApplet marker)
+	public HauntedMaze()
 	{
 		super(200, 150, 500, 400);
+		
 		protagonist = new Officer(null, x+70, y+60);
 		villain = new Grinch(730, 580);
+		
 		settingData = new MazeData();
 		settingData.generateMaze();
 		
+		/*
 		for (String[] r : settingData.toStringArr())
 		{
 			for (String c : r)
 				System.out.println(c);
 			System.out.println();
 		}
+		*/
 		
 		items = new ArrayList<Item>(); 
 		direction = 0;
@@ -230,7 +234,7 @@ public class HauntedMaze extends ScreenObject {
 		double[] posX = {x, minX, maxX, x+w};
 		double[] posY = {y, minY, maxY, y+h};
 		
-		System.out.println(x + " " + (x+h));
+		// System.out.println(x + " " + (x+h));
 		
 		marker.fill(SHADE_COLOR[0], SHADE_COLOR[1], SHADE_COLOR[2], SHADE_COLOR[3]);
 		marker.stroke(SHADE_COLOR[0], SHADE_COLOR[1], SHADE_COLOR[2], SHADE_COLOR[3]/3);
@@ -303,9 +307,10 @@ public class HauntedMaze extends ScreenObject {
 		double dist = Math.sqrt(Math.pow(relX, 2) + Math.pow(relY, 2));
 		
 		direction = (relY > 0) ? Math.acos(relX/dist) : (2*Math.PI - Math.acos(relX/dist));
-		
+	
 		protagonist.act(this);
 		villain.act(this);
+		villain.isOfficerNearTrap(this);
 	}
 	
 	

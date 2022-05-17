@@ -22,6 +22,12 @@ public class GameScreen extends Screen {
 	
 	private HauntedMaze gameSetting;
 	private InfoBar bar;
+	public static int TIME_CAP = 15*1000;
+	private int[] lastResumeTime;
+	// lastResumeTime[0] is time last resumed since application opened
+	// lastResumeTime[1] is the time remaining in the game
+	private boolean isPaused;
+	private int timer;
 
 	/**
 	 * Constructs a new GameScreen object using a DrawingSurface object
@@ -31,8 +37,12 @@ public class GameScreen extends Screen {
 		super(800, 600);
 		this.surface = surface;
 		// System.out.println(surface.width + " " + surface.height);
-		gameSetting = new HauntedMaze(surface);
+		gameSetting = new HauntedMaze();
 		bar = new InfoBar(gameSetting.protagonist);
+		
+		isPaused = true;
+		timer = TIME_CAP;
+		lastResumeTime = new int[] {0, TIME_CAP};
 	}
 	
 	public void setup()
@@ -44,18 +54,25 @@ public class GameScreen extends Screen {
 		gameSetting.setup();
 	}
 	
+	public void pause() {
+		isPaused = true;
+		lastResumeTime[1] = timer;
+	}
+	
+	public void resume() {
+		isPaused = false;
+		lastResumeTime[0] = surface.millis();
+	}
+	
 	public void draw()
 	{
-		surface.background(255, 255, 255);
-		
-		if (!gameSetting.protagonist.isAlive())
-		{
-			surface.push();
-			surface.fill(0, 0, 0);
-			surface.text("Game over :/", 300, 200);
-			surface.pop();
+		if (surface.isPressed(KeyEvent.VK_ESCAPE)) {
+			surface.switchScreen(surface.OPTION);
 			return;
 		}
+		surface.background(255, 255, 255);
+		
+		// ending screens - will be replaced with Victory / Loss screen
 		if (gameSetting.protagonist.isSuccessful(gameSetting))
 		{
 			surface.push();
@@ -64,16 +81,43 @@ public class GameScreen extends Screen {
 			surface.pop();
 			return;
 		}
-		gameSetting.update(surface.mouseX, surface.mouseY);
+		if ((timer == 0) || !gameSetting.protagonist.isAlive())
+		{
+			surface.push();
+			surface.fill(0, 0, 0);
+			surface.text("Game over :/", 300, 200);
+			surface.pop();
+			return;
+		}
 		
 		gameSetting.draw(surface);
 		bar.draw(surface);
 		
-		if (surface.isPressed(KeyEvent.VK_ESCAPE)) {
-			surface.switchScreen(surface.OPTION);
-			return;
-		}
+		if (gameSetting.protagonist.nearBlueprint(gameSetting) != null)
+		{
+			surface.push();
+			surface.fill(0, 0, 0);
+			surface.text("Press E to pick up the blueprint", 300, 100);
+			surface.pop();
+			if (surface.isPressed(KeyEvent.VK_E))
+			{
+				System.out.println("here");
+				gameSetting.protagonist.takeBlueprint(gameSetting);
+			}
+		}	
 		
+		drawTimer();
+		
+		
+		if (!isPaused)
+		{
+			moveOfficer();
+			gameSetting.update(surface.mouseX, surface.mouseY);
+		}
+	}
+	
+	private void moveOfficer()
+	{
 		if (surface.isPressed(KeyEvent.VK_A) && surface.isPressed(KeyEvent.VK_D))
 			gameSetting.protagonist.setVx(0);
 		else if (surface.isPressed(KeyEvent.VK_A))
@@ -91,20 +135,29 @@ public class GameScreen extends Screen {
 			gameSetting.protagonist.setVy(Officer.AXIS_V);
 		else
 			gameSetting.protagonist.setVy(0);
+	}
+	
+	private void drawTimer()
+	{
+		int intTime = timer / 1000;
+		int minutes = intTime / 60;
+		int seconds = intTime % 60;
 		
+		surface.push();
 		
-		if (gameSetting.protagonist.nearBlueprint(gameSetting) != null)
-		{
-			surface.push();
-			surface.fill(0, 0, 0);
-			surface.text("Press E to pick up the blueprint", 300, 100);
-			surface.pop();
-			if (surface.isPressed(KeyEvent.VK_E))
-			{
-				System.out.println("here");
-				gameSetting.protagonist.takeBlueprint(gameSetting);
-			}
-		}	
+		surface.stroke(0); surface.noFill();
+		surface.rect(	20, surface.height - 100,
+						100, 70);
+		
+		surface.fill(0);
+		
+		String label = "Timer: " + minutes + ":" + seconds;
+		surface.text(label, 20, surface.height - 100);
+		
+		surface.pop();
+		
+		timer = Math.max(0, lastResumeTime[0] + lastResumeTime[1] - surface.millis());
+		// System.out.println(timer);
 	}
 }
 
