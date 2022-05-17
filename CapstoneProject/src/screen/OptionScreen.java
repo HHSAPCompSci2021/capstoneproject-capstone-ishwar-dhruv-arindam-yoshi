@@ -21,9 +21,10 @@ import game.*;
  */
 public class OptionScreen extends Screen {
 
+	
 	private PImage optionScreen;
 	private DrawingSurface surface;
-	public static final String optionScreen_PATH = "optionScreen.png";
+	public static final String optionScreen_PATH = "optionScreen.jpg";
 	
 
 	
@@ -49,8 +50,7 @@ public class OptionScreen extends Screen {
 	public void draw() {
 
 		surface.background(255,255,255);
-		PImage img = surface.loadImage(OptionScreen.optionScreen_PATH);
-		surface.image(img, 0, 0, 800, 600);
+		surface.image(optionScreen, 0, 0, 1000, 800);
 		//surface.background(img);
 		surface.fill(100, 200, 240);
 		String str1 = "Option Screen! Welcome!";
@@ -68,6 +68,10 @@ public class OptionScreen extends Screen {
 	}
 
 
+	public void setup() {
+		optionScreen = surface.loadImage(OptionScreen.optionScreen_PATH);
+		//optionScreen.resize(surface.width, surface.height);
+	}
 
 	/**
 	 * Checks whether the mouse presses in the button, and switches screen accordingly

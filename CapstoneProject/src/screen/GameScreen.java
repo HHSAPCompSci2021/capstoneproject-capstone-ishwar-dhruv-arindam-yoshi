@@ -22,7 +22,7 @@ public class GameScreen extends Screen {
 	
 	private HauntedMaze gameSetting;
 	private InfoBar bar;
-	public static int TIME_CAP = 15*1000;
+	public static int TIME_CAP = 60*1000;
 	private int[] lastResumeTime;
 	// lastResumeTime[0] is time last resumed since application opened
 	// lastResumeTime[1] is the time remaining in the game
@@ -116,8 +116,7 @@ public class GameScreen extends Screen {
 		}
 	}
 	
-	private void moveOfficer()
-	{
+	private void moveOfficer() {
 		if (surface.isPressed(KeyEvent.VK_A) && surface.isPressed(KeyEvent.VK_D))
 			gameSetting.protagonist.setVx(0);
 		else if (surface.isPressed(KeyEvent.VK_A))
@@ -126,7 +125,9 @@ public class GameScreen extends Screen {
 			gameSetting.protagonist.setVx(Officer.AXIS_V);
 		else
 			gameSetting.protagonist.setVx(0);
-			
+
+		
+
 		if (surface.isPressed(KeyEvent.VK_W) && surface.isPressed(KeyEvent.VK_S))
 			gameSetting.protagonist.setVy(0);
 		else if (surface.isPressed(KeyEvent.VK_W))
@@ -135,6 +136,7 @@ public class GameScreen extends Screen {
 			gameSetting.protagonist.setVy(Officer.AXIS_V);
 		else
 			gameSetting.protagonist.setVy(0);
+
 	}
 	
 	private void drawTimer()
