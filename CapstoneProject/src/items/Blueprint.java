@@ -50,7 +50,7 @@ public class Blueprint extends Item {
 		
 		String str = "BLUEPRINT " + identifier;
 		float w = marker.textWidth(str);
-		marker.text(str, (float) (x), (float) y);
+		marker.text(str, (float) (x + 20), (float) y);
 		marker.pop();
 	}
 	
