@@ -23,7 +23,8 @@ public class DrawingSurface extends PApplet {
 	
 	private ArrayList<Integer> keys;
 	
-	public static double DT = 1.0/60;
+	private static int PREV_MILLIS = 0;
+	public static double DT = 0;
 	
 	/**
 	 * Initializes the drawing surface for the game
@@ -59,7 +60,15 @@ public class DrawingSurface extends PApplet {
 	 */
 	public void switchScreen(int i)
 	{
-		activeScreen = screens.get(i);
+		Screen nextScreen = screens.get(i);
+		if (nextScreen instanceof GameScreen)
+		{
+			((GameScreen)nextScreen).resume();
+		}
+		else
+			if (activeScreen instanceof GameScreen)
+				((GameScreen)activeScreen).pause();
+		activeScreen = nextScreen;
 	}
 	
 	/**
@@ -67,6 +76,9 @@ public class DrawingSurface extends PApplet {
 	 */
 	public void draw()
 	{
+		DT = (this.millis() - PREV_MILLIS)/1000.0;
+		PREV_MILLIS = this.millis();
+		
 		push();
 		
 		activeScreen.draw();

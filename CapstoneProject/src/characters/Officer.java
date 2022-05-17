@@ -1,5 +1,7 @@
 package characters;
 
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.util.*;
 import game.*;
 
@@ -25,7 +27,7 @@ public class Officer extends Actor {
 	public ArrayList<Blueprint> blueprints;
 	public GeigerCounter gtool;
 	
-	public static double AXIS_V = 90; 
+	public static double AXIS_V = 200; 
 	
 	/**
 	 * Creates a new Officer object
@@ -89,10 +91,10 @@ public class Officer extends Actor {
 	 * @return the Officer's health level
 	 */
 	public double getHealth()
-	{
-		if (health > 0)
-			return health;
-		else return 0;
+	{	
+		DecimalFormat df = new DecimalFormat("#.####");
+		df.setRoundingMode(RoundingMode.CEILING);
+		return Double.parseDouble(df.format((health > 0) ? health : 0)); 
 	}
 	
 	/**
@@ -115,7 +117,10 @@ public class Officer extends Actor {
 	 */
 	public boolean isOutsideMaze(HauntedMaze maze)
 	{
-		return true;
+		return 		(x < maze.getX()-w)
+				|| 	(x > maze.getX()+maze.getW())
+				|| 	(y < maze.getY()-h)
+				||	(y > maze.getY()+maze.getH());
 	}
 	
 	/**
