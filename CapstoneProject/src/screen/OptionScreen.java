@@ -24,7 +24,7 @@ public class OptionScreen extends Screen {
 	
 	private PImage optionScreen;
 	private DrawingSurface surface;
-	public static final String optionScreen_PATH = "optionScreen.jpg";
+	public static final String optionScreen_PATH = "assets/optionScreen.jpg";
 	
 
 	
