@@ -214,13 +214,15 @@ public class MazeData {
 	public int[][] toIntArr(){
 		return null; 
 	}
+	
+	
 	/**
 	 * left = 0
 	 * right = 1
 	 * top = 2
 	 * bottom = 3 
 	 */
-	public static boolean[] isActorInGrid(HauntedMaze h) {
+	public static boolean[] isTouchingWall(HauntedMaze h) {
 		Actor a = h.protagonist; 
 		int size = h.settingData.size; 
 		MazeData m = h.settingData; 
