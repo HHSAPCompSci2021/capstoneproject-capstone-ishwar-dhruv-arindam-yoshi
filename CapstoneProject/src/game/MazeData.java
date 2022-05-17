@@ -213,6 +213,10 @@ public class MazeData {
 	public int[][] toIntArr(){
 		return null; 
 	}
+	
+	public boolean[] isActorInGrid() {
+		return new boolean[4]; 
+	}
 }
 
 
