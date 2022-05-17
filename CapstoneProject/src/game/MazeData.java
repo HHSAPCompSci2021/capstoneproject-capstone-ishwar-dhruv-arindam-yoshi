@@ -214,15 +214,93 @@ public class MazeData {
 	public int[][] toIntArr(){
 		return null; 
 	}
-	
-	public boolean[] isActorInGrid(Actor a) {
+	/**
+	 * left = 0
+	 * right = 1
+	 * top = 2
+	 * bottom = 3 
+	 */
+	public static boolean[] isActorInGrid(HauntedMaze h) {
+		Actor a = h.protagonist; 
+		int size = h.settingData.size; 
+		MazeData m = h.settingData; 
+		
+		boolean[] result = new boolean[4]; 
+		
+		double pixelLenWidth = ((h.getW()))/(4 * size + 1);
+		double pixelLenHeight = ((h.getH()))/(2 * size + 1); 
+		
+		double actorPosX = a.getX(); 
+		double actorPosY = a.getY(); 
+		
+		double mazeLeftX = h.getX(); 
+		double mazeTopY = h.getY(); 
+		
+		double widthMaze = h.getH(); 
+		double heightMaze = h.getW(); 
+		
+		Point p = null; 
 		
 		
+		//true represents closer to top/left
+		//false represents closer to bottom/right
+		boolean closerToVertical = false;  
+		boolean closerToHorizontal = false;  
 		
+		if (actorPosX >= mazeLeftX && actorPosX <= (mazeLeftX + widthMaze) && actorPosY >= mazeTopY && actorPosY <=  (mazeTopY + heightMaze)) {
+			for (int i=0; i < (4 * size); i++) {
+				if (actorPosX >= (pixelLenWidth * i + mazeLeftX) && 
+					actorPosX <= (pixelLenWidth * (i + 1) + mazeLeftX)) {
+					closerToHorizontal = Math.abs(actorPosX - (pixelLenWidth * i + mazeLeftX)) <= Math.abs(actorPosX - (pixelLenWidth * (i+1) + mazeLeftX)); 
+					p.y = i; 
+				}
+			}
+			
+			for (int i=0; i < (2 * size); i++) {
+				if (actorPosY >= (pixelLenHeight * i + mazeTopY) && 
+					actorPosY <= (pixelLenHeight * (i + 1) + mazeTopY)) {
+					closerToVertical = Math.abs(actorPosY - (pixelLenHeight * i + mazeTopY)) <= Math.abs(actorPosY - (pixelLenHeight * (i+1) + mazeTopY)); 
+					p.x = i; 
+				}
+			}
+		}
 		
+		char[][] grid = new char[4 * size + 1][2 * size + 1]; 
+		String[][] gridString = m.toStringArr(); 
 		
+		for (int i=0;i<(2 * size + 1);i++) {
+			grid[i] = gridString[i][0].toCharArray(); 
+		}
+		/**
+		 * left = 0
+		 * right = 1
+		 * top = 2
+		 * bottom = 3 
+		 */
 		
-		return new boolean[4]; 
+		if (grid[p.x][p.y] == ' ') {
+			result[0] = result[1] = result[2] = result[3] = false;  
+		}else if (grid[p.x][p.y] == '-') {
+			if (closerToVertical) {
+				result[0] = result[1] = result[3] = false; 
+				result[2] = true; 
+			}else {
+				result[0] = result[1] = result[2] = false; 
+				result[3] = true; 
+			}
+		}else if (grid[p.x][p.y] == '|') {
+			if (closerToHorizontal) {
+				result[1] = result[2] = result[3] = false; 
+				result[0] = true; 
+			}else {
+				result[0] = result[2] = result[3] = false; 
+				result[1] = true; 
+			}
+		}else if (grid[p.x][p.y] == '+') {
+			result[0] = result[1] = result[2] = result[3] = false; 
+		}
+		
+		return result; 
 	}
 }
 
