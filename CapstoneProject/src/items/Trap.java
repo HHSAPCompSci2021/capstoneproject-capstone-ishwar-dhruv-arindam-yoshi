@@ -22,9 +22,9 @@ public class Trap extends Item {
 	 * Traps of type 3 set the position of the officer back to the start
 	 * Traps of type 4 makes the Grinch more powerful(not decided how). 
 	 */
-	public Trap(double x, double y, double width, double height, int type)
+	public Trap(double x, double y, int type)
 	{
-		super(x, y, width, height);
+		super(x, y, 15, 15);
 		this.type = type; 
 	}
 	
