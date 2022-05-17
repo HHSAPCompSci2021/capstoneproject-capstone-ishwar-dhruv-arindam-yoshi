@@ -3,6 +3,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Random;
 
+import characters.Actor;
 import characters.Grinch;
 import characters.Officer;
 import items.*;
@@ -212,6 +213,16 @@ public class MazeData {
 	 */
 	public int[][] toIntArr(){
 		return null; 
+	}
+	
+	public boolean[] isActorInGrid(Actor a) {
+		
+		
+		
+		
+		
+		
+		return new boolean[4]; 
 	}
 }
 
