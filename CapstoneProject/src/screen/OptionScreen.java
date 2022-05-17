@@ -1,10 +1,17 @@
 package screen;
 import java.awt.Point;
 import java.awt.Rectangle;
-
+import java.util.*;
 import core.DrawingSurface;
 import processing.core.*;
 import screen.Screen;
+
+import java.awt.event.KeyEvent;
+
+
+import characters.*;
+import items.*;
+import game.*;
 
 
 /**
@@ -14,8 +21,10 @@ import screen.Screen;
  */
 public class OptionScreen extends Screen {
 
+	private PImage optionScreen;
 	private DrawingSurface surface;
-	
+	public static final String optionScreen_PATH = "optionScreen.png";
+
 	private Rectangle button;
 
 	/**
@@ -27,6 +36,8 @@ public class OptionScreen extends Screen {
 		this.surface = surface;
 
 		button = new Rectangle(800/2-100,600/2-50,200,100);
+
+		
 	}
 
 	/**
@@ -35,6 +46,9 @@ public class OptionScreen extends Screen {
 	public void draw() {
 
 		surface.background(255,255,255);
+		PImage img = surface.loadImage(OptionScreen.optionScreen_PATH);
+		surface.image(img, 0, 0, 800, 600);
+		//surface.background(img);
 		surface.fill(100, 200, 240);
 		String str1 = "Option Screen! Welcome!";
 		surface.textSize(40);

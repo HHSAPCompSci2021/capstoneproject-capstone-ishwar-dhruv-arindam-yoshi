@@ -2,6 +2,7 @@ package core;
 import java.awt.Point;
 import java.util.ArrayList;
 
+import items.Blueprint;
 import processing.core.PApplet;
 import screen.*;
 
