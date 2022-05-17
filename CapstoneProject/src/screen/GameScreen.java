@@ -36,9 +36,9 @@ public class GameScreen extends Screen {
 	public GameScreen(DrawingSurface surface) {
 		super(800, 600);
 		this.surface = surface;
-		// System.out.println(surface.width + " " + surface.height);
-		gameSetting = new HauntedMaze();
-		bar = new InfoBar(gameSetting.protagonist);
+		
+		gameSetting = null;
+		bar = null;
 		
 		isPaused = true;
 		timer = TIME_CAP;
@@ -47,11 +47,12 @@ public class GameScreen extends Screen {
 	
 	public void setup()
 	{
-		gameSetting.protagonist.setImage(surface.loadImage(Officer.IMG_PATH));
-		gameSetting.addItem(new Blueprint(gameSetting.getX()+10, gameSetting.getY()+10, "A", surface.loadImage(Blueprint.pin_PATH)));
-		gameSetting.addItem(new Blueprint(gameSetting.getX()+50, gameSetting.getY()+50, "B", surface.loadImage(Blueprint.pin_PATH)));
-		gameSetting.addItem(new Blueprint(gameSetting.getX()+90, gameSetting.getY()+130, "C", surface.loadImage(Blueprint.pin_PATH)));
+		gameSetting = new HauntedMaze(surface);
+		
+		bar = new InfoBar(surface, gameSetting.protagonist);
 		gameSetting.setup();
+		
+		System.out.println(gameSetting == null);
 	}
 	
 	public void pause() {

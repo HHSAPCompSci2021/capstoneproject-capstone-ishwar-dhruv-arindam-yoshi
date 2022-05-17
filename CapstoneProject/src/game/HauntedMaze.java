@@ -21,6 +21,7 @@ public class HauntedMaze extends ScreenObject {
 	
 	// has mazedata, actors, and items
 	
+	public PApplet marker; // used for image loading
 	public Officer protagonist;
 	public Grinch villain;
 	public MazeData settingData;
@@ -35,32 +36,30 @@ public class HauntedMaze extends ScreenObject {
 	public static final int[] SHADE_COLOR = {0, 0, 0, 255};
 	public static final int[] LIGHT_COLOR = {252, 252, 38, 100};
 	
-	public HauntedMaze()
+	public HauntedMaze(PApplet marker)
 	{
 		super(200, 150, 500, 400);
+		this.marker = marker;
 		
-		protagonist = new Officer(null, x+70, y+60);
-		villain = new Grinch(730, 580);
-		
+		protagonist = new Officer(marker, x+70, y+60);
+		villain = new Grinch(marker, x+240, y+200);
 		settingData = new MazeData();
 		settingData.generateMaze();
 		
-		/*
-		for (String[] r : settingData.toStringArr())
-		{
-			for (String c : r)
-				System.out.println(c);
-			System.out.println();
-		}
-		*/
-		
 		items = new ArrayList<Item>(); 
+		
 		direction = 0;
+		
 	}
 	
 	public void setup()
 	{
 		// System.out.println(x + " " + y);
+		
+		// add Blueprints randomly
+		addItem(new Blueprint(marker, x+10, y+10, "A"));
+		addItem(new Blueprint(marker, x+50, y+50, "B"));
+		addItem(new Blueprint(marker, x+90, y+130, "C"));
 	}
 	
 	public void draw(PApplet marker)
@@ -73,7 +72,7 @@ public class HauntedMaze extends ScreenObject {
 		
 		settingData.draw(marker, (float)x, (float)y, (float)w, (float)h);
 		
-		drawLighting(marker);
+		drawLighting();
 		protagonist.draw(marker);
 		villain.draw(marker);
 		for (Item i : items)
@@ -87,7 +86,7 @@ public class HauntedMaze extends ScreenObject {
 	 * Draws the lighting in the HauntedMaze (from the officer's flashlight).
 	 * @param marker
 	 */
-	public void drawLighting(PApplet marker)
+	public void drawLighting()
 	{
 		//marker.push();
 		
@@ -310,7 +309,11 @@ public class HauntedMaze extends ScreenObject {
 	
 		protagonist.act(this);
 		villain.act(this);
-		villain.isOfficerNearTrap(this);
+		
+		for (Item i : items)
+		{
+			i.use(this);
+		}
 	}
 	
 	

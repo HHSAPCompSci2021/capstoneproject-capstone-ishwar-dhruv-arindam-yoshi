@@ -10,15 +10,10 @@ public class Actor extends ScreenObject {
 	protected PImage image;
 	protected double vx, vy; 
 	
-	public Actor(PImage img, double x, double y, double w, double h) {
+	public Actor(String imgPath, PApplet marker, double x, double y, double w, double h) {
 		super(x, y, w, h);
 		vx = 0; vy = 0;
-		setImage(img);
-	}
-	
-	public void setImage(PImage img)
-	{
-		image = img;
+		this.image = marker.loadImage(imgPath);
 	}
 	
 	/**
