@@ -123,6 +123,12 @@ public class GameScreen extends Screen {
 			gameSetting.protagonist.setVx(-Officer.AXIS_V);
 		else if (surface.isPressed(KeyEvent.VK_D))
 			gameSetting.protagonist.setVx(Officer.AXIS_V);
+		else if (surface.isPressed(KeyEvent.VK_LEFT) && surface.isPressed(KeyEvent.VK_RIGHT))
+			gameSetting.protagonist.setVx(0);
+		else if (surface.isPressed(KeyEvent.VK_LEFT))
+			gameSetting.protagonist.setVx(-Officer.AXIS_V);
+		else if (surface.isPressed(KeyEvent.VK_RIGHT))
+			gameSetting.protagonist.setVx(Officer.AXIS_V);
 		else
 			gameSetting.protagonist.setVx(0);
 
@@ -134,8 +140,15 @@ public class GameScreen extends Screen {
 			gameSetting.protagonist.setVy(-Officer.AXIS_V);
 		else if (surface.isPressed(KeyEvent.VK_S))
 			gameSetting.protagonist.setVy(Officer.AXIS_V);
+		else if (surface.isPressed(KeyEvent.VK_UP) && surface.isPressed(KeyEvent.VK_DOWN))
+			gameSetting.protagonist.setVy(0);
+		else if (surface.isPressed(KeyEvent.VK_UP))
+			gameSetting.protagonist.setVy(-Officer.AXIS_V);
+		else if (surface.isPressed(KeyEvent.VK_DOWN))
+			gameSetting.protagonist.setVy(Officer.AXIS_V);
 		else
 			gameSetting.protagonist.setVy(0);
+		
 
 	}
 	
