@@ -73,6 +73,7 @@ public class DrawingSurface extends PApplet {
 	}
 	
 	/**
+	 * 
 	 * draws the active screen
 	 */
 	public void draw()
@@ -91,6 +92,7 @@ public class DrawingSurface extends PApplet {
 	/**
 	 * takes into account keys pressed, prevents processing from closing on escape key
 	 */
+	
 	public void keyPressed() {
 		keys.add(keyCode);
 		if (key == ESC)  // This prevents a processing program from closing on escape key
