@@ -21,6 +21,11 @@ public class GameScreen extends Screen {
 	// has a haunted maze object and an info bar object
 	
 	private HauntedMaze gameSetting;
+	private PImage winning;
+	public static final String winningScreen_PATH = "winningScreen.jpg";
+	private PImage losing;
+	public static final String losingScreen_PATH = "losingScreen.jpg";
+
 	private InfoBar bar;
 	public static int TIME_CAP = 60*1000;
 	private int[] lastResumeTime;
@@ -47,6 +52,9 @@ public class GameScreen extends Screen {
 	
 	public void setup()
 	{
+		winning = surface.loadImage(GameScreen.winningScreen_PATH);
+		losing = surface.loadImage(GameScreen.losingScreen_PATH);
+
 		gameSetting.protagonist.setImage(surface.loadImage(Officer.IMG_PATH));
 		gameSetting.addItem(new Blueprint(gameSetting.getX()+10, gameSetting.getY()+10, "A", surface.loadImage(Blueprint.pin_PATH)));
 		gameSetting.addItem(new Blueprint(gameSetting.getX()+50, gameSetting.getY()+50, "B", surface.loadImage(Blueprint.pin_PATH)));
@@ -77,7 +85,8 @@ public class GameScreen extends Screen {
 		{
 			surface.push();
 			surface.fill(0, 0, 0);
-			surface.text("You have won :)", 300, 200);
+			surface.image(winning, 0, 0, 1000, 800);
+
 			surface.pop();
 			return;
 		}
@@ -85,8 +94,10 @@ public class GameScreen extends Screen {
 		{
 			surface.push();
 			surface.fill(0, 0, 0);
-			surface.text("Game over :/", 300, 200);
+			surface.image(losing, 0, 0, 1000, 800);
+
 			surface.pop();
+			
 			return;
 		}
 		
@@ -174,5 +185,7 @@ public class GameScreen extends Screen {
 		timer = Math.max(0, lastResumeTime[0] + lastResumeTime[1] - surface.millis());
 		// System.out.println(timer);
 	}
+	
+	
 }
 

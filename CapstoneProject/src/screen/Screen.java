@@ -11,6 +11,7 @@ public class Screen {
 	public final int DRAWING_WIDTH, DRAWING_HEIGHT;
 	public static final int OPTION_SCREEN = 0;
 	public static final int GAME_SCREEN = 1;
+	public static final int END_SCREEN = 2;
 	protected DrawingSurface surface;
 	
 	/**
