@@ -25,8 +25,11 @@ public class OptionScreen extends Screen {
 	private PImage optionScreen;
 	private PImage starter;
 	private DrawingSurface surface;
+	private PImage grinchFringe;
+
 	public static final String optionScreen_PATH = "optionScreen.png";
 	public static final String starter_PATH = "starter.png";
+	public static final String title_PATH = "grinchFringe.png";
 
 
 	
@@ -55,13 +58,13 @@ public class OptionScreen extends Screen {
 		surface.image(optionScreen, 0, 0, 1000, 800);
 		//surface.background(img);
 		surface.fill(100, 200, 240);
-		String str1 = "Option Screen! Welcome!";
+		surface.image(grinchFringe, 500 - 350/4, 100, 350/2, 140);
+
 		surface.textSize(40);
-		surface.text(str1, 400 - surface.textWidth(str1)/2, 100);
 		surface.fill(137, 207, 240);
 		surface.fill(0);
 		surface.textSize(15);
-		surface.image(starter, 500 - 487/4, 200, 487/2, 192/2);
+		surface.image(starter, 500 - 487/4, 300, 487/2, 192/2);
 
 		
 	}
@@ -71,7 +74,9 @@ public class OptionScreen extends Screen {
 		optionScreen = surface.loadImage(OptionScreen.optionScreen_PATH);
 		//optionScreen.resize(surface.width, surface.height);
 		starter = surface.loadImage(OptionScreen.starter_PATH);
-		button = new Rectangle(500 - 487/4, 200, 487/2, 192/2);
+		grinchFringe = surface.loadImage(OptionScreen.title_PATH);
+
+		button = new Rectangle(500 - 487/4, 300, 487/2, 192/2);
 	}
 
 	/**

@@ -25,7 +25,8 @@ public class GameScreen extends Screen {
 	public static final String winningScreen_PATH = "winningScreen.jpg";
 	private PImage losing;
 	public static final String losingScreen_PATH = "losingScreen.jpg";
-
+	private PImage tryAgain;
+	public static final String tryAgain_PATH = "tryAgain.png";
 	private InfoBar bar;
 	public static int TIME_CAP = 60*1000;
 	private int[] lastResumeTime;
@@ -54,6 +55,7 @@ public class GameScreen extends Screen {
 	{
 		winning = surface.loadImage(GameScreen.winningScreen_PATH);
 		losing = surface.loadImage(GameScreen.losingScreen_PATH);
+		tryAgain = surface.loadImage(GameScreen.tryAgain_PATH);
 
 		gameSetting.protagonist.setImage(surface.loadImage(Officer.IMG_PATH));
 		gameSetting.addItem(new Blueprint(gameSetting.getX()+10, gameSetting.getY()+10, "A", surface.loadImage(Blueprint.pin_PATH)));
@@ -86,6 +88,7 @@ public class GameScreen extends Screen {
 			surface.push();
 			surface.fill(0, 0, 0);
 			surface.image(winning, 0, 0, 1000, 800);
+			surface.image(tryAgain, 200, 200, 100, 100);
 
 			surface.pop();
 			return;
@@ -95,7 +98,8 @@ public class GameScreen extends Screen {
 			surface.push();
 			surface.fill(0, 0, 0);
 			surface.image(losing, 0, 0, 1000, 800);
-
+			surface.image(tryAgain, 200, 200, 100, 100);
+			
 			surface.pop();
 			
 			return;
@@ -186,6 +190,12 @@ public class GameScreen extends Screen {
 		// System.out.println(timer);
 	}
 	
+	public void mousePressed() {
+		Point p = (new Point(surface.mouseX,surface.mouseY));
+		Rectangle button = new Rectangle(200, 200, 100, 100);
+		if (button.contains(p))
+			surface.switchScreen(0);
+	}
 	
 }
 
