@@ -164,7 +164,24 @@ public class Officer extends Actor {
 	public void adjustV(int codeX, int codeY)
 	{
 		if (codeX < 0)
-			vx = -
+			vx = -axisV;
+		else if (codeX > 0)
+			vx = axisV;
+		else
+			vx = 0;
+		
+		if (codeY < 0)
+			vy = -axisV;
+		else if (codeY > 0)
+			vy = axisV;
+		else
+			vy = 0;
+		
+		if ((codeX != 0) && (codeY != 0))
+		{
+			vx *= 1/Math.sqrt(2);
+			vy *= 1/Math.sqrt(2);
+		}
 	}
 	
 	public void act(HauntedMaze maze)

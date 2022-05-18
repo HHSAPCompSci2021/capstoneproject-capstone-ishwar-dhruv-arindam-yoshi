@@ -22,7 +22,7 @@ public class GameScreen extends Screen {
 	
 	private HauntedMaze gameSetting;
 	private InfoBar bar;
-	public static int TIME_CAP = 60*1000;
+	public static int TIME_CAP = 10*1000;
 	private int[] lastResumeTime;
 	// lastResumeTime[0] is time last resumed since application opened
 	// lastResumeTime[1] is the time remaining in the game
@@ -143,7 +143,7 @@ public class GameScreen extends Screen {
 	
 	private void drawTimer()
 	{
-		int intTime = timer / 1000;
+		int intTime = (timer / 1000) + 1;
 		int minutes = intTime / 60;
 		int seconds = intTime % 60;
 		
@@ -151,12 +151,15 @@ public class GameScreen extends Screen {
 		
 		surface.stroke(0); surface.noFill();
 		surface.rect(	20, surface.height - 100,
-						100, 70);
+						80, 60);
 		
 		surface.fill(0);
 		
-		String label = "Timer: " + minutes + ":" + seconds;
-		surface.text(label, 20, surface.height - 100);
+		String minutesStr = (minutes / 10 == 0) ? ("0"+minutes) : (""+minutes);
+		String secondsStr = (seconds / 10 == 0) ? ("0"+seconds) : (""+seconds);
+		
+		String label = "Time left\n" + minutesStr + ":" + secondsStr;
+		surface.text(label, 25, surface.height - 80);
 		
 		surface.pop();
 		
