@@ -126,39 +126,19 @@ public class GameScreen extends Screen {
 	}
 	
 	private void moveOfficer() {
-		if (surface.isPressed(KeyEvent.VK_A) && surface.isPressed(KeyEvent.VK_D))
-			gameSetting.protagonist.setVx(0);
-		else if (surface.isPressed(KeyEvent.VK_A))
-			gameSetting.protagonist.setVx(-Officer.AXIS_V);
-		else if (surface.isPressed(KeyEvent.VK_D))
-			gameSetting.protagonist.setVx(Officer.AXIS_V);
-		else if (surface.isPressed(KeyEvent.VK_LEFT) && surface.isPressed(KeyEvent.VK_RIGHT))
-			gameSetting.protagonist.setVx(0);
-		else if (surface.isPressed(KeyEvent.VK_LEFT))
-			gameSetting.protagonist.setVx(-Officer.AXIS_V);
-		else if (surface.isPressed(KeyEvent.VK_RIGHT))
-			gameSetting.protagonist.setVx(Officer.AXIS_V);
-		else
-			gameSetting.protagonist.setVx(0);
-
+		int codeX = 0, codeY = 0;
 		
-
-		if (surface.isPressed(KeyEvent.VK_W) && surface.isPressed(KeyEvent.VK_S))
-			gameSetting.protagonist.setVy(0);
-		else if (surface.isPressed(KeyEvent.VK_W))
-			gameSetting.protagonist.setVy(-Officer.AXIS_V);
-		else if (surface.isPressed(KeyEvent.VK_S))
-			gameSetting.protagonist.setVy(Officer.AXIS_V);
-		else if (surface.isPressed(KeyEvent.VK_UP) && surface.isPressed(KeyEvent.VK_DOWN))
-			gameSetting.protagonist.setVy(0);
-		else if (surface.isPressed(KeyEvent.VK_UP))
-			gameSetting.protagonist.setVy(-Officer.AXIS_V);
-		else if (surface.isPressed(KeyEvent.VK_DOWN))
-			gameSetting.protagonist.setVy(Officer.AXIS_V);
-		else
-			gameSetting.protagonist.setVy(0);
+		if (surface.isPressed(KeyEvent.VK_A) || surface.isPressed(KeyEvent.VK_LEFT))
+			codeX--;
+		if (surface.isPressed(KeyEvent.VK_D) || surface.isPressed(KeyEvent.VK_RIGHT))
+			codeX++;
 		
-
+		if (surface.isPressed(KeyEvent.VK_W) || surface.isPressed(KeyEvent.VK_UP))
+			codeY--;
+		if (surface.isPressed(KeyEvent.VK_S) || surface.isPressed(KeyEvent.VK_DOWN))
+			codeY++;
+		
+		gameSetting.protagonist.adjustV(codeX, codeY);
 	}
 	
 	private void drawTimer()

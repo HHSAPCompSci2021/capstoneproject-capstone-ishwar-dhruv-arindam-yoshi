@@ -39,6 +39,9 @@ public class Trap extends Item {
 	
 	public void use(HauntedMaze maze)
 	{
+		if (!isActive)
+			return;
+		
 		Officer o = maze.protagonist; 
 		
 		double dist = Math.sqrt(Math.pow(o.getX()-x, 2) + Math.pow(o.getY()-y, 2));

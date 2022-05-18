@@ -72,7 +72,7 @@ public class HauntedMaze extends ScreenObject {
 		
 		settingData.draw(marker, (float)x, (float)y, (float)w, (float)h);
 		
-		drawLighting();
+		// drawLighting();
 		protagonist.draw(marker);
 		villain.draw(marker);
 		for (Item i : items)
