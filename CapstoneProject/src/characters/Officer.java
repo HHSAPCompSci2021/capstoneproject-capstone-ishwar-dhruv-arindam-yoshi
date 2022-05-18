@@ -16,7 +16,6 @@ public class Officer extends Actor {
 	
 	// has blueprints and health level (# of lives)
 	
-	public static final String IMG_PATH = "badge.png";
 	private static final double LETHAL_RAD = 50;
 	public static final double PICK_DIST = 20;
 	
@@ -27,16 +26,16 @@ public class Officer extends Actor {
 	public ArrayList<Blueprint> blueprints;
 	public GeigerCounter gtool;
 	
-	public static double AXIS_V = 200; 
+	public static double AXIS_V = 100; 
 	
 	/**
 	 * Creates a new Officer object
 	 * @param x the x-coordinate of the officer
 	 * @param y the y-coordinate of the officer
 	 */
-	public Officer(PImage img, double x, double y)
+	public Officer(PApplet marker, double x, double y)
 	{
-		super(img, x, y, 30, 40);
+		super("assets/badge.png", marker, x, y, 30, 40);
 		blueprints = new ArrayList<Blueprint>();
 		gtool = new GeigerCounter(x, y);
 		health = 100;

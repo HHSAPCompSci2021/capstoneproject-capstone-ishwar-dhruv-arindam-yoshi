@@ -6,16 +6,10 @@ public class Antagonist extends Grinch {
 	private int health;
 	private boolean isAlive;
 	private double proximity;
+	private static final String IMG_PATH = "grinch.png";
 	
-	public Antagonist(int x, double z, int xCoord, int yCoord)
-	{
-		super(xCoord, yCoord);
-		health = x;
-		isAlive = health > 0;
-		proximity = z;
-	} 
-	
-	
-	
+	public Antagonist(PApplet marker, double x, double y) {
+		super(marker, x, y);
+	}
 	
 }

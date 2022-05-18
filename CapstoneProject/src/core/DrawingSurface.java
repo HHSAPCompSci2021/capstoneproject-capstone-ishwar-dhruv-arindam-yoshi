@@ -9,7 +9,7 @@ import screen.*;
 
 /**
  * Represents the drawing surface for the game
- * @author akulkarni174
+ * @author Ishwar S.
  *
  */
 public class DrawingSurface extends PApplet {

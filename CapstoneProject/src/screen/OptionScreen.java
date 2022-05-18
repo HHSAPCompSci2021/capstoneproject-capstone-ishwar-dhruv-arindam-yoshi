@@ -27,9 +27,9 @@ public class OptionScreen extends Screen {
 	private DrawingSurface surface;
 	private PImage grinchFringe;
 
-	public static final String optionScreen_PATH = "optionScreen.png";
-	public static final String starter_PATH = "starter.png";
-	public static final String title_PATH = "grinchFringe.png";
+	public static final String optionScreen_PATH = "assets/optionScreen.png";
+	public static final String starter_PATH = "assets/starter.png";
+	public static final String title_PATH = "assets/grinchFringe.png";
 
 
 	

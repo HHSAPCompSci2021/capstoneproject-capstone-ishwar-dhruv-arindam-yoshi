@@ -9,6 +9,7 @@ public class Trap extends Item {
 	// has damage intensity
 	private int type; 
 	private boolean isActive = true; 
+	public static final double NEAR_DIST = 15;
 	
 	/**
 	 * 
@@ -39,15 +40,20 @@ public class Trap extends Item {
 	public void use(HauntedMaze maze)
 	{
 		Officer o = maze.protagonist; 
-		if (type == 1) {
-			o.changeHealth(-25);
-		}else if (type == 2) {
-			o.setVx(o.getVx()-2);
-			o.setVy(o.getVy()-2);
-		}else if (type == 3) {
-			o.setPos(0, 0);
+		
+		double dist = Math.sqrt(Math.pow(o.getX()-x, 2) + Math.pow(o.getY()-y, 2));
+		if (dist < NEAR_DIST)
+		{
+			if (type == 1) {
+				o.changeHealth(-25);
+			}else if (type == 2) {
+				o.setVx(o.getVx()-2);
+				o.setVy(o.getVy()-2);
+			}else if (type == 3) {
+				o.setPos(0, 0);
+			}
+			isActive = false; 
 		}
-		isActive = false; 
 	}
 	
 	public boolean isTrapActive() {
