@@ -10,20 +10,9 @@ public class Grinch extends Actor {
 	
 	// has arraylist of traps to set in the maze (want-to-have)
 	
-	
 	public Grinch(PApplet marker, double x, double y)
 	{
-		this(marker, x, y, new ArrayList<Trap>());
-//		grinchTraps.add(new Trap(0,0,1));
-//		grinchTraps.add(new Trap(0,0,1));
-//		grinchTraps.add(new Trap(0,0,1));
-//		
-	}
-	
-	public Grinch(PApplet marker, double x, double y, ArrayList<Trap> grinchTraps)
-	{
 		super("assets/grinch.png", marker, x, y, 30, 40);
-		this.grinchTraps = grinchTraps; 
 	}
 	
 	public void setTrap(Trap e)
