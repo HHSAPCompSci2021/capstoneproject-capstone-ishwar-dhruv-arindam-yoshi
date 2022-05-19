@@ -9,6 +9,7 @@ import processing.core.*;
 import characters.*;
 import items.*;
 import game.*;
+import screen.*;
 
 
 /**
@@ -73,10 +74,12 @@ public class GameScreen extends Screen {
 		lastResumeTime[0] = surface.millis();
 	}
 	
+	
 	public void draw()
 	{
 		if (surface.isPressed(KeyEvent.VK_ESCAPE)) {
 			surface.switchScreen(surface.OPTION);
+			EndScreen.winLose = false;
 			return;
 		}
 		surface.background(255, 255, 255);
@@ -84,18 +87,14 @@ public class GameScreen extends Screen {
 		// ending screens - will be replaced with Victory / Loss screen
 		if (gameSetting.protagonist.isSuccessful(gameSetting))
 		{
-			surface.push();
-			surface.fill(0, 0, 0);
-			surface.text("You have won :)", 300, 200);
-			surface.pop();
+			surface.switchScreen(2);
+			EndScreen.winLose = true;
 			return;
 		}
 		if ((timer == 0) || !gameSetting.protagonist.isAlive())
 		{
-			surface.push();
-			surface.fill(0, 0, 0);
-			surface.text("Game over :/", 300, 200);
-			surface.pop();
+			surface.switchScreen(2);
+			EndScreen.winLose = false;
 			return;
 		}
 		
@@ -123,6 +122,7 @@ public class GameScreen extends Screen {
 			moveOfficer();
 			gameSetting.update(surface.mouseX, surface.mouseY);
 		}
+		return;
 	}
 	
 	private void moveOfficer() {

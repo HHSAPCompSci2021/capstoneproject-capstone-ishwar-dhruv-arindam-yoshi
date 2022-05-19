@@ -20,7 +20,7 @@ public class DrawingSurface extends PApplet {
 	/**
 	 * Represents an int for a certain screen
 	 */
-	public static final int GAME = 0, OPTION = 1;
+	public static final int GAME = 0, OPTION = 1, END = 2;
 	
 	private ArrayList<Integer> keys;
 	
@@ -39,6 +39,9 @@ public class DrawingSurface extends PApplet {
 		
 		OptionScreen screen2 = new OptionScreen(this);
 		screens.add(screen2);
+		
+		EndScreen screen3 = new EndScreen(this);
+		screens.add(screen3);
 		
 		activeScreen = screens.get(1);
 		
@@ -61,6 +64,7 @@ public class DrawingSurface extends PApplet {
 	 */
 	public void switchScreen(int i)
 	{
+		
 		Screen nextScreen = screens.get(i);
 		if (nextScreen instanceof GameScreen)
 		{
@@ -70,6 +74,7 @@ public class DrawingSurface extends PApplet {
 			if (activeScreen instanceof GameScreen)
 				((GameScreen)activeScreen).pause();
 		activeScreen = nextScreen;
+		
 	}
 	
 	/**
