@@ -15,7 +15,7 @@ import screen.*;
 public class DrawingSurface extends PApplet {
 	
 	private Screen activeScreen;
-	private ArrayList<Screen> screens;
+	public ArrayList<Screen> screens;
 	
 	/**
 	 * Represents an int for a certain screen
