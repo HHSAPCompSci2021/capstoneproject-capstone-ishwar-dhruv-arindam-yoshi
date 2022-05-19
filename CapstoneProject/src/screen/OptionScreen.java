@@ -27,13 +27,10 @@ public class OptionScreen extends Screen {
 	private DrawingSurface surface;
 	private PImage grinchFringe;
 
-	public static final String optionScreen_PATH = "optionScreen.png";
-	public static final String starter_PATH = "starter.png";
-	public static final String title_PATH = "grinchFringe.png";
-
-
+	public static final String OPTION_SCREEN_PATH = "assets/optionScreen.png";
+	public static final String STARTER_PATH = "assets/starter.png";
+	public static final String TITLE_PATH = "assets/grinchFringe.png";
 	
-
 	private Rectangle button;
 
 	/**
@@ -43,10 +40,16 @@ public class OptionScreen extends Screen {
 	public OptionScreen(DrawingSurface surface) {
 		super(800,600);
 		this.surface = surface;
-
 		button = new Rectangle();
+	}
+	
+	public void setup()
+	{
+		optionScreen = surface.loadImage(OptionScreen.OPTION_SCREEN_PATH);
+		starter = surface.loadImage(OptionScreen.STARTER_PATH);
+		grinchFringe = surface.loadImage(OptionScreen.TITLE_PATH);
 
-		
+		button = new Rectangle(500 - 487/4, 300, 487/2, 192/2);
 	}
 
 	/**
@@ -67,16 +70,6 @@ public class OptionScreen extends Screen {
 		surface.image(starter, 500 - 487/4, 300, 487/2, 192/2);
 
 		
-	}
-
-
-	public void setup() {
-		optionScreen = surface.loadImage(OptionScreen.optionScreen_PATH);
-		//optionScreen.resize(surface.width, surface.height);
-		starter = surface.loadImage(OptionScreen.starter_PATH);
-		grinchFringe = surface.loadImage(OptionScreen.title_PATH);
-
-		button = new Rectangle(500 - 487/4, 300, 487/2, 192/2);
 	}
 
 	/**

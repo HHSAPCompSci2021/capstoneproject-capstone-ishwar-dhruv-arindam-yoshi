@@ -21,19 +21,21 @@ public class GameScreen extends Screen {
 	// has a haunted maze object and an info bar object
 	
 	private HauntedMaze gameSetting;
+	private InfoBar bar;
+	public static int TIME_CAP = 120*1000;
+	private int[] lastResumeTime;
+	// lastResumeTime[0] is time last resumed since application opened
+	// lastResumeTime[1] is the time remaining in the game
+	private boolean isPaused;
+	private int timer;
+
+	// image paths
 	private PImage winning;
 	public static final String winningScreen_PATH = "winningScreen.jpg";
 	private PImage losing;
 	public static final String losingScreen_PATH = "losingScreen.jpg";
 	private PImage tryAgain;
 	public static final String tryAgain_PATH = "tryAgain.png";
-	private InfoBar bar;
-	public static int TIME_CAP = 60*1000;
-	private int[] lastResumeTime;
-	// lastResumeTime[0] is time last resumed since application opened
-	// lastResumeTime[1] is the time remaining in the game
-	private boolean isPaused;
-	private int timer;
 
 	/**
 	 * Constructs a new GameScreen object using a DrawingSurface object
@@ -42,9 +44,9 @@ public class GameScreen extends Screen {
 	public GameScreen(DrawingSurface surface) {
 		super(800, 600);
 		this.surface = surface;
-		// System.out.println(surface.width + " " + surface.height);
-		gameSetting = new HauntedMaze();
-		bar = new InfoBar(gameSetting.protagonist);
+		
+		gameSetting = null;
+		bar = null;
 		
 		isPaused = true;
 		timer = TIME_CAP;
@@ -53,15 +55,12 @@ public class GameScreen extends Screen {
 	
 	public void setup()
 	{
-		winning = surface.loadImage(GameScreen.winningScreen_PATH);
-		losing = surface.loadImage(GameScreen.losingScreen_PATH);
-		tryAgain = surface.loadImage(GameScreen.tryAgain_PATH);
-
-		gameSetting.protagonist.setImage(surface.loadImage(Officer.IMG_PATH));
-		gameSetting.addItem(new Blueprint(gameSetting.getX()+10, gameSetting.getY()+10, "A", surface.loadImage(Blueprint.pin_PATH)));
-		gameSetting.addItem(new Blueprint(gameSetting.getX()+50, gameSetting.getY()+50, "B", surface.loadImage(Blueprint.pin_PATH)));
-		gameSetting.addItem(new Blueprint(gameSetting.getX()+90, gameSetting.getY()+130, "C", surface.loadImage(Blueprint.pin_PATH)));
+		gameSetting = new HauntedMaze(surface);
+		
+		bar = new InfoBar(surface, gameSetting.protagonist);
 		gameSetting.setup();
+		
+		System.out.println(gameSetting == null);
 	}
 	
 	public void pause() {
@@ -87,9 +86,7 @@ public class GameScreen extends Screen {
 		{
 			surface.push();
 			surface.fill(0, 0, 0);
-			surface.image(winning, 0, 0, 1000, 800);
-			surface.image(tryAgain, 200, 200, 100, 100);
-
+			surface.text("You have won :)", 300, 200);
 			surface.pop();
 			return;
 		}
@@ -97,11 +94,8 @@ public class GameScreen extends Screen {
 		{
 			surface.push();
 			surface.fill(0, 0, 0);
-			surface.image(losing, 0, 0, 1000, 800);
-			surface.image(tryAgain, 200, 200, 100, 100);
-			
+			surface.text("Game over :/", 300, 200);
 			surface.pop();
-			
 			return;
 		}
 		
@@ -132,44 +126,24 @@ public class GameScreen extends Screen {
 	}
 	
 	private void moveOfficer() {
-		if (surface.isPressed(KeyEvent.VK_A) && surface.isPressed(KeyEvent.VK_D))
-			gameSetting.protagonist.setVx(0);
-		else if (surface.isPressed(KeyEvent.VK_A))
-			gameSetting.protagonist.setVx(-Officer.AXIS_V);
-		else if (surface.isPressed(KeyEvent.VK_D))
-			gameSetting.protagonist.setVx(Officer.AXIS_V);
-		else if (surface.isPressed(KeyEvent.VK_LEFT) && surface.isPressed(KeyEvent.VK_RIGHT))
-			gameSetting.protagonist.setVx(0);
-		else if (surface.isPressed(KeyEvent.VK_LEFT))
-			gameSetting.protagonist.setVx(-Officer.AXIS_V);
-		else if (surface.isPressed(KeyEvent.VK_RIGHT))
-			gameSetting.protagonist.setVx(Officer.AXIS_V);
-		else
-			gameSetting.protagonist.setVx(0);
-
+		int codeX = 0, codeY = 0;
 		
-
-		if (surface.isPressed(KeyEvent.VK_W) && surface.isPressed(KeyEvent.VK_S))
-			gameSetting.protagonist.setVy(0);
-		else if (surface.isPressed(KeyEvent.VK_W))
-			gameSetting.protagonist.setVy(-Officer.AXIS_V);
-		else if (surface.isPressed(KeyEvent.VK_S))
-			gameSetting.protagonist.setVy(Officer.AXIS_V);
-		else if (surface.isPressed(KeyEvent.VK_UP) && surface.isPressed(KeyEvent.VK_DOWN))
-			gameSetting.protagonist.setVy(0);
-		else if (surface.isPressed(KeyEvent.VK_UP))
-			gameSetting.protagonist.setVy(-Officer.AXIS_V);
-		else if (surface.isPressed(KeyEvent.VK_DOWN))
-			gameSetting.protagonist.setVy(Officer.AXIS_V);
-		else
-			gameSetting.protagonist.setVy(0);
+		if (surface.isPressed(KeyEvent.VK_A) || surface.isPressed(KeyEvent.VK_LEFT))
+			codeX--;
+		if (surface.isPressed(KeyEvent.VK_D) || surface.isPressed(KeyEvent.VK_RIGHT))
+			codeX++;
 		
-
+		if (surface.isPressed(KeyEvent.VK_W) || surface.isPressed(KeyEvent.VK_UP))
+			codeY--;
+		if (surface.isPressed(KeyEvent.VK_S) || surface.isPressed(KeyEvent.VK_DOWN))
+			codeY++;
+		
+		gameSetting.protagonist.adjustV(codeX, codeY);
 	}
 	
 	private void drawTimer()
 	{
-		int intTime = timer / 1000;
+		int intTime = (timer / 1000) + 1;
 		int minutes = intTime / 60;
 		int seconds = intTime % 60;
 		
@@ -177,25 +151,20 @@ public class GameScreen extends Screen {
 		
 		surface.stroke(0); surface.noFill();
 		surface.rect(	20, surface.height - 100,
-						100, 70);
+						80, 60);
 		
 		surface.fill(0);
 		
-		String label = "Timer: " + minutes + ":" + seconds;
-		surface.text(label, 20, surface.height - 100);
+		String minutesStr = (minutes / 10 == 0) ? ("0"+minutes) : (""+minutes);
+		String secondsStr = (seconds / 10 == 0) ? ("0"+seconds) : (""+seconds);
+		
+		String label = "Time left\n" + minutesStr + ":" + secondsStr;
+		surface.text(label, 25, surface.height - 80);
 		
 		surface.pop();
 		
 		timer = Math.max(0, lastResumeTime[0] + lastResumeTime[1] - surface.millis());
 		// System.out.println(timer);
 	}
-	
-	public void mousePressed() {
-		Point p = (new Point(surface.mouseX,surface.mouseY));
-		Rectangle button = new Rectangle(200, 200, 100, 100);
-		if (button.contains(p))
-			surface.switchScreen(0);
-	}
-	
 }
 

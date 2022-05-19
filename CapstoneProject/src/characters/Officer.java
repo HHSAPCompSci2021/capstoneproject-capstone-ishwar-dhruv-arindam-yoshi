@@ -16,7 +16,6 @@ public class Officer extends Actor {
 	
 	// has blueprints and health level (# of lives)
 	
-	public static final String IMG_PATH = "badge.png";
 	private static final double LETHAL_RAD = 50;
 	public static final double PICK_DIST = 20;
 	
@@ -27,16 +26,16 @@ public class Officer extends Actor {
 	public ArrayList<Blueprint> blueprints;
 	public GeigerCounter gtool;
 	
-	public static double AXIS_V = 200; 
+	public double axisV = 100; 
 	
 	/**
 	 * Creates a new Officer object
 	 * @param x the x-coordinate of the officer
 	 * @param y the y-coordinate of the officer
 	 */
-	public Officer(PImage img, double x, double y)
+	public Officer(PApplet marker, double x, double y)
 	{
-		super(img, x, y, 30, 40);
+		super("assets/badge.png", marker, x, y, 30, 40);
 		blueprints = new ArrayList<Blueprint>();
 		gtool = new GeigerCounter(x, y);
 		health = 100;
@@ -145,6 +144,29 @@ public class Officer extends Actor {
 		marker.pop();
 	}
 	
+	public void adjustV(int codeX, int codeY)
+	{
+		if (codeX < 0)
+			vx = -axisV;
+		else if (codeX > 0)
+			vx = axisV;
+		else
+			vx = 0;
+		
+		if (codeY < 0)
+			vy = -axisV;
+		else if (codeY > 0)
+			vy = axisV;
+		else
+			vy = 0;
+		
+		if ((codeX != 0) && (codeY != 0))
+		{
+			vx *= 1/Math.sqrt(2);
+			vy *= 1/Math.sqrt(2);
+		}
+	}
+	
 	public void act(HauntedMaze maze)
 	{
 		gtool.use(maze);
@@ -154,7 +176,6 @@ public class Officer extends Actor {
 		if (gtool.getReading() > LETHAL_RAD)
 			health = 0;
 		
-		x += vx*DrawingSurface.DT;
-		y += vy*DrawingSurface.DT;
+		super.act(maze);
 	}
 }

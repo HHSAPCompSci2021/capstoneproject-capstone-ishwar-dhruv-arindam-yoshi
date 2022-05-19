@@ -1,5 +1,6 @@
 package characters;
 import processing.core.*;
+import core.DrawingSurface;
 import game.*;
 import screen.ScreenObject;
 
@@ -10,15 +11,10 @@ public class Actor extends ScreenObject {
 	protected PImage image;
 	protected double vx, vy; 
 	
-	public Actor(PImage img, double x, double y, double w, double h) {
+	public Actor(String imgPath, PApplet marker, double x, double y, double w, double h) {
 		super(x, y, w, h);
 		vx = 0; vy = 0;
-		setImage(img);
-	}
-	
-	public void setImage(PImage img)
-	{
-		image = img;
+		this.image = marker.loadImage(imgPath);
 	}
 	
 	/**
@@ -60,7 +56,27 @@ public class Actor extends ScreenObject {
 	
 	public void act(HauntedMaze maze)
 	{
+		// wallImpact(maze);
 		
+		x += vx*DrawingSurface.DT;
+		y += vy*DrawingSurface.DT;
+	}
+	
+	protected void wallImpact(HauntedMaze maze)
+	{
+		boolean[] collisions = maze.settingData.isTouchingWall(maze, this);
+		
+		for (int i = 0; i < 4; i++)
+			
+		
+		if (collisions[0])
+			vx = (vx < 0) ? 0 : vx;
+		if (collisions[1])
+			vx = (vx > 0) ? 0 : vx;
+		if (collisions[2])
+			vy = (vy < 0) ? 0 : vy;
+		if (collisions[3])
+			vy = (vy > 0) ? 0 : vy;
 	}
 
 }

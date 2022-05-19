@@ -21,6 +21,7 @@ public class HauntedMaze extends ScreenObject {
 	
 	// has mazedata, actors, and items
 	
+	public PApplet marker; // used for image loading
 	public Officer protagonist;
 	public Grinch villain;
 	public MazeData settingData;
@@ -28,39 +29,40 @@ public class HauntedMaze extends ScreenObject {
 	
 	public double direction; // direction with respect to the horizontal (pointing right, clockwise)
 	
-	public static final double LIGHT_ANGLE = Math.PI*50/180;
-	public static final double LIGHT_DIST = 70;
+	public static final double LIGHT_ANGLE = Math.PI*90/180;
+	public static final double LIGHT_DIST = 100;
 	public static final int LIGHT_RES = 4;
 	
-	public static final int[] SHADE_COLOR = {0, 0, 0, 255};
+	public static final int[] SHADE_COLOR = {30, 30, 30, 255};
 	public static final int[] LIGHT_COLOR = {252, 252, 38, 100};
 	
-	public HauntedMaze()
+	public HauntedMaze(PApplet marker)
 	{
 		super(200, 150, 500, 400);
+		this.marker = marker;
 		
-		protagonist = new Officer(null, x+70, y+60);
-		villain = new Grinch(730, 580);
-		
+		protagonist = new Officer(marker, x+70, y+60);
+		villain = new Grinch(marker, x+240, y+200);
 		settingData = new MazeData();
 		settingData.generateMaze();
 		
-		/*
-		for (String[] r : settingData.toStringArr())
-		{
-			for (String c : r)
-				System.out.println(c);
-			System.out.println();
-		}
-		*/
-		
 		items = new ArrayList<Item>(); 
+		
 		direction = 0;
+		
 	}
 	
 	public void setup()
 	{
 		// System.out.println(x + " " + y);
+		
+		// add Blueprints randomly
+		addItem(new Blueprint(marker, x+10, y+10, "A"));
+		addItem(new Blueprint(marker, x+50, y+50, "B"));
+		addItem(new Blueprint(marker, x+90, y+130, "C"));
+		
+		addItem(new Trap(marker, x+300, y+300, 1));
+		addItem(new Trap(marker, x+400, y+300, 1));
 	}
 	
 	public void draw(PApplet marker)
@@ -69,17 +71,24 @@ public class HauntedMaze extends ScreenObject {
 		
 		// marker.rect((float)x, (float)y, (float)w, (float)h);
 		marker.fill(0, 0, 0);
-		marker.text("Haunted Maze", (float)(x + w/2), (float)(y + h/2));
+		// marker.text("Haunted Maze", (float)(x + w/2), (float)(y + h/2));
+		
+		
+		
+		
+		villain.draw(marker);
+		for (Item i : items)
+			if (i instanceof Trap)
+				i.draw(marker);
+		drawLighting();
+		
+		protagonist.draw(marker);
+		for (Item i : items)
+			if (i instanceof Blueprint)
+				i.draw(marker);
 		
 		settingData.draw(marker, (float)x, (float)y, (float)w, (float)h);
 		
-		drawLighting(marker);
-		protagonist.draw(marker);
-		villain.draw(marker);
-		for (Item i : items)
-		{
-			i.draw(marker);
-		}
 		marker.pop();
 	}
 	
@@ -87,7 +96,7 @@ public class HauntedMaze extends ScreenObject {
 	 * Draws the lighting in the HauntedMaze (from the officer's flashlight).
 	 * @param marker
 	 */
-	public void drawLighting(PApplet marker)
+	public void drawLighting()
 	{
 		//marker.push();
 		
@@ -128,7 +137,7 @@ public class HauntedMaze extends ScreenObject {
 		double[] corner = new double[2];
 		
 		marker.fill(SHADE_COLOR[0], SHADE_COLOR[1], SHADE_COLOR[2], SHADE_COLOR[3]);
-		marker.stroke(SHADE_COLOR[0], SHADE_COLOR[1], SHADE_COLOR[2], SHADE_COLOR[3]/3);
+		marker.stroke(SHADE_COLOR[0], SHADE_COLOR[1], SHADE_COLOR[2], SHADE_COLOR[3]);
 		for (int i = 0; i < LIGHT_RES+1; i++)
 		{
 			boxArr[i] = findEndPt(px, py, pointArr[i], minX, maxX, minY, maxY);
@@ -165,7 +174,7 @@ public class HauntedMaze extends ScreenObject {
 							(float)pointArr[i+1][0], (float)pointArr[i+1][1]);
 			
 			marker.fill(SHADE_COLOR[0], SHADE_COLOR[1], SHADE_COLOR[2], SHADE_COLOR[3]);
-			marker.stroke(SHADE_COLOR[0], SHADE_COLOR[1], SHADE_COLOR[2], SHADE_COLOR[3]/3);
+			marker.stroke(SHADE_COLOR[0], SHADE_COLOR[1], SHADE_COLOR[2], SHADE_COLOR[3]);
 			marker.quad((float)boxArr[i][0], (float)boxArr[i][1],
 					(float)pointArr[i][0], (float)pointArr[i][1],
 					(float)pointArr[i+1][0], (float)pointArr[i+1][1],
@@ -237,7 +246,7 @@ public class HauntedMaze extends ScreenObject {
 		// System.out.println(x + " " + (x+h));
 		
 		marker.fill(SHADE_COLOR[0], SHADE_COLOR[1], SHADE_COLOR[2], SHADE_COLOR[3]);
-		marker.stroke(SHADE_COLOR[0], SHADE_COLOR[1], SHADE_COLOR[2], SHADE_COLOR[3]/3);
+		marker.stroke(SHADE_COLOR[0], SHADE_COLOR[1], SHADE_COLOR[2], SHADE_COLOR[3]);
 		for (int i = 0; i < 3; i++)
 		{
 			for (int j = 0; j < 3; j++)
@@ -310,7 +319,11 @@ public class HauntedMaze extends ScreenObject {
 	
 		protagonist.act(this);
 		villain.act(this);
-		villain.isOfficerNearTrap(this);
+		
+		for (Item i : items)
+		{
+			i.use(this);
+		}
 	}
 	
 	

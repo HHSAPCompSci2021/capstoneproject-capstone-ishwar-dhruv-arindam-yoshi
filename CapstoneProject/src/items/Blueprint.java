@@ -10,13 +10,13 @@ import game.HauntedMaze;
  *
  */
 public class Blueprint extends Item {
-	protected PImage pin;
-	// has identifier
-
+	
+	protected PImage image;
 	/**
 	 * path to image used for blueprints
 	 */
-	public static final String pin_PATH = "pin.png";
+	
+	// has identifier
 	private String identifier;
 	
 	/**
@@ -26,11 +26,11 @@ public class Blueprint extends Item {
 	 * @param identify is the identification used to access img
 	 * @param img is the image used to show blueprint in the maze
 	 */
-	public Blueprint(double x, double y, String identify, PImage img)
+	public Blueprint(PApplet marker, double x, double y, String identify)
 	{
-		super(x, y, 15, 15);
+		super(x, y, 20, 25);
 		identifier = identify;
-		pin = img;
+		image = marker.loadImage("assets/pin.png");
 	}
 	
 	
@@ -46,7 +46,7 @@ public class Blueprint extends Item {
 		marker.push();
 		marker.fill(137, 207, 240);
 
-		marker.rect((float)x, (float)y, (float)getW(), (float)getH());
+		marker.rect((float)(x-(w/2)), (float)(y-h), (float)w, (float)h);
 		
 		String str = "BLUEPRINT " + identifier;
 		float w = marker.textWidth(str);
@@ -62,7 +62,7 @@ public class Blueprint extends Item {
 		marker.push();
 		
 		marker.fill(0);
-		marker.image(pin, (float)x, (float)y, (float)w, (float)h);
+		marker.image(image, (float)x, (float)y, (float)w, (float)h);
 		
 		marker.pop();
 	}

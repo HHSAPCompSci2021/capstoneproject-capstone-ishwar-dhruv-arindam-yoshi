@@ -3,29 +3,31 @@ import processing.core.*;
 
 import java.util.ArrayList;
 
+import core.DrawingSurface;
 import game.HauntedMaze;
 import items.*;
 
 public class Grinch extends Actor {
 	
 	// has arraylist of traps to set in the maze (want-to-have)
-	private ArrayList<Trap> grinchTraps; 
-	public static final double NEAR_DIST = 15;
 	
-	public Grinch(double x, double y)
+	public static final double SPEED = 15;
+	
+	public Grinch(PApplet marker, double x, double y)
 	{
-		super(null, x, y, 30, 40);
-		grinchTraps = new ArrayList<Trap>(); 
-//		grinchTraps.add(new Trap(0,0,1));
-//		grinchTraps.add(new Trap(0,0,1));
-//		grinchTraps.add(new Trap(0,0,1));
-//		
+		super("assets/grinch.png", marker, x, y, 30, 40);
 	}
 	
-	public Grinch(double x, double y, ArrayList<Trap> grinchTraps)
+	@Override
+	public void draw(PApplet marker)
 	{
-		super(null, x, y, 30, 40);
-		this.grinchTraps = grinchTraps; 
+		marker.push();
+		
+		marker.fill(0);
+		// marker.rect((float)x,  (float)y, (float)w, (float)h);
+		marker.image(image, (float)x, (float)y, (float)w, (float)h);
+		
+		marker.pop();
 	}
 	
 	public void setTrap(Trap e)
@@ -33,12 +35,27 @@ public class Grinch extends Actor {
 		
 	}
 	
+	public void act(HauntedMaze maze)
+	{
+		double dx = maze.protagonist.getX() - x;
+		double dy = maze.protagonist.getY() - y;
+		double dist = Math.sqrt(Math.pow(dx, 2) + Math.pow(dy, 2));
+		
+		vx = SPEED * (dx / dist);
+		vy = SPEED * (dy / dist);
+				
+		super.act(maze);
+	}
+	
+	/*
 	public void isOfficerNearTrap(HauntedMaze h) {
 		for (Trap t : grinchTraps)
 		{
-			double dist = Math.sqrt(Math.pow(x-t.getX(), 2) + Math.pow(y-t.getY(), 2));
+			Officer o = maze.protagonist; 
+			double dist = Math.sqrt(Math.pow(o.getX()-x, 2) + Math.pow(o.getY()-y, 2));
 			if (dist < NEAR_DIST)
 				t.use(h);
 		}
 	}
+	*/
 }
