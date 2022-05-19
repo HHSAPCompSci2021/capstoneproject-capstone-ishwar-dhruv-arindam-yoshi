@@ -58,10 +58,14 @@ public class GameScreen extends Screen {
 	{
 		gameSetting = new HauntedMaze(surface);
 		
+		
 		bar = new InfoBar(surface, gameSetting.protagonist);
 		gameSetting.setup();
 		
 		System.out.println(gameSetting == null);
+		timer = TIME_CAP;
+		
+		
 	}
 	
 	public void pause() {
@@ -78,6 +82,7 @@ public class GameScreen extends Screen {
 	public void draw()
 	{
 		if (surface.isPressed(KeyEvent.VK_ESCAPE)) {
+			setup();
 			surface.switchScreen(surface.OPTION);
 			EndScreen.winLose = false;
 			return;
@@ -87,12 +92,14 @@ public class GameScreen extends Screen {
 		// ending screens - will be replaced with Victory / Loss screen
 		if (gameSetting.protagonist.isSuccessful(gameSetting))
 		{
+			setup();
 			surface.switchScreen(2);
 			EndScreen.winLose = true;
 			return;
 		}
 		if ((timer == 0) || !gameSetting.protagonist.isAlive())
 		{
+			setup();
 			surface.switchScreen(2);
 			EndScreen.winLose = false;
 			return;
