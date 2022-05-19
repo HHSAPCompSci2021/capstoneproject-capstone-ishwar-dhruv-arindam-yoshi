@@ -137,6 +137,10 @@ public class MazeData {
 	 * @param h the height of the maze
 	 */
 	public void draw(PApplet marker, float x, float y, float w, float h) {
+		marker.push();
+		
+		marker.fill(0, 0, 0);
+		marker.stroke(0, 0, 0);
 		String[][] mazeGrid = this.toStringArr(); 
 		int lengthMaze = 4 * size + 1; 
 		int heightMaze = 2 * size + 1;
@@ -167,6 +171,7 @@ public class MazeData {
 				}
 			}	
 		}
+		marker.pop();
 	}
 	
 	
@@ -222,8 +227,7 @@ public class MazeData {
 	 * top = 2
 	 * bottom = 3 
 	 */
-	public static boolean[] isTouchingWall(HauntedMaze h) {
-		Actor a = h.protagonist; 
+	public static boolean[] isTouchingWall(HauntedMaze h, Actor a) {
 		int size = h.settingData.size; 
 		MazeData m = h.settingData; 
 		

@@ -22,7 +22,7 @@ public class GameScreen extends Screen {
 	
 	private HauntedMaze gameSetting;
 	private InfoBar bar;
-	public static int TIME_CAP = 10*1000;
+	public static int TIME_CAP = 120*1000;
 	private int[] lastResumeTime;
 	// lastResumeTime[0] is time last resumed since application opened
 	// lastResumeTime[1] is the time remaining in the game

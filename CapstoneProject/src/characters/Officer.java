@@ -132,23 +132,6 @@ public class Officer extends Actor {
 		return hasAllBlueprints(maze) && isAlive() && isOutsideMaze(maze);
 	}
 	
-	private void wallImpact(HauntedMaze maze)
-	{
-		boolean[] collisions = maze.settingData.isTouchingWall(maze);
-		
-		for (int i = 0; i < 4; i++)
-			
-		
-		if (collisions[0])
-			vx = (vx < 0) ? 0 : vx;
-		if (collisions[1])
-			vx = (vx > 0) ? 0 : vx;
-		if (collisions[2])
-			vy = (vy < 0) ? 0 : vy;
-		if (collisions[3])
-			vy = (vy > 0) ? 0 : vy;
-	}
-	
 	@Override
 	public void draw(PApplet marker)
 	{
@@ -193,9 +176,6 @@ public class Officer extends Actor {
 		if (gtool.getReading() > LETHAL_RAD)
 			health = 0;
 		
-		wallImpact(maze);
-		
-		x += vx*DrawingSurface.DT;
-		y += vy*DrawingSurface.DT;
+		super.act(maze);
 	}
 }

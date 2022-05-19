@@ -6,10 +6,16 @@ import processing.core.*;
 
 public class Trap extends Item {
 	
+	protected PImage image;
 	// has damage intensity
 	private int type; 
 	private boolean isActive = true; 
+	
+	
 	public static final double NEAR_DIST = 15;
+	public static final double DEFECT_CHANCE = 0.01;
+	
+	// private double timeExposed = ;
 	
 	/**
 	 * 
@@ -23,10 +29,11 @@ public class Trap extends Item {
 	 * Traps of type 3 set the position of the officer back to the start
 	 * Traps of type 4 makes the Grinch more powerful(not decided how). 
 	 */
-	public Trap(double x, double y, int type)
+	public Trap(PApplet marker, double x, double y, int type)
 	{
-		super(x, y, 15, 15);
+		super(x, y, 20, 20);
 		this.type = type; 
+		image = marker.loadImage("assets/trap.png");
 	}
 	
 	public int getType() {
@@ -47,6 +54,7 @@ public class Trap extends Item {
 		double dist = Math.sqrt(Math.pow(o.getX()-x, 2) + Math.pow(o.getY()-y, 2));
 		if (dist < NEAR_DIST)
 		{
+			System.out.println("trapped");
 			if (type == 1) {
 				o.changeHealth(-25);
 			}else if (type == 2) {
@@ -55,7 +63,7 @@ public class Trap extends Item {
 			}else if (type == 3) {
 				o.setPos(0, 0);
 			}
-			isActive = false; 
+			setInactive(); 
 		}
 	}
 	
@@ -73,11 +81,18 @@ public class Trap extends Item {
 	 * @param x
 	 * @param y
 	 */
-	public void draw(PApplet marker, double x, double y) {
-		marker.push();	
-		marker.fill(0);
-		marker.image(null, (float)x, (float)y, (float)w, (float)h);
-		marker.pop();
+	public void draw(PApplet marker) {
+		double rand = Math.random();
+		boolean willDraw = rand < DEFECT_CHANCE;
+		willDraw &= isActive;
+		
+		if (willDraw)
+		{
+			marker.push();	
+			marker.fill(0);
+			marker.image(image, (float)x, (float)y, (float)w, (float)h);
+			marker.pop();
+		}
 	}
 
 	@Override

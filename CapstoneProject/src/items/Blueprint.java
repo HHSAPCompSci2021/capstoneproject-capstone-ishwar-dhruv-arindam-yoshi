@@ -28,7 +28,7 @@ public class Blueprint extends Item {
 	 */
 	public Blueprint(PApplet marker, double x, double y, String identify)
 	{
-		super(x, y, 15, 15);
+		super(x, y, 20, 25);
 		identifier = identify;
 		image = marker.loadImage("assets/pin.png");
 	}
@@ -46,7 +46,7 @@ public class Blueprint extends Item {
 		marker.push();
 		marker.fill(137, 207, 240);
 
-		marker.rect((float)x, (float)y, (float)getW(), (float)getH());
+		marker.rect((float)(x-(w/2)), (float)(y-h), (float)w, (float)h);
 		
 		String str = "BLUEPRINT " + identifier;
 		float w = marker.textWidth(str);
