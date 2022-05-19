@@ -40,7 +40,6 @@ public class EndScreen extends Screen {
 	public EndScreen(DrawingSurface surface) {
 		super(800,600);
 		this.surface = surface;
-		winLose = false;
 		button = new Rectangle();
 	}
 	
@@ -62,21 +61,22 @@ public class EndScreen extends Screen {
 			surface.push();
 			surface.fill(0, 0, 0);
 			surface.image(winning, 0, 0, 1000, 800);
-			surface.image(playAgain, 200, 200, 100, 100);
+			surface.image(playAgain, 200, 200, 250, 60);
 
 			surface.pop();
 		}
 		
-		surface.push();
-		surface.fill(0, 0, 0);
-		surface.image(losing, 0, 0, 1000, 800);
-		surface.image(playAgain, 200, 200, 250, 60);
+		else {
+			surface.push();
+			surface.fill(0, 0, 0);
+			surface.image(losing, 0, 0, 1000, 800);
+			surface.image(playAgain, 200, 200, 250, 60);
 		
-		surface.pop();
+			surface.pop();
 		
 		return;
 
-		
+		}
 		
 	}
 
