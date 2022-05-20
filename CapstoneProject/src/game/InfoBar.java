@@ -18,7 +18,7 @@ public class InfoBar extends ScreenObject {
 	private PImage halfHeart;
 	private PImage emptyHeart;
 	public static final String fullHeart_PATH = "assets/fullheart.png";
-	public static final String halfHeart_PATH = "assets/halfheart.jpg";
+	public static final String halfHeart_PATH = "assets/halfheart.png";
 	public static final String emptyHeart_PATH = "assets/emptyheart.png";
 	/**
 	 * Initializes an InfoBar object

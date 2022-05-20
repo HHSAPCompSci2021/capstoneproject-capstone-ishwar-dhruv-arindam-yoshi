@@ -23,6 +23,9 @@ public class GameScreen extends Screen {
 	
 	private HauntedMaze gameSetting;
 	private InfoBar bar;
+	/**
+	 * the time that the user has to play the game (in milliseconds).
+	 */
 	public static int TIME_CAP = 120*1000;
 	private int[] lastResumeTime;
 	// lastResumeTime[0] is time last resumed since application opened
@@ -32,18 +35,18 @@ public class GameScreen extends Screen {
 
 	// image paths
 	private PImage winning;
-	public static final String winningScreen_PATH = "winningScreen.jpg";
+	private static final String winningScreen_PATH = "winningScreen.jpg";
 	private PImage losing;
-	public static final String losingScreen_PATH = "losingScreen.jpg";
+	private static final String losingScreen_PATH = "losingScreen.jpg";
 	private PImage tryAgain;
-	public static final String tryAgain_PATH = "tryAgain.png";
+	private static final String tryAgain_PATH = "tryAgain.png";
 
 	/**
 	 * Constructs a new GameScreen object using a DrawingSurface object
 	 * @param surface the DrawingSurface object used to display the game and receive user input
 	 */
 	public GameScreen(DrawingSurface surface) {
-		super(800, 600);
+		super(1000, 800);
 		this.surface = surface;
 		
 		gameSetting = null;
@@ -87,6 +90,7 @@ public class GameScreen extends Screen {
 			EndScreen.winLose = false;
 			return;
 		}
+		
 		surface.background(255, 255, 255);
 		
 		// ending screens - will be replaced with Victory / Loss screen
@@ -105,8 +109,7 @@ public class GameScreen extends Screen {
 			return;
 		}
 		
-		gameSetting.draw(surface);
-		bar.draw(surface);
+		
 		
 		if (gameSetting.protagonist.nearBlueprint(gameSetting) != null)
 		{
@@ -121,18 +124,24 @@ public class GameScreen extends Screen {
 			}
 		}	
 		
-		drawTimer();
-		
-		
 		if (!isPaused)
 		{
 			moveOfficer();
 			gameSetting.update(surface.mouseX, surface.mouseY);
 		}
-		return;
+		
+		drawTimer();
+		gameSetting.draw(surface);
+		bar.draw(surface);
+		
 	}
 	
 	private void moveOfficer() {
+		if (surface.isPressed(KeyEvent.VK_SPACE))
+			gameSetting.protagonist.accelerate();
+		else
+			gameSetting.protagonist.stopAccelerate();
+		
 		int codeX = 0, codeY = 0;
 		
 		if (surface.isPressed(KeyEvent.VK_A) || surface.isPressed(KeyEvent.VK_LEFT))

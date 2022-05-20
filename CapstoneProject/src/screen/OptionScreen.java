@@ -38,7 +38,7 @@ public class OptionScreen extends Screen {
 	 * @param surface is the surface which we draw on
 	 */
 	public OptionScreen(DrawingSurface surface) {
-		super(800,600);
+		super(1000, 800);
 		this.surface = surface;
 		button = new Rectangle();
 	}
@@ -76,7 +76,7 @@ public class OptionScreen extends Screen {
 	 * Checks whether the mouse presses in the button, and switches screen accordingly
 	 */
 	public void mousePressed() {
-		Point p = (new Point(surface.mouseX,surface.mouseY));
+		Point p = surface.actualCoordinatesToAssumed(new Point(surface.mouseX,surface.mouseY));
 		if (button.contains(p)) {
 			surface.switchScreen(0);
 			surface.setup();

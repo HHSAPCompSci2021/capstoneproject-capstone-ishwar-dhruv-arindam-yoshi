@@ -21,20 +21,32 @@ public class HauntedMaze extends ScreenObject {
 	
 	// has mazedata, actors, and items
 	
-	public PApplet marker; // used for image loading
+	private PApplet marker; // used for image loading
+	/**
+	 * the Officer in the game
+	 */
 	public Officer protagonist;
+	/**
+	 * the Grinch in the game
+	 */
 	public Grinch villain;
+	/**
+	 * the data that represents the walls in the maze
+	 */
 	public MazeData settingData;
+	/**
+	 * the list of items that are in the haunted maze
+	 */
 	public ArrayList<Item> items;
 	
-	public double direction; // direction with respect to the horizontal (pointing right, clockwise)
+	private double direction; // direction with respect to the horizontal (pointing right, clockwise)
 	
-	public static final double LIGHT_ANGLE = Math.PI*90/180;
-	public static final double LIGHT_DIST = 100;
-	public static final int LIGHT_RES = 4;
+	private static final double LIGHT_ANGLE = Math.PI*90/180;
+	private static final double LIGHT_DIST = 100;
+	private static final int LIGHT_RES = 4;
 	
-	public static final int[] SHADE_COLOR = {0, 0, 0, 255};
-	public static final int[] LIGHT_COLOR = {252, 252, 38, 100};
+	private static final int[] SHADE_COLOR = {0, 0, 0, 255};
+	private static final int[] LIGHT_COLOR = {252, 252, 38, 100};
 	
 	public HauntedMaze(PApplet marker)
 	{

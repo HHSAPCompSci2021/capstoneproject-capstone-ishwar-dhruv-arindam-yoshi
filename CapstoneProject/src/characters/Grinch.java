@@ -48,8 +48,9 @@ public class Grinch extends Actor {
 		
 		vx = SPEED * (dx / dist);
 		vy = SPEED * (dy / dist);
-		
+
 				
+		// System.out.print("Grinch: ");
 		super.act(maze);
 	}
 	
