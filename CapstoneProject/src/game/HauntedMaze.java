@@ -75,7 +75,7 @@ public class HauntedMaze extends ScreenObject {
 		
 		
 		
-		
+		settingData.draw(marker, (float)x, (float)y, (float)w, (float)h);
 		villain.draw(marker);
 		for (Item i : items)
 			if (i instanceof Trap)
@@ -87,7 +87,7 @@ public class HauntedMaze extends ScreenObject {
 			if (i instanceof Blueprint)
 				i.draw(marker);
 		
-		settingData.draw(marker, (float)x, (float)y, (float)w, (float)h);
+		
 		
 		marker.pop();
 	}

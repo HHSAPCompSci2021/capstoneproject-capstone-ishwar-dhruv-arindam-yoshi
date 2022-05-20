@@ -35,7 +35,7 @@ public class Officer extends Actor {
 	 */
 	public Officer(PApplet marker, double x, double y)
 	{
-		super("assets/badge.png", marker, x, y, 30, 40);
+		super("assets/badge.png", marker, x, y, 21, 31);
 		blueprints = new ArrayList<Blueprint>();
 		gtool = new GeigerCounter(x, y);
 		health = 100;

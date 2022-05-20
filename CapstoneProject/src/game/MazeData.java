@@ -25,9 +25,12 @@ import processing.core.PApplet;
 
 
 public class MazeData {
+	private static final int CORNERS = 0;
 	private gridP[][] myBoard ;
 	private int size; 
 	private ArrayList<gridP> cList;
+	
+	public ArrayList<Rectangle> wallsList; 
 	
 	/**
 	 * contructs the maze. 
@@ -36,6 +39,7 @@ public class MazeData {
 		myBoard = new gridP[10][10]; 
 		cList = new ArrayList<gridP>();; 
 		size = 10; 
+		wallsList = new ArrayList<Rectangle>(); 
 	}
 	
 	/**
@@ -46,6 +50,7 @@ public class MazeData {
 		myBoard = new gridP[size][size]; 
 		cList = new ArrayList<gridP>();; 
 		this.size = size; 
+		wallsList = new ArrayList<Rectangle>(); 
 	}
 	
 	/**
@@ -138,6 +143,7 @@ public class MazeData {
 	 */
 	public void draw(PApplet marker, float x, float y, float w, float h) {
 		marker.push();
+//		marker.rectMode(CORNERS); 
 		
 		marker.fill(0, 0, 0);
 		marker.stroke(0, 0, 0);
@@ -155,10 +161,13 @@ public class MazeData {
 					double xCoord = x + j * xLen;
 					double xCoordSec = x + (j+4) * xLen;
 					if (currRow[j] == '+' && currRow[j+1] == '-') {
-						marker.line((float)xCoord, (float)yCoord, (float)xCoordSec, (float)yCoord);
+						marker.rect((float) xCoord, (float)yCoord-1, (float) xCoordSec- (float) xCoord, 2);
+						wallsList.add(new Rectangle(xCoord, yCoord-1, xCoordSec- xCoord, 2)); 
+						
+//						marker.line((float)xCoord, (float)yCoord, (float)xCoordSec, (float)yCoord);
 					}
-					marker.circle((float)xCoord, (float)yCoord, 5);
-					marker.circle((float)xCoordSec, (float)yCoord, 5);
+//					marker.circle((float)xCoord, (float)yCoord, 5);
+//					marker.circle((float)xCoordSec, (float)yCoord, 5);
 				}
 			}else {
 				for (int j=0;j<currRow.length;j++) {
@@ -166,7 +175,9 @@ public class MazeData {
 						double xCoord = x + j * xLen;
 						double yCoordFirst = yCoord - yLen; 
 						double yCoordSecond = yCoord + yLen; 
-						marker.line((float)xCoord, (float)yCoordFirst, (float)xCoord, (float)yCoordSecond);
+						marker.rect((float) xCoord-1, (float)yCoordFirst,2, (float) yCoordSecond - (float) yCoordFirst);
+						wallsList.add(new Rectangle(xCoord-1, yCoordFirst, 2, yCoordSecond - yCoordFirst)); 
+//						marker.line((float)xCoord, (float)yCoordFirst, (float)xCoord, (float)yCoordSecond);
 					}
 				}
 			}	
@@ -177,7 +188,7 @@ public class MazeData {
 	
 	/**
 	 * This method converts the maze into a array of strings in order to 
-	 * successfully display it on a graphing window. 
+	 * successfully display on console. 
 	 * 
 	 * @return A string array representing the maze with the characters "+" representing a corner, a "-" representing a wall
 	 * and a " " representing an empty location. 
@@ -210,16 +221,7 @@ public class MazeData {
 		return out; 
 
 	}
-	/**
-	 * This method converts the maze into a array of integers in order to 
-	 * successfully perform algorithms such as Depth First Search, and Breadth First Search. 
-	 * 
-	 * @return A integer array representing the maze where "1" represents a wall, and "0" represents a path. 
-	 */
-	public int[][] toIntArr(){
-		return null; 
-	}
-	
+
 	
 	/**
 	 * left = 0
@@ -227,86 +229,61 @@ public class MazeData {
 	 * top = 2
 	 * bottom = 3 
 	 */
-	public static boolean[] isTouchingWall(HauntedMaze h, Actor a) {
-		int size = h.settingData.size; 
-		MazeData m = h.settingData; 
+	
+	/**
+	 * Position 1 of the array represents whether the actor is touching the wall from above. 
+	 * Position 2 of the array represents whether the actor is touching the wall from the right.
+	 * Position 3 of the array represents whether the actor is touching the wall from the bottom
+	 * Position 4 of the array represents whether the actor is touching the wall from the left. 
+	 */
+	
+	
+	public static boolean[] isActorTouchingMaze(ArrayList<Rectangle> walls, Actor a) {
+		ArrayList<Rectangle> wallsTouchingActor = new ArrayList<Rectangle>(); 
+		ArrayList<boolean[]> direcOfWall = new ArrayList<boolean[]>();
 		
-		boolean[] result = new boolean[4]; 
+		for (Rectangle w : walls) {
+			boolean[] isTouching = w.isTouchingActor(a); 
+			if (isTouching[0]) {
+				wallsTouchingActor.add(w); 
+				direcOfWall.add(isTouching); 
+			}
+		}
+		System.out.println(wallsTouchingActor.size()); 
 		
-		double pixelLenWidth = ((h.getW()))/(4 * size + 1);
-		double pixelLenHeight = ((h.getH()))/(2 * size + 1); 
-		
-		double actorPosX = a.getX(); 
-		double actorPosY = a.getY(); 
-		
-		double mazeLeftX = h.getX(); 
-		double mazeTopY = h.getY(); 
-		
-		double widthMaze = h.getH(); 
-		double heightMaze = h.getW(); 
-		
-		Point p = new Point(0, 0); 
-		
-		
-		//true represents closer to top/left
-		//false represents closer to bottom/right
-		boolean closerToVertical = false;  
-		boolean closerToHorizontal = false;  
-		
-		if (actorPosX >= mazeLeftX && actorPosX <= (mazeLeftX + widthMaze) && actorPosY >= mazeTopY && actorPosY <=  (mazeTopY + heightMaze)) {
-			for (int i=0; i < (4 * size); i++) {
-				if (actorPosX >= (pixelLenWidth * i + mazeLeftX) && 
-					actorPosX <= (pixelLenWidth * (i + 1) + mazeLeftX)) {
-					closerToHorizontal = Math.abs(actorPosX - (pixelLenWidth * i + mazeLeftX)) <= Math.abs(actorPosX - (pixelLenWidth * (i+1) + mazeLeftX)); 
-					p.y = i; 
+		if (wallsTouchingActor.size() == 1) {
+			if (direcOfWall.get(0)[1]) {
+				return new boolean[]{false, false, true, false}; 
+			}else if (direcOfWall.get(0)[2]) {
+				return new boolean[]{false, true, false, false}; 
+			}else if (direcOfWall.get(0)[3]) {
+				return new boolean[]{false, false, false, true}; 
+			}else if (direcOfWall.get(0)[4]) {
+				return new boolean[]{true, false, false, false}; 
+			}
+		}else if (wallsTouchingActor.size() == 2) {
+			if (equals(wallsTouchingActor.get(0).h, wallsTouchingActor.get(1).h)) {
+				if (direcOfWall.get(0)[1]) {
+					return new boolean[]{false, false, true, false}; 
+				}else if (direcOfWall.get(0)[3]) {
+					return new boolean[]{false, false, false, true}; 
+				}
+			}else if (equals(wallsTouchingActor.get(0).w, wallsTouchingActor.get(1).w)) {
+				if (direcOfWall.get(0)[2]) {
+					return new boolean[]{false, true, false, false}; 
+				}else if (direcOfWall.get(0)[4]) {
+					return new boolean[]{true, false, false, false};
 				}
 			}
-			
-			for (int i=0; i < (2 * size); i++) {
-				if (actorPosY >= (pixelLenHeight * i + mazeTopY) && 
-					actorPosY <= (pixelLenHeight * (i + 1) + mazeTopY)) {
-					closerToVertical = Math.abs(actorPosY - (pixelLenHeight * i + mazeTopY)) <= Math.abs(actorPosY - (pixelLenHeight * (i+1) + mazeTopY)); 
-					p.x = i; 
-				}
-			}
 		}
-		
-		char[][] grid = new char[4 * size + 1][2 * size + 1]; 
-		String[][] gridString = m.toStringArr(); 
-		
-		for (int i=0;i<(2 * size + 1);i++) {
-			grid[i] = gridString[i][0].toCharArray(); 
-		}
-		/**
-		 * left = 0
-		 * right = 1
-		 * top = 2
-		 * bottom = 3 
-		 */
-		
-		if (grid[p.x][p.y] == ' ') {
-			result[0] = result[1] = result[2] = result[3] = false;  
-		}else if (grid[p.x][p.y] == '-') {
-			if (closerToVertical) {
-				result[0] = result[1] = result[3] = false; 
-				result[2] = true; 
-			}else {
-				result[0] = result[1] = result[2] = false; 
-				result[3] = true; 
-			}
-		}else if (grid[p.x][p.y] == '|') {
-			if (closerToHorizontal) {
-				result[1] = result[2] = result[3] = false; 
-				result[0] = true; 
-			}else {
-				result[0] = result[2] = result[3] = false; 
-				result[1] = true; 
-			}
-		}else if (grid[p.x][p.y] == '+') {
-			result[0] = result[1] = result[2] = result[3] = false; 
-		}
-		
-		return result; 
+		return new boolean[]{false, false, false, false};
+	}
+	
+	private static boolean equals(double a, double b) {
+		double epsilon = 0.000001d;
+		if (Math.abs(a - b) < epsilon)
+			return true; 
+		return false; 
 	}
 }
 

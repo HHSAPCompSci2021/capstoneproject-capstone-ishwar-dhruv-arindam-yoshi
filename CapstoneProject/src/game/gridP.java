@@ -5,6 +5,7 @@ public class gridP {
 
 	int hrow, vrow, visited, n, s, e, w;
 	public int num;
+	ArrayList<gridP> adjlist = new ArrayList<gridP>();
 
 	public gridP(int x, int y) {
 		this.hrow = x;
@@ -13,5 +14,5 @@ public class gridP {
 		visited = 0;
 	}
 
-	ArrayList<gridP> adjlist = new ArrayList<gridP>();
+	
 }
