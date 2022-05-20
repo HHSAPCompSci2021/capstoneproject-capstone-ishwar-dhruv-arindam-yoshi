@@ -23,8 +23,6 @@ import processing.core.PApplet;
  * @author dhruv
  *
  */
-
-
 public class MazeData {
 	private static final int CORNERS = 0;
 	private gridP[][] myBoard ;

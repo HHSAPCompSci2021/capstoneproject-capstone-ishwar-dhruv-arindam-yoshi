@@ -18,7 +18,7 @@ public class Officer extends Actor {
 	
 	private static final double LETHAL_RAD = 50;
 	private static final double PICK_DIST = 20;
-	
+	public ArrayList<Officer> officer;
 	private boolean accelerator;
 	private static final double ACCELERATOR_DAMAGE = 10;
 	
