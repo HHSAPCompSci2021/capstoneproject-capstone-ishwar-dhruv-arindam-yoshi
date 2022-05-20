@@ -39,7 +39,9 @@ public class Blueprint extends Item {
 		
 	}
 	
-	
+	/**
+	 * Draws the info of the blueprint. 
+	 */
 	public void drawInfo(PApplet marker, double x, double y)
 	{
 		
