@@ -23,6 +23,9 @@ public class GameScreen extends Screen {
 	
 	private HauntedMaze gameSetting;
 	private InfoBar bar;
+	/**
+	 * the time that the user has to play the game (in milliseconds).
+	 */
 	public static int TIME_CAP = 120*1000;
 	private int[] lastResumeTime;
 	// lastResumeTime[0] is time last resumed since application opened
@@ -32,11 +35,11 @@ public class GameScreen extends Screen {
 
 	// image paths
 	private PImage winning;
-	public static final String winningScreen_PATH = "winningScreen.jpg";
+	private static final String winningScreen_PATH = "winningScreen.jpg";
 	private PImage losing;
-	public static final String losingScreen_PATH = "losingScreen.jpg";
+	private static final String losingScreen_PATH = "losingScreen.jpg";
 	private PImage tryAgain;
-	public static final String tryAgain_PATH = "tryAgain.png";
+	private static final String tryAgain_PATH = "tryAgain.png";
 
 	/**
 	 * Constructs a new GameScreen object using a DrawingSurface object
