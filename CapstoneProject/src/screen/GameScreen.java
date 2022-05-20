@@ -87,6 +87,7 @@ public class GameScreen extends Screen {
 			EndScreen.winLose = false;
 			return;
 		}
+		
 		surface.background(255, 255, 255);
 		
 		// ending screens - will be replaced with Victory / Loss screen
@@ -105,8 +106,7 @@ public class GameScreen extends Screen {
 			return;
 		}
 		
-		gameSetting.draw(surface);
-		bar.draw(surface);
+		
 		
 		if (gameSetting.protagonist.nearBlueprint(gameSetting) != null)
 		{
@@ -121,18 +121,24 @@ public class GameScreen extends Screen {
 			}
 		}	
 		
-		drawTimer();
-		
-		
 		if (!isPaused)
 		{
 			moveOfficer();
 			gameSetting.update(surface.mouseX, surface.mouseY);
 		}
-		return;
+		
+		drawTimer();
+		gameSetting.draw(surface);
+		bar.draw(surface);
+		
 	}
 	
 	private void moveOfficer() {
+		if (surface.isPressed(KeyEvent.VK_SPACE))
+			gameSetting.protagonist.accelerate();
+		else
+			gameSetting.protagonist.stopAccelerate();
+		
 		int codeX = 0, codeY = 0;
 		
 		if (surface.isPressed(KeyEvent.VK_A) || surface.isPressed(KeyEvent.VK_LEFT))

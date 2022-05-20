@@ -37,16 +37,15 @@ public class Grinch extends Actor {
 	
 	public void act(HauntedMaze maze)
 	{
-		/*
+		
 		double dx = maze.protagonist.getX() - x;
 		double dy = maze.protagonist.getY() - y;
 		double dist = Math.sqrt(Math.pow(dx, 2) + Math.pow(dy, 2));
 		
 		vx = SPEED * (dx / dist);
 		vy = SPEED * (dy / dist);
-		*/
 				
-		System.out.print("Grinch: ");
+		// System.out.print("Grinch: ");
 		super.act(maze);
 	}
 	
