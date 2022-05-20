@@ -7,6 +7,11 @@ import core.DrawingSurface;
 import game.HauntedMaze;
 import items.*;
 
+/**
+ * Represents a Grinch. 
+ * @author dhruv
+ *
+ */
 public class Grinch extends Actor {
 	
 	// has arraylist of traps to set in the maze (want-to-have)
