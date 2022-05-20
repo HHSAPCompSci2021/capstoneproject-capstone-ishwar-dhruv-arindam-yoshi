@@ -11,8 +11,18 @@ public class Actor extends ScreenObject {
 	
 	// has an image, velocity vector, and image
 	
+	/**
+	 * the image that the Actor has, stored as a PImage object
+	 */
 	protected PImage image;
-	protected double vx, vy; 
+	/**
+	 * the x-velocity of the Actor
+	 */
+	protected double vx;
+	/**
+	 * the y-velocity of the Actor
+	 */
+	protected double vy; 
 	
 	public Actor(String imgPath, PApplet marker, double x, double y, double w, double h) {
 		super(x, y, w, h);
@@ -65,11 +75,19 @@ public class Actor extends ScreenObject {
 		y += vy*DrawingSurface.DT;
 	}
 	
+	/**
+	 * Returns the bounding rectangle of the Actor.
+	 * @return the bounding rectangle of the Actor
+	 */
 	public Rectangle getBoundingRectangle() {
 		return new Rectangle(super.x, super.y, super.w, super.h); 
 	}
 	
 
+	/**
+	 * Makes sure that the actor does not pass through walls.
+	 * @param maze the maze in which the actor is contained
+	 */
 	protected void wallImpact(HauntedMaze maze)
 	{
 		ArrayList<Rectangle> walls = maze.settingData.wallsList; 

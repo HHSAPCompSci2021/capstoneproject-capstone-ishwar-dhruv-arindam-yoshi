@@ -17,16 +17,26 @@ public class Officer extends Actor {
 	// has blueprints and health level (# of lives)
 	
 	private static final double LETHAL_RAD = 50;
-	public static final double PICK_DIST = 20;
+	private static final double PICK_DIST = 20;
+	
+	private boolean accelerator;
+	private static final double ACCELERATOR_DAMAGE = 10;
 	
 	// image taken from
 	// https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.istockphoto.com%2Fphotos%2Fpolice-badge-graphic&psig=AOvVaw3xpVBxMDAwHVxv8yK_jvxl&ust=1652402341678000&source=images&cd=vfe&ved=0CA0QjhxqFwoTCLi90tHc2PcCFQAAAAAdAAAAABAQ
 	
 	private double health;
+	
+	/**
+	 * the list of Blueprints that the Officer has
+	 */
 	public ArrayList<Blueprint> blueprints;
+	/**
+	 * the Geiger counter that the Officer has
+	 */
 	public GeigerCounter gtool;
 	
-	public double axisV = 100; 
+	public double axisV; 
 	
 	/**
 	 * Creates a new Officer object
@@ -39,6 +49,25 @@ public class Officer extends Actor {
 		blueprints = new ArrayList<Blueprint>();
 		gtool = new GeigerCounter(x, y);
 		health = 100;
+		
+		accelerator = false;
+		axisV = 100;
+	}
+	
+	/**
+	 * Gives the officer a faster speed.
+	 */
+	public void accelerate() {
+		accelerator = true;
+		axisV = 150;
+	}
+	
+	/**
+	 * Stops giving the officer a faster speed.
+	 */
+	public void stopAccelerate() {
+		accelerator = false;
+		axisV = 100;
 	}
 	
 	/**
@@ -144,6 +173,11 @@ public class Officer extends Actor {
 		marker.pop();
 	}
 	
+	/**
+	 * Adjusts the 2D velocity of the officer.
+	 * @param codeX if codeX &lt; 0, the x-velocity of the officer will become negative;<br> if codeX &gt; 0, the x-velocity of the officer will become positive;<br> else, the x-velocity will be set to 0.
+	 * @param codeY if codeY &lt; 0, the y-velocity of the officer will become negative;<br> if codeY &gt; 0, the y-velocity of the officer will become positive;<br> else, the y-velocity will be set to 0.
+	 */
 	public void adjustV(int codeX, int codeY)
 	{
 		if (codeX < 0)
@@ -167,8 +201,12 @@ public class Officer extends Actor {
 		}
 	}
 	
+	@Override
 	public void act(HauntedMaze maze)
 	{
+		if (accelerator)
+			health -= ACCELERATOR_DAMAGE * DrawingSurface.DT;
+			
 		gtool.use(maze);
 		
 		changeHealth(Math.min(-0.01*gtool.getReading() + 0.1, 0));
@@ -176,7 +214,7 @@ public class Officer extends Actor {
 		if (gtool.getReading() > LETHAL_RAD)
 			health = 0;
 		
-		System.out.print("Officer: ");
+		// System.out.print("Officer: ");
 		super.act(maze);
 	}
 }
