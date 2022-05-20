@@ -10,6 +10,7 @@ import items.*;
 import screen.*;
 import processing.core.*;
 import java.awt.Point;
+import java.awt.geom.Point2D;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
@@ -141,11 +142,13 @@ public class MazeData {
 		
 		marker.fill(0, 0, 0);
 		marker.stroke(0, 0, 0);
+		marker.strokeWeight(2);
+		
 		String[][] mazeGrid = this.toStringArr(); 
 		int lengthMaze = 4 * size + 1; 
 		int heightMaze = 2 * size + 1;
-		double xLen = ((w))/lengthMaze; 
-		double yLen = ((h))/heightMaze; 
+		double xLen = w/(lengthMaze-1); 
+		double yLen = h/(heightMaze-1); 
 		
 		for (int i=0;i<heightMaze;i++) {
 			char[] currRow = mazeGrid[i][0].toCharArray(); 
@@ -157,8 +160,8 @@ public class MazeData {
 					if (currRow[j] == '+' && currRow[j+1] == '-') {
 						marker.line((float)xCoord, (float)yCoord, (float)xCoordSec, (float)yCoord);
 					}
-					marker.circle((float)xCoord, (float)yCoord, 5);
-					marker.circle((float)xCoordSec, (float)yCoord, 5);
+					// marker.circle((float)xCoord, (float)yCoord, 5);
+					// marker.circle((float)xCoordSec, (float)yCoord, 5);
 				}
 			}else {
 				for (int j=0;j<currRow.length;j++) {
@@ -227,14 +230,14 @@ public class MazeData {
 	 * top = 2
 	 * bottom = 3 
 	 */
-	public static boolean[] isTouchingWall(HauntedMaze h, Actor a) {
+	public boolean[] isTouchingWall(HauntedMaze h, Actor a) {
 		int size = h.settingData.size; 
 		MazeData m = h.settingData; 
 		
 		boolean[] result = new boolean[4]; 
 		
-		double pixelLenWidth = ((h.getW()))/(4 * size + 1);
-		double pixelLenHeight = ((h.getH()))/(2 * size + 1); 
+		double pixelLenWidth = ((h.getW()))/(4*size);
+		double pixelLenHeight = ((h.getH()))/(2*size);
 		
 		double actorPosX = a.getX(); 
 		double actorPosY = a.getY(); 

@@ -33,7 +33,7 @@ public class HauntedMaze extends ScreenObject {
 	public static final double LIGHT_DIST = 100;
 	public static final int LIGHT_RES = 4;
 	
-	public static final int[] SHADE_COLOR = {30, 30, 30, 255};
+	public static final int[] SHADE_COLOR = {0, 0, 0, 255};
 	public static final int[] LIGHT_COLOR = {252, 252, 38, 100};
 	
 	public HauntedMaze(PApplet marker)
@@ -74,7 +74,7 @@ public class HauntedMaze extends ScreenObject {
 		// marker.text("Haunted Maze", (float)(x + w/2), (float)(y + h/2));
 		
 		
-		
+		settingData.draw(marker, (float)x, (float)y, (float)w, (float)h);
 		
 		villain.draw(marker);
 		for (Item i : items)
@@ -86,8 +86,6 @@ public class HauntedMaze extends ScreenObject {
 		for (Item i : items)
 			if (i instanceof Blueprint)
 				i.draw(marker);
-		
-		settingData.draw(marker, (float)x, (float)y, (float)w, (float)h);
 		
 		marker.pop();
 	}

@@ -176,6 +176,7 @@ public class Officer extends Actor {
 		if (gtool.getReading() > LETHAL_RAD)
 			health = 0;
 		
+		System.out.print("Officer: ");
 		super.act(maze);
 	}
 }

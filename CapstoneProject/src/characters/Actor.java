@@ -56,7 +56,7 @@ public class Actor extends ScreenObject {
 	
 	public void act(HauntedMaze maze)
 	{
-		// wallImpact(maze);
+		wallImpact(maze);
 		
 		x += vx*DrawingSurface.DT;
 		y += vy*DrawingSurface.DT;
@@ -67,8 +67,10 @@ public class Actor extends ScreenObject {
 		boolean[] collisions = maze.settingData.isTouchingWall(maze, this);
 		
 		for (int i = 0; i < 4; i++)
-			
+			System.out.print(collisions[i] + " ");
+		System.out.println();
 		
+		/*
 		if (collisions[0])
 			vx = (vx < 0) ? 0 : vx;
 		if (collisions[1])
@@ -77,6 +79,7 @@ public class Actor extends ScreenObject {
 			vy = (vy < 0) ? 0 : vy;
 		if (collisions[3])
 			vy = (vy > 0) ? 0 : vy;
+		*/
 	}
 
 }
