@@ -122,49 +122,15 @@ public class Rectangle {
 	 * @return
 	 */
 	public static boolean intersects(Rectangle a, Rectangle b) {
+		double minX = Math.max(a.x1, b.x1);
+		double minY = Math.max(a.y1, b.y1);
+		double maxX = Math.min(a.x2, b.x2);
+		double maxY = Math.min(a.y2, b.y2);
 		
-		
-		double minXA = Math.min(a.getX(), a.getX() + a.getW()); 
-		double maxXA = Math.max(a.getX(), a.getX() + a.getW());
-		double minXB = Math.min(b.getX(), b.getX() + b.getW()); 
-		double maxXB = Math.max(b.getX(), b.getX() + b.getW());
-		
-		double minYA = Math.min(a.getY(), a.getY() + a.getH()); 
-		double maxYA = Math.max(a.getY(), a.getY() + a.getH());
-		double minYB = Math.min(b.getY(), b.getY() + b.getH()); 
-		double maxYB = Math.max(b.getY(), b.getY() + b.getH());
-
-		if (maxXA < minXB) return false; 
-		if (maxXB < minXA) return false;
-		
-		if (maxYA < minYB) return false; 
-		if (maxYB < minYA) return false;
-		return true; 
-		
-//		if (Math.min(b.getX(), b.getX() + b.getW()) >= Math.min(a.getX(), a.getX() + a.getW()) && 
-//			Math.min(b.getX(), b.getX() + b.getW()) <= Math.max(a.getX(), a.getX() + a.getW()) && 
-//			Math.min(b.getY(), b.getY() + b.getH()) >= Math.min(a.getY(), a.getY() + a.getW()) && 
-//			Math.min(b.getY(), b.getY() + b.getH()) <= Math.max(a.getY(), a.getY() + a.getH())) 
-//        			return true;
-//		
-//		if (Math.max(b.getX(), b.getX() + b.getW()) >= Math.min(a.getX(), a.getX() + a.getW()) && 
-//			Math.max(b.getX(), b.getX() + b.getW()) <= Math.max(a.getX(), a.getX() + a.getW()) && 
-//			Math.max(b.getY(), b.getY() + b.getH()) >= Math.min(a.getY(), a.getY() + a.getW()) && 
-//			Math.max(b.getY(), b.getY() + b.getH()) <= Math.max(a.getY(), a.getY() + a.getH())) 
-//	        			return true;
-//		
-//		if (Math.min(b.getX(), b.getX() + b.getW()) >= Math.min(a.getX(), a.getX() + a.getW()) && 
-//			Math.min(b.getX(), b.getX() + b.getW()) <= Math.max(a.getX(), a.getX() + a.getW()) && 
-//			Math.max(b.getY(), b.getY() + b.getH()) >= Math.min(a.getY(), a.getY() + a.getW()) && 
-//			Math.max(b.getY(), b.getY() + b.getH()) <= Math.max(a.getY(), a.getY() + a.getH())) 
-//		        			return true;
-//		if (Math.max(b.getX(), b.getX() + b.getW()) >= Math.min(a.getX(), a.getX() + a.getW()) && 
-//			Math.max(b.getX(), b.getX() + b.getW()) <= Math.max(a.getX(), a.getX() + a.getW()) && 
-//			Math.min(b.getY(), b.getY() + b.getH()) >= Math.min(a.getY(), a.getY() + a.getW()) && 
-//			Math.min(b.getY(), b.getY() + b.getH()) <= Math.max(a.getY(), a.getY() + a.getH())) 
-//			        			return true;
-//		
-		}
+		if ((minX <= maxX) && (minY <= maxY))
+			return true;
+		return false;
+	}
 
 	
 	
