@@ -20,6 +20,7 @@ public class Officer extends Actor {
 	public static final double PICK_DIST = 20;
 	
 	private boolean accelerator;
+	public static final double ACCELERATOR_DAMAGE = 10;
 	
 	// image taken from
 	// https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.istockphoto.com%2Fphotos%2Fpolice-badge-graphic&psig=AOvVaw3xpVBxMDAwHVxv8yK_jvxl&ust=1652402341678000&source=images&cd=vfe&ved=0CA0QjhxqFwoTCLi90tHc2PcCFQAAAAAdAAAAABAQ
@@ -191,7 +192,7 @@ public class Officer extends Actor {
 	public void act(HauntedMaze maze)
 	{
 		if (accelerator)
-			health -= 1 * DrawingSurface.DT;
+			health -= ACCELERATOR_DAMAGE * DrawingSurface.DT;
 			
 		gtool.use(maze);
 		
