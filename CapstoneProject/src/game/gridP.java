@@ -1,11 +1,15 @@
 package game;
 import java.util.ArrayList;
 
+/**
+ * This class represents a point on the maze. 
+ * @author dhruv
+ */
 public class gridP {
 
-	int hrow, vrow, visited, n, s, e, w;
+	public int hrow, vrow, visited, n, s, e, w;
 	public int num;
-	ArrayList<gridP> adjlist = new ArrayList<gridP>();
+	public ArrayList<gridP> adjlist = new ArrayList<gridP>();
 
 	public gridP(int x, int y) {
 		this.hrow = x;

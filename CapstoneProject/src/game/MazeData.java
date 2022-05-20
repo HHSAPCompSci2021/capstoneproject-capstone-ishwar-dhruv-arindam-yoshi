@@ -28,8 +28,11 @@ public class MazeData {
 	private gridP[][] myBoard ;
 	private int size; 
 	private ArrayList<gridP> cList;
-	
+	/**
+	 * Represents the walls list in the maze. 
+	 */
 	public ArrayList<Rectangle> wallsList; 
+	private boolean firstTime = true; 
 	
 	/**
 	 * contructs the maze. 
@@ -163,7 +166,9 @@ public class MazeData {
 					double xCoordSec = x + (j+4) * xLen;
 					if (currRow[j] == '+' && currRow[j+1] == '-') {
 						marker.rect((float) xCoord, (float)yCoord-1, (float) xCoordSec- (float) xCoord, 2);
-						wallsList.add(new Rectangle(xCoord, yCoord-1, xCoordSec- xCoord, 2)); 
+						if (firstTime) {
+							wallsList.add(new Rectangle(xCoord, yCoord-1, xCoordSec- xCoord, 2)); 
+						}
 						
 //						marker.line((float)xCoord, (float)yCoord, (float)xCoordSec, (float)yCoord);
 					}
@@ -178,13 +183,16 @@ public class MazeData {
 						double xCoord = x + j * xLen;
 						double yCoordFirst = yCoord - yLen; 
 						double yCoordSecond = yCoord + yLen; 
-						marker.rect((float) xCoord-1, (float)yCoordFirst,2, (float) yCoordSecond - (float) yCoordFirst);
-						wallsList.add(new Rectangle(xCoord-1, yCoordFirst, 2, yCoordSecond - yCoordFirst)); 
+						marker.rect((float) xCoord-1, (float)yCoordFirst, 2, (float) yCoordSecond - (float) yCoordFirst);
+						if (firstTime) {
+							wallsList.add(new Rectangle(xCoord-1, yCoordFirst, 2, yCoordSecond - yCoordFirst)); 
+						}
 //						marker.line((float)xCoord, (float)yCoordFirst, (float)xCoord, (float)yCoordSecond);
 					}
 				}
 			}	
 		}
+		firstTime = false; 
 		marker.pop();
 	}
 	
@@ -224,36 +232,40 @@ public class MazeData {
 		return out; 
 
 	}
-
-	
 	/**
-	 * left = 0
-	 * right = 1
-	 * top = 2
-	 * bottom = 3 
+	 * 
+	 * @param walls which represents the walls in the maze
+	 * @param a which represents actor(or specifically protaganist in the maze
+	 * @return a boolean array of length 4 which is:
+	 * Position 0 of the array represents whether the actor is touching the wall from left. 
+	 * Position 1 of the array represents whether the actor is touching the wall from the right.
+	 * Position 2 of the array represents whether the actor is touching the wall from the top
+	 * Position 3 of the array represents whether the actor is touching the wall from the bottom. 
 	 */
-	
-	/**
-	 * Position 1 of the array represents whether the actor is touching the wall from above. 
-	 * Position 2 of the array represents whether the actor is touching the wall from the right.
-	 * Position 3 of the array represents whether the actor is touching the wall from the bottom
-	 * Position 4 of the array represents whether the actor is touching the wall from the left. 
-	 */
-	
-	
 	public static boolean[] isActorTouchingMaze(ArrayList<Rectangle> walls, Actor a) {
+//		System.out.println("been here"); 
+//		System.out.println(walls.size()); 
 		ArrayList<Rectangle> wallsTouchingActor = new ArrayList<Rectangle>(); 
 		ArrayList<boolean[]> direcOfWall = new ArrayList<boolean[]>();
+		
+//		System.out.println("ACTOR " + a.getX() + " " + a.getY()); 
 		
 		for (Rectangle w : walls) {
 			boolean[] isTouching = w.isTouchingActor(a); 
 			if (isTouching[0]) {
 				wallsTouchingActor.add(w); 
+//				System.out.println(w.x1 + " " + w.y1 + " " + w.w + " " + w.h); 
+//				System.out.println(a.getBoundingRectangle().x1 + " " + a.getBoundingRectangle().y1); 
 				direcOfWall.add(isTouching); 
 			}
 		}
-
-		if (wallsTouchingActor.size() == 1) {
+		
+//		System.out.println(wallsTouchingActor.size()); 
+		
+		if (wallsTouchingActor.size() == 0) {
+			return new boolean[]{false, false, false, false};
+		
+		}else {
 			if (direcOfWall.get(0)[1]) {
 				return new boolean[]{false, false, true, false}; 
 			}else if (direcOfWall.get(0)[2]) {
@@ -263,22 +275,37 @@ public class MazeData {
 			}else if (direcOfWall.get(0)[4]) {
 				return new boolean[]{true, false, false, false}; 
 			}
-		}else if (wallsTouchingActor.size() == 2) {
-			if (equals(wallsTouchingActor.get(0).h, wallsTouchingActor.get(1).h)) {
-				if (direcOfWall.get(0)[1]) {
-					return new boolean[]{false, false, true, false}; 
-				}else if (direcOfWall.get(0)[3]) {
-					return new boolean[]{false, false, false, true}; 
-				}
-			}else if (equals(wallsTouchingActor.get(0).w, wallsTouchingActor.get(1).w)) {
-				if (direcOfWall.get(0)[2]) {
-					return new boolean[]{false, true, false, false}; 
-				}else if (direcOfWall.get(0)[4]) {
-					return new boolean[]{true, false, false, false};
-				}
-			}
 		}
+		
+//		else if (wallsTouchingActor.size() == 1) {
+//			if (direcOfWall.get(0)[1]) {
+//				return new boolean[]{false, false, true, false}; 
+//			}else if (direcOfWall.get(0)[2]) {
+//				return new boolean[]{false, true, false, false}; 
+//			}else if (direcOfWall.get(0)[3]) {
+//				return new boolean[]{false, false, false, true}; 
+//			}else if (direcOfWall.get(0)[4]) {
+//				return new boolean[]{true, false, false, false}; 
+//			}
+//		}else if (wallsTouchingActor.size() >= 2) {
+//			if (equals(wallsTouchingActor.get(0).h, wallsTouchingActor.get(1).h)) {
+//				if (direcOfWall.get(0)[1]) {
+//					return new boolean[]{false, false, true, false}; 
+//				}else if (direcOfWall.get(0)[3]) {
+//					return new boolean[]{false, false, false, true}; 
+//				}
+//			}
+//			if (equals(wallsTouchingActor.get(0).w, wallsTouchingActor.get(1).w)) {
+//				if (direcOfWall.get(0)[2]) {
+//					return new boolean[]{false, true, false, false}; 
+//				}else if (direcOfWall.get(0)[4]) {
+//					return new boolean[]{true, false, false, false};
+//				}
+//			}
+//		}
+		
 		return new boolean[]{false, false, false, false};
+		
 		
 	}
 	
