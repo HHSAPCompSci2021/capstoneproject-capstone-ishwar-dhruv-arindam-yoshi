@@ -5,13 +5,30 @@ import java.awt.geom.Line2D;
 import characters.Actor;
 
 public class Rectangle {
+	/**
+	 * x1 represents the upper left X coordinate of the rectangle
+	 * y1 represents the upper left Y coordinate of the rectangle
+	 * x2 represents the lower right X coordinate of the rectangle
+	 * y2 represents the lower right Y coordinate of the rectangle
+	 * w represents the width of the rectangle
+	 * h represents the height of the rectangle
+	 */
 	public double x1, y1, x2, y2, w, h; 
 	
-	
+	/**
+	 * Contructs a rectangle object where the fields are all 0. 
+	 */
 	public Rectangle() {
 		x1 = y1 = x2 = y2 = w = h = 0; 
 	}
 	
+	/**
+	 * Constructs a rectangle object where the fields are the values passed.
+	 * @param x1 the upper x coordinate of the rectangle
+	 * @param y1 the upper y coordinate of the rectangle
+	 * @param w the width of the rectangle
+	 * @param h the height of the rectangle 
+	 */
 	public Rectangle(double x1, double y1, double w, double h) {
 		this.x1 = x1; 
 		this.y1 = y1; 
@@ -21,18 +38,34 @@ public class Rectangle {
 		y2 = y1 + h; 
 	}
 	
+	/**
+	 * Returns x coordinate of the rectangle
+	 * @return the upper x coordinate of the rectangle
+	 */
 	public double getX() {
 		return x1; 
 	}
 	
+	/**
+	 * Returns y coordinate of the rectangle
+	 * @return the upper y coordinate of the rectangle
+	 */
 	public double getY() {
 		return y1; 
 	}
 	
+	/**
+	 * Returns width of the rectangle
+	 * @return the width of the rectangle
+	 */
 	public double getW() {
 		return w; 
 	}
 	
+	/**
+	 * Returns height of the rectangle
+	 * @return the height of the rectangle
+	 */
 	public double getH() {
 		return h; 
 	}

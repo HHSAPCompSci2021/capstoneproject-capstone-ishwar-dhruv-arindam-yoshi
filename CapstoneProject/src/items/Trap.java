@@ -12,13 +12,15 @@ public class Trap extends Item {
 	private boolean isActive = true; 
 	
 	
+	/**
+	 * NEAR_DIST is a constant that represents the distance between the trap. 
+	 */
 	public static final double NEAR_DIST = 15;
 	public static final double DEFECT_CHANCE = 0.01;
 	
 	// private double timeExposed = ;
 	
 	/**
-	 * 
 	 * @param x the x coord of the trap
 	 * @param y the y coord of the trap
 	 * @param width the width of the trap
@@ -36,14 +38,26 @@ public class Trap extends Item {
 		image = marker.loadImage("assets/trap.png");
 	}
 	
+	/**
+	 * Gets the type of the trap
+	 * @return
+	 */
 	public int getType() {
 		return type; 
 	}
 	
+	/**
+	 * Changes the type of the trap. 
+	 * @param newType the type of the new trap. 
+	 */
 	public void setType(int newType) {
 		type = newType; 
 	}
 	
+	/**
+	 * Uses the trap once in the maze which is passed
+	 * @param the maze which the trap is acted upon. 
+	 */
 	public void use(HauntedMaze maze)
 	{
 		if (!isActive)
@@ -67,10 +81,19 @@ public class Trap extends Item {
 		}
 	}
 	
+	
+	
+	/**
+	 * returns true if the trap is active, and can still be used. 
+	 * @return true if the trap is active. 
+	 */
 	public boolean isTrapActive() {
 		return isActive; 
 	}
 	
+	/**
+	 * Sets the trap to inactive, which means it can't be used
+	 */
 	public void setInactive() {
 		isActive = false; 
 	}

@@ -24,6 +24,15 @@ public class Actor extends ScreenObject {
 	 */
 	protected double vy; 
 	
+	/**
+	 * Constructs an actor
+	 * @param imgPath the image of the actor which is shown on the PApplet
+	 * @param marker the processing window which the actor is created upon. 
+	 * @param x the x coordinate of the actor
+	 * @param y the y coordinate of the actor
+	 * @param w the width of the actor
+	 * @param h the height of the actor
+	 */
 	public Actor(String imgPath, PApplet marker, double x, double y, double w, double h) {
 		super(x, y, w, h);
 		vx = 0; vy = 0;
@@ -66,7 +75,10 @@ public class Actor extends ScreenObject {
 	{
 		
 	}
-	
+	/**
+	 * Performs an act on the maze which changes the position of the actor
+	 * @param maze the HauntedMaze which the actor is located upon. 
+	 */
 	public void act(HauntedMaze maze)
 	{
 		

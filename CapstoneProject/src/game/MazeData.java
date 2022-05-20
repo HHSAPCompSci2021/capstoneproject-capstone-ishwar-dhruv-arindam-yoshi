@@ -23,16 +23,16 @@ import processing.core.PApplet;
  * @author dhruv
  *
  */
-
-
 public class MazeData {
 	private static final int CORNERS = 0;
 	private gridP[][] myBoard ;
 	private int size; 
 	private ArrayList<gridP> cList;
-	
+	/**
+	 * Represents the walls list in the maze. 
+	 */
 	public ArrayList<Rectangle> wallsList; 
-	boolean firstTime = true; 
+	private boolean firstTime = true; 
 	
 	/**
 	 * contructs the maze. 
@@ -232,24 +232,15 @@ public class MazeData {
 		return out; 
 
 	}
-
-	
-	/**
-	 * left = 0
-	 * right = 1
-	 * top = 2
-	 * bottom = 3 
-	 */
-	
 	/**
 	 * 
 	 * @param walls which represents the walls in the maze
 	 * @param a which represents actor(or specifically protaganist in the maze
-	 * 
-	 * Position 1 of the array represents whether the actor is touching the wall from above. 
-	 * Position 2 of the array represents whether the actor is touching the wall from the right.
-	 * Position 3 of the array represents whether the actor is touching the wall from the bottom
-	 * Position 4 of the array represents whether the actor is touching the wall from the left. 
+	 * @return a boolean array of length 4 which is:
+	 * Position 0 of the array represents whether the actor is touching the wall from left. 
+	 * Position 1 of the array represents whether the actor is touching the wall from the right.
+	 * Position 2 of the array represents whether the actor is touching the wall from the top
+	 * Position 3 of the array represents whether the actor is touching the wall from the bottom. 
 	 */
 	public static boolean[] isActorTouchingMaze(ArrayList<Rectangle> walls, Actor a) {
 //		System.out.println("been here"); 

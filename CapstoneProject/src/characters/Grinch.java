@@ -10,9 +10,17 @@ import items.*;
 public class Grinch extends Actor {
 	
 	// has arraylist of traps to set in the maze (want-to-have)
-	
+	/**
+	 * Represents the speed of the grinch
+	 */
 	public static final double SPEED = 15;
 	
+	/**
+	 * Constructs a grinch
+	 * @param marker the grinch is on the marker
+	 * @param x the x coordinate of the grinch
+	 * @param y the y coordinate of the grinch
+	 */
 	public Grinch(PApplet marker, double x, double y)
 	{
 		super("assets/grinch.png", marker, x, y, 30, 40);
@@ -29,7 +37,10 @@ public class Grinch extends Actor {
 		
 		marker.pop();
 	}
-	
+	/**
+	 * Sets the trap of the grinch around the maze
+	 * @param e the trap to set around the maze
+	 */
 	public void setTrap(Trap e)
 	{
 		
