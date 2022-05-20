@@ -80,12 +80,14 @@ public class Rectangle {
 	}
 
 	public static boolean intersects(Rectangle a, Rectangle b) {
-		if (b.getX() >= Math.min(a.getX(), a.getX() + a.getW()) && 
-        		b.getX() <= Math.max(a.getX(), a.getX() + a.getW()) && 
-        		b.getY() >= Math.min(a.getY(), a.getY() + a.getW()) && 
-        		b.getY() <= Math.max(a.getY(), a.getY() + a.getH())) 
-        			return true;
-		return false; 
+		double minX = Math.max(a.x1, b.x1);
+		double minY = Math.max(a.y1, b.y1);
+		double maxX = Math.min(a.x2, b.x2);
+		double maxY = Math.min(a.y2, b.y2);
+		
+		if ((minX <= maxX) && (minY <= maxY))
+			return true;
+		return false;
 	}
 
 	
