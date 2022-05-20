@@ -16,7 +16,7 @@ public class DrawingSurface extends PApplet {
 	
 	private Screen activeScreen;
 	public ArrayList<Screen> screens;
-	
+	public float ratioX, ratioY;
 	/**
 	 * Represents an int for a certain screen
 	 */
@@ -86,8 +86,14 @@ public class DrawingSurface extends PApplet {
 		DT = (this.millis() - PREV_MILLIS)/1000.0;
 		PREV_MILLIS = this.millis();
 		
+		
+		
+		ratioX = (float)width/activeScreen.DRAWING_WIDTH;
+		ratioY = (float)height/activeScreen.DRAWING_HEIGHT;
+
 		push();
 		
+		scale(ratioX, ratioY);
 		activeScreen.draw();
 		
 		pop();
@@ -160,6 +166,13 @@ public class DrawingSurface extends PApplet {
 		activeScreen.keyTyped();
 	}
 
+	public Point assumedCoordinatesToActual(Point assumed) {
+		return new Point((int)(assumed.getX()*ratioX), (int)(assumed.getY()*ratioY));
+	}
+
+	public Point actualCoordinatesToAssumed(Point actual) {
+		return new Point((int)(actual.getX()/ratioX) , (int)(actual.getY()/ratioY));
+	}
 	
 
 }

@@ -84,7 +84,8 @@ public class EndScreen extends Screen {
 	 * Checks whether the mouse presses in the button, and switches screen accordingly
 	 */
 	public void mousePressed() {
-		Point p = (new Point(surface.mouseX,surface.mouseY));
+		Point p = surface.actualCoordinatesToAssumed(new Point(surface.mouseX,surface.mouseY));
+
 		if (button.contains(p)) {
 			
 			surface.switchScreen(1);
