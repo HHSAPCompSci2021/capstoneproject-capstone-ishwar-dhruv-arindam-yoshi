@@ -35,30 +35,33 @@ public class Grinch extends Actor {
 		
 	}
 	
+	/**
+	 * This performs a grinch act which involves moving closer to the protagonist of the maze
+	 * @param maze which represents the maze which the grid is on. 
+	 */
 	public void act(HauntedMaze maze)
 	{
-		/*
+		
 		double dx = maze.protagonist.getX() - x;
 		double dy = maze.protagonist.getY() - y;
 		double dist = Math.sqrt(Math.pow(dx, 2) + Math.pow(dy, 2));
 		
 		vx = SPEED * (dx / dist);
 		vy = SPEED * (dy / dist);
-		*/
+		
 				
-		System.out.print("Grinch: ");
 		super.act(maze);
 	}
 	
-	/*
-	public void isOfficerNearTrap(HauntedMaze h) {
-		for (Trap t : grinchTraps)
-		{
-			Officer o = maze.protagonist; 
-			double dist = Math.sqrt(Math.pow(o.getX()-x, 2) + Math.pow(o.getY()-y, 2));
-			if (dist < NEAR_DIST)
-				t.use(h);
-		}
-	}
-	*/
+
+//	public void isOfficerNearTrap(HauntedMaze h) {
+//		for (Trap t : grinchTraps)
+//		{
+//			Officer o = maze.protagonist; 
+//			double dist = Math.sqrt(Math.pow(o.getX()-x, 2) + Math.pow(o.getY()-y, 2));
+//			if (dist < NEAR_DIST)
+//				t.use(h);
+//		}
+//	}
+	
 }
