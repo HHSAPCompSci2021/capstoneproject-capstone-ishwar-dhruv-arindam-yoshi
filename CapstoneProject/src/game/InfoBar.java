@@ -17,8 +17,20 @@ public class InfoBar extends ScreenObject {
 	private PImage fullHeart;
 	private PImage halfHeart;
 	private PImage emptyHeart;
+	
+	/**
+	 * Access path to the full heart image
+	 */
 	public static final String fullHeart_PATH = "assets/fullheart.png";
+	
+	/**
+	 * Access path to the half heart image
+	 */
 	public static final String halfHeart_PATH = "assets/halfheart.png";
+	
+	/**
+	 * Access path to the empty heart image
+	 */
 	public static final String emptyHeart_PATH = "assets/emptyheart.png";
 	/**
 	 * Initializes an InfoBar object
@@ -155,7 +167,7 @@ public class InfoBar extends ScreenObject {
 			blueprint.drawInfo(marker, x+3, y+60 + i);
 			i += 20;
 		}
-		
+		 
 		marker.pop();
 	}
 	

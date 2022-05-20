@@ -23,12 +23,28 @@ public class EndScreen extends Screen {
 
 	
 	private PImage winning;
+	
+	/**
+	 * Path to the winningScreen image
+	 */
 	public static final String winningScreen_PATH = "assets/winningScreen.jpg";
 	private PImage losing;
+	
+	/**
+	 * Path to the losingScreen image
+	 */
 	public static final String losingScreen_PATH = "assets/losingScreen.jpg";
 	private PImage playAgain;
+	
+	/**
+	 * Path to the playAgain image
+	 */
 	public static final String playAgain_PATH = "assets/playAgain.png";
 	private DrawingSurface surface;
+	
+	/**
+	 * boolean on whether the game has been won or lost
+	 */
 	public static boolean winLose;
 	
 	private Rectangle button;
@@ -43,6 +59,9 @@ public class EndScreen extends Screen {
 		button = new Rectangle();
 	}
 	
+	/**
+	 * Sets up all images and the button for this class
+	 */
 	public void setup()
 	{
 		winning = surface.loadImage(EndScreen.winningScreen_PATH);
@@ -53,7 +72,7 @@ public class EndScreen extends Screen {
 	}
 
 	/**
-	 * Draws the option screen 
+	 * Draws the end screen 
 	 */
 	public void draw() {
 

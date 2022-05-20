@@ -27,8 +27,20 @@ public class OptionScreen extends Screen {
 	private DrawingSurface surface;
 	private PImage grinchFringe;
 
+	
+	/**
+	 * Path to the option screen image
+	 */
 	public static final String OPTION_SCREEN_PATH = "assets/optionScreen.png";
+	
+	/**
+	 * Path to the starter screen image
+	 */
 	public static final String STARTER_PATH = "assets/starter.png";
+	
+	/**
+	 * Path to the grinch fringe image
+	 */
 	public static final String TITLE_PATH = "assets/grinchFringe.png";
 	
 	private Rectangle button;
@@ -43,6 +55,9 @@ public class OptionScreen extends Screen {
 		button = new Rectangle();
 	}
 	
+	/**
+	 * Sets up images and a button for the option screen class
+	 */
 	public void setup()
 	{
 		optionScreen = surface.loadImage(OptionScreen.OPTION_SCREEN_PATH);

@@ -12,9 +12,7 @@ import game.HauntedMaze;
 public class Blueprint extends Item {
 	
 	protected PImage image;
-	/**
-	 * path to image used for blueprints
-	 */
+	
 	
 	// has identifier
 	private String identifier;
@@ -33,13 +31,20 @@ public class Blueprint extends Item {
 		image = marker.loadImage("assets/pin.png");
 	}
 	
-	
+	/**
+	 * Empty method
+	 */
 	public void use(HauntedMaze maze)
 	{
 		
 	}
 	
-	
+	/**
+	 * Draws information about the blueprint in the infobar
+	 * @param marker is the object that draws stuff
+	 * @param x is the x coordinate of where it is drawn
+	 * @param y is the y coordinate of where it is drawn
+	 */
 	public void drawInfo(PApplet marker, double x, double y)
 	{
 		
