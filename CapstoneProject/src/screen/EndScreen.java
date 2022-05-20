@@ -15,7 +15,7 @@ import game.*;
 
 
 /**
- * Represents the option screen class of the game 
+ * Represents the winning or losing result screen class of the game 
  * @author akulkarni174
  *
  */
@@ -38,7 +38,7 @@ public class EndScreen extends Screen {
 	 * @param surface is the surface which we draw on
 	 */
 	public EndScreen(DrawingSurface surface) {
-		super(800,600);
+		super(1000, 800);
 		this.surface = surface;
 		button = new Rectangle();
 	}

@@ -43,7 +43,7 @@ public class GameScreen extends Screen {
 	 * @param surface the DrawingSurface object used to display the game and receive user input
 	 */
 	public GameScreen(DrawingSurface surface) {
-		super(800, 600);
+		super(1000, 800);
 		this.surface = surface;
 		
 		gameSetting = null;
