@@ -72,7 +72,6 @@ public class Actor extends ScreenObject {
 
 	protected void wallImpact(HauntedMaze maze)
 	{
-		
 		ArrayList<Rectangle> walls = maze.settingData.wallsList; 
 		boolean[] collisions = MazeData.isActorTouchingMaze(walls, this); 
 		
@@ -86,7 +85,6 @@ public class Actor extends ScreenObject {
 			if (collisions[3])
 				vy = (vy > 0) ? 0 : vy;
 		}
-		
 	}
 
 }

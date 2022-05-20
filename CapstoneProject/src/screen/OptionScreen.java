@@ -77,8 +77,10 @@ public class OptionScreen extends Screen {
 	 */
 	public void mousePressed() {
 		Point p = (new Point(surface.mouseX,surface.mouseY));
-		if (button.contains(p))
+		if (button.contains(p)) {
 			surface.switchScreen(0);
+			surface.setup();
+		}
 	}
 	
 

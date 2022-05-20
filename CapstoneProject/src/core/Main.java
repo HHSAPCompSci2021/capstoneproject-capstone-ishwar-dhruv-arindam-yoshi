@@ -15,7 +15,8 @@ public class Main {
 		PSurfaceAWT surf = (PSurfaceAWT) drawing.getSurface();
 		PSurfaceAWT.SmoothCanvas canvas = (PSurfaceAWT.SmoothCanvas) surf.getNative();
 		JFrame window = (JFrame)canvas.getFrame();
-
+		
+		window.setTitle("Grinch Fringe");
 		window.setSize(1000, 800);
 		window.setMinimumSize(new Dimension(1000,800));
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

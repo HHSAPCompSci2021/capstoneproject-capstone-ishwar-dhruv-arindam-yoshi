@@ -10,6 +10,7 @@ import items.*;
 import screen.*;
 import processing.core.*;
 import java.awt.Point;
+import java.awt.geom.Point2D;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
@@ -147,11 +148,13 @@ public class MazeData {
 		
 		marker.fill(0, 0, 0);
 		marker.stroke(0, 0, 0);
+		marker.strokeWeight(2);
+		
 		String[][] mazeGrid = this.toStringArr(); 
 		int lengthMaze = 4 * size + 1; 
 		int heightMaze = 2 * size + 1;
-		double xLen = ((w))/lengthMaze; 
-		double yLen = ((h))/heightMaze; 
+		double xLen = w/(lengthMaze-1); 
+		double yLen = h/(heightMaze-1); 
 		
 		for (int i=0;i<heightMaze;i++) {
 			char[] currRow = mazeGrid[i][0].toCharArray(); 
@@ -168,6 +171,8 @@ public class MazeData {
 					}
 //					marker.circle((float)xCoord, (float)yCoord, 5);
 //					marker.circle((float)xCoordSec, (float)yCoord, 5);
+					// marker.circle((float)xCoord, (float)yCoord, 5);
+					// marker.circle((float)xCoordSec, (float)yCoord, 5);
 				}
 			}else {
 				for (int j=0;j<currRow.length;j++) {
@@ -249,8 +254,7 @@ public class MazeData {
 				direcOfWall.add(isTouching); 
 			}
 		}
-		System.out.println(wallsTouchingActor.size()); 
-		
+
 		if (wallsTouchingActor.size() == 1) {
 			if (direcOfWall.get(0)[1]) {
 				return new boolean[]{false, false, true, false}; 
@@ -277,6 +281,7 @@ public class MazeData {
 			}
 		}
 		return new boolean[]{false, false, false, false};
+		
 	}
 	
 	private static boolean equals(double a, double b) {

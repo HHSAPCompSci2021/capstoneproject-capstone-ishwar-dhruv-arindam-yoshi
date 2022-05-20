@@ -86,9 +86,11 @@ public class EndScreen extends Screen {
 	public void mousePressed() {
 		Point p = (new Point(surface.mouseX,surface.mouseY));
 		if (button.contains(p)) {
+			
+			surface.switchScreen(1);
 			surface.setup();
 		}
-			surface.switchScreen(1);
+			
 	}
 	
 
