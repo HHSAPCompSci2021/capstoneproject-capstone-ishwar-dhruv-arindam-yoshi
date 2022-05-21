@@ -8,21 +8,12 @@ import core.*;
 
 public class Screen {
 
-	public final int DRAWING_WIDTH, DRAWING_HEIGHT;
+	public static final int DRAWING_WIDTH = 1000, DRAWING_HEIGHT = 750;
 	public static final int OPTION_SCREEN = 0;
 	public static final int GAME_SCREEN = 1;
 	public static final int END_SCREEN = 2;
 	protected DrawingSurface surface;
 	
-	/**
-	 * Constructs a new Screen object given window dimensions
-	 * @param width the width of the screen
-	 * @param height the height of the screen
-	 */
-	public Screen(int width, int height) {
-		this.DRAWING_WIDTH = width;
-		this.DRAWING_HEIGHT = height;
-	}
 	
 	/**
 	 * Sets up the Screen before displaying

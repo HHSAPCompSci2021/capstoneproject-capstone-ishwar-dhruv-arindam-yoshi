@@ -120,7 +120,7 @@ public class Officer extends Actor {
 	 */
 	public double getHealth()
 	{	
-		DecimalFormat df = new DecimalFormat("#.####");
+		DecimalFormat df = new DecimalFormat("#.##");
 		df.setRoundingMode(RoundingMode.CEILING);
 		return Double.parseDouble(df.format((health > 0) ? health : 0)); 
 	}

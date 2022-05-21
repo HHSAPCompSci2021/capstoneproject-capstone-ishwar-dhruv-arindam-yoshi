@@ -50,7 +50,7 @@ public class OptionScreen extends Screen {
 	 * @param surface is the surface which we draw on
 	 */
 	public OptionScreen(DrawingSurface surface) {
-		super(1000, 800);
+		super();
 		this.surface = surface;
 		button = new Rectangle();
 	}
