@@ -83,13 +83,7 @@ public class GameScreen extends Screen {
 	
 	
 	public void draw()
-	{
-		if (surface.isPressed(KeyEvent.VK_ESCAPE)) {
-			setup();
-			surface.switchScreen(surface.OPTION);
-			EndScreen.winLose = false;
-			return;
-		}
+	{		
 		
 		surface.background(255, 255, 255);
 		
@@ -109,8 +103,6 @@ public class GameScreen extends Screen {
 			return;
 		}
 		
-		
-		
 		if (gameSetting.protagonist.nearBlueprint(gameSetting) != null)
 		{
 			surface.push();
@@ -128,6 +120,7 @@ public class GameScreen extends Screen {
 		{
 			moveOfficer();
 			gameSetting.update(surface.mouseX, surface.mouseY);
+			updateTimer();
 		}
 		
 		drawTimer();
@@ -158,14 +151,19 @@ public class GameScreen extends Screen {
 	}
 	
 	private void drawTimer()
-	{
+	{	
 		int intTime = (timer / 1000) + 1;
 		int minutes = intTime / 60;
 		int seconds = intTime % 60;
-		
+	
 		surface.push();
+		surface.stroke(0);
 		
-		surface.stroke(0); surface.noFill();
+		surface.fill(0);
+		if (isPaused)
+			surface.text("Paused", 20, (float)(surface.height-100-10));
+		
+		surface.noFill();
 		surface.rect(	20, surface.height - 100,
 						80, 60);
 		
@@ -179,8 +177,25 @@ public class GameScreen extends Screen {
 		
 		surface.pop();
 		
-		timer = Math.max(0, lastResumeTime[0] + lastResumeTime[1] - surface.millis());
 		// System.out.println(timer);
+	}
+	
+	public void updateTimer()
+	{
+		timer = Math.max(0, lastResumeTime[0] + lastResumeTime[1] - surface.millis());
+	}
+	
+	@Override
+	public void keyReleased()
+	{
+		System.out.println("Here");
+		if (surface.keyCode == KeyEvent.VK_ESCAPE)
+			if (!isPaused)
+				pause();
+			else
+				resume();
+		
+		System.out.println(isPaused);
 	}
 }
 

@@ -126,6 +126,7 @@ public class DrawingSurface extends PApplet {
 	public void keyReleased() {
 		while(keys.contains(keyCode))
 			keys.remove(new Integer(keyCode));
+		activeScreen.keyReleased();
 	}
 
 	// taken from GamePhysicsDemo
@@ -165,14 +166,6 @@ public class DrawingSurface extends PApplet {
 	 */
 	public void mouseReleased() {
 		activeScreen.mouseReleased();
-	}
-	
-	/**
-	 * Acts on which key is typed
-	 */
-	public void keyTyped()
-	{
-		activeScreen.keyTyped();
 	}
 
 	/**

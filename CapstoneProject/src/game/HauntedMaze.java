@@ -50,7 +50,7 @@ public class HauntedMaze extends ScreenObject {
 	
 	public HauntedMaze(PApplet marker)
 	{
-		super(200, 150, 500, 400);
+		super(200, 150, 500, 500);
 		this.marker = marker;
 		
 		protagonist = new Officer(marker, x+70, y+60);
