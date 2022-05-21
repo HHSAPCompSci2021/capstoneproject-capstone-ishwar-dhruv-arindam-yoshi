@@ -33,6 +33,7 @@ public class GameScreen extends Screen {
 	private boolean isPaused;
 	private int timer;
 
+	public static HauntedMaze sender;
 	// image paths
 	private PImage winning;
 	private static final String winningScreen_PATH = "winningScreen.jpg";
@@ -64,7 +65,7 @@ public class GameScreen extends Screen {
 		
 		bar = new InfoBar(surface, gameSetting.protagonist);
 		gameSetting.setup();
-		
+		sender = gameSetting;
 		System.out.println(gameSetting == null);
 		timer = TIME_CAP;
 		
