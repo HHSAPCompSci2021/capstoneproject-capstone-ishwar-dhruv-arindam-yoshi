@@ -75,8 +75,8 @@ public class GameScreen extends Screen {
 	
 	public void draw()
 	{		
-		
-		surface.background(255, 255, 255);
+		int[] bc = bar.getBackground();
+		surface.background(bc[0], bc[1], bc[2]);
 		
 		// ending screens - will be replaced with Victory / Loss screen
 		if (gameSetting.protagonist.isSuccessful(gameSetting))

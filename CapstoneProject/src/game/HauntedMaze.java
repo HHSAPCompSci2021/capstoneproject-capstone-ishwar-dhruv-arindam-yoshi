@@ -98,7 +98,8 @@ public class HauntedMaze extends ScreenObject {
 	{	
 		marker.push();
 		
-		// marker.rect((float)x, (float)y, (float)w, (float)h);
+		marker.fill(255, 255, 255);
+		marker.rect((float)x, (float)y, (float)w, (float)h);
 //		marker.fill(0, 0, 0);
 		// marker.text("Haunted Maze", (float)(x + w/2), (float)(y + h/2));
 		

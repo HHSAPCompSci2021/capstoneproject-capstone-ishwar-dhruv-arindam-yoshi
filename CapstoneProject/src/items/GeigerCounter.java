@@ -58,16 +58,19 @@ public class GeigerCounter extends Item {
 		marker.push();
 		
 		marker.stroke(0);
-		marker.noFill();
+		// marker.noFill();
+		marker.fill(50, 50, 50);
 		
 		marker.rect((float)x, (float)y, (float)w, (float)h);
 		
+		marker.fill(255);
+		
 		marker.text("Radiation reading:", (float)(x+3), (float)(y+15));
 		String readingStr = "" + getReading() + " Bq";
-		if (getReading() >= 2) {
+		if (getReading() <= 12) {
 			marker.textSize((float) 15);
 			marker.fill(124,252,0); 
-		}else if (getReading() >= 1.5) {
+		}else if (getReading() <= 20) {
 			marker.textSize((float) 17);
 			marker.fill(255,140,0); 
 		}else {

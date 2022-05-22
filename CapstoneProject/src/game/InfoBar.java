@@ -33,6 +33,11 @@ public class InfoBar extends ScreenObject {
 	 * Access path to the empty heart image
 	 */
 	public static final String emptyHeart_PATH = "assets/emptyheart.png";
+	
+	
+	private static final double[] COLOR_30 = {245, 86, 86};
+	private static final double[] COLOR_5 = {255, 255, 255};
+	
 	/**
 	 * Initializes an InfoBar object
 	 * @param o is the officer playing
@@ -111,5 +116,25 @@ public class InfoBar extends ScreenObject {
 		marker.pop();
 	}
 	
+	/**
+	 * Returns the background color of the screen in an array of 3 doubles.
+	 * @return an array of 3 doubles with RGB values for the background color of the screen
+	 */
+	public int[] getBackground()
+	{
+		double[] color = new double[3];
+		
+		GeigerCounter g = officer.gtool;
+		
+		for (int i = 0; i < 3; i++)
+			color[i] = (1 - (30-g.getReading())/25)*COLOR_30[i]
+					 + (1 - (g.getReading()-5)/25)*COLOR_5[i];
+		
+		int[] colorInt = new int[3];
+		for (int i = 0; i < 3; i++)
+			colorInt[i] = (int)(Math.min(255, Math.max(0, color[i])));
+		
+		return colorInt;
+	}
 	
 }

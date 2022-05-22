@@ -247,7 +247,7 @@ public class Officer extends Actor {
 			health = 0;
 
 		// System.out.print("Officer: ");
-		super.act(maze);
 		super.wallImpact(maze);; 
+		super.act(maze);
 	}
 }
