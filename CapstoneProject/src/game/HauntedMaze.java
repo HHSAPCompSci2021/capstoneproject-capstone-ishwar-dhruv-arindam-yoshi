@@ -1,8 +1,8 @@
 package game;
-import java.util.ArrayList;
+import java.awt.geom.*;
+import java.util.*;
 
-import characters.Grinch;
-import characters.Officer;
+import characters.*;
 import items.*;
 import screen.*;
 import processing.core.*;
@@ -52,7 +52,7 @@ public class HauntedMaze extends ScreenObject {
 		this.marker = marker;
 		
 		protagonist = new Officer(marker, x+70, y+60);
-		villain = new Grinch(marker, x+240, y+200);
+		villain = new Grinch(marker, x+260, y+200);
 		settingData = new MazeData();
 		settingData.generateMaze();
 		
@@ -60,17 +60,47 @@ public class HauntedMaze extends ScreenObject {
 		
 	}
 	
+	private Point2D.Double generateRandomPos()
+	{
+		int randR = (int) (settingData.getSize() * Math.random());
+		int randC = (int) (settingData.getSize() * Math.random());
+		double randX = x + w*((randC+0.5)/settingData.getSize());
+		double randY = y + h*((randR+0.5)/settingData.getSize());
+		
+		return new Point2D.Double(randX, randY);
+	}
+	
 	public void setup()
 	{
 		// System.out.println(x + " " + y);
 		
 		// add Blueprints randomly
+		for (int i = 0; i < 3; i++)
+		{
+			Point2D randomPos = generateRandomPos();
+			addItem(new Blueprint(marker,	randomPos.getX(),
+											randomPos.getY(),
+											""+(char)('A'+i)));
+		}
+		
+		/*
 		addItem(new Blueprint(marker, x+10, y+10, "A"));
 		addItem(new Blueprint(marker, x+50, y+50, "B"));
 		addItem(new Blueprint(marker, x+90, y+130, "C"));
+		*/
 		
+		for (int i = 0; i < 3; i++)
+		{
+			Point2D randomPos = generateRandomPos();
+			int randomType = (int)(3*Math.random()) + 1;
+			addItem(new Trap(marker,	randomPos.getX(),
+										randomPos.getY(),
+										randomType));
+		}
+		/*
 		addItem(new Trap(marker, x+300, y+300, 1));
 		addItem(new Trap(marker, x+400, y+300, 1));
+		*/
 	}
 	
 	public void draw(PApplet marker)
@@ -150,13 +180,13 @@ public class HauntedMaze extends ScreenObject {
 			if (i > 0)
 			{
 				boolean ifEither = true;
-				if (equal(boxArr[i-1][0], maxX) && equal(boxArr[i][1], maxY))
+				if (DoubleX.equal(boxArr[i-1][0], maxX) && DoubleX.equal(boxArr[i][1], maxY))
 					{corner[0] = maxX; corner[1] = maxY;}
-				else if (equal(boxArr[i-1][1], maxY) && equal(boxArr[i][0], minX))
+				else if (DoubleX.equal(boxArr[i-1][1], maxY) && DoubleX.equal(boxArr[i][0], minX))
 					{corner[0] = minX; corner[1] = maxY;}
-				else if (equal(boxArr[i-1][0], minX) && equal(boxArr[i][1], minY))
+				else if (DoubleX.equal(boxArr[i-1][0], minX) && DoubleX.equal(boxArr[i][1], minY))
 					{corner[0] = minX; corner[1] = minY;}
-				else if (equal(boxArr[i-1][1], minY) && equal(boxArr[i][0], maxX))
+				else if (DoubleX.equal(boxArr[i-1][1], minY) && DoubleX.equal(boxArr[i][0], maxX))
 					{corner[0] = maxX; corner[1] = minY;}
 				else
 					ifEither = false;
@@ -189,14 +219,14 @@ public class HauntedMaze extends ScreenObject {
 		double leftX = 0, leftY = 0;
 		double rightX = 0, rightY = 0;
 		
-		if (equal(minX, px))
+		if (DoubleX.equal(minX, px))
 		{
-			if (equal(minY, py))
+			if (DoubleX.equal(minY, py))
 			{
 				leftX = maxX;
 				rightX = minX;
 			}
-			else if (equal(maxY, py))
+			else if (DoubleX.equal(maxY, py))
 			{
 				leftX = minX;
 				rightX = maxX;
@@ -209,14 +239,14 @@ public class HauntedMaze extends ScreenObject {
 			leftY = minY;
 			rightY = maxY;
 		}
-		else if (equal(maxX, px))
+		else if (DoubleX.equal(maxX, px))
 		{
-			if (equal(minY, py))
+			if (DoubleX.equal(minY, py))
 			{
 				leftX = maxX;
 				rightX = minX;
 			}
-			else if (equal(maxY, py))
+			else if (DoubleX.equal(maxY, py))
 			{
 				leftX = minX;
 				rightX = maxX;
@@ -231,12 +261,12 @@ public class HauntedMaze extends ScreenObject {
 		}
 		else
 		{
-			if (equal(minY, py))
+			if (DoubleX.equal(minY, py))
 			{
 				leftX = maxX; leftY = minY;
 				rightX = minX; rightY = minY;
 			}
-			else if (equal(maxY, py))
+			else if (DoubleX.equal(maxY, py))
 			{
 				leftX = minX; leftY = maxY;
 				rightX = maxX; rightY = maxY;
@@ -256,7 +286,7 @@ public class HauntedMaze extends ScreenObject {
 		{
 			for (int j = 0; j < 3; j++)
 			{
-				if (equal(posX[i], minX) && equal(posY[j], minY))
+				if (DoubleX.equal(posX[i], minX) && DoubleX.equal(posY[j], minY))
 					continue;
 				marker.rect((float)posX[i], (float)posY[j], (float)(posX[i+1]-posX[i]), (float)(posY[j+1]-posY[j]));
 			}
@@ -265,17 +295,6 @@ public class HauntedMaze extends ScreenObject {
 		// marker.rect((float)x, (float)y, (float)w, (float)h);
 		
 		// marker.pop();
-	}
-	
-	/**
-	 * Returns whether two doubles are equal
-	 * @param a first double
-	 * @param b second double
-	 * @return whether the given doubles are equal
-	 */
-	public boolean equal(double a, double b)
-	{
-		return Math.abs(a-b) <= 0.0000001;
 	}
 	
 	private double[] findEndPt(double px, double py, double[] pt, double minX, double maxX, double minY, double maxY)

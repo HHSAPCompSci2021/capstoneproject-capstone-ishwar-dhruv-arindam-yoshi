@@ -96,7 +96,7 @@ public class Officer extends Actor {
 		{
 			if (e instanceof Blueprint)
 			{
-				double dist = Math.sqrt(Math.pow(x-e.getX(), 2) + Math.pow(y-e.getY(), 2));
+				double dist = Math.sqrt(Math.pow((x + w/2)-e.getX(), 2) + Math.pow((y + h/2)-e.getY(), 2));
 				if (dist < PICK_DIST)
 					return (Blueprint)e;
 			}

@@ -28,7 +28,7 @@ public class Grinch extends Actor {
 	 */
 	public Grinch(PApplet marker, double x, double y)
 	{
-		super("assets/grinch.png", marker, x, y, 30, 40);
+		super("assets/grinch.png", marker, x, y, 21, 31);
 	}
 	
 	@Override
