@@ -56,6 +56,14 @@ public class MazeData {
 	}
 	
 	/**
+	 * Returns the number of rows/columns in the maze.
+	 * @return the number of rows/columsn in the maze
+	 */
+	public int getSize() {
+		return size;
+	}
+	
+	/**
 	 * Generates a random maze, and populates the maze in the myBoard field. 
 	 */
 	public void generateMaze() {
