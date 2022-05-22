@@ -179,14 +179,16 @@ public class GameScreen extends Screen {
 	@Override
 	public void keyReleased()
 	{
-		System.out.println("Here");
+		// System.out.println("Here");
 		if (surface.keyCode == KeyEvent.VK_ESCAPE)
 			if (!isPaused)
 				pause();
 			else
 				resume();
+		// System.out.println(isPaused);
 		
-		System.out.println(isPaused);
+		if (surface.keyCode == KeyEvent.VK_T)
+			gameSetting.protagonist.useTeleporter(gameSetting);
 	}
 }
 

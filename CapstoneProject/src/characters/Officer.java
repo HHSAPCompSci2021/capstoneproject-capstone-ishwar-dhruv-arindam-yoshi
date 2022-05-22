@@ -37,6 +37,11 @@ public class Officer extends Actor {
 	 */
 	public GeigerCounter gtool;
 	
+	/**
+	 * the collection of teleporters that the Officer has
+	 */
+	public ArrayList<Teleporter> teleporters;
+	
 	public double axisV; 
 	
 	/**
@@ -50,12 +55,18 @@ public class Officer extends Actor {
 		// image taken from
 		// https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.istockphoto.com%2Fphotos%2Fpolice-badge-graphic&psig=AOvVaw3xpVBxMDAwHVxv8yK_jvxl&ust=1652402341678000&source=images&cd=vfe&ved=0CA0QjhxqFwoTCLi90tHc2PcCFQAAAAAdAAAAABAQ
 		blueprints = new ArrayList<Blueprint>();
+		teleporters = new ArrayList<Teleporter>();
+		
 		gtool = new GeigerCounter(x, y);
+		
 		health = 100;
 		
 		accelerator = false;
 		axisV = 100;
 		direction = 0;
+		
+		// add teleporters
+		teleporters.add(new Teleporter(marker, x, y));
 	}
 	
 	/**
@@ -72,6 +83,14 @@ public class Officer extends Actor {
 	public void stopAccelerate() {
 		accelerator = false;
 		axisV = 100;
+	}
+	
+	/**
+	 * Gives the officer a new teleporter.
+	 */
+	
+	public void addTeleporter(Teleporter t) {
+		teleporters.add(t);
 	}
 	
 	/**
@@ -203,6 +222,15 @@ public class Officer extends Actor {
 			vx *= 1/Math.sqrt(2);
 			vy *= 1/Math.sqrt(2);
 		}
+	}
+	
+	public boolean useTeleporter(HauntedMaze maze) {
+		if (teleporters.size() == 0)
+			return false;
+		
+		Teleporter tUse = teleporters.remove(0);
+		tUse.use(maze);
+		return true;
 	}
 	
 	@Override

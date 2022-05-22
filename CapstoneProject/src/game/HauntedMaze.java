@@ -65,7 +65,8 @@ public class HauntedMaze extends ScreenObject {
 		items = new ArrayList<Item>(); 
 		rand = new Random();
 		audio = new AudioPlayer(".//assets//DeadForestMusic.wav"); 
-		
+				
+		rand = new Random();
 	}
 	
 	
@@ -80,7 +81,6 @@ public class HauntedMaze extends ScreenObject {
 		}
 		addItem(new Teleporter(marker, x+200, y+200));
 		
-
 	}
 	
 	private double[] getRandLocs() {
