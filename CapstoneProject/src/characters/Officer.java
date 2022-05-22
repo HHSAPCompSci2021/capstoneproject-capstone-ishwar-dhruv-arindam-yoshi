@@ -18,13 +18,14 @@ public class Officer extends Actor {
 	
 	private static final double LETHAL_RAD = 50;
 	private static final double PICK_DIST = 20;
-	public ArrayList<Officer> officer;
+	
 	private boolean accelerator;
 	private static final double ACCELERATOR_DAMAGE = 10;
 	
-	// image taken from
-	// https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.istockphoto.com%2Fphotos%2Fpolice-badge-graphic&psig=AOvVaw3xpVBxMDAwHVxv8yK_jvxl&ust=1652402341678000&source=images&cd=vfe&ved=0CA0QjhxqFwoTCLi90tHc2PcCFQAAAAAdAAAAABAQ
-	
+	/**
+	 * the angle of the officer with respect to the horizontal (in radians) 
+	 */
+	public double direction;
 	private double health;
 	
 	/**
@@ -46,12 +47,15 @@ public class Officer extends Actor {
 	public Officer(PApplet marker, double x, double y)
 	{
 		super("assets/badge.png", marker, x, y, 21, 31);
+		// image taken from
+		// https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.istockphoto.com%2Fphotos%2Fpolice-badge-graphic&psig=AOvVaw3xpVBxMDAwHVxv8yK_jvxl&ust=1652402341678000&source=images&cd=vfe&ved=0CA0QjhxqFwoTCLi90tHc2PcCFQAAAAAdAAAAABAQ
 		blueprints = new ArrayList<Blueprint>();
 		gtool = new GeigerCounter(x, y);
 		health = 100;
 		
 		accelerator = false;
 		axisV = 100;
+		direction = 0;
 	}
 	
 	/**

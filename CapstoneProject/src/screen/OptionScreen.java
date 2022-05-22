@@ -24,7 +24,6 @@ public class OptionScreen extends Screen {
 	
 	private PImage optionScreen;
 	private PImage starter;
-	private DrawingSurface surface;
 	private PImage grinchFringe;
 
 	
