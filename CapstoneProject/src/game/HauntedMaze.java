@@ -1,9 +1,12 @@
 package game;
+import java.awt.Point;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Random;
 
 import characters.*;
 import items.*;
+import music.AudioPlayer;
 import screen.*;
 import processing.core.*;
 import core.*;
@@ -39,6 +42,8 @@ public class HauntedMaze extends ScreenObject {
 	 */
 	public ArrayList<Item> items;
 	
+	private AudioPlayer audio; 
+	
 	private static final double LIGHT_ANGLE = Math.PI*90/180;
 	private static final double LIGHT_DIST = 100;
 	private static final int LIGHT_RES = 4;
@@ -57,10 +62,9 @@ public class HauntedMaze extends ScreenObject {
 		villain = new Grinch(marker, x+260, y+200);
 		settingData = new MazeData();
 		settingData.generateMaze(marker, (float)x, (float)y, (float)w, (float)h);
-		
 		items = new ArrayList<Item>(); 
-		
-		rand = new Random();; 
+		rand = new Random();
+		audio = new AudioPlayer(".//assets//DeadForestMusic.wav"); 
 		
 	}
 	
@@ -75,6 +79,7 @@ public class HauntedMaze extends ScreenObject {
 			addItem(new Blueprint(marker, randLocs[0], randLocs[1], temp[i]));
 		}
 		addItem(new Teleporter(marker, x+200, y+200));
+		
 
 	}
 	
@@ -98,11 +103,8 @@ public class HauntedMaze extends ScreenObject {
 	
 	public void draw(PApplet marker)
 	{	
-		marker.push();
 		
-		// marker.rect((float)x, (float)y, (float)w, (float)h);
-//		marker.fill(0, 0, 0);
-		// marker.text("Haunted Maze", (float)(x + w/2), (float)(y + h/2));
+		marker.push();
 		
 		settingData.draw(marker, (float)x, (float)y, (float)w, (float)h);
 
@@ -335,6 +337,11 @@ public class HauntedMaze extends ScreenObject {
 		double relX = mouseX - px; double relY = mouseY - py;
 		double dist = Math.sqrt(Math.pow(relX, 2) + Math.pow(relY, 2));
 		
+//		if (!audio.hasMusicStarted) {
+//			audio.play(); 
+//			audio.hasMusicStarted = true; 
+//		}
+//		
 		protagonist.direction = (relY > 0) ? Math.acos(relX/dist) : (2*Math.PI - Math.acos(relX/dist));
 	
 		protagonist.act(this);
