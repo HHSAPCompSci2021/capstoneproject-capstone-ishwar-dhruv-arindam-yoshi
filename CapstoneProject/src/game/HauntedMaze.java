@@ -75,6 +75,9 @@ public class HauntedMaze extends ScreenObject {
 		
 		addItem(new Trap(marker, x+300, y+300, 1));
 		addItem(new Trap(marker, x+400, y+300, 1));
+		
+		addItem(new Teleporter(marker, x+200, y+200));
+
 	}
 	
 	public void draw(PApplet marker)
@@ -98,6 +101,9 @@ public class HauntedMaze extends ScreenObject {
 			if (i instanceof Blueprint)
 				i.draw(marker);
 		
+		for (Item i : items)
+			if (i instanceof Teleporter)
+				i.draw(marker);
 		marker.pop();
 	}
 	

@@ -53,7 +53,7 @@ public class Teleporter extends Item {
         setting = screen.GameScreen.sender;
         double dist = Math.sqrt(Math.pow(x-setting.protagonist.getX(), 2) + Math.pow(y-setting.protagonist.getY(), 2));
 		if (dist < 20)
-			setting.protagonist.setPos(setting.protagonist.blueprints.get(0).getX(), setting.protagonist.blueprints.get(0).getY());
+			setting.protagonist.setPos(x+100, y+100);
 			
     }
 
@@ -81,6 +81,7 @@ public class Teleporter extends Item {
         marker.image(teleporter, (float)x, (float)y, (float)w, (float)h);
 
         marker.pop();
+        //System.out.println("TELEPORTER HAS BEEN MADE");
     }
 
 
