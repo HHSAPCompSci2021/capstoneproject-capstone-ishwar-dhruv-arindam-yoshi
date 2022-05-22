@@ -106,10 +106,26 @@ public class Rectangle {
 							                        (int)otherX[vals[j][2]], (int)otherY[vals[j][3]]);
 					if (line1.intersectsLine(line2)) {
 						info[i+1] = true; 
-						break;
+//						return info;
 					}
 				}
 			}
+		}
+		int counter = 0; 
+		for (int i=1;i<5;i++) {
+			if (info[i]) counter++; 
+		}
+		if (counter > 1) {
+			if (info[1] && info[3]) {
+				info[1] = false; 
+				info[3] = true; 
+			}
+			if (info[2] && info[4]) {
+				info[2] = true; 
+				info[4] = false; 
+			}
+			
+//			
 		}
 		return info; 
 	}
