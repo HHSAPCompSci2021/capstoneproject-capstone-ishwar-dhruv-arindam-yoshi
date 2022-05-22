@@ -20,7 +20,7 @@ public class Officer extends Actor {
 	private static final double PICK_DIST = 20;
 	
 	private boolean accelerator;
-	private static final double ACCELERATOR_DAMAGE = 10;
+	private static final double ACCELERATOR_DAMAGE = 60;
 	
 	/**
 	 * the angle of the officer with respect to the horizontal (in radians) 
@@ -247,7 +247,9 @@ public class Officer extends Actor {
 			health = 0;
 
 		// System.out.print("Officer: ");
-		super.wallImpact(maze);; 
+		if (!accelerator) 
+			super.wallImpact(maze);
+		
 		super.act(maze);
 	}
 }
