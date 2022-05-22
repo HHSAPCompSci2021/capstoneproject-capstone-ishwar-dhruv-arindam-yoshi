@@ -19,6 +19,12 @@ public class Grinch extends Actor {
 	 * Represents the speed of the grinch
 	 */
 	public static final double SPEED = 25;
+	static String imageForGrinch = "assets/grinch.png";  
+	
+	
+	public Grinch(PApplet marker, double x, double y, boolean noImage) {
+		super(null, marker, x, y, 21, 31);
+	}
 	
 	/**
 	 * Constructs a grinch
@@ -28,7 +34,7 @@ public class Grinch extends Actor {
 	 */
 	public Grinch(PApplet marker, double x, double y)
 	{
-		super("assets/grinch.png", marker, x, y, 21, 31);
+		super(imageForGrinch, marker, x, y, 21, 31);
 	}
 	
 	@Override
@@ -57,21 +63,15 @@ public class Grinch extends Actor {
 	 */
 	public void act(HauntedMaze maze)
 	{
+		double dist = Math.sqrt(Math.pow(( maze.protagonist.getX() - x), 2) + Math.pow((maze.protagonist.getY() - y), 2));
 		
-		double dx = maze.protagonist.getX() - x;
-		double dy = maze.protagonist.getY() - y;
-		double dist = Math.sqrt(Math.pow(dx, 2) + Math.pow(dy, 2));
-		
-		vx = SPEED * (dx / dist);
-		vy = SPEED * (dy / dist);
-		
-		// System.out.print("Grinch: ");
-		super.act(maze);
-	}
+		vx = SPEED * (( maze.protagonist.getX() - x) / dist);
+		vy = SPEED * ((maze.protagonist.getY() - y) / dist);
+		super.act(maze);	}
 	
 
 //	public void isOfficerNearTrap(HauntedMaze h) {
-//		for (Trap t : grinchTraps)
+//		for (Trap t : h.)
 //		{
 //			Officer o = maze.protagonist; 
 //			double dist = Math.sqrt(Math.pow(o.getX()-x, 2) + Math.pow(o.getY()-y, 2));

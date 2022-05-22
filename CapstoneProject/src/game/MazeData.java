@@ -98,6 +98,7 @@ public class MazeData {
 				}
 			}
 		}
+		
 		draw(marker, x, y, w, h); 
 		
 	}
@@ -268,7 +269,9 @@ public class MazeData {
 			newS += "+---"; 
 		}
 		newS += "+"; 
-		out[counter++][0] = newS; 
+		out[counter++][0] = newS;
+	
+		
 		return out; 
 
 	}
