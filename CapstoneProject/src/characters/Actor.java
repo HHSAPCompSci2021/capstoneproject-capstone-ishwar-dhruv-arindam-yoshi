@@ -82,7 +82,7 @@ public class Actor extends ScreenObject {
 	public void act(HauntedMaze maze)
 	{
 		
-//		wallImpact(maze);
+		wallImpact(maze);
 		
 		x += vx*DrawingSurface.DT;
 		y += vy*DrawingSurface.DT;
@@ -110,49 +110,35 @@ public class Actor extends ScreenObject {
 	 */
 	protected void wallImpact(HauntedMaze maze)
 	{
+		int pushBackVel = 4; 
 		ArrayList<Rectangle> walls = maze.settingData.wallsList; 
-		boolean[] collisions = MazeData.isActorTouchingMaze(walls, this); 
-		System.out.println(collisions[0] + " " + collisions[1] + " " + collisions[2] + " " + collisions[3]); 
+		boolean[] collisions = MazeData.isActorTouchingMaze(walls, this);
+		
+		int counter = 0; 
+		for (int i=0;i<collisions.length;i++) {
+			if (collisions[i]) counter++; 
+		}
+		if (counter > 1) {
+			pushBackVel = 10; 
+		}
+			
 		
 		if (collisions[0]) {
-			x-=2; 
-//			vx = -vx; 
-			System.out.println("LAST COLLISION WENT HERE: 0"); 
+			x-=pushBackVel;
 
 		}
 		if (collisions[1]) {
-			if (vy < 0) {
-				y+=4; 
-			}else if (vy > 0) {
-				y-=4; 
-			}
+			x+=pushBackVel; 
 		}
-			x+=2; 
-			System.out.println("LAST COLLISION WENT HERE: 1"); 
-
-//		}
+		
 		if (collisions[2]) {
-			if (vy < 0) {
-				y+=4; 
-			}else if (vy > 0) {
-				y-=4; 
-			}
-//			y-=2; 
-			System.out.println("LAST COLLISION WENT HERE: 2"); 
+			y-=pushBackVel; 
 		}
+		
 		if (collisions[3]) {
-			y+=2; 
-			System.out.println("LAST COLLISION WENT HERE: 3"); 
+			y+=pushBackVel; 
+
 		}
-			
-//		if (collisions[0])
-//			vx = (vx < 0) ? 0 : vx;
-//		if (collisions[1])
-//			vx = (vx > 0) ? 0 : vx;
-//		if (collisions[2])
-//			vy = (vy < 0) ? 0 : vy;
-//		if (collisions[3])
-//			vy = (vy > 0) ? 0 : vy;
 		
 	}
 
