@@ -82,7 +82,7 @@ public class Actor extends ScreenObject {
 	public void act(HauntedMaze maze)
 	{
 		
-//		wallImpact(maze);
+		wallImpact(maze);
 		
 		x += vx*DrawingSurface.DT;
 		y += vy*DrawingSurface.DT;
@@ -112,38 +112,46 @@ public class Actor extends ScreenObject {
 	{
 		ArrayList<Rectangle> walls = maze.settingData.wallsList; 
 		boolean[] collisions = MazeData.isActorTouchingMaze(walls, this); 
-		System.out.println(collisions[0] + " " + collisions[1] + " " + collisions[2] + " " + collisions[3]); 
 		
 		if (collisions[0]) {
-			x-=2; 
-//			vx = -vx; 
-			System.out.println("LAST COLLISION WENT HERE: 0"); 
+			x-=4;
+//			System.out.println("0"); 
+//			System.out.println(collisions[0] + " " + collisions[1] + " " + collisions[2] + " " + collisions[3]); 
 
 		}
 		if (collisions[1]) {
-			if (vy < 0) {
-				y+=4; 
-			}else if (vy > 0) {
-				y-=4; 
-			}
+			x+=4; 
+//			System.out.println("1"); 
+//			System.out.println(collisions[0] + " " + collisions[1] + " " + collisions[2] + " " + collisions[3]); 
 		}
-			x+=2; 
-			System.out.println("LAST COLLISION WENT HERE: 1"); 
-
-//		}
+		
 		if (collisions[2]) {
-			if (vy < 0) {
-				y+=4; 
-			}else if (vy > 0) {
-				y-=4; 
-			}
-//			y-=2; 
-			System.out.println("LAST COLLISION WENT HERE: 2"); 
+			y-=4; 
+//			System.out.println("2"); 
+//			System.out.println(collisions[0] + " " + collisions[1] + " " + collisions[2] + " " + collisions[3]); 
 		}
+		
 		if (collisions[3]) {
-			y+=2; 
-			System.out.println("LAST COLLISION WENT HERE: 3"); 
+			y+=4; 
+//			System.out.println("3"); 
+//			System.out.println(collisions[0] + " " + collisions[1] + " " + collisions[2] + " " + collisions[3]); 
 		}
+		
+//		if (collisions[0]) {
+//			x-=2; 
+//
+//		}
+//		if (collisions[1]) {
+//			y-=4; 
+//		}
+////		}
+//		if (collisions[2]) {
+//			y+=4; 
+//			
+//		}
+//		if (collisions[3]) {
+//			y+=2; 
+//		}
 			
 //		if (collisions[0])
 //			vx = (vx < 0) ? 0 : vx;

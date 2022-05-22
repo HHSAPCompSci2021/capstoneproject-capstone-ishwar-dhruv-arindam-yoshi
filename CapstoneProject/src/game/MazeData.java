@@ -149,49 +149,86 @@ public class MazeData {
 		
 		marker.fill(0, 0, 0);
 		marker.stroke(0, 0, 0);
-		marker.strokeWeight(2);
+//		marker.strokeWeight(2);
 		
 		String[][] mazeGrid = this.toStringArr(); 
+		if (firstTime) {
+			for (int i=0;i<mazeGrid.length;i++) {
+				char[] currRow = mazeGrid[i][0].toCharArray(); 
+				for (int j=0;j<currRow.length;j++) {
+					System.out.print(currRow[j]); 
+				}
+				System.out.println(); 
+			}
+		}
 		int lengthMaze = 4 * size + 1; 
 		int heightMaze = 2 * size + 1;
 		double xLen = w/(lengthMaze-1); 
 		double yLen = h/(heightMaze-1); 
+		char[][] entireGrid = new char[21][41]; 
 		
 		for (int i=0;i<heightMaze;i++) {
 			char[] currRow = mazeGrid[i][0].toCharArray(); 
+			entireGrid[i] = currRow; 
 			double yCoord = y + i * yLen; 
 			if (i % 2 == 0) {
-				for (int j=0;j<currRow.length-1;j+=4) {
+				double startX = x; 
+				double endX = startX;
+				for (int j=0;j<currRow.length-1;j+=4) { 
 					double xCoord = x + j * xLen;
 					double xCoordSec = x + (j+4) * xLen;
 					if (currRow[j] == '+' && currRow[j+1] == '-') {
-						marker.rect((float) xCoord, (float)yCoord-1, (float) xCoordSec- (float) xCoord, 2);
-						if (firstTime) {
-							wallsList.add(new Rectangle(xCoord, yCoord-1, xCoordSec- xCoord, 2)); 
+						endX = x + (j+4) * xLen; 
+					}else {
+						if (!equals(startX, endX)) {
+							marker.rect((float) startX, (float)yCoord-1, (float) endX - (float) startX, 2);
+							if (firstTime) {
+								wallsList.add(new Rectangle(startX, yCoord-1, endX- startX, 2)); 
+							}
 						}
-						
-//						marker.line((float)xCoord, (float)yCoord, (float)xCoordSec, (float)yCoord);
+						startX = endX = xCoordSec; 
 					}
-//					marker.circle((float)xCoord, (float)yCoord, 5);
-//					marker.circle((float)xCoordSec, (float)yCoord, 5);
-					// marker.circle((float)xCoord, (float)yCoord, 5);
-					// marker.circle((float)xCoordSec, (float)yCoord, 5);
 				}
-			}else {
-				for (int j=0;j<currRow.length;j++) {
-					if (currRow[j] == '|') {
-						double xCoord = x + j * xLen;
-						double yCoordFirst = yCoord - yLen; 
-						double yCoordSecond = yCoord + yLen; 
-						marker.rect((float) xCoord-1, (float)yCoordFirst, 2, (float) yCoordSecond - (float) yCoordFirst);
-						if (firstTime) {
-							wallsList.add(new Rectangle(xCoord-1, yCoordFirst, 2, yCoordSecond - yCoordFirst)); 
-						}
-//						marker.line((float)xCoord, (float)yCoordFirst, (float)xCoord, (float)yCoordSecond);
+				if (!equals(startX, endX)) {
+					marker.rect((float) startX, (float)yCoord-1, (float) endX - (float) startX, 2);
+					if (firstTime) {
+						wallsList.add(new Rectangle(startX, yCoord-1, endX- startX, 2)); 
 					}
+					startX = endX; 
 				}
 			}	
 		}
+		
+		for (int i=0;i<lengthMaze;i++) {
+			double startY = y; 
+			double endY = startY;
+			double xCoord = x + i * xLen; 
+			for (int j=0;j<heightMaze-1;j+=2) {
+				double yCoord = y + j * yLen;
+				double yCoordSec = y + (j+2) * yLen;
+				if (entireGrid[j][i] == '+' && entireGrid[j+1][i]=='|') {
+					endY = y + (j+2) * yLen; 
+				}else {
+					if (!equals(startY, endY)) {
+						marker.rect((float) xCoord-1, (float)startY, 2, (float) endY - (float) startY);
+						if (firstTime) {
+							wallsList.add(new Rectangle(xCoord-1, startY, 2, endY - startY));
+						}
+					}
+					startY = endY = yCoordSec;
+				}
+			}
+			if (!equals(startY, endY)) {
+				marker.rect((float) xCoord-1, (float)startY, 2, (float) endY - (float) startY);
+				if (firstTime) {
+					wallsList.add(new Rectangle(xCoord-1, startY, 2, endY - startY));
+				}
+			}
+			startY = endY;
+		}
+		
+		
+		
 		firstTime = false; 
 		marker.pop();
 	}
@@ -243,29 +280,23 @@ public class MazeData {
 	 * Position 3 of the array represents whether the actor is touching the wall from the bottom. 
 	 */
 	public static boolean[] isActorTouchingMaze(ArrayList<Rectangle> walls, Actor a) {
-//		System.out.println("been here"); 
-//		System.out.println(walls.size()); 
 		ArrayList<Rectangle> wallsTouchingActor = new ArrayList<Rectangle>(); 
 		ArrayList<boolean[]> direcOfWall = new ArrayList<boolean[]>();
 		
-//		System.out.println("ACTOR " + a.getX() + " " + a.getY()); 
 		
 		for (Rectangle w : walls) {
 			boolean[] isTouching = w.isTouchingActor(a); 
 			if (isTouching[0]) {
 				wallsTouchingActor.add(w); 
-//				System.out.println(w.x1 + " " + w.y1 + " " + w.w + " " + w.h); 
-//				System.out.println(a.getBoundingRectangle().x1 + " " + a.getBoundingRectangle().y1); 
 				direcOfWall.add(isTouching); 
 			}
 		}
-		
-//		System.out.println(wallsTouchingActor.size()); 
+
 		
 		if (wallsTouchingActor.size() == 0) {
 			return new boolean[]{false, false, false, false};
 		
-		}else {
+		}else if (wallsTouchingActor.size() == 1) {
 			if (direcOfWall.get(0)[1]) {
 				return new boolean[]{false, false, true, false}; 
 			}else if (direcOfWall.get(0)[2]) {
@@ -275,38 +306,57 @@ public class MazeData {
 			}else if (direcOfWall.get(0)[4]) {
 				return new boolean[]{true, false, false, false}; 
 			}
-		}
-		
-//		else if (wallsTouchingActor.size() == 1) {
-//			if (direcOfWall.get(0)[1]) {
-//				return new boolean[]{false, false, true, false}; 
-//			}else if (direcOfWall.get(0)[2]) {
-//				return new boolean[]{false, true, false, false}; 
-//			}else if (direcOfWall.get(0)[3]) {
-//				return new boolean[]{false, false, false, true}; 
-//			}else if (direcOfWall.get(0)[4]) {
-//				return new boolean[]{true, false, false, false}; 
-//			}
-//		}else if (wallsTouchingActor.size() >= 2) {
-//			if (equals(wallsTouchingActor.get(0).h, wallsTouchingActor.get(1).h)) {
-//				if (direcOfWall.get(0)[1]) {
-//					return new boolean[]{false, false, true, false}; 
-//				}else if (direcOfWall.get(0)[3]) {
-//					return new boolean[]{false, false, false, true}; 
-//				}
-//			}
-//			if (equals(wallsTouchingActor.get(0).w, wallsTouchingActor.get(1).w)) {
-//				if (direcOfWall.get(0)[2]) {
-//					return new boolean[]{false, true, false, false}; 
-//				}else if (direcOfWall.get(0)[4]) {
-//					return new boolean[]{true, false, false, false};
-//				}
-//			}
-//		}
-		
+		}else if (wallsTouchingActor.size() >= 2) {
+			if (equals(wallsTouchingActor.get(0).h, wallsTouchingActor.get(1).h) || equals(wallsTouchingActor.get(0).w, wallsTouchingActor.get(1).w)) {
+//				System.out.println("BEEN HERE"); 
+//				System.out.println(direcOfWall.get(0)[0] + " " + direcOfWall.get(0)[1] + " " + direcOfWall.get(0)[2] + " " + direcOfWall.get(0)[3] + " " + direcOfWall.get(0)[4]); 
+//				System.out.println(direcOfWall.get(1)[0] + " " + direcOfWall.get(1)[1] + " " + direcOfWall.get(1)[2] + " " + direcOfWall.get(1)[3] + " " + direcOfWall.get(1)[4]); 
+				if (direcOfWall.get(0)[1]) {
+					return new boolean[]{false, false, true, false}; 
+				}else if (direcOfWall.get(0)[2]) {
+					return new boolean[]{false, true, false, false}; 
+				}else if (direcOfWall.get(0)[3]) {
+					return new boolean[]{false, false, false, true}; 
+				}else if (direcOfWall.get(0)[4]) {
+					return new boolean[]{true, false, false, false}; 
+				}
+			}else {
+				Rectangle wall1 = wallsTouchingActor.get(0); 
+				Rectangle wall2 = wallsTouchingActor.get(1); 
+				System.out.println(wallsTouchingActor.size()); 
+				if (equals(wall1.w, 2)) {
+					return getPos(wall1, wall2); 
+				}else {
+					return getPos(wall2, wall1); 
+				}
+				
+			}
+		}	
 		return new boolean[]{false, false, false, false};
 		
+	}
+	
+	private static boolean[] getPos(Rectangle wall1, Rectangle wall2) {
+		System.out.println("Been here");
+		double x1 = Math.min(wall1.x1, wall1.x2); 
+		double y1 = Math.min(wall1.y1, wall1.y2); 
 		
+		double x2 = Math.min(wall2.x1, wall2.x2); 
+		double y2 = Math.min(wall2.y1, wall2.y2); 
+		
+		System.out.println("X" + x1 + " " + x2); 
+		System.out.println("Y" + y1 + " " + y2); 
+
+		if (x1 > x2 && y1 > y2) {
+			return new boolean[]{false, true, true, false}; 
+		}else if (equals(x1, x2) && y1 > y2) {
+			return new boolean[] {true, false, false, true}; 
+		}else if (x1 < x2 && y1 < y2) {
+			return new boolean[] {false, true, false, true}; 
+		}else if (equals(x1, x2) && y1 < y2) {
+			return new boolean[] {true, false, true, false}; 
+		}
+		return new boolean[] {false, false, false, false}; 
 	}
 	
 	private static boolean equals(double a, double b) {

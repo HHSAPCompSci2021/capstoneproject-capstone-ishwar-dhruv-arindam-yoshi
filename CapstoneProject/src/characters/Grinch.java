@@ -67,7 +67,7 @@ public class Grinch extends Actor {
 
 				
 		// System.out.print("Grinch: ");
-		super.act(maze);
+//		super.act(maze);
 	}
 	
 
