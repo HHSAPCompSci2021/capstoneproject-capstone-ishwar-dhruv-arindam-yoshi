@@ -307,6 +307,7 @@ public class MazeData {
 				return new boolean[]{true, false, false, false}; 
 			}
 		}else if (wallsTouchingActor.size() >= 2) {
+			
 			if (equals(wallsTouchingActor.get(0).h, wallsTouchingActor.get(1).h) || equals(wallsTouchingActor.get(0).w, wallsTouchingActor.get(1).w)) {
 //				System.out.println("BEEN HERE"); 
 //				System.out.println(direcOfWall.get(0)[0] + " " + direcOfWall.get(0)[1] + " " + direcOfWall.get(0)[2] + " " + direcOfWall.get(0)[3] + " " + direcOfWall.get(0)[4]); 
