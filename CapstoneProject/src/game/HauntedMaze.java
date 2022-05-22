@@ -60,8 +60,7 @@ public class HauntedMaze extends ScreenObject {
 		
 		items = new ArrayList<Item>(); 
 		
-		rand = new Random();; 
-		
+		rand = new Random();
 	}
 	
 	
@@ -74,7 +73,6 @@ public class HauntedMaze extends ScreenObject {
 			double[] randLocs = getRandLocs(); 
 			addItem(new Blueprint(marker, randLocs[0], randLocs[1], temp[i]));
 		}
-		addItem(new Teleporter(marker, x+200, y+200));
 
 	}
 	

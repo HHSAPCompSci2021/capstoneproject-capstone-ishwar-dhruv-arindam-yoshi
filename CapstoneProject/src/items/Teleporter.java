@@ -48,11 +48,19 @@ public class Teleporter extends Item {
      */
     public void use(HauntedMaze maze)
     {
-        double dist = Math.sqrt(Math.pow(x-maze.protagonist.getX(), 2) + Math.pow(y-maze.protagonist.getY(), 2));
-		if (dist < 20) {
-			maze.protagonist.setPos(maze.items.get(0).getX(), maze.items.get(0).getY());
-			maze.protagonist.changeHealth(-10);
-		}
+    	
+        // double dist = Math.sqrt(Math.pow(x-maze.protagonist.getX(), 2) + Math.pow(y-maze.protagonist.getY(), 2));
+    	Blueprint picked = null;
+    	for (int i = 0; i < maze.items.size(); i++)
+    		if (maze.items.get(i) instanceof Blueprint) {
+    			picked = (Blueprint)maze.items.get(i);
+    			break;
+    		}
+    	
+		maze.protagonist.setPos(picked.getX() - maze.protagonist.getW()/2,
+								picked.getY() - maze.protagonist.getH()/2);
+		maze.protagonist.changeHealth(-10);
+		
     }
 
 
@@ -64,8 +72,12 @@ public class Teleporter extends Item {
      */
     public void drawInfo(PApplet marker, double x, double y)
     {
+    	marker.push();
 
-
+        marker.fill(0);
+        marker.image(teleporter, (float)x, (float)y, (float)w, (float)h);
+        
+        marker.pop();
     }
 
     /**
