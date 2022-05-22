@@ -220,5 +220,6 @@ public class Officer extends Actor {
 
 		// System.out.print("Officer: ");
 		super.act(maze);
+		super.wallImpact(maze);; 
 	}
 }

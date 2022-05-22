@@ -58,7 +58,7 @@ public class MazeData {
 	/**
 	 * Generates a random maze, and populates the maze in the myBoard field. 
 	 */
-	public void generateMaze() {
+	public void generateMaze(PApplet marker, float x, float y, float w, float h) {
 		this.assignLocations(); 
 		gridP currentCell = myBoard[0][0];
 		currentCell.visited = 1;
@@ -90,6 +90,8 @@ public class MazeData {
 				}
 			}
 		}
+		draw(marker, x, y, w, h); 
+		
 	}
 	
 	private void assignLocations() {
@@ -149,18 +151,11 @@ public class MazeData {
 		
 		marker.fill(0, 0, 0);
 		marker.stroke(0, 0, 0);
-//		marker.strokeWeight(2);
+		marker.strokeWeight(2);
+//		toIntArray(); 
 		
 		String[][] mazeGrid = this.toStringArr(); 
-		if (firstTime) {
-			for (int i=0;i<mazeGrid.length;i++) {
-				char[] currRow = mazeGrid[i][0].toCharArray(); 
-				for (int j=0;j<currRow.length;j++) {
-					System.out.print(currRow[j]); 
-				}
-				System.out.println(); 
-			}
-		}
+		
 		int lengthMaze = 4 * size + 1; 
 		int heightMaze = 2 * size + 1;
 		double xLen = w/(lengthMaze-1); 
@@ -269,6 +264,49 @@ public class MazeData {
 		return out; 
 
 	}
+	
+	//1 represents wall
+	//0 represents space
+	public int[][] toIntArray(){
+		String[][] mazeGrid = this.toStringArr();
+		int[][] intGrid = new int[12][12]; 
+		int lengthMaze = 4 * size + 1; 
+		int heightMaze = 2 * size + 1;
+		int iCounter = 0; 
+		for (int i=0;i<heightMaze;i+=2) {
+			char[] currRow = mazeGrid[i][0].toCharArray(); 
+			int jCounter = 0; 
+			for (int j=0;j<currRow.length-1;j+=4) { 
+				System.out.println(iCounter + " " + jCounter); 
+				if (i%2 == 0) {
+					if (currRow[j] == '+' && currRow[j+1] == '-') {
+						intGrid[iCounter][jCounter] = 1; 
+						jCounter++; 
+					}else {
+						intGrid[iCounter][jCounter] = 0;
+						jCounter++; 
+					}
+				}else {
+					if (currRow[j] == '|') {
+						intGrid[iCounter][jCounter] = 1; 
+						jCounter++; 
+					}else {
+						intGrid[iCounter][jCounter] = 0;
+						jCounter++; 
+					}
+				}
+			}
+		}
+		
+		for (int i=0;i<11;i++) {
+			for (int j=0;j<11;j++) {
+				System.out.println(intGrid[i][j]);
+			}
+		}
+		return intGrid; 
+	}
+	
+	
 	/**
 	 * 
 	 * @param walls which represents the walls in the maze

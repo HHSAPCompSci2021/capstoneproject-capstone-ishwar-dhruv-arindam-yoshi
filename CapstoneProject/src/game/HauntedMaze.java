@@ -1,5 +1,6 @@
 package game;
 import java.util.ArrayList;
+import java.util.Random;
 
 import characters.Grinch;
 import characters.Officer;
@@ -46,6 +47,8 @@ public class HauntedMaze extends ScreenObject {
 	private static final int[] SHADE_COLOR = {0, 0, 0, 255};
 	private static final int[] LIGHT_COLOR = {252, 252, 38, 100};
 	
+	private Random rand; 
+	
 	public HauntedMaze(PApplet marker)
 	{
 		super(200, 150, 500, 500);
@@ -54,9 +57,11 @@ public class HauntedMaze extends ScreenObject {
 		protagonist = new Officer(marker, x+70, y+60);
 		villain = new Grinch(marker, x+240, y+200);
 		settingData = new MazeData();
-		settingData.generateMaze();
+		settingData.generateMaze(marker, (float)x, (float)y, (float)w, (float)h);
 		
 		items = new ArrayList<Item>(); 
+		
+		rand = new Random();; 
 		
 	}
 	
@@ -65,15 +70,38 @@ public class HauntedMaze extends ScreenObject {
 		// System.out.println(x + " " + y);
 		
 		// add Blueprints randomly
-		addItem(new Blueprint(marker, x+10, y+10, "A"));
-		addItem(new Blueprint(marker, x+50, y+50, "B"));
-		addItem(new Blueprint(marker, x+90, y+130, "C"));
+
+		
+		String[] temp = new String[] {"A", "B", "C"}; 
+		for (int i = 0; i < 3; i++) {
+			double[] randLocs = getRandLocs(); 
+			addItem(new Blueprint(marker, randLocs[0], randLocs[1], temp[i]));
+		}
+		
 		
 		addItem(new Trap(marker, x+300, y+300, 1));
 		addItem(new Trap(marker, x+400, y+300, 1));
 		
 		addItem(new Teleporter(marker, x+200, y+200));
 
+	}
+	
+	private double[] getRandLocs() {
+		ArrayList<Rectangle> walls = settingData.wallsList; 
+		System.out.println("WALLSIZE + " + walls.size()); 
+		while(true) {
+			double randomX = x+50 + (w - x+50) * rand.nextDouble();
+			double randomY = y+50 + (h - y+50) * rand.nextDouble();
+			boolean works = true; 
+			for (int i=0;i<walls.size();i++) {
+				if (walls.get(i).contains(randomX, randomY)) {
+					works = false;
+				}
+			}
+			if (works) {
+				return new double[] {randomX, randomY}; 
+			}
+		}
 	}
 	
 	public void draw(PApplet marker)

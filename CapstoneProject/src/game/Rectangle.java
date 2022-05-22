@@ -147,6 +147,15 @@ public class Rectangle {
 			return true;
 		return false;
 	}
+	
+	public boolean contains(double xOfItem, double yOfItem) {
+		if (xOfItem<Math.max(x1, x2) 
+		&&  xOfItem>Math.min(x1, x2)
+		&&  yOfItem<Math.max(y1, y2) 
+		&&  yOfItem>Math.min(y1, y2)) return true; 
+		return false; 
+	}
+	
 
 	
 	

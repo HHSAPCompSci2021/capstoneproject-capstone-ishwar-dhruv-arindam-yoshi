@@ -82,7 +82,8 @@ public class Actor extends ScreenObject {
 	public void act(HauntedMaze maze)
 	{
 		
-		wallImpact(maze);
+		
+//		wallImpact(maze);
 		
 		x += vx*DrawingSurface.DT;
 		y += vy*DrawingSurface.DT;
