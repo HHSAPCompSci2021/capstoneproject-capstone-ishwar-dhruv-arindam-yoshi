@@ -39,8 +39,6 @@ public class HauntedMaze extends ScreenObject {
 	 */
 	public ArrayList<Item> items;
 	
-	private double direction; // direction with respect to the horizontal (pointing right, clockwise)
-	
 	private static final double LIGHT_ANGLE = Math.PI*90/180;
 	private static final double LIGHT_DIST = 100;
 	private static final int LIGHT_RES = 4;
@@ -59,8 +57,6 @@ public class HauntedMaze extends ScreenObject {
 		settingData.generateMaze();
 		
 		items = new ArrayList<Item>(); 
-		
-		direction = 0;
 		
 	}
 	
@@ -117,7 +113,7 @@ public class HauntedMaze extends ScreenObject {
 		
 		for (int i = 0; i < LIGHT_RES; i++)
 		{
-			double angle = direction - LIGHT_ANGLE/2 + LIGHT_ANGLE*i/LIGHT_RES;
+			double angle = protagonist.direction - LIGHT_ANGLE/2 + LIGHT_ANGLE*i/LIGHT_RES;
 			double travelDist = LIGHT_DIST;
 			double X1 = px + Math.cos(angle)*travelDist; double Y1 = py + Math.sin(angle)*travelDist;
 			double X2 = px + Math.cos(angle + LIGHT_ANGLE/LIGHT_RES)*travelDist; double Y2 = py + Math.sin(angle + LIGHT_ANGLE/LIGHT_RES)*travelDist;
@@ -324,7 +320,7 @@ public class HauntedMaze extends ScreenObject {
 		double relX = mouseX - px; double relY = mouseY - py;
 		double dist = Math.sqrt(Math.pow(relX, 2) + Math.pow(relY, 2));
 		
-		direction = (relY > 0) ? Math.acos(relX/dist) : (2*Math.PI - Math.acos(relX/dist));
+		protagonist.direction = (relY > 0) ? Math.acos(relX/dist) : (2*Math.PI - Math.acos(relX/dist));
 	
 		protagonist.act(this);
 		villain.act(this);

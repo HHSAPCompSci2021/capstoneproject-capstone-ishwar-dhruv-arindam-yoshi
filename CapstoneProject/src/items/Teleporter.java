@@ -24,7 +24,6 @@ import screen.*;
 public class Teleporter extends Item {
 
     protected PImage teleporter;
-	private HauntedMaze setting; 
 
     // has identifier
 
@@ -39,7 +38,6 @@ public class Teleporter extends Item {
     {
         super(x, y, 20, 25);
         teleporter = marker.loadImage("assets/teleporter.png");
-        setting = new HauntedMaze(marker);
 
     }
 
@@ -49,11 +47,9 @@ public class Teleporter extends Item {
      */
     public void use(HauntedMaze maze)
     {
-
-        setting = screen.GameScreen.sender;
-        double dist = Math.sqrt(Math.pow(x-setting.protagonist.getX(), 2) + Math.pow(y-setting.protagonist.getY(), 2));
+        double dist = Math.sqrt(Math.pow(x-maze.protagonist.getX(), 2) + Math.pow(y-maze.protagonist.getY(), 2));
 		if (dist < 20)
-			setting.protagonist.setPos(setting.protagonist.blueprints.get(0).getX(), setting.protagonist.blueprints.get(0).getY());
+			maze.protagonist.setPos(maze.protagonist.blueprints.get(0).getX(), maze.protagonist.blueprints.get(0).getY());
 			
     }
 

@@ -33,15 +33,6 @@ public class GameScreen extends Screen {
 	private boolean isPaused;
 	private int timer;
 
-	public static HauntedMaze sender;
-	// image paths
-	private PImage winning;
-	private static final String winningScreen_PATH = "winningScreen.jpg";
-	private PImage losing;
-	private static final String losingScreen_PATH = "losingScreen.jpg";
-	private PImage tryAgain;
-	private static final String tryAgain_PATH = "tryAgain.png";
-
 	/**
 	 * Constructs a new GameScreen object using a DrawingSurface object
 	 * @param surface the DrawingSurface object used to display the game and receive user input
@@ -65,7 +56,6 @@ public class GameScreen extends Screen {
 		
 		bar = new InfoBar(surface, gameSetting.protagonist);
 		gameSetting.setup();
-		sender = gameSetting;
 		System.out.println(gameSetting == null);
 		timer = TIME_CAP;
 		
