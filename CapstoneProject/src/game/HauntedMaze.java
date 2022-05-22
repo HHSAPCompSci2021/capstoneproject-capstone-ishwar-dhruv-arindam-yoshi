@@ -42,7 +42,7 @@ public class HauntedMaze extends ScreenObject {
 	 */
 	public ArrayList<Item> items;
 	
-	private AudioPlayer audio; 
+//	private AudioPlayer audio; 
 	
 	private static final double LIGHT_ANGLE = Math.PI*90/180;
 	private static final double LIGHT_DIST = 100;
@@ -64,7 +64,7 @@ public class HauntedMaze extends ScreenObject {
 		settingData.generateMaze(marker, (float)x, (float)y, (float)w, (float)h);
 		items = new ArrayList<Item>(); 
 		rand = new Random();
-		audio = new AudioPlayer(".//assets//DeadForestMusic.wav"); 
+//		audio = new AudioPlayer(".//assets//DeadForestMusic.wav"); 
 				
 		rand = new Random();
 	}
