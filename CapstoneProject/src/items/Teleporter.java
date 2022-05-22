@@ -23,6 +23,7 @@ import screen.*;
  */
 public class Teleporter extends Item {
 
+	private final int deductor = 20;
     protected PImage teleporter;
 
     // has identifier
@@ -48,9 +49,10 @@ public class Teleporter extends Item {
     public void use(HauntedMaze maze)
     {
         double dist = Math.sqrt(Math.pow(x-maze.protagonist.getX(), 2) + Math.pow(y-maze.protagonist.getY(), 2));
-		if (dist < 20)
+		if (dist < 20) {
 			maze.protagonist.setPos(maze.items.get(0).getX(), maze.items.get(0).getY());
-			
+			maze.protagonist.changeHealth(-10);
+		}
     }
 
 
@@ -76,6 +78,8 @@ public class Teleporter extends Item {
         marker.fill(0);
         marker.image(teleporter, (float)x, (float)y, (float)w, (float)h);
 
+        
+        
         marker.pop();
     }
 
