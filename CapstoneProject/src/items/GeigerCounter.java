@@ -26,7 +26,7 @@ public class GeigerCounter extends Item {
 
 	public GeigerCounter(double x, double y)
 	{
-		super(x, y, 205, 50);
+		super(x, y, 205, 40);
 	}
 	
 	/**

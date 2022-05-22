@@ -12,7 +12,7 @@ public class Actor extends ScreenObject {
 	// has an image, velocity vector, and image
 	
 	/**
-	 * the image that the Actor has, stored as a PImage object
+	 * the image that the Actor has, which is stored as a PImage object
 	 */
 	protected PImage image;
 	/**

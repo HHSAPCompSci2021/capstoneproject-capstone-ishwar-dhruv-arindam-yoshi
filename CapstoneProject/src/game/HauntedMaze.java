@@ -39,8 +39,6 @@ public class HauntedMaze extends ScreenObject {
 	 */
 	public ArrayList<Item> items;
 	
-	private double direction; // direction with respect to the horizontal (pointing right, clockwise)
-	
 	private static final double LIGHT_ANGLE = Math.PI*90/180;
 	private static final double LIGHT_DIST = 100;
 	private static final int LIGHT_RES = 4;
@@ -50,7 +48,7 @@ public class HauntedMaze extends ScreenObject {
 	
 	public HauntedMaze(PApplet marker)
 	{
-		super(200, 150, 500, 400);
+		super(200, 150, 500, 500);
 		this.marker = marker;
 		
 		protagonist = new Officer(marker, x+70, y+60);
@@ -59,8 +57,6 @@ public class HauntedMaze extends ScreenObject {
 		settingData.generateMaze();
 		
 		items = new ArrayList<Item>(); 
-		
-		direction = 0;
 		
 	}
 	
@@ -75,6 +71,9 @@ public class HauntedMaze extends ScreenObject {
 		
 		addItem(new Trap(marker, x+300, y+300, 1));
 		addItem(new Trap(marker, x+400, y+300, 1));
+		
+		addItem(new Teleporter(marker, x+200, y+200));
+
 	}
 	
 	public void draw(PApplet marker)
@@ -85,7 +84,7 @@ public class HauntedMaze extends ScreenObject {
 //		marker.fill(0, 0, 0);
 		// marker.text("Haunted Maze", (float)(x + w/2), (float)(y + h/2));
 		
-
+		settingData.draw(marker, (float)x, (float)y, (float)w, (float)h);
 
 		villain.draw(marker);
 		for (Item i : items)
@@ -97,8 +96,10 @@ public class HauntedMaze extends ScreenObject {
 		for (Item i : items)
 			if (i instanceof Blueprint)
 				i.draw(marker);
-		settingData.draw(marker, (float)x, (float)y, (float)w, (float)h);
-
+		
+		for (Item i : items)
+			if (i instanceof Teleporter)
+				i.draw(marker);
 		marker.pop();
 	}
 	
@@ -118,7 +119,7 @@ public class HauntedMaze extends ScreenObject {
 		
 		for (int i = 0; i < LIGHT_RES; i++)
 		{
-			double angle = direction - LIGHT_ANGLE/2 + LIGHT_ANGLE*i/LIGHT_RES;
+			double angle = protagonist.direction - LIGHT_ANGLE/2 + LIGHT_ANGLE*i/LIGHT_RES;
 			double travelDist = LIGHT_DIST;
 			double X1 = px + Math.cos(angle)*travelDist; double Y1 = py + Math.sin(angle)*travelDist;
 			double X2 = px + Math.cos(angle + LIGHT_ANGLE/LIGHT_RES)*travelDist; double Y2 = py + Math.sin(angle + LIGHT_ANGLE/LIGHT_RES)*travelDist;
@@ -325,7 +326,7 @@ public class HauntedMaze extends ScreenObject {
 		double relX = mouseX - px; double relY = mouseY - py;
 		double dist = Math.sqrt(Math.pow(relX, 2) + Math.pow(relY, 2));
 		
-		direction = (relY > 0) ? Math.acos(relX/dist) : (2*Math.PI - Math.acos(relX/dist));
+		protagonist.direction = (relY > 0) ? Math.acos(relX/dist) : (2*Math.PI - Math.acos(relX/dist));
 	
 		protagonist.act(this);
 		villain.act(this);

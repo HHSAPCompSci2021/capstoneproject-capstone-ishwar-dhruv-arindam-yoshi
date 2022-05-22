@@ -12,9 +12,7 @@ import game.HauntedMaze;
 public class Blueprint extends Item {
 	
 	protected PImage image;
-	/**
-	 * path to image used for blueprints
-	 */
+	
 	
 	// has identifier
 	private String identifier;
@@ -33,14 +31,19 @@ public class Blueprint extends Item {
 		image = marker.loadImage("assets/pin.png");
 	}
 	
-	
+	/**
+	 * Empty method
+	 */
 	public void use(HauntedMaze maze)
 	{
 		
 	}
 	
 	/**
-	 * Draws the info of the blueprint. 
+	 * Draws information about the blueprint in the infobar
+	 * @param marker is the object that draws stuff
+	 * @param x is the x coordinate of where it is drawn
+	 * @param y is the y coordinate of where it is drawn
 	 */
 	public void drawInfo(PApplet marker, double x, double y)
 	{
@@ -48,7 +51,7 @@ public class Blueprint extends Item {
 		marker.push();
 		marker.fill(137, 207, 240);
 
-		marker.rect((float)(x-(w/2)), (float)(y-h), (float)w, (float)h);
+		// marker.rect((float)(x-(w/2)), (float)(y-h), (float)w, (float)h);
 		
 		String str = "BLUEPRINT " + identifier;
 		float w = marker.textWidth(str);
@@ -64,7 +67,9 @@ public class Blueprint extends Item {
 		marker.push();
 		
 		marker.fill(0);
-		marker.image(image, (float)x, (float)y, (float)w, (float)h);
+		marker.image(image, (float)(x-w/2), (float)(y-h), (float)w, (float)h);
+		marker.fill(255, 0, 0);
+		marker.text(identifier, (float)(x - marker.textWidth(identifier)/2), (float)(y-30));
 		
 		marker.pop();
 	}
