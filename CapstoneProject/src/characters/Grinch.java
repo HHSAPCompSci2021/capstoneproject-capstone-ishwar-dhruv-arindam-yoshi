@@ -18,7 +18,7 @@ public class Grinch extends Actor {
 	/**
 	 * Represents the speed of the grinch
 	 */
-	public static final double SPEED = 15;
+	public static final double SPEED = 25;
 	
 	/**
 	 * Constructs a grinch
