@@ -19,7 +19,7 @@ import game.*;
  * @author akulkarni174
  *
  */
-public class OptionScreen extends Screen {
+public class InstructionsScreen extends Screen {
 
 	
 	private PImage optionScreen;
@@ -48,7 +48,7 @@ public class OptionScreen extends Screen {
 	 * Represents the option screen for the game
 	 * @param surface is the surface which we draw on
 	 */
-	public OptionScreen(DrawingSurface surface) {
+	public InstructionsScreen(DrawingSurface surface) {
 		super();
 		this.surface = surface;
 		button = new Rectangle();
