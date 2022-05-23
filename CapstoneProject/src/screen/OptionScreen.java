@@ -68,7 +68,7 @@ public class OptionScreen extends Screen {
 
 		instructions = surface.loadImage(INSTRUCTIONS_PATH);
 		button = new Rectangle(500 - 487/4, 300, 487/2, 192/2);
-		instructionButton = new Rectangle(500 - 487/4, 500, 487/2, 192/2);
+		instructionButton = new Rectangle(500 - 487/4, 500, 350/2, 192/2);
 	}
 
 	/**
@@ -88,7 +88,7 @@ public class OptionScreen extends Screen {
 		surface.textSize(15);
 		surface.image(starter, 500 - (float)487/4, 300, 487/2, 192/2);
 
-		surface.image(instructions, 500 - 487/4, 500, 487/2, 192/2);
+		surface.image(instructions, 500 - 487/4, 500, 350/2, 192/2);
 
 		
 	}
