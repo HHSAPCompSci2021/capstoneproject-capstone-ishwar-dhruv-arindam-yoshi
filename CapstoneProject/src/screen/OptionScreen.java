@@ -26,12 +26,14 @@ public class OptionScreen extends Screen {
 	private PImage starter;
 	private PImage grinchFringe;
 
+	private PImage instructions;
 	
 	/**
 	 * Path to the option screen image
 	 */
 	public static final String OPTION_SCREEN_PATH = "assets/optionScreen.png";
 	
+	public static final String INSTRUCTIONS_PATH = "assets/Instructions.png";
 	/**
 	 * Path to the starter screen image
 	 */
@@ -43,6 +45,7 @@ public class OptionScreen extends Screen {
 	public static final String TITLE_PATH = "assets/grinchFringe.png";
 	
 	private Rectangle button;
+	private Rectangle instructionButton;
 
 	/**
 	 * Represents the option screen for the game
@@ -63,7 +66,9 @@ public class OptionScreen extends Screen {
 		starter = surface.loadImage(OptionScreen.STARTER_PATH);
 		grinchFringe = surface.loadImage(OptionScreen.TITLE_PATH);
 
+		instructions = surface.loadImage(INSTRUCTIONS_PATH);
 		button = new Rectangle(500 - 487/4, 300, 487/2, 192/2);
+		instructionButton = new Rectangle(500 - 487/4, 500, 487/2, 192/2);
 	}
 
 	/**
@@ -83,6 +88,8 @@ public class OptionScreen extends Screen {
 		surface.textSize(15);
 		surface.image(starter, 500 - (float)487/4, 300, 487/2, 192/2);
 
+		surface.image(instructions, 500 - 487/4, 500, 487/2, 192/2);
+
 		
 	}
 
@@ -93,6 +100,11 @@ public class OptionScreen extends Screen {
 		Point p = surface.actualCoordinatesToAssumed(new Point(surface.mouseX,surface.mouseY));
 		if (button.contains(p)) {
 			surface.switchScreen(0);
+			surface.setup();
+		}
+		
+		if (instructionButton.contains(p)) {
+			surface.switchScreen(3);
 			surface.setup();
 		}
 	}

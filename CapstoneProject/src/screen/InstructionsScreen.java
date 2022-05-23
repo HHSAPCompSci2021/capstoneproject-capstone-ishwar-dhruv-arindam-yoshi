@@ -22,25 +22,15 @@ import game.*;
 public class InstructionsScreen extends Screen {
 
 	
-	private PImage optionScreen;
-	private PImage starter;
-	private PImage grinchFringe;
+	private PImage instructions;
+	
 
 	
 	/**
 	 * Path to the option screen image
 	 */
-	public static final String OPTION_SCREEN_PATH = "assets/optionScreen.png";
+	public static final String INSTRUCTIONS_PATH = "assets/Instructions.png";
 	
-	/**
-	 * Path to the starter screen image
-	 */
-	public static final String STARTER_PATH = "assets/starter.png";
-	
-	/**
-	 * Path to the grinch fringe image
-	 */
-	public static final String TITLE_PATH = "assets/grinchFringe.png";
 	
 	private Rectangle button;
 
@@ -59,9 +49,8 @@ public class InstructionsScreen extends Screen {
 	 */
 	public void setup()
 	{
-		optionScreen = surface.loadImage(OptionScreen.OPTION_SCREEN_PATH);
-		starter = surface.loadImage(OptionScreen.STARTER_PATH);
-		grinchFringe = surface.loadImage(OptionScreen.TITLE_PATH);
+		instructions = surface.loadImage(InstructionsScreen.INSTRUCTIONS_PATH);
+		
 
 		button = new Rectangle(500 - 487/4, 300, 487/2, 192/2);
 	}
@@ -72,16 +61,16 @@ public class InstructionsScreen extends Screen {
 	public void draw() {
 
 		surface.background(255,255,255);
-		surface.image(optionScreen, 0, 0, 1000, 800);
 		//surface.background(img);
 		surface.fill(100, 200, 240);
-		surface.image(grinchFringe, 500 - 350/4, 100, 350/2, 140);
+		
 
 		surface.textSize(40);
+		surface.text("Instructions: ", 100, 100);
 		surface.fill(137, 207, 240);
 		surface.fill(0);
 		surface.textSize(15);
-		surface.image(starter, 500 - (float)487/4, 300, 487/2, 192/2);
+		surface.image(instructions, 500 - (float)487/4, 300, 487/2, 192/2);
 
 		
 	}
