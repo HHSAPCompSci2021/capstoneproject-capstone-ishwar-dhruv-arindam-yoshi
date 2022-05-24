@@ -5,37 +5,13 @@ import java.io.IOException;
 
 import javax.sound.sampled.*; 
 
-
-/**
- * This class represents audio in the program. It plays/pause the soundtracks, and plays soundeffects. 
- * @author Arindam Kulkarni and Dhruv Lohani
- */
 public class AudioPlayer {
-	/**
-	 * file represents the file from which the audio is being played from. 
-	 */
-	public File file; 
+	File file; 
+	AudioInputStream audioStream; 
+	Clip clip; 
 	
-	/**
-	 * audioStream represents the player which plays the music in the java program. 
-	 */
-	public AudioInputStream audioStream; 
+	public boolean hasMusicStarted = false; 
 	
-	/**
-	 * Clip represents a clip in the java program that plays music. 
-	 */
-	public Clip clip; 
-	
-	/**
-	 * hasMusicStarted represents whether the music has started playing or not. 
-	 */
-	public boolean hasMusicStarted; 
-	
-	
-	/**
-	 * Creates an object of the AudioPlayer class.
-	 * @param file represents the file from which the music is stored in, and to be played from. 
-	 */
 	public AudioPlayer(File file) {
 		this.file = file; 
 		try {
@@ -60,15 +36,8 @@ public class AudioPlayer {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
-		hasMusicStarted = false; 
 	}
 	
-	
-	/**
-	 * Creates an object of the AudioPlayer class. 
-	 * @param s the string which is the path of the file from which the music is going to be played from. 
-	 */
 	public AudioPlayer(String s) {
 		File music = new File(s); 
 		this.file = music; 
@@ -89,9 +58,6 @@ public class AudioPlayer {
 		}  
 	}
 	
-	/**
-	 * Plays the music, and loops it continuously.  
-	 */
 	public void play() {
 		try {
 			clip.open(audioStream);
@@ -104,16 +70,10 @@ public class AudioPlayer {
 		}
 	}
 	
-	/**
-	 * Pauses the music. 
-	 */
 	public void pause() {
 		clip.stop();
 	}
 	
-	/**
-	 * Resets the music back to position 0. 
-	 */
 	public void reset() {
 		clip.setMicrosecondPosition(0);
 	}

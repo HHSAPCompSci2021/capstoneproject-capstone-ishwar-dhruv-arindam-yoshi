@@ -16,13 +16,6 @@ public abstract class ScreenObject {
 	// 	x = 0; y = 0; w = 0; h = 0;
 	// }
 	
-	/**
-	 * Creates an object of the screen class
-	 * @param x the x coordinate of the object
-	 * @param y the y coordinate of the object
-	 * @param w the width of the object
-	 * @param h the height of the object
-	 */
 	public ScreenObject(double x, double y, double w, double h)
 	{
 		this.x = x; this.y = y;

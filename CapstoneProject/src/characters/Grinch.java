@@ -21,13 +21,7 @@ public class Grinch extends Actor {
 	public static final double SPEED = 25;
 	static String imageForGrinch = "assets/grinch.png";  
 	
-	/**
-	 * Creates an object of the grinch
-	 * @param marker the grinch is on the marker
-	 * @param x the x coordinate of the grinch
-	 * @param y the y coordinate of the grinch
-	 * @param noImage true if there is no image for this grinch
-	 */
+	
 	public Grinch(PApplet marker, double x, double y, boolean noImage) {
 		super(null, marker, x, y, 21, 31);
 	}
@@ -54,6 +48,14 @@ public class Grinch extends Actor {
 		
 		marker.pop();
 	}
+	/**
+	 * Sets the trap of the grinch around the maze
+	 * @param e the trap to set around the maze
+	 */
+	public void setTrap(Trap e)
+	{
+		
+	}
 	
 	/**
 	 * This performs a grinch act which involves moving closer to the protagonist of the maze
@@ -65,8 +67,7 @@ public class Grinch extends Actor {
 		
 		vx = SPEED * (( maze.protagonist.getX() - x) / dist);
 		vy = SPEED * ((maze.protagonist.getY() - y) / dist);
-		super.act(maze);	
-	}
+		super.act(maze);	}
 	
 
 //	public void isOfficerNearTrap(HauntedMaze h) {

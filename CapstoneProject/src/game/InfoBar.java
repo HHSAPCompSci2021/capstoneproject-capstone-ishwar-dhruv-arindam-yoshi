@@ -18,17 +18,21 @@ public class InfoBar extends ScreenObject {
 	private PImage fullHeart;
 	private PImage halfHeart;
 	private PImage emptyHeart;
-	private PImage infobar;
 	
-	private static final String fullHeart_PATH = "assets/fullheart.png";
+	/**
+	 * Access path to the full heart image
+	 */
+	public static final String fullHeart_PATH = "assets/fullheart.png";
 	
-	private static final String infobar_PATH = "assets/infobar.png";
-
+	/**
+	 * Access path to the half heart image
+	 */
+	public static final String halfHeart_PATH = "assets/halfheart.png";
 	
-	private static final String halfHeart_PATH = "assets/halfheart.png";
-	
-	
-	private static final String emptyHeart_PATH = "assets/emptyheart.png";
+	/**
+	 * Access path to the empty heart image
+	 */
+	public static final String emptyHeart_PATH = "assets/emptyheart.png";
 	
 	
 	private static final double[] COLOR_30 = {245, 86, 86};
@@ -36,7 +40,6 @@ public class InfoBar extends ScreenObject {
 	
 	/**
 	 * Initializes an InfoBar object
-	 * @param marker the PApplet object with which images are loaded
 	 * @param o is the officer playing
 	 */
 	public InfoBar(PApplet marker, Officer o)
@@ -47,8 +50,6 @@ public class InfoBar extends ScreenObject {
 		fullHeart = marker.loadImage(InfoBar.fullHeart_PATH);
 		halfHeart = marker.loadImage(InfoBar.halfHeart_PATH);
 		emptyHeart = marker.loadImage(InfoBar.emptyHeart_PATH);
-		infobar = marker.loadImage(InfoBar.infobar_PATH);
-
 	}
 	
 	/**
@@ -67,9 +68,12 @@ public class InfoBar extends ScreenObject {
 		// marker.line((float)x, (float)y, (float)x, (float)(y+h));
 		// marker.line((float)(x+w), (float)y, (float)(x+w), (float)(y+h));
 		marker.fill(0, 0, 0);
-		marker.image(infobar, (float)x-140, (float)y, 120, 120);
-
-		ht += 50;
+		
+		ht += 15;
+		marker.text("Info Bar", (float)(x + 3), (float)(y + ht));
+		
+		// health section
+		ht += 15;
 		marker.text("Health: " + officer.getHealth(), (float)(x + 3), (float)(y + ht));
 		
 		int numFullHearts = (int)Math.floor(officer.getHealth()/20);
