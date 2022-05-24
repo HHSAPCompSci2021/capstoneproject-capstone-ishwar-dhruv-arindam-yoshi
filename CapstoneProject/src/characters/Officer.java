@@ -9,6 +9,11 @@ import core.DrawingSurface;
 import processing.core.*;
 import items.*;
 
+/**
+ * This class represents an officer which is a type of an actor
+ * @author Ishwar with small contributions from Dhruv
+ *
+ */
 public class Officer extends Actor {
 	
 	// TO-DO
@@ -41,9 +46,15 @@ public class Officer extends Actor {
 	 * the collection of teleporters that the Officer has
 	 */
 	public ArrayList<Teleporter> teleporters;
-		
+	
+	/**
+	 * The axis of the velocity of the officer
+	 */
 	public double axisV; 
 	
+	/**
+	 * The path finder object to find the nearest blueprint. 
+	 */
 	public PathFinder p; 
 	
 	/**
@@ -161,6 +172,10 @@ public class Officer extends Actor {
 		health += dh;
 	}
 	
+	/**
+	 * Returns true if the officer is alive.
+	 * @return true if officer is alive
+	 */
 	public boolean isAlive() {
 		return health > 0;
 	}
@@ -228,6 +243,11 @@ public class Officer extends Actor {
 		}
 	}
 	
+	/**
+	 * Uses the teleporter to teleport the person to a random location
+	 * @param maze the HauntedMaze where the teleportation happens
+	 * @return true if it was successful. 
+	 */
 	public boolean useTeleporter(HauntedMaze maze) {
 		if (teleporters.size() == 0)
 			return false;
@@ -237,10 +257,18 @@ public class Officer extends Actor {
 		return true;
 	}
 	
+	/**
+	 * Finds the shortest path to the nearest blueprint. 
+	 * @param maze the HauntedMaze where the path finder happens
+	 */
 	public void usePathFinder(HauntedMaze maze) {
 		p.use(maze);
 	}
 	
+	/**
+	 * Draws the shortest path to the nearest blueprint. 
+	 * @param maze the HauntedMaze where the path drawiing happens
+	 */
 	public void drawPathFinder(PApplet marker) {
 		p.draw(marker);
 	}
