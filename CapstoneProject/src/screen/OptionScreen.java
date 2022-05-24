@@ -25,7 +25,9 @@ public class OptionScreen extends Screen {
 	private PImage optionScreen;
 	private PImage starter;
 	private PImage grinchFringe;
-
+	private PImage number1;
+	private PImage number2;
+	private PImage number3;
 	private PImage instructions;
 	
 	/**
@@ -44,11 +46,14 @@ public class OptionScreen extends Screen {
 	 */
 	public static final String TITLE_PATH = "assets/grinchFringe.png";
 	
+	private static final String ONE_PATH = "assets/number1.png";
+	private static final String TWO_PATH = "assets/number2.png";
+	private static final String THREE_PATH = "assets/number3.png";
 	// private Rectangle button;
 	private Rectangle instructionButton;
 	
 	private MazeData[] mazeList;
-	private Rectangle[] buttonList;
+	private Rectangle[] buttons;
 
 	/**
 	 * Represents the option screen for the game
@@ -65,12 +70,17 @@ public class OptionScreen extends Screen {
 			mazeList[i] = new MazeData();
 			mazeList[i].generateMaze();
 		}
+		buttons = new Rectangle[3];
+		int x = 250;
+		int y = 300;
+		int w = 100;
+		int h = 100;
+		for (int i = 0; i < buttons.length; i++) {
+			buttons[i] = new Rectangle(x, y, w, h);
+			x += 250;
+		}
 		
-		buttonList = new Rectangle[3];
 		
-		buttonList[0] = new Rectangle(250, 300, 100, 100);
-		buttonList[1] = new Rectangle(450, 300, 100, 100);
-		buttonList[2] = new Rectangle(650, 300, 100, 100);
 	}
 	
 	/**
@@ -82,9 +92,15 @@ public class OptionScreen extends Screen {
 		starter = surface.loadImage(OptionScreen.STARTER_PATH);
 		grinchFringe = surface.loadImage(OptionScreen.TITLE_PATH);
 
+		number1 = surface.loadImage(OptionScreen.ONE_PATH);
+		number2 = surface.loadImage(OptionScreen.TWO_PATH);
+		number3 = surface.loadImage(OptionScreen.THREE_PATH);
 		instructions = surface.loadImage(INSTRUCTIONS_PATH);
 		// button = new Rectangle(500 - 487/4, 300, 487/2, 192/2);
 		instructionButton = new Rectangle(500 - 487/4, 500, 350/2, 192/2);
+		
+		
+		
 	}
 
 	/**
@@ -92,6 +108,10 @@ public class OptionScreen extends Screen {
 	 */
 	public void draw() {
 
+		PImage[] numbers = new PImage[3];
+		numbers[0] = number1;
+		numbers[1] = number2;
+		numbers[2] = number3;
 		surface.background(255,255,255);
 		surface.image(optionScreen, 0, 0, 1000, 800);
 		//surface.background(img);
@@ -104,15 +124,13 @@ public class OptionScreen extends Screen {
 		surface.textSize(15);
 		// surface.image(starter, 500 - (float)487/4, 300, 487/2, 192/2);
 
-		surface.image(instructions, 500 - 487/4, 500, 350/2, 192/2);
+		surface.image(instructions, 700, 100, 350/2, 192/2);
 
 		// draw selection buttons
 		for (int i = 0; i < 3; i++)
 		{
 			surface.fill(170, 250, 90); surface.stroke(0); surface.strokeWeight(2);
-			surface.rect((float)buttonList[i].x, (float)buttonList[i].y, (float)buttonList[i].width, (float)buttonList[i].height);
-			surface.fill(0);
-			surface.text(""+(i+1), (float)(buttonList[i].x + buttonList[i].width/2), (float)(buttonList[i].y + buttonList[i].height/2));
+			surface.image(numbers[i], buttons[i].x, buttons[i].y, buttons[i].width, buttons[i].height);
 		}
 	}
 
@@ -135,7 +153,7 @@ public class OptionScreen extends Screen {
 		
 		for (int i = 0; i < 3; i++)
 		{
-			if (buttonList[i].contains(p))
+			if (buttons[i].contains(p))
 			{
 				surface.switchScreen(0);
 				surface.setup();
