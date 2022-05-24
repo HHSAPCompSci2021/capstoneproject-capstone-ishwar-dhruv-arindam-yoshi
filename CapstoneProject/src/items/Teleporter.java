@@ -23,8 +23,9 @@ import screen.*;
  */
 public class Teleporter extends Item {
 
+	//deducts 20 if used
 	private final int deductor = 20;
-    protected PImage teleporter;
+    private PImage teleporter;
 
     // has identifier
 
@@ -49,7 +50,6 @@ public class Teleporter extends Item {
     public void use(HauntedMaze maze)
     {
     	
-        // double dist = Math.sqrt(Math.pow(x-maze.protagonist.getX(), 2) + Math.pow(y-maze.protagonist.getY(), 2));
     	Blueprint picked = null;
     	for (int i = 0; i < maze.items.size(); i++)
     		if (maze.items.get(i) instanceof Blueprint) {

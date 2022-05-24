@@ -27,9 +27,7 @@ public class InfoBar extends ScreenObject {
 	
 	private static final String halfHeart_PATH = "assets/halfheart.png";
 	
-	/**
-	 * Access path to the empty heart image
-	 */
+	
 	private static final String emptyHeart_PATH = "assets/emptyheart.png";
 	
 	

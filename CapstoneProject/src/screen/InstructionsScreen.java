@@ -73,9 +73,9 @@ public class InstructionsScreen extends Screen {
 		surface.fill(137, 207, 240);
 		surface.fill(0);
 		surface.textSize(15);
-		surface.text("In the game, there is a maze. You're an officer and must collect all the blueprints in the dark maze.\n Your flashlight is the only thing that can help you see. The grinch in the maze hates visitors, and tries to attack. \n The closer he gets, the more health you lose. If he touches you, you're dead.\n Get all blueprints and exit maze to win! \n Use WDAS keys or up/right/left/down keys to move. Mouse lets you adjust flashlight. \n Click E to collect a blueprint. Click T to teleport.", 100, 150);
+		surface.text("In the game, there is a maze. You're an officer and must collect all the blueprints in the dark maze.\n Your flashlight is the only thing that can help you see. The grinch in the maze hates visitors, and tries to attack. \n The closer he gets, the more health you lose. If he touches you, you're dead.\n Get all blueprints and exit maze to win! Much of your information is shown in the Infobar \n Use WDAS keys or up/right/left/down keys to move. Mouse lets you adjust flashlight. \n Click E to collect a blueprint. Click T to teleport. \n Remember, you can only teleport once and it loses you health. \n Finally, using the space bar allows you to go faster, but it reduces one's health very very fast. \n Have fun!", 100, 150);
 
-		surface.image(instructions, 500 - (float)487/4, 300, 350/2, 192/2);
+		surface.image(instructions, 500 - (float)487/4, 500, 350/2, 192/2);
 
 		
 	}
