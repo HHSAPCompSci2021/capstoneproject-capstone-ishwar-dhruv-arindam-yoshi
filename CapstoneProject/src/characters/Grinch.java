@@ -21,7 +21,13 @@ public class Grinch extends Actor {
 	public static final double SPEED = 25;
 	static String imageForGrinch = "assets/grinch.png";  
 	
-	
+	/**
+	 * Creates an object of the grinch
+	 * @param marker the grinch is on the marker
+	 * @param x the x coordinate of the grinch
+	 * @param y the y coordinate of the grinch
+	 * @param noImage true if there is no image for this grinch
+	 */
 	public Grinch(PApplet marker, double x, double y, boolean noImage) {
 		super(null, marker, x, y, 21, 31);
 	}

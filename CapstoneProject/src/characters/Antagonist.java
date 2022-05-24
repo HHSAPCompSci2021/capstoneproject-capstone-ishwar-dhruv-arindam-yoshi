@@ -1,6 +1,9 @@
 package characters;
 import processing.core.*;
 
+/**
+ * Represents an Antagonist: A minion of the grinchs *
+ */
 public class Antagonist extends Grinch {
 	
 	private int health;
