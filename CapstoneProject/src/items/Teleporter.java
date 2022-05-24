@@ -49,17 +49,21 @@ public class Teleporter extends Item {
      */
     public void use(HauntedMaze maze)
     {
+    	try {
+    		Blueprint picked = null;
+        	for (int i = 0; i < maze.items.size(); i++)
+        		if (maze.items.get(i) instanceof Blueprint) {
+        			picked = (Blueprint)maze.items.get(i);
+        			break;
+        		}
+        	
+    		maze.protagonist.setPos(picked.getX() - maze.protagonist.getW()/2,
+    								picked.getY() - maze.protagonist.getH()/2);
+    		maze.protagonist.changeHealth(-10);
+    	} catch (Exception e) {
+    		return;
+    	}
     	
-    	Blueprint picked = null;
-    	for (int i = 0; i < maze.items.size(); i++)
-    		if (maze.items.get(i) instanceof Blueprint) {
-    			picked = (Blueprint)maze.items.get(i);
-    			break;
-    		}
-    	
-		maze.protagonist.setPos(picked.getX() - maze.protagonist.getW()/2,
-								picked.getY() - maze.protagonist.getH()/2);
-		maze.protagonist.changeHealth(-10);
 		
     }
 
