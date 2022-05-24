@@ -184,7 +184,8 @@ public class Officer extends Actor {
 	public boolean isSuccessful(HauntedMaze maze)
 	{
 		// System.out.println(hasAllBlueprints(maze));
-		return hasAllBlueprints(maze) && isAlive() && isOutsideMaze(maze);
+		return hasAllBlueprints(maze) && isAlive();
+		// return hasAllBlueprints(maze) && isAlive() && isOutsideMaze(maze);
 	}
 	
 	@Override
