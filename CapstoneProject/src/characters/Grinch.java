@@ -48,14 +48,6 @@ public class Grinch extends Actor {
 		
 		marker.pop();
 	}
-	/**
-	 * Sets the trap of the grinch around the maze
-	 * @param e the trap to set around the maze
-	 */
-	public void setTrap(Trap e)
-	{
-		
-	}
 	
 	/**
 	 * This performs a grinch act which involves moving closer to the protagonist of the maze
