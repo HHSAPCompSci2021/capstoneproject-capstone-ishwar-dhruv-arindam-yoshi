@@ -9,6 +9,11 @@ import core.DrawingSurface;
 import processing.core.*;
 import items.*;
 
+/**
+ * This class represents an officer which is a type of an actor
+ * @author Ishwar with small contributions from Dhruv
+ *
+ */
 public class Officer extends Actor {
 	
 	// TO-DO
@@ -42,10 +47,19 @@ public class Officer extends Actor {
 	 */
 	public ArrayList<Teleporter> teleporters;
 	
+	/**
+	 * The axis of the velocity of the officer
+	 */
 	public double axisV; 
 	
 	/**
+	 * The path finder object to find the nearest blueprint. 
+	 */
+	public PathFinder p; 
+	
+	/**
 	 * Creates a new Officer object
+	 * @param marker the marker with which to import images
 	 * @param x the x-coordinate of the officer
 	 * @param y the y-coordinate of the officer
 	 */
@@ -67,6 +81,7 @@ public class Officer extends Actor {
 		
 		// add teleporters
 		teleporters.add(new Teleporter(marker, x, y));
+		p = new PathFinder(0,0,0,0); 
 	}
 	
 	/**
@@ -87,6 +102,7 @@ public class Officer extends Actor {
 	
 	/**
 	 * Gives the officer a new teleporter.
+	 * @param t the teleporter that is being given to the officer
 	 */
 	
 	public void addTeleporter(Teleporter t) {
@@ -95,7 +111,7 @@ public class Officer extends Actor {
 	
 	/**
 	 * Takes a blueprint on the officer's behalf
-	 * @param e the blueprint
+	 * @param maze the maze that is being processed
 	 */
 	public void takeBlueprint(HauntedMaze maze)
 	{
@@ -107,6 +123,7 @@ public class Officer extends Actor {
 	
 	/**
 	 * Returns a blueprint that is within picking range of the officer
+	 * @param maze the maze that is being processed
 	 * @return a blueprint that can be picked up by the officer
 	 */
 	public Blueprint nearBlueprint(HauntedMaze maze)
@@ -125,6 +142,7 @@ public class Officer extends Actor {
 	
 	/**
 	 * Returns whether the Officer has all the blueprints in the maze
+	 * @param maze the maze that is being processed
 	 * @return true if the Officer has all the blueprints in the maze; false otherwise
 	 */
 	public boolean hasAllBlueprints(HauntedMaze maze)
@@ -151,20 +169,24 @@ public class Officer extends Actor {
 	/**
 	 * Changes the health of the officer by the amount given
 	 * @param dh the amount by which to change the officer's health
-	 * @return
 	 */
 	public void changeHealth(double dh)
 	{
 		health += dh;
 	}
 	
+	/**
+	 * Returns true if the officer is alive.
+	 * @return true if officer is alive
+	 */
 	public boolean isAlive() {
 		return health > 0;
 	}
 	
 	/**
 	 * Returns whether the Officer is outside the maze
-	 * @return
+	 * @param maze the maze that is being processed
+	 * @return whether the officer is outside the maze
 	 */
 	public boolean isOutsideMaze(HauntedMaze maze)
 	{
@@ -176,12 +198,14 @@ public class Officer extends Actor {
 	
 	/**
 	 * Returns whether the Officer has exited the maze with all the blueprints
+	 * @param maze the maze that is being processed
 	 * @return true if the Officer has exited the maze with all the blueprints; false otherwise
 	 */
 	public boolean isSuccessful(HauntedMaze maze)
 	{
 		// System.out.println(hasAllBlueprints(maze));
-		return hasAllBlueprints(maze) && isAlive() && isOutsideMaze(maze);
+		return hasAllBlueprints(maze) && isAlive();
+		// return hasAllBlueprints(maze) && isAlive() && isOutsideMaze(maze);
 	}
 	
 	@Override
@@ -224,6 +248,11 @@ public class Officer extends Actor {
 		}
 	}
 	
+	/**
+	 * Uses the teleporter to teleport the person to a random location
+	 * @param maze the HauntedMaze where the teleportation happens
+	 * @return true if it was successful. 
+	 */
 	public boolean useTeleporter(HauntedMaze maze) {
 		if (teleporters.size() == 0)
 			return false;
@@ -232,6 +261,23 @@ public class Officer extends Actor {
 		tUse.use(maze);
 		return true;
 	}
+	
+	/**
+	 * Finds the shortest path to the nearest blueprint. 
+	 * @param maze the HauntedMaze where the path finder happens
+	 */
+	public void usePathFinder(HauntedMaze maze) {
+		p.use(maze);
+	}
+	
+	/**
+	 * Draws the shortest path to the nearest blueprint. 
+	 * @param marker the PApplet object with which to draw the path finder
+	 */
+	public void drawPathFinder(PApplet marker) {
+		p.draw(marker);
+	}
+	
 	
 	@Override
 	public void act(HauntedMaze maze)

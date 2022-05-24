@@ -7,6 +7,10 @@ import core.DrawingSurface;
 import game.*;
 import screen.ScreenObject;
 
+/**
+ * Represents an actor: a person on the maze
+ *
+ */
 public class Actor extends ScreenObject {
 	
 	// has an image, velocity vector, and image
@@ -71,6 +75,9 @@ public class Actor extends ScreenObject {
 		vy = v;
 	}
 	
+	/**
+	 * Useless method
+	 */
 	public void move()
 	{
 		
