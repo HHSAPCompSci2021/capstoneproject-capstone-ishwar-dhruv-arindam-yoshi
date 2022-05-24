@@ -28,10 +28,9 @@ public class Trap extends Item {
 	// private double timeExposed = ;
 	
 	/**
+	 * @param marker the PApplet object with which to load images
 	 * @param x the x coord of the trap
 	 * @param y the y coord of the trap
-	 * @param width the width of the trap
-	 * @param height the height of the trap
 	 * @param type the type of the trap. There are 4 types of traps. 
 	 * Traps of type 1 simply change the health of the officer by 25. 
 	 * Traps of type 2 decrease the speed of the officer by 2 units in the X and Y direction. 
@@ -61,10 +60,7 @@ public class Trap extends Item {
 		type = newType; 
 	}
 	
-	/**
-	 * Uses the trap once in the maze which is passed
-	 * @param the maze which the trap is acted upon. 
-	 */
+	@Override
 	public void use(HauntedMaze maze)
 	{
 		if (!isActive)
@@ -108,8 +104,6 @@ public class Trap extends Item {
 	/**
 	 * Traps are not visible to the player, so in essense this method is purposeless. 
 	 * @param marker
-	 * @param x
-	 * @param y
 	 */
 	public void draw(PApplet marker) {
 		double rand = Math.random();

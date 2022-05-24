@@ -54,6 +54,11 @@ public class HauntedMaze extends ScreenObject {
 	
 	private Random rand; 
 	
+	
+	/**
+	 * Constructs a new haunted maze.
+	 * @param marker the PApplet object with which to construct new objects and load images
+	 */
 	public HauntedMaze(PApplet marker)
 	{
 		super(200, 180, 500, 500);
@@ -137,7 +142,6 @@ public class HauntedMaze extends ScreenObject {
 	
 	/**
 	 * Draws the lighting in the HauntedMaze (from the officer's flashlight).
-	 * @param marker
 	 */
 	public void drawLighting()
 	{

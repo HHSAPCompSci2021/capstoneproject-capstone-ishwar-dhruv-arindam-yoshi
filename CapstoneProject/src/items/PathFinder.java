@@ -37,6 +37,7 @@ public class PathFinder extends Item{
 
     /**
      * Uses the shortest path item and finds the path to the nearest blueprint
+	 * @param maze is the maze through which game is played
      * @post the field pathToShortest gets populated. 
      */
     public void use(HauntedMaze maze) {

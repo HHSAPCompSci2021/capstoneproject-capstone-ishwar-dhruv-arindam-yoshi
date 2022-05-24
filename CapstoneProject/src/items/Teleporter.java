@@ -30,11 +30,9 @@ public class Teleporter extends Item {
     // has identifier
 
     /**
-     * 
+     * @param marker the marker with which to import the image
      * @param x is an x coordinate for blueprint
      * @param y is a y coordinate for blueprint
-     * @param identify is the identification used to access img
-     * @param img is the image used to show blueprint in the maze
      */
     public Teleporter(PApplet marker, double x, double y)
     {

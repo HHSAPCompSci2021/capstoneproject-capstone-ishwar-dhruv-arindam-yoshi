@@ -36,6 +36,7 @@ public class InfoBar extends ScreenObject {
 	
 	/**
 	 * Initializes an InfoBar object
+	 * @param marker the PApplet object with which images are loaded
 	 * @param o is the officer playing
 	 */
 	public InfoBar(PApplet marker, Officer o)

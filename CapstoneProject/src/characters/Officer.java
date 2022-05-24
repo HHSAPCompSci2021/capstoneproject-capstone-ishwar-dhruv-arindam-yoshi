@@ -59,6 +59,7 @@ public class Officer extends Actor {
 	
 	/**
 	 * Creates a new Officer object
+	 * @param marker the marker with which to import images
 	 * @param x the x-coordinate of the officer
 	 * @param y the y-coordinate of the officer
 	 */
@@ -101,6 +102,7 @@ public class Officer extends Actor {
 	
 	/**
 	 * Gives the officer a new teleporter.
+	 * @param t the teleporter that is being given to the officer
 	 */
 	
 	public void addTeleporter(Teleporter t) {
@@ -109,7 +111,7 @@ public class Officer extends Actor {
 	
 	/**
 	 * Takes a blueprint on the officer's behalf
-	 * @param e the blueprint
+	 * @param maze the maze that is being processed
 	 */
 	public void takeBlueprint(HauntedMaze maze)
 	{
@@ -121,6 +123,7 @@ public class Officer extends Actor {
 	
 	/**
 	 * Returns a blueprint that is within picking range of the officer
+	 * @param maze the maze that is being processed
 	 * @return a blueprint that can be picked up by the officer
 	 */
 	public Blueprint nearBlueprint(HauntedMaze maze)
@@ -139,6 +142,7 @@ public class Officer extends Actor {
 	
 	/**
 	 * Returns whether the Officer has all the blueprints in the maze
+	 * @param maze the maze that is being processed
 	 * @return true if the Officer has all the blueprints in the maze; false otherwise
 	 */
 	public boolean hasAllBlueprints(HauntedMaze maze)
@@ -165,7 +169,6 @@ public class Officer extends Actor {
 	/**
 	 * Changes the health of the officer by the amount given
 	 * @param dh the amount by which to change the officer's health
-	 * @return
 	 */
 	public void changeHealth(double dh)
 	{
@@ -182,7 +185,8 @@ public class Officer extends Actor {
 	
 	/**
 	 * Returns whether the Officer is outside the maze
-	 * @return
+	 * @param maze the maze that is being processed
+	 * @return whether the officer is outside the maze
 	 */
 	public boolean isOutsideMaze(HauntedMaze maze)
 	{
@@ -194,6 +198,7 @@ public class Officer extends Actor {
 	
 	/**
 	 * Returns whether the Officer has exited the maze with all the blueprints
+	 * @param maze the maze that is being processed
 	 * @return true if the Officer has exited the maze with all the blueprints; false otherwise
 	 */
 	public boolean isSuccessful(HauntedMaze maze)
@@ -267,7 +272,7 @@ public class Officer extends Actor {
 	
 	/**
 	 * Draws the shortest path to the nearest blueprint. 
-	 * @param maze the HauntedMaze where the path drawiing happens
+	 * @param marker the PApplet object with which to draw the path finder
 	 */
 	public void drawPathFinder(PApplet marker) {
 		p.draw(marker);
