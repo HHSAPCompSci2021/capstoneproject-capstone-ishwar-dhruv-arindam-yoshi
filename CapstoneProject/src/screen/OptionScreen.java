@@ -25,9 +25,7 @@ public class OptionScreen extends Screen {
 	private PImage optionScreen;
 	private PImage starter;
 	private PImage grinchFringe;
-	private PImage number1;
-	private PImage number2;
-	private PImage number3;
+
 	private PImage instructions;
 	
 	/**
@@ -46,14 +44,8 @@ public class OptionScreen extends Screen {
 	 */
 	public static final String TITLE_PATH = "assets/grinchFringe.png";
 	
-	private static final String ONE_PATH = "assets/number1.png";
-	private static final String TWO_PATH = "assets/number2.png";
-	private static final String THREE_PATH = "assets/number3.png";
 	private Rectangle button;
 	private Rectangle instructionButton;
-	
-	private MazeData[] mazeList;
-	private Rectangle[] buttons;
 
 	/**
 	 * Represents the option screen for the game
@@ -62,25 +54,7 @@ public class OptionScreen extends Screen {
 	public OptionScreen(DrawingSurface surface) {
 		super();
 		this.surface = surface;
-		// button = new Rectangle();
-		
-		
-		mazeList = new MazeData[3];
-		for (int i = 0; i < 3; i++) {
-			mazeList[i] = new MazeData();
-			mazeList[i].generateMaze();
-		}
-		buttons = new Rectangle[3];
-		int x = 250;
-		int y = 500;
-		int w = 100;
-		int h = 100;
-		for (int i = 0; i < buttons.length; i++) {
-			buttons[i] = new Rectangle(x, y, w, h);
-			x += 200;
-		}
-		
-		
+		button = new Rectangle();
 	}
 	
 	/**
@@ -92,15 +66,9 @@ public class OptionScreen extends Screen {
 		starter = surface.loadImage(OptionScreen.STARTER_PATH);
 		grinchFringe = surface.loadImage(OptionScreen.TITLE_PATH);
 
-		number1 = surface.loadImage(OptionScreen.ONE_PATH);
-		number2 = surface.loadImage(OptionScreen.TWO_PATH);
-		number3 = surface.loadImage(OptionScreen.THREE_PATH);
 		instructions = surface.loadImage(INSTRUCTIONS_PATH);
 		button = new Rectangle(500 - 487/4, 300, 487/2, 192/2);
-		instructionButton = new Rectangle(700, 100, 350/2, 192/2);
-		
-		
-		
+		instructionButton = new Rectangle(500 - 487/4, 500, 350/2, 192/2);
 	}
 
 	/**
@@ -108,10 +76,6 @@ public class OptionScreen extends Screen {
 	 */
 	public void draw() {
 
-		PImage[] numbers = new PImage[3];
-		numbers[0] = number1;
-		numbers[1] = number2;
-		numbers[2] = number3;
 		surface.background(255,255,255);
 		surface.image(optionScreen, 0, 0, 1000, 800);
 		//surface.background(img);
@@ -124,14 +88,9 @@ public class OptionScreen extends Screen {
 		surface.textSize(15);
 		surface.image(starter, 500 - (float)487/4, 300, 487/2, 192/2);
 
-		surface.image(instructions, instructionButton.x, instructionButton.y, instructionButton.width, instructionButton.height);
+		surface.image(instructions, 500 - 487/4, 500, 350/2, 192/2);
 
-		// draw selection buttons
-		for (int i = 0; i < 3; i++)
-		{
-			surface.fill(170, 250, 90); surface.stroke(0); surface.strokeWeight(2);
-			surface.image(numbers[i], buttons[i].x, buttons[i].y, buttons[i].width, buttons[i].height);
-		}
+		
 	}
 
 	/**
@@ -139,27 +98,14 @@ public class OptionScreen extends Screen {
 	 */
 	public void mousePressed() {
 		Point p = surface.actualCoordinatesToAssumed(new Point(surface.mouseX,surface.mouseY));
-		
 		if (button.contains(p)) {
 			surface.switchScreen(0);
 			surface.setup();
 		}
 		
-		
 		if (instructionButton.contains(p)) {
 			surface.switchScreen(3);
 			surface.setup();
-		}
-		
-		for (int i = 0; i < 3; i++)
-		{
-			if (buttons[i].contains(p))
-			{
-				surface.switchScreen(0);
-				surface.setup();
-				((GameScreen)surface.screens.get(0)).addMaze(mazeList[i]);
-				break;
-			}
 		}
 	}
 	

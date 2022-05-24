@@ -22,7 +22,7 @@ public class Blueprint extends Item {
 	 * @param x is an x coordinate for blueprint
 	 * @param y is a y coordinate for blueprint
 	 * @param identify is the identification used to access img
-	 * @param identify the identifier of the blueprint
+	 * @param img is the image used to show blueprint in the maze
 	 */
 	public Blueprint(PApplet marker, double x, double y, String identify)
 	{
