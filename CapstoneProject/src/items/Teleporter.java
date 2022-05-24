@@ -45,7 +45,8 @@ public class Teleporter extends Item {
 
     
     /**
-     * 
+     * Uses the teleporter in the maze
+     * @param maze which is where the teleporter is used upon. 
      */
     public void use(HauntedMaze maze)
     {

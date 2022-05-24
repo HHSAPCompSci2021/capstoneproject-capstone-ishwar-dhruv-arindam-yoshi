@@ -4,6 +4,12 @@ import characters.Officer;
 import game.HauntedMaze;
 import processing.core.*;
 
+
+/**
+ * Represents a trap in the maze which is an item that hurts the officer. 
+ * @author Dhruv Lohani
+ *
+ */
 public class Trap extends Item {
 	
 	protected PImage image;
