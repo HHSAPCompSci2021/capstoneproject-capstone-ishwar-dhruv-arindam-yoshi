@@ -49,19 +49,20 @@ public class GameScreen extends Screen {
 		lastResumeTime = new int[] {0, TIME_CAP};
 	}
 	
+	public void addMaze(MazeData m) {
+		gameSetting.settingData = m;
+		m.draw(surface, (float)gameSetting.x, (float)gameSetting.y, (float)gameSetting.w, (float)gameSetting.h);
+	}
+	
 	public void setup()
 	{
 		gameSetting = new HauntedMaze(surface);
-		
-		
 		bar = new InfoBar(surface, gameSetting.protagonist);
 		gameSetting.setup();
 		System.out.println(gameSetting == null);
 		timer = TIME_CAP;
-		
-		
 	}
-	
+
 	public void pause() {
 		isPaused = true;
 		lastResumeTime[1] = timer;
