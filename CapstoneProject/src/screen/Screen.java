@@ -12,6 +12,7 @@ public class Screen {
 	public static final int OPTION_SCREEN = 0;
 	public static final int GAME_SCREEN = 1;
 	public static final int END_SCREEN = 2;
+	public static final int INSTRUCTIONS_SCREEN = 3;
 	protected DrawingSurface surface;
 	
 	
