@@ -29,6 +29,9 @@ public class Screen {
 		
 	}
 	
+	public void keyPressed() {
+		
+	}
 	
 	
 	public void keyReleased() {
