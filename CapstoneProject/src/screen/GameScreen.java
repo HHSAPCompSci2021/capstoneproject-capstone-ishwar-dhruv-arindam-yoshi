@@ -49,6 +49,11 @@ public class GameScreen extends Screen {
 		lastResumeTime = new int[] {0, TIME_CAP};
 	}
 	
+	
+	/**
+	 * Adds a maze to the home screen for the user to select an option from multiple mazes
+	 * @param m the maze which is to be added in the home screen
+	 */
 	public void addMaze(MazeData m) {
 		gameSetting.settingData = m;
 		m.draw(surface, (float)gameSetting.x, (float)gameSetting.y, (float)gameSetting.w, (float)gameSetting.h);
@@ -63,17 +68,24 @@ public class GameScreen extends Screen {
 		timer = TIME_CAP;
 	}
 
+	
+	/**
+	 * Pauses the game timer
+	 */
 	public void pause() {
 		isPaused = true;
 		lastResumeTime[1] = timer;
 	}
 	
+	/**
+	 * Resumes the game timer
+	 */
 	public void resume() {
 		isPaused = false;
 		lastResumeTime[0] = surface.millis();
 	}
 	
-	
+	@Override
 	public void draw()
 	{		
 		int[] bc = bar.getBackground();
@@ -175,6 +187,10 @@ public class GameScreen extends Screen {
 		// System.out.println(timer);
 	}
 	
+	
+	/**
+	 * Updates the game timer in order for the user to see how much time is left in the game
+	 */
 	public void updateTimer()
 	{
 		timer = Math.max(0, lastResumeTime[0] + lastResumeTime[1] - surface.millis());

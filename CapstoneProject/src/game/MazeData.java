@@ -26,7 +26,7 @@ import processing.core.PApplet;
 public class MazeData {
 	private static final int CORNERS = 0;
 	private gridP[][] myBoard ;
-	private int size; 
+	public int size; 
 	private ArrayList<gridP> cList;
 	/**
 	 * Represents the walls list in the maze. 
