@@ -19,13 +19,16 @@ import java.util.Scanner;
 import processing.core.PApplet;
 
 /**
- * has characters, items, maze walls
- * @author dhruv
+ * This class represents a maze, with many common methods that you could do with a maze. 
+ * @author Dhruv Lohani
  *
  */
 public class MazeData {
 	private static final int CORNERS = 0;
 	private gridP[][] myBoard ;
+	/**
+	 * Represents the size of the maze
+	 */
 	public int size; 
 	private ArrayList<gridP> cList;
 	/**
@@ -35,7 +38,7 @@ public class MazeData {
 	private boolean firstTime = true; 
 	
 	/**
-	 * contructs the maze. 
+	 * Creates a MazeData object. 
 	 */
 	public MazeData() {
 		myBoard = new gridP[10][10]; 
@@ -282,7 +285,20 @@ public class MazeData {
 		return out; 
 
 	}
-	
+	/**
+	 * Converts a grid pixel coordinate to a point on the grid of the maze
+	 * @param x1 the grid pixel x1 coordinate
+	 * @param y1 the grid pixel y1 coordinate
+	 * @param x the upper left x coordinate of the maze
+	 * @param y the upper left y coordinate of the maze
+	 * @param w the width of the maze
+	 * @param h the height of the maze
+	 * @param grid the grid which represents the character by character grid of the maze
+	 * @param isActor used to determine if the object is an actor
+	 * @param vx the velocity on the x of the actor, if it is an actor
+	 * @param vy the velocity on the y of the actor, if it is an actor
+	 * @return
+	 */
 	public static Point convertToPoint(float x1, float y1, float x, float y, float w, float h, char[][] grid, boolean isActor, double vx, double vy) {
 		try{
 			 Point p = new Point(0,0);
