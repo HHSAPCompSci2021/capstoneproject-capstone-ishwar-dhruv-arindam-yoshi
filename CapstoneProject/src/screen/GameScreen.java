@@ -199,10 +199,10 @@ public class GameScreen extends Screen {
 				resume();
 		// System.out.println(isPaused);
 		
-		
-		if (surface.keyCode == KeyEvent.VK_T) {
-			gameSetting.protagonist.useTeleporter(gameSetting);
-		}
+		if (!isPaused)
+			if (surface.keyCode == KeyEvent.VK_T) {
+				gameSetting.protagonist.useTeleporter(gameSetting);
+			}
 	}
 }
 
