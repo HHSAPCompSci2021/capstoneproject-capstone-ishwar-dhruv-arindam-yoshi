@@ -44,8 +44,11 @@ public class OptionScreen extends Screen {
 	 */
 	public static final String TITLE_PATH = "assets/grinchFringe.png";
 	
-	private Rectangle button;
+	// private Rectangle button;
 	private Rectangle instructionButton;
+	
+	private MazeData[] mazeList;
+	private Rectangle[] buttonList;
 
 	/**
 	 * Represents the option screen for the game
@@ -54,7 +57,20 @@ public class OptionScreen extends Screen {
 	public OptionScreen(DrawingSurface surface) {
 		super();
 		this.surface = surface;
-		button = new Rectangle();
+		// button = new Rectangle();
+		
+		
+		mazeList = new MazeData[3];
+		for (int i = 0; i < 3; i++) {
+			mazeList[i] = new MazeData();
+			mazeList[i].generateMaze();
+		}
+		
+		buttonList = new Rectangle[3];
+		
+		buttonList[0] = new Rectangle(250, 300, 100, 100);
+		buttonList[1] = new Rectangle(450, 300, 100, 100);
+		buttonList[2] = new Rectangle(650, 300, 100, 100);
 	}
 	
 	/**
@@ -67,7 +83,7 @@ public class OptionScreen extends Screen {
 		grinchFringe = surface.loadImage(OptionScreen.TITLE_PATH);
 
 		instructions = surface.loadImage(INSTRUCTIONS_PATH);
-		button = new Rectangle(500 - 487/4, 300, 487/2, 192/2);
+		// button = new Rectangle(500 - 487/4, 300, 487/2, 192/2);
 		instructionButton = new Rectangle(500 - 487/4, 500, 350/2, 192/2);
 	}
 
@@ -86,11 +102,18 @@ public class OptionScreen extends Screen {
 		surface.fill(137, 207, 240);
 		surface.fill(0);
 		surface.textSize(15);
-		surface.image(starter, 500 - (float)487/4, 300, 487/2, 192/2);
+		// surface.image(starter, 500 - (float)487/4, 300, 487/2, 192/2);
 
 		surface.image(instructions, 500 - 487/4, 500, 350/2, 192/2);
 
-		
+		// draw selection buttons
+		for (int i = 0; i < 3; i++)
+		{
+			surface.fill(255); surface.stroke(0); surface.strokeWeight(2);
+			surface.rect((float)buttonList[i].x, (float)buttonList[i].y, (float)buttonList[i].width, (float)buttonList[i].height);
+			surface.fill(0);
+			surface.text(""+(i+1), (float)(buttonList[i].x + buttonList[i].width/2), (float)(buttonList[i].y + buttonList[i].height/2));
+		}
 	}
 
 	/**
@@ -98,14 +121,27 @@ public class OptionScreen extends Screen {
 	 */
 	public void mousePressed() {
 		Point p = surface.actualCoordinatesToAssumed(new Point(surface.mouseX,surface.mouseY));
+		/*
 		if (button.contains(p)) {
 			surface.switchScreen(0);
 			surface.setup();
 		}
+		*/
 		
 		if (instructionButton.contains(p)) {
 			surface.switchScreen(3);
 			surface.setup();
+		}
+		
+		for (int i = 0; i < 3; i++)
+		{
+			if (buttonList[i].contains(p))
+			{
+				surface.switchScreen(0);
+				surface.setup();
+				((GameScreen)surface.screens.get(0)).addMaze(mazeList[i]);
+				break;
+			}
 		}
 	}
 	

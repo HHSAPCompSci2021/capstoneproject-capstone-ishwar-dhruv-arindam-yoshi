@@ -66,7 +66,7 @@ public class MazeData {
 	/**
 	 * Generates a random maze, and populates the maze in the myBoard field. 
 	 */
-	public void generateMaze(PApplet marker, float x, float y, float w, float h) {
+	public void generateMaze() {
 		this.assignLocations(); 
 		gridP currentCell = myBoard[0][0];
 		currentCell.visited = 1;
@@ -98,8 +98,6 @@ public class MazeData {
 				}
 			}
 		}
-		
-		draw(marker, x, y, w, h); 
 		
 	}
 	
