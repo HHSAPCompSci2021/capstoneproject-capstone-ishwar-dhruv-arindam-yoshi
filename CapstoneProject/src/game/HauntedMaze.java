@@ -42,6 +42,7 @@ public class HauntedMaze extends ScreenObject {
 	 */
 	public ArrayList<Item> items;
 	
+	
 	private AudioPlayer audio; 
 	
 	private static final double LIGHT_ANGLE = Math.PI*90/180;
@@ -87,7 +88,6 @@ public class HauntedMaze extends ScreenObject {
 	
 	private double[] getRandLocs() {
 		ArrayList<Rectangle> walls = settingData.wallsList; 
-		System.out.println("WALLSIZE + " + walls.size()); 
 		while(true) {
 			double randomX = x+50 + (w - x+50) * rand.nextDouble();
 			double randomY = y+50 + (h - y+50) * rand.nextDouble();
@@ -105,8 +105,9 @@ public class HauntedMaze extends ScreenObject {
 	
 	public void draw(PApplet marker)
 	{	
-		marker.push();
 		
+		marker.push();
+				
 		marker.fill(255, 255, 255);
 		marker.rect((float)x, (float)y, (float)w, (float)h);
 //		marker.fill(0, 0, 0);
@@ -128,6 +129,9 @@ public class HauntedMaze extends ScreenObject {
 		for (Item i : items)
 			if (i instanceof Teleporter)
 				i.draw(marker);
+		
+		protagonist.p.draw(marker, getX(), getY(), getW(), getH());
+
 		marker.pop();
 	}
 	

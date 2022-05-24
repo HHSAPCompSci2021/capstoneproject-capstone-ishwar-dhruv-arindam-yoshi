@@ -67,7 +67,8 @@ public class Grinch extends Actor {
 		
 		vx = SPEED * (( maze.protagonist.getX() - x) / dist);
 		vy = SPEED * ((maze.protagonist.getY() - y) / dist);
-		super.act(maze);	}
+		super.act(maze);	
+	}
 	
 
 //	public void isOfficerNearTrap(HauntedMaze h) {

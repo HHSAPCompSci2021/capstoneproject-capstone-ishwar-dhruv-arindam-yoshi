@@ -24,10 +24,8 @@ public class EndScreen extends Screen {
 	
 	private PImage winning;
 	
-	/**
-	 * Path to the winningScreen image
-	 */
-	public static final String winningScreen_PATH = "assets/winningScreen.jpg";
+	
+	private static final String winningScreen_PATH = "assets/winningScreen.jpg";
 	private PImage losing;
 	
 	/**

@@ -41,8 +41,10 @@ public class Officer extends Actor {
 	 * the collection of teleporters that the Officer has
 	 */
 	public ArrayList<Teleporter> teleporters;
-	
+		
 	public double axisV; 
+	
+	public PathFinder p; 
 	
 	/**
 	 * Creates a new Officer object
@@ -67,6 +69,7 @@ public class Officer extends Actor {
 		
 		// add teleporters
 		teleporters.add(new Teleporter(marker, x, y));
+		p = new PathFinder(0,0,0,0); 
 	}
 	
 	/**
@@ -232,6 +235,15 @@ public class Officer extends Actor {
 		tUse.use(maze);
 		return true;
 	}
+	
+	public void usePathFinder(HauntedMaze maze) {
+		p.use(maze);
+	}
+	
+	public void drawPathFinder(PApplet marker) {
+		p.draw(marker);
+	}
+	
 	
 	@Override
 	public void act(HauntedMaze maze)

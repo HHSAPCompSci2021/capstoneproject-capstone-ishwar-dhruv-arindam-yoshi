@@ -5,7 +5,8 @@ import java.util.*;
 import core.DrawingSurface;
 import processing.core.*;
 import screen.Screen;
-
+import java.awt.*;    
+import java.applet.*;    
 import java.awt.event.KeyEvent;
 
 
@@ -15,7 +16,7 @@ import game.*;
 
 
 /**
- * Represents the option screen class of the game 
+ * Represents the instructions screen class of the game 
  * @author akulkarni174
  *
  */
@@ -45,7 +46,7 @@ public class InstructionsScreen extends Screen {
 	}
 	
 	/**
-	 * Sets up images and a button for the option screen class
+	 * Sets up images and a button for the instructions screen class
 	 */
 	public void setup()
 	{
@@ -56,7 +57,7 @@ public class InstructionsScreen extends Screen {
 	}
 
 	/**
-	 * Draws the option screen 
+	 * Draws the instruction screen, and the instructions of the game
 	 */
 	public void draw() {
 
@@ -64,6 +65,8 @@ public class InstructionsScreen extends Screen {
 		//surface.background(img);
 		surface.fill(100, 200, 240);
 		
+
+		Font f3 = new Font("Elephant",Font.ITALIC,28);
 
 		surface.textSize(40);
 		surface.text("Instructions: ", 100, 100);
