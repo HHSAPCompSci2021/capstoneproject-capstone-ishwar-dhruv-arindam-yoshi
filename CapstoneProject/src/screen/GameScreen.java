@@ -182,11 +182,8 @@ public class GameScreen extends Screen {
 	
 	@Override
 	public void keyPressed() {
-		System.out.println("been here for key"); 
-		if (surface.key == 'P') {
-			gameSetting.protagonist.usePathFinder(gameSetting);
-
-		}
+		// System.out.println("been here for key"); 
+		
 	}
 	
 	
@@ -203,6 +200,9 @@ public class GameScreen extends Screen {
 		// System.out.println(isPaused);
 		
 		
+		if (surface.keyCode == KeyEvent.VK_T) {
+			gameSetting.protagonist.useTeleporter(gameSetting);
+		}
 	}
 }
 
