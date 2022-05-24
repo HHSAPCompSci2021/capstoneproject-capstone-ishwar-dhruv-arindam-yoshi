@@ -109,7 +109,7 @@ public class OptionScreen extends Screen {
 		// draw selection buttons
 		for (int i = 0; i < 3; i++)
 		{
-			surface.fill(255); surface.stroke(0); surface.strokeWeight(2);
+			surface.fill(170, 250, 90); surface.stroke(0); surface.strokeWeight(2);
 			surface.rect((float)buttonList[i].x, (float)buttonList[i].y, (float)buttonList[i].width, (float)buttonList[i].height);
 			surface.fill(0);
 			surface.text(""+(i+1), (float)(buttonList[i].x + buttonList[i].width/2), (float)(buttonList[i].y + buttonList[i].height/2));
