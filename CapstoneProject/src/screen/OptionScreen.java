@@ -97,7 +97,7 @@ public class OptionScreen extends Screen {
 		number3 = surface.loadImage(OptionScreen.THREE_PATH);
 		instructions = surface.loadImage(INSTRUCTIONS_PATH);
 		button = new Rectangle(500 - 487/4, 300, 487/2, 192/2);
-		instructionButton = new Rectangle(500 - 487/4, 500, 350/2, 192/2);
+		instructionButton = new Rectangle(700, 100, 350/2, 192/2);
 		
 		
 		
@@ -124,7 +124,7 @@ public class OptionScreen extends Screen {
 		surface.textSize(15);
 		surface.image(starter, 500 - (float)487/4, 300, 487/2, 192/2);
 
-		surface.image(instructions, 700, 100, 350/2, 192/2);
+		surface.image(instructions, instructionButton.x, instructionButton.y, instructionButton.width, instructionButton.height);
 
 		// draw selection buttons
 		for (int i = 0; i < 3; i++)
