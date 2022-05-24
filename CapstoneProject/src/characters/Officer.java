@@ -20,7 +20,7 @@ public class Officer extends Actor {
 	private static final double PICK_DIST = 20;
 	
 	private boolean accelerator;
-	private static final double ACCELERATOR_DAMAGE = 0;
+	private static final double ACCELERATOR_DAMAGE = 60;
 	
 	/**
 	 * the angle of the officer with respect to the horizontal (in radians) 
