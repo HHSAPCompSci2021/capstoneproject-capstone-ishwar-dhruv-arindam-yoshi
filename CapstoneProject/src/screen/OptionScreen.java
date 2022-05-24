@@ -49,7 +49,7 @@ public class OptionScreen extends Screen {
 	private static final String ONE_PATH = "assets/number1.png";
 	private static final String TWO_PATH = "assets/number2.png";
 	private static final String THREE_PATH = "assets/number3.png";
-	// private Rectangle button;
+	private Rectangle button;
 	private Rectangle instructionButton;
 	
 	private MazeData[] mazeList;
@@ -72,12 +72,12 @@ public class OptionScreen extends Screen {
 		}
 		buttons = new Rectangle[3];
 		int x = 250;
-		int y = 300;
+		int y = 500;
 		int w = 100;
 		int h = 100;
 		for (int i = 0; i < buttons.length; i++) {
 			buttons[i] = new Rectangle(x, y, w, h);
-			x += 250;
+			x += 200;
 		}
 		
 		
@@ -96,7 +96,7 @@ public class OptionScreen extends Screen {
 		number2 = surface.loadImage(OptionScreen.TWO_PATH);
 		number3 = surface.loadImage(OptionScreen.THREE_PATH);
 		instructions = surface.loadImage(INSTRUCTIONS_PATH);
-		// button = new Rectangle(500 - 487/4, 300, 487/2, 192/2);
+		button = new Rectangle(500 - 487/4, 300, 487/2, 192/2);
 		instructionButton = new Rectangle(500 - 487/4, 500, 350/2, 192/2);
 		
 		
@@ -122,7 +122,7 @@ public class OptionScreen extends Screen {
 		surface.fill(137, 207, 240);
 		surface.fill(0);
 		surface.textSize(15);
-		// surface.image(starter, 500 - (float)487/4, 300, 487/2, 192/2);
+		surface.image(starter, 500 - (float)487/4, 300, 487/2, 192/2);
 
 		surface.image(instructions, 700, 100, 350/2, 192/2);
 
@@ -139,12 +139,12 @@ public class OptionScreen extends Screen {
 	 */
 	public void mousePressed() {
 		Point p = surface.actualCoordinatesToAssumed(new Point(surface.mouseX,surface.mouseY));
-		/*
+		
 		if (button.contains(p)) {
 			surface.switchScreen(0);
 			surface.setup();
 		}
-		*/
+		
 		
 		if (instructionButton.contains(p)) {
 			surface.switchScreen(3);
