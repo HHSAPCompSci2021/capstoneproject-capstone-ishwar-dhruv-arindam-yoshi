@@ -11,15 +11,34 @@ import game.HauntedMaze;
 import game.MazeData;
 import processing.core.PApplet;
 
+
+/**
+ * Represents an item that finds the path from the officer to the nearest blueprint. 
+ * @author Dhruv Lohani
+ *
+ */
 public class PathFinder extends Item{
 
+	/**
+	 * Represents the path to the nearest blueprint
+	 */
     public ArrayList<Point> pathToshortest = null;
     
+    /**
+     * Creates an object of the PathFinder class. 
+     * @param x the x position of this item(if invalid, pass -1)
+     * @param y the y position of this item(if invalid, pass -1)
+     * @param width the height of this item(if invalid, pass -1)
+     * @param height the width of this item(if invalid, pass -1)
+     */
     public PathFinder(double x, double y, double width, double height) {
    	 super(x, y, width, height);
     }
 
-    @Override
+    /**
+     * Uses the shortest path item and finds the path to the nearest blueprint
+     * @post the field pathToShortest gets populated. 
+     */
     public void use(HauntedMaze maze) {
    	 ArrayList<Item> items = maze.items;
    	 ArrayList<Blueprint> bps = new ArrayList<Blueprint>();
@@ -190,6 +209,14 @@ public class PathFinder extends Item{
     
     }
     
+    /**
+     * Draws the shortest path. 
+     * @param marker the PApplet which the shortest path is draw upon. 
+     * @param x the upper left x coordinate of the marker
+     * @param y the upper left y coordinate of the marker 
+     * @param w the width of the marker 
+     * @param h the height of the marker 
+     */
     public void draw(PApplet marker, double x, double y, double w, double h) {
     	
     try{
