@@ -149,10 +149,10 @@ public class Rectangle {
 	}
 	
 	public boolean contains(double xOfItem, double yOfItem) {
-		if (xOfItem<Math.max(x1, x2) 
-		&&  xOfItem>Math.min(x1, x2)
-		&&  yOfItem<Math.max(y1, y2) 
-		&&  yOfItem>Math.min(y1, y2)) return true; 
+		if (xOfItem< (Math.max(x1, x2) + 20) 
+		&&  xOfItem> (Math.min(x1, x2) - 20)
+		&&  yOfItem< (Math.max(y1, y2) + 25)
+		&&  yOfItem> (Math.min(y1, y2)) - 25) return true; 
 		return false; 
 	}
 	

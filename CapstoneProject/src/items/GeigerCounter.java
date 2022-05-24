@@ -1,6 +1,7 @@
 package items;
 import screen.ScreenObject;
 import game.HauntedMaze;
+import music.AudioPlayer;
 import processing.core.*;
 
 import java.math.RoundingMode;
@@ -21,12 +22,14 @@ public class GeigerCounter extends Item {
 		// should return distance between Grinch and Officer
 	
 	private double radiationReading; // radioactivity measured in Bq
+	private AudioPlayer soundEffects1; 
 	
 	// has damage intensity
 
 	public GeigerCounter(double x, double y)
 	{
 		super(x, y, 205, 40);
+		soundEffects1 = new AudioPlayer(".//assets//heartbeat.wav"); 
 	}
 	
 	/**
@@ -38,6 +41,15 @@ public class GeigerCounter extends Item {
 		DecimalFormat df = new DecimalFormat("#.####");
 		df.setRoundingMode(RoundingMode.CEILING);
 		return Double.parseDouble(df.format(radiationReading)); 
+	}
+	
+	public void playSound() {
+		if (getReading() > 11) {
+			soundEffects1.play(); 
+		}else {
+			soundEffects1.pause();
+			soundEffects1.reset(); 
+		}
 	}
 	
 

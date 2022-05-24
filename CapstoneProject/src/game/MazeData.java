@@ -285,6 +285,68 @@ public class MazeData {
 
 	}
 	
+	public static Point convertToPoint(float x1, float y1, float x, float y, float w, float h, char[][] grid, boolean isActor, double vx, double vy) {
+		try{
+			 Point p = new Point(0,0);
+		   	 int lengthMaze = 4 * 10 + 1;
+		   	 int heightMaze = 2 * 10 + 1;
+		   	 double xLen = w/(lengthMaze);
+		   	 double yLen = h/(heightMaze);
+		   	 
+//		   	 p.x = (int) ((((x1-x) * lengthMaze)/(w)) );
+//		   	 p.y = (int) ((((y1-y) * heightMaze)/(h)) );
+//		   	 
+		   	 for (int i=0;i<40;i++) {
+		   		 double xCoord = x + i * xLen;
+		   		 double xCoordSec = xCoord + xLen;
+		   		 if (x1 >= xCoord && x1 <= xCoordSec) {
+		   			 p.x = i;
+		   			 break;
+		   		 }
+		   	 }
+		   	 
+		   	 for (int i=0;i<20;i++) {
+		   		 double yCoord = y + i * yLen;
+		   		 double yCoordSec = yCoord + yLen;
+		   		 if (y1 >= yCoord && y1 <= yCoordSec) {
+		   			 p.y = i;
+		   			 break;
+		   		 }
+		   	 }
+		   	 
+		   	 if (!isActor) {
+		   		 return p; 
+		   	 }
+		   	 
+		   	 if (grid[p.y][p.x] != ' ') {
+			   	if (vx == 0) p.x = p.x; 
+			   	else p.x = (vx > 0) ? p.x-1 : p.x+1; 
+			   	
+			   	if (vy == 0) p.y = p.y; 
+			   	else p.y = (vy > 0) ? p.y-1 : p.y+1; 
+		   		
+		   		
+		   	 }
+		   	 
+//		   	 if (grid[p.y][p.x] != ' ') {
+//		   		 if (y > 0 && grid[p.y-1][p.x] == ' ') {
+//		   			 p.y =  (int) (p.y-1);
+//		   		 }else if (y < 21 && grid[p.y+1][p.x] == ' ') {
+//		   			 p.y = (int) (p.y+1);
+//		   		 }else if (x > 0 && grid[p.y][p.x-1] == ' ') {
+//		   			 p.x = (int) (p.x-1);
+//		   		 }else if (x < 41 && grid[p.y][p.x+1] == ' ') {
+//		   			 p.x = (int) (p.x+1);
+//		   		 }
+//		   		 
+//		   	 }
+		   	 return p;
+		}catch (Exception e) {
+			return new Point(0,0); 
+		}
+	    }
+
+	
 	//1 represents wall
 	//0 represents space
 	public int[][] toIntArray(){
@@ -425,5 +487,3 @@ public class MazeData {
 		return false; 
 	}
 }
-
-
