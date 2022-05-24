@@ -26,6 +26,11 @@ public class GeigerCounter extends Item {
 	
 	// has damage intensity
 
+	/**
+	 * Creates an object of the GeigerCounter class
+	 * @param x the x coordinate of where the object should be created
+	 * @param y the y coordinate of where the object should be created
+	 */
 	public GeigerCounter(double x, double y)
 	{
 		super(x, y, 205, 40);
@@ -43,6 +48,9 @@ public class GeigerCounter extends Item {
 		return Double.parseDouble(df.format(radiationReading)); 
 	}
 	
+	/**
+	 * Plays the sound effect for this item
+	 */
 	public void playSound() {
 		if (getReading() > 11) {
 			soundEffects1.play(); 
@@ -52,7 +60,7 @@ public class GeigerCounter extends Item {
 		}
 	}
 	
-
+	@Override
 	public void use(HauntedMaze maze)
 	{
 		double px = maze.protagonist.getX(); double py = maze.protagonist.getY();
