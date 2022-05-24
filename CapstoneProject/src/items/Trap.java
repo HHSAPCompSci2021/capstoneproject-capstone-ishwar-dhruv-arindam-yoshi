@@ -14,6 +14,7 @@ public class Trap extends Item {
 	
 	/**
 	 * NEAR_DIST is a constant that represents the distance between the trap. 
+	 * DEFECT_CHANCE represents the chance the trap "malfunctions" and does not harm the officer. 
 	 */
 	public static final double NEAR_DIST = 15;
 	public static final double DEFECT_CHANCE = 0.01;
