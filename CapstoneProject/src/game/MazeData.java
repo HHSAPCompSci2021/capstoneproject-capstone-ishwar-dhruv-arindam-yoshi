@@ -185,18 +185,22 @@ public class MazeData {
 						endX = x + (j+4) * xLen; 
 					}else {
 						if (!equals(startX, endX)) {
-							marker.rect((float) startX, (float)yCoord-1, (float) endX - (float) startX, 2);
 							if (firstTime) {
 								wallsList.add(new Rectangle(startX, yCoord-1, endX- startX, 2)); 
+							}
+							else {
+								marker.rect((float) startX, (float)yCoord-1, (float) endX - (float) startX, 2);
 							}
 						}
 						startX = endX = xCoordSec; 
 					}
 				}
 				if (!equals(startX, endX)) {
-					marker.rect((float) startX, (float)yCoord-1, (float) endX - (float) startX, 2);
 					if (firstTime) {
 						wallsList.add(new Rectangle(startX, yCoord-1, endX- startX, 2)); 
+					}
+					else {
+						marker.rect((float) startX, (float)yCoord-1, (float) endX - (float) startX, 2);
 					}
 					startX = endX; 
 				}
@@ -214,18 +218,23 @@ public class MazeData {
 					endY = y + (j+2) * yLen; 
 				}else {
 					if (!equals(startY, endY)) {
-						marker.rect((float) xCoord-1, (float)startY, 2, (float) endY - (float) startY);
+						
 						if (firstTime) {
 							wallsList.add(new Rectangle(xCoord-1, startY, 2, endY - startY));
+						}
+						else {
+							marker.rect((float) xCoord-1, (float)startY, 2, (float) endY - (float) startY);
 						}
 					}
 					startY = endY = yCoordSec;
 				}
 			}
 			if (!equals(startY, endY)) {
-				marker.rect((float) xCoord-1, (float)startY, 2, (float) endY - (float) startY);
 				if (firstTime) {
 					wallsList.add(new Rectangle(xCoord-1, startY, 2, endY - startY));
+				}
+				else {
+					marker.rect((float) xCoord-1, (float)startY, 2, (float) endY - (float) startY);
 				}
 			}
 			startY = endY;
