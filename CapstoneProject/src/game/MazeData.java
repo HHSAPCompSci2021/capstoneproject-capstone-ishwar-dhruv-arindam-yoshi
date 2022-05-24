@@ -19,14 +19,17 @@ import java.util.Scanner;
 import processing.core.PApplet;
 
 /**
- * has characters, items, maze walls
- * @author dhruv
+ * This class represents a maze, with many common methods that you could do with a maze. 
+ * @author Dhruv Lohani
  *
  */
 public class MazeData {
 	private static final int CORNERS = 0;
 	private gridP[][] myBoard ;
-	private int size; 
+	/**
+	 * Represents the size of the maze
+	 */
+	public int size; 
 	private ArrayList<gridP> cList;
 	/**
 	 * Represents the walls list in the maze. 
@@ -35,7 +38,7 @@ public class MazeData {
 	private boolean firstTime = true; 
 	
 	/**
-	 * contructs the maze. 
+	 * Creates a MazeData object. 
 	 */
 	public MazeData() {
 		myBoard = new gridP[10][10]; 
@@ -66,7 +69,7 @@ public class MazeData {
 	/**
 	 * Generates a random maze, and populates the maze in the myBoard field. 
 	 */
-	public void generateMaze(PApplet marker, float x, float y, float w, float h) {
+	public void generateMaze() {
 		this.assignLocations(); 
 		gridP currentCell = myBoard[0][0];
 		currentCell.visited = 1;
@@ -98,8 +101,6 @@ public class MazeData {
 				}
 			}
 		}
-		
-		draw(marker, x, y, w, h); 
 		
 	}
 	
@@ -185,18 +186,22 @@ public class MazeData {
 						endX = x + (j+4) * xLen; 
 					}else {
 						if (!equals(startX, endX)) {
-							marker.rect((float) startX, (float)yCoord-1, (float) endX - (float) startX, 2);
 							if (firstTime) {
 								wallsList.add(new Rectangle(startX, yCoord-1, endX- startX, 2)); 
+							}
+							else {
+								marker.rect((float) startX, (float)yCoord-1, (float) endX - (float) startX, 2);
 							}
 						}
 						startX = endX = xCoordSec; 
 					}
 				}
 				if (!equals(startX, endX)) {
-					marker.rect((float) startX, (float)yCoord-1, (float) endX - (float) startX, 2);
 					if (firstTime) {
 						wallsList.add(new Rectangle(startX, yCoord-1, endX- startX, 2)); 
+					}
+					else {
+						marker.rect((float) startX, (float)yCoord-1, (float) endX - (float) startX, 2);
 					}
 					startX = endX; 
 				}
@@ -214,18 +219,23 @@ public class MazeData {
 					endY = y + (j+2) * yLen; 
 				}else {
 					if (!equals(startY, endY)) {
-						marker.rect((float) xCoord-1, (float)startY, 2, (float) endY - (float) startY);
+						
 						if (firstTime) {
 							wallsList.add(new Rectangle(xCoord-1, startY, 2, endY - startY));
+						}
+						else {
+							marker.rect((float) xCoord-1, (float)startY, 2, (float) endY - (float) startY);
 						}
 					}
 					startY = endY = yCoordSec;
 				}
 			}
 			if (!equals(startY, endY)) {
-				marker.rect((float) xCoord-1, (float)startY, 2, (float) endY - (float) startY);
 				if (firstTime) {
 					wallsList.add(new Rectangle(xCoord-1, startY, 2, endY - startY));
+				}
+				else {
+					marker.rect((float) xCoord-1, (float)startY, 2, (float) endY - (float) startY);
 				}
 			}
 			startY = endY;
@@ -275,6 +285,81 @@ public class MazeData {
 		return out; 
 
 	}
+	/**
+	 * Converts a grid pixel coordinate to a point on the grid of the maze
+	 * @param x1 the grid pixel x1 coordinate
+	 * @param y1 the grid pixel y1 coordinate
+	 * @param x the upper left x coordinate of the maze
+	 * @param y the upper left y coordinate of the maze
+	 * @param w the width of the maze
+	 * @param h the height of the maze
+	 * @param grid the grid which represents the character by character grid of the maze
+	 * @param isActor used to determine if the object is an actor
+	 * @param vx the velocity on the x of the actor, if it is an actor
+	 * @param vy the velocity on the y of the actor, if it is an actor
+	 * @return
+	 */
+	public static Point convertToPoint(float x1, float y1, float x, float y, float w, float h, char[][] grid, boolean isActor, double vx, double vy) {
+		try{
+			 Point p = new Point(0,0);
+		   	 int lengthMaze = 4 * 10 + 1;
+		   	 int heightMaze = 2 * 10 + 1;
+		   	 double xLen = w/(lengthMaze);
+		   	 double yLen = h/(heightMaze);
+		   	 
+//		   	 p.x = (int) ((((x1-x) * lengthMaze)/(w)) );
+//		   	 p.y = (int) ((((y1-y) * heightMaze)/(h)) );
+//		   	 
+		   	 for (int i=0;i<40;i++) {
+		   		 double xCoord = x + i * xLen;
+		   		 double xCoordSec = xCoord + xLen;
+		   		 if (x1 >= xCoord && x1 <= xCoordSec) {
+		   			 p.x = i;
+		   			 break;
+		   		 }
+		   	 }
+		   	 
+		   	 for (int i=0;i<20;i++) {
+		   		 double yCoord = y + i * yLen;
+		   		 double yCoordSec = yCoord + yLen;
+		   		 if (y1 >= yCoord && y1 <= yCoordSec) {
+		   			 p.y = i;
+		   			 break;
+		   		 }
+		   	 }
+		   	 
+		   	 if (!isActor) {
+		   		 return p; 
+		   	 }
+		   	 
+		   	 if (grid[p.y][p.x] != ' ') {
+			   	if (vx == 0) p.x = p.x; 
+			   	else p.x = (vx > 0) ? p.x-1 : p.x+1; 
+			   	
+			   	if (vy == 0) p.y = p.y; 
+			   	else p.y = (vy > 0) ? p.y-1 : p.y+1; 
+		   		
+		   		
+		   	 }
+		   	 
+//		   	 if (grid[p.y][p.x] != ' ') {
+//		   		 if (y > 0 && grid[p.y-1][p.x] == ' ') {
+//		   			 p.y =  (int) (p.y-1);
+//		   		 }else if (y < 21 && grid[p.y+1][p.x] == ' ') {
+//		   			 p.y = (int) (p.y+1);
+//		   		 }else if (x > 0 && grid[p.y][p.x-1] == ' ') {
+//		   			 p.x = (int) (p.x-1);
+//		   		 }else if (x < 41 && grid[p.y][p.x+1] == ' ') {
+//		   			 p.x = (int) (p.x+1);
+//		   		 }
+//		   		 
+//		   	 }
+		   	 return p;
+		}catch (Exception e) {
+			return new Point(0,0); 
+		}
+	    }
+
 	
 	//1 represents wall
 	//0 represents space
@@ -416,5 +501,3 @@ public class MazeData {
 		return false; 
 	}
 }
-
-

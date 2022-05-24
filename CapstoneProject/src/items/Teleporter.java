@@ -23,17 +23,16 @@ import screen.*;
  */
 public class Teleporter extends Item {
 
+	//deducts 20 if used
 	private final int deductor = 20;
-    protected PImage teleporter;
+    private PImage teleporter;
 
     // has identifier
 
     /**
-     * 
+     * @param marker the marker with which to import the image
      * @param x is an x coordinate for blueprint
      * @param y is a y coordinate for blueprint
-     * @param identify is the identification used to access img
-     * @param img is the image used to show blueprint in the maze
      */
     public Teleporter(PApplet marker, double x, double y)
     {
@@ -44,22 +43,26 @@ public class Teleporter extends Item {
 
     
     /**
-     * 
+     * Uses the teleporter in the maze
+     * @param maze which is where the teleporter is used upon. 
      */
     public void use(HauntedMaze maze)
     {
+    	try {
+    		Blueprint picked = null;
+        	for (int i = 0; i < maze.items.size(); i++)
+        		if (maze.items.get(i) instanceof Blueprint) {
+        			picked = (Blueprint)maze.items.get(i);
+        			break;
+        		}
+        	
+    		maze.protagonist.setPos(picked.getX() - maze.protagonist.getW()/2,
+    								picked.getY() - maze.protagonist.getH()/2);
+    		maze.protagonist.changeHealth(-10);
+    	} catch (Exception e) {
+    		return;
+    	}
     	
-        // double dist = Math.sqrt(Math.pow(x-maze.protagonist.getX(), 2) + Math.pow(y-maze.protagonist.getY(), 2));
-    	Blueprint picked = null;
-    	for (int i = 0; i < maze.items.size(); i++)
-    		if (maze.items.get(i) instanceof Blueprint) {
-    			picked = (Blueprint)maze.items.get(i);
-    			break;
-    		}
-    	
-		maze.protagonist.setPos(picked.getX() - maze.protagonist.getW()/2,
-								picked.getY() - maze.protagonist.getH()/2);
-		maze.protagonist.changeHealth(-10);
 		
     }
 

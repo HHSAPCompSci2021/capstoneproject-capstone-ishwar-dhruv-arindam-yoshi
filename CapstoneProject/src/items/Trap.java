@@ -4,6 +4,12 @@ import characters.Officer;
 import game.HauntedMaze;
 import processing.core.*;
 
+
+/**
+ * Represents a trap in the maze which is an item that hurts the officer. 
+ * @author Dhruv Lohani
+ *
+ */
 public class Trap extends Item {
 	
 	protected PImage image;
@@ -14,6 +20,7 @@ public class Trap extends Item {
 	
 	/**
 	 * NEAR_DIST is a constant that represents the distance between the trap. 
+	 * DEFECT_CHANCE represents the chance the trap "malfunctions" and does not harm the officer. 
 	 */
 	public static final double NEAR_DIST = 15;
 	public static final double DEFECT_CHANCE = 0.01;
@@ -21,10 +28,9 @@ public class Trap extends Item {
 	// private double timeExposed = ;
 	
 	/**
+	 * @param marker the PApplet object with which to load images
 	 * @param x the x coord of the trap
 	 * @param y the y coord of the trap
-	 * @param width the width of the trap
-	 * @param height the height of the trap
 	 * @param type the type of the trap. There are 4 types of traps. 
 	 * Traps of type 1 simply change the health of the officer by 25. 
 	 * Traps of type 2 decrease the speed of the officer by 2 units in the X and Y direction. 
@@ -54,10 +60,7 @@ public class Trap extends Item {
 		type = newType; 
 	}
 	
-	/**
-	 * Uses the trap once in the maze which is passed
-	 * @param the maze which the trap is acted upon. 
-	 */
+	@Override
 	public void use(HauntedMaze maze)
 	{
 		if (!isActive)
@@ -101,8 +104,6 @@ public class Trap extends Item {
 	/**
 	 * Traps are not visible to the player, so in essense this method is purposeless. 
 	 * @param marker
-	 * @param x
-	 * @param y
 	 */
 	public void draw(PApplet marker) {
 		double rand = Math.random();

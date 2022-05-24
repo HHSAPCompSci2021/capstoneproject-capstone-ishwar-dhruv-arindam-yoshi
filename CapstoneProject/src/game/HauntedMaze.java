@@ -42,6 +42,7 @@ public class HauntedMaze extends ScreenObject {
 	 */
 	public ArrayList<Item> items;
 	
+	
 	private AudioPlayer audio; 
 	
 	private static final double LIGHT_ANGLE = Math.PI*90/180;
@@ -53,15 +54,23 @@ public class HauntedMaze extends ScreenObject {
 	
 	private Random rand; 
 	
+	
+	/**
+	 * Constructs a new haunted maze.
+	 * @param marker the PApplet object with which to construct new objects and load images
+	 */
 	public HauntedMaze(PApplet marker)
 	{
-		super(200, 150, 500, 500);
+		super(200, 180, 500, 500);
 		this.marker = marker;
 		
 		protagonist = new Officer(marker, x+70, y+60);
 		villain = new Grinch(marker, x+260, y+200);
 		settingData = new MazeData();
-		settingData.generateMaze(marker, (float)x, (float)y, (float)w, (float)h);
+		
+		settingData.generateMaze();
+		settingData.draw(marker,(float)x, (float)y, (float)w, (float)h);
+		
 		items = new ArrayList<Item>(); 
 		rand = new Random();
 		audio = new AudioPlayer(".//assets//DeadForestMusic.wav"); 
@@ -84,7 +93,6 @@ public class HauntedMaze extends ScreenObject {
 	
 	private double[] getRandLocs() {
 		ArrayList<Rectangle> walls = settingData.wallsList; 
-		System.out.println("WALLSIZE + " + walls.size()); 
 		while(true) {
 			double randomX = x+50 + (w - x+50) * rand.nextDouble();
 			double randomY = y+50 + (h - y+50) * rand.nextDouble();
@@ -102,8 +110,9 @@ public class HauntedMaze extends ScreenObject {
 	
 	public void draw(PApplet marker)
 	{	
-		marker.push();
 		
+		marker.push();
+				
 		marker.fill(255, 255, 255);
 		marker.rect((float)x, (float)y, (float)w, (float)h);
 //		marker.fill(0, 0, 0);
@@ -125,12 +134,14 @@ public class HauntedMaze extends ScreenObject {
 		for (Item i : items)
 			if (i instanceof Teleporter)
 				i.draw(marker);
+		
+		protagonist.p.draw(marker, getX(), getY(), getW(), getH());
+
 		marker.pop();
 	}
 	
 	/**
 	 * Draws the lighting in the HauntedMaze (from the officer's flashlight).
-	 * @param marker
 	 */
 	public void drawLighting()
 	{
