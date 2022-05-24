@@ -4,6 +4,12 @@ import java.awt.geom.Line2D;
 
 import characters.Actor;
 
+
+/**
+ * This class represents a rectangle
+ * @author Dhruv Lohani
+ *
+ */
 public class Rectangle {
 	/**
 	 * x1 represents the upper left X coordinate of the rectangle
