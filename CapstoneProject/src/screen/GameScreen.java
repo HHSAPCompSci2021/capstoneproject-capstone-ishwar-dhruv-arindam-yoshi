@@ -137,6 +137,9 @@ public class GameScreen extends Screen {
 			codeY--;
 		if (surface.isPressed(KeyEvent.VK_S) || surface.isPressed(KeyEvent.VK_DOWN))
 			codeY++;
+		if (surface.isPressed(KeyEvent.VK_P)) {
+			gameSetting.protagonist.usePathFinder(gameSetting);
+		}
 		
 		gameSetting.protagonist.adjustV(codeX, codeY);
 	}
@@ -177,6 +180,17 @@ public class GameScreen extends Screen {
 	}
 	
 	@Override
+	public void keyPressed() {
+		System.out.println("been here for key"); 
+		if (surface.key == 'P') {
+			gameSetting.protagonist.usePathFinder(gameSetting);
+
+		}
+	}
+	
+	
+	
+	@Override
 	public void keyReleased()
 	{
 		// System.out.println("Here");
@@ -187,8 +201,7 @@ public class GameScreen extends Screen {
 				resume();
 		// System.out.println(isPaused);
 		
-		if (surface.keyCode == KeyEvent.VK_T)
-			gameSetting.protagonist.useTeleporter(gameSetting);
+		
 	}
 }
 
