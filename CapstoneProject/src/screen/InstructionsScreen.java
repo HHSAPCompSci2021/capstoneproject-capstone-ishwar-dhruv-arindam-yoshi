@@ -24,6 +24,7 @@ public class InstructionsScreen extends Screen {
 
 	
 	private PImage instructions;
+	private PImage background;
 	
 
 	
@@ -31,7 +32,7 @@ public class InstructionsScreen extends Screen {
 	 * Path to the option screen image
 	 */
 	public static final String INSTRUCTIONS_PATH = "assets/Instructions.png";
-	
+	private static final String BACKGROUND_PATH = "assets/background.png";
 	
 	private Rectangle button;
 
@@ -62,7 +63,7 @@ public class InstructionsScreen extends Screen {
 	public void draw() {
 
 		surface.background(255,255,255);
-		//surface.background(img);
+		surface.background(background);
 		surface.fill(100, 200, 240);
 		
 
