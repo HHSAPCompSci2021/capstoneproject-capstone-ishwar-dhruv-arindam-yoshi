@@ -78,7 +78,9 @@ public class HauntedMaze extends ScreenObject {
 		rand = new Random();
 	}
 	
-	
+	/**
+	 * Sets up the haunted maze.
+	 */
 	public void setup()
 	{
 		

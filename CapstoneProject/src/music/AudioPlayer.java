@@ -36,6 +36,7 @@ public class AudioPlayer {
 	/**
 	 * Creates an object of the AudioPlayer class.
 	 * @param file represents the file from which the music is stored in, and to be played from. 
+	 * @param loop whether the AudioPlayer should loop the clip.
 	 */
 	public AudioPlayer(File file, boolean loop) {
 		this.file = file; 
@@ -69,7 +70,8 @@ public class AudioPlayer {
 	
 	/**
 	 * Creates an object of the AudioPlayer class. 
-	 * @param s the string which is the path of the file from which the music is going to be played from. 
+	 * @param s the string which is the path of the file from which the music is going to be played from.
+	 * @param loop whether the AudioPlayer should loop the clip. 
 	 */
 	public AudioPlayer(String s, boolean loop) {
 		this(new File(s), loop); 
