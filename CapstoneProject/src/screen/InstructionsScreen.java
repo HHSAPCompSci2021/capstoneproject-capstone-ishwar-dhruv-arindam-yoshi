@@ -52,9 +52,8 @@ public class InstructionsScreen extends Screen {
 	public void setup()
 	{
 		instructions = surface.loadImage(InstructionsScreen.INSTRUCTIONS_PATH);
-		
-
-		button = new Rectangle(500 - 487/4, 350, 350/2, 192/2);
+		background = surface.loadImage(InstructionsScreen.BACKGROUND_PATH);
+		button = new Rectangle(800, 100, 350/2, 192/2);
 	}
 
 	/**
@@ -63,18 +62,11 @@ public class InstructionsScreen extends Screen {
 	public void draw() {
 
 		surface.background(255,255,255);
-		surface.background(background);
+		surface.image(background, 0, 0, 1000, 800);
 		surface.fill(100, 200, 240);
 		
 
 		Font f3 = new Font("Elephant",Font.ITALIC,28);
-
-		surface.textSize(40);
-		surface.text("Instructions: ", 100, 100);
-		surface.fill(137, 207, 240);
-		surface.fill(0);
-		surface.textSize(15);
-		surface.text("In the game, there is a maze. You're an officer and must collect all the blueprints in the dark maze.\n Your flashlight is the only thing that can help you see. The grinch in the maze hates visitors, and tries to attack. \n The closer he gets, the more health you lose. If he touches you, you're dead.\n Get all blueprints and exit maze to win! \n Use WDAS keys or up/right/left/down keys to move. Mouse lets you adjust flashlight. \n Click E to collect a blueprint. Click T to teleport.\n You could also press the spacebar to accelerate and \"leap\" through walls, though this incurs a cost on the officer's health.", 100, 150);
 
 		surface.image(instructions, button.x, button.y, button.width, button.height);
 
