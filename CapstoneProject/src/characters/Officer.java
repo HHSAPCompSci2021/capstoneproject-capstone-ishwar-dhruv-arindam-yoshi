@@ -128,19 +128,19 @@ public class Officer extends Actor {
 	 */
 	public Blueprint nearBlueprint(HauntedMaze maze)
 	{
-		for (Item e : maze.items)
-		{
-			if (e instanceof Blueprint)
-			{
-				double dist = Math.sqrt(Math.pow((x + w/2)-e.getX(), 2) + Math.pow((y + h/2)-e.getY(), 2));
-				if (dist < PICK_DIST)
-					return (Blueprint)e;
+		for (int i = 0; i < maze.items.size(); i++) {
+			if (maze.items.get(i) instanceof Blueprint) {
+				double dist = Math.sqrt(Math.pow((x + w/2)-maze.items.get(i).getX(), 2)
+						+ Math.pow((y + h/2)-maze.items.get(i).getY(), 2));
+				if (dist < PICK_DIST) {
+					return (Blueprint) maze.items.get(i);
+				}
 			}
-		}
-		return null;
+		} return null;
+		
 	}
 	
-	/**
+	/**rn
 	 * Returns whether the Officer has all the blueprints in the maze
 	 * @param maze the maze that is being processed
 	 * @return true if the Officer has all the blueprints in the maze; false otherwise
@@ -203,9 +203,7 @@ public class Officer extends Actor {
 	 */
 	public boolean isSuccessful(HauntedMaze maze)
 	{
-		// System.out.println(hasAllBlueprints(maze));
 		return hasAllBlueprints(maze) && isAlive();
-		// return hasAllBlueprints(maze) && isAlive() && isOutsideMaze(maze);
 	}
 	
 	@Override
@@ -214,7 +212,6 @@ public class Officer extends Actor {
 		marker.push();
 		
 		marker.fill(0);
-		// marker.rect((float)x,  (float)y, (float)w, (float)h);
 		marker.image(image, (float)x, (float)y, (float)w, (float)h);
 		
 		marker.pop();
@@ -292,7 +289,6 @@ public class Officer extends Actor {
 		if (gtool.getReading() > LETHAL_RAD)
 			health = 0;
 
-		// System.out.print("Officer: ");
 		if (!accelerator) 
 			super.wallImpact(maze);
 		
