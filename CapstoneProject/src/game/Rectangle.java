@@ -154,6 +154,12 @@ public class Rectangle {
 		return false;
 	}
 	
+	/**
+	 * Returns whether the item contains the given x-y coordinates
+	 * @param xOfItem the x-coordinate of the point for testing
+	 * @param yOfItem the y-coordinate of the point for testing
+	 * @return
+	 */
 	public boolean contains(double xOfItem, double yOfItem) {
 		if (xOfItem< (Math.max(x1, x2) + 20) 
 		&&  xOfItem> (Math.min(x1, x2) - 20)
