@@ -118,36 +118,83 @@ public class Actor extends ScreenObject {
 	 */
 	protected void wallImpact(HauntedMaze maze)
 	{
-		int pushBackVel = 4; 
 		ArrayList<Rectangle> walls = maze.settingData.wallsList; 
-		boolean[] collisions = MazeData.isActorTouchingMaze(walls, this);
+		boolean[] collisions = MazeData.isActorTouchingMaze(walls, this); 
 		
-		int counter = 0; 
-		for (int i=0;i<collisions.length;i++) {
-			if (collisions[i]) counter++; 
-		}
-		if (counter > 1) {
-			pushBackVel = 10; 
-		}
-			
+		/*
+		if (this instanceof Officer)
+			System.out.println(collisions[0] + " " + collisions[1] + " " + collisions[2] + " " + collisions[3]);
+		*/ 
 		
 		if (collisions[0]) {
-			x-=pushBackVel;
-
+			vx = Math.max(0, vx);
+			// System.out.println("LAST COLLISION WENT HERE: 0"); 
 		}
 		if (collisions[1]) {
-			x+=pushBackVel; 
+			vx = Math.min(0, vx);
+			// System.out.println("LAST COLLISION WENT HERE: 1"); 
 		}
-		
 		if (collisions[2]) {
-			y-=pushBackVel; 
+			vy = Math.max(0, vy); 
+			// System.out.println("LAST COLLISION WENT HERE: 2"); 
 		}
-		
 		if (collisions[3]) {
-			y+=pushBackVel; 
-
+			vy = Math.min(0, vy); 
+			// System.out.println("LAST COLLISION WENT HERE: 3"); 
 		}
+	}
+
+	/**
+	 * Determines if the actor passed is touching the wall, and if so, then in what direction.
+	 * @param r the Rectangle object with which to check for intersection
+	 * @return a boolean array of size 4, that represents whether an actor is touching a wall
+	 * Position 0 of the array represents whether the actor is touching the wall from left. 
+	 * Position 1 of the array represents whether the actor is touching the wall from the right.
+	 * Position 2 of the array represents whether the actor is touching the wall from the top
+	 * Position 3 of the array represents whether the actor is touching the wall from the bottom. 
+	 */
+	public boolean[] isTouchingWall(Rectangle r) {
+		boolean[] info = new boolean[4]; 
+		info[0] = info[1] = info[2] = info[3] = false; 
 		
+		Rectangle other = getBoundingRectangle();
+		Rectangle intersect = Rectangle.intersects(r, other);
+		
+		if (intersect == null)
+			return info;
+		
+		double midInterX = intersect.x1 + intersect.w/2;
+		double midInterY = intersect.y1 + intersect.h/2;
+		
+		double midX = x + w/2;
+		double midY = y + h/2;
+		
+		double scaledInterX = (midInterX - midX)/(w/2);
+		double scaledInterY = (midInterY - midY)/(h/2);
+		
+		double[] dists = {1 + scaledInterX, 1 - scaledInterX,
+							1 + scaledInterY, 1 - scaledInterY};
+		
+		/*
+		if (this instanceof Officer)
+		{
+			for (int i = 0; i < 4; i++)
+				System.out.print(dists[i] + " ");
+			System.out.println();
+		}
+		*/
+		
+		int minIndex = 0;
+		double min = Double.MAX_VALUE;
+		for (int i = 0; i < 4; i++)
+			if (dists[i] < min)
+			{
+				min = dists[i];
+				minIndex = i;
+			}
+		
+		info[minIndex] = true;
+		return info;
 	}
 
 }
