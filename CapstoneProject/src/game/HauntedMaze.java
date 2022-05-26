@@ -79,6 +79,11 @@ public class HauntedMaze extends ScreenObject {
 		rand = new Random();
 	}
 	
+	/**
+	 * Constructs a new haunted maze.
+	 * @param marker the PApplet object with which to construct new objects and load images
+	 * @param numBlueprints the number of blueprints in the maze
+	 */
 	public HauntedMaze(PApplet marker, int numBlueprints) {
 		super(200, 180, 500, 500);
 		this.marker = marker;
