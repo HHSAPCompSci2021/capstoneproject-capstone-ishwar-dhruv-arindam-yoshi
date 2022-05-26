@@ -414,60 +414,21 @@ public class MazeData {
 	 * Position 3 of the array represents whether the actor is touching the wall from the bottom. 
 	 */
 	public static boolean[] isActorTouchingMaze(ArrayList<Rectangle> walls, Actor a) {
-		ArrayList<Rectangle> wallsTouchingActor = new ArrayList<Rectangle>(); 
+//		System.out.println("been here"); 
+//		System.out.println(walls.size()); 
+		// ArrayList<Rectangle> wallsTouchingActor = new ArrayList<Rectangle>(); 
 		ArrayList<boolean[]> direcOfWall = new ArrayList<boolean[]>();
 		
+		boolean[] answer = {false, false, false, false};		
+//		System.out.println("ACTOR " + a.getX() + " " + a.getY()); 
 		
 		for (Rectangle w : walls) {
-			boolean[] isTouching = w.isTouchingActor(a); 
-			if (isTouching[0]) {
-				wallsTouchingActor.add(w); 
-				direcOfWall.add(isTouching); 
-			}
+			boolean[] isTouching = a.isTouchingWall(w); 
+			for (int i = 0; i < 4; i++)
+				answer[i] |= isTouching[i];
 		}
-
 		
-		if (wallsTouchingActor.size() == 0) {
-			return new boolean[]{false, false, false, false};
-		
-		}else if (wallsTouchingActor.size() == 1) {
-			if (direcOfWall.get(0)[1]) {
-				return new boolean[]{false, false, true, false}; 
-			}else if (direcOfWall.get(0)[2]) {
-				return new boolean[]{false, true, false, false}; 
-			}else if (direcOfWall.get(0)[3]) {
-				return new boolean[]{false, false, false, true}; 
-			}else if (direcOfWall.get(0)[4]) {
-				return new boolean[]{true, false, false, false}; 
-			}
-		}else if (wallsTouchingActor.size() >= 2) {
-			
-			if (equals(wallsTouchingActor.get(0).h, wallsTouchingActor.get(1).h) || equals(wallsTouchingActor.get(0).w, wallsTouchingActor.get(1).w)) {
-//				System.out.println("BEEN HERE"); 
-//				System.out.println(direcOfWall.get(0)[0] + " " + direcOfWall.get(0)[1] + " " + direcOfWall.get(0)[2] + " " + direcOfWall.get(0)[3] + " " + direcOfWall.get(0)[4]); 
-//				System.out.println(direcOfWall.get(1)[0] + " " + direcOfWall.get(1)[1] + " " + direcOfWall.get(1)[2] + " " + direcOfWall.get(1)[3] + " " + direcOfWall.get(1)[4]); 
-				if (direcOfWall.get(0)[1]) {
-					return new boolean[]{false, false, true, false}; 
-				}else if (direcOfWall.get(0)[2]) {
-					return new boolean[]{false, true, false, false}; 
-				}else if (direcOfWall.get(0)[3]) {
-					return new boolean[]{false, false, false, true}; 
-				}else if (direcOfWall.get(0)[4]) {
-					return new boolean[]{true, false, false, false}; 
-				}
-			}else {
-				Rectangle wall1 = wallsTouchingActor.get(0); 
-				Rectangle wall2 = wallsTouchingActor.get(1); 
-				System.out.println(wallsTouchingActor.size()); 
-				if (equals(wall1.w, 2)) {
-					return getPos(wall1, wall2); 
-				}else {
-					return getPos(wall2, wall1); 
-				}
-				
-			}
-		}	
-		return new boolean[]{false, false, false, false};
+		return answer;
 		
 	}
 	

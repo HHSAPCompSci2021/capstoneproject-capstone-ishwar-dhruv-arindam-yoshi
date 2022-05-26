@@ -76,84 +76,30 @@ public class Rectangle {
 		return h; 
 	}
 	
-	/**
-	 * Determines if the actor passed is touching the wall, and if so, then in what direction.
-	 *  
-	 * @param a the actor to which this wall might touch. 
-	 * @return a boolean array of size 5, that represents whether an actor is touching a wall
-	 * Position 0 of the array represents whether the wall is touching the actor
-	 * Position 1 of the array represents whether the actor is touching the wall from above. 
-	 * Position 2 of the array represents whether the actor is touching the wall from the right.
-	 * Position 3 of the array represents whether the actor is touching the wall from the bottom
-	 * Position 4 of the array represents whether the actor is touching the wall from the left. 
-	 */
-	public boolean[] isTouchingActor(Actor a) {
-		boolean[] info = new boolean[5]; 
-		info[0] = info[1] = info[2] = info[3] = info[4] = false; 
-		
-		Rectangle other = a.getBoundingRectangle(); 
-		if (Rectangle.intersects(this, other)) {
-			info[0] = true; 
-			double[] thisX = {Math.min(this.x1, this.x2), Math.max(this.x1, this.x2)}; 
-			double[] otherX = {Math.min(other.x1, other.x2), Math.max(other.x1,other.x2)}; 
-			double[] thisY = {Math.min(this.y1, this.y2), Math.max(this.y1, this.y2)}; 
-			double[] otherY = {Math.min(other.y1, other.y2), Math.max(other.y1, other.y2)}; 
-			int[][] vals = {
-							{0,0,1,0}, 
-							{1,0,1,1},
-							{0,1,1,1},
-							{0,0,0,1}
-						   };
-			for (int i=0;i<4;i++) {
-				Line2D line1 = new Line2D.Float((int)thisX[vals[i][0]], (int)thisY[vals[i][1]], 
-						                        (int)thisX[vals[i][2]], (int)thisY[vals[i][3]]);
-				for (int j=0;j<4;j++) {
-					Line2D line2 = new Line2D.Float((int)otherX[vals[j][0]], (int)otherY[vals[j][1]], 
-							                        (int)otherX[vals[j][2]], (int)otherY[vals[j][3]]);
-					if (line1.intersectsLine(line2)) {
-						info[i+1] = true; 
-//						return info;
-					}
-				}
-			}
-		}
-		int counter = 0; 
-		for (int i=1;i<5;i++) {
-			if (info[i]) counter++; 
-		}
-		if (counter > 1) {
-			if (info[1] && info[3]) {
-				info[1] = false; 
-				info[3] = true; 
-			}
-			if (info[2] && info[4]) {
-				info[2] = true; 
-				info[4] = false; 
-			}
-			
-//			
-		}
-		return info; 
-	}
-
 	
 	/**
-	 * This method determines whether two rectangles intersect. 
+	 * This method finds the intersection region of two rectangles. 
 	 * @param a the first rectangle which the method determines intersection for. 
 	 * @param b the second rectangle which the method determines intersection for. 
-	 * @return
+	 * @return the Rectangle object representing the intersection; null if this Rectangle does not exist
 	 */
-	public static boolean intersects(Rectangle a, Rectangle b) {
+	public static Rectangle intersects(Rectangle a, Rectangle b) {
 		double minX = Math.max(a.x1, b.x1);
 		double minY = Math.max(a.y1, b.y1);
 		double maxX = Math.min(a.x2, b.x2);
 		double maxY = Math.min(a.y2, b.y2);
 		
 		if ((minX <= maxX) && (minY <= maxY))
-			return true;
-		return false;
+			return new Rectangle(minX, minY, maxX-minX, maxY-minY);
+		return null;
 	}
 	
+	/**
+	 * Returns whether the item contains the given x-y coordinates
+	 * @param xOfItem the x-coordinate of the point for testing
+	 * @param yOfItem the y-coordinate of the point for testing
+	 * @return
+	 */
 	public boolean contains(double xOfItem, double yOfItem) {
 		if (xOfItem< (Math.max(x1, x2) + 20) 
 		&&  xOfItem> (Math.min(x1, x2) - 20)
