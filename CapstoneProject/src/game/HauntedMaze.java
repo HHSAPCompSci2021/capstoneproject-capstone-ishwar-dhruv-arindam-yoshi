@@ -42,8 +42,9 @@ public class HauntedMaze extends ScreenObject {
 	 */
 	public ArrayList<Item> items;
 	
-	
 	private AudioPlayer audio; 
+	
+	public int numBlueprints = 4; 
 	
 	private static final double LIGHT_ANGLE = Math.PI*90/180;
 	private static final double LIGHT_DIST = 100;
@@ -83,8 +84,8 @@ public class HauntedMaze extends ScreenObject {
 	{
 		
 		// add Blueprints randomly
-		String[] temp = new String[] {"A", "B", "C"}; 
-		for (int i = 0; i < 3; i++) {
+		String[] temp = new String[] {"A", "B", "C", "D"}; 
+		for (int i = 0; i < 4; i++) {
 			double[] randLocs = getRandLocs(); 
 			addItem(new Blueprint(marker, randLocs[0], randLocs[1], temp[i]));
 		}
