@@ -79,6 +79,26 @@ public class HauntedMaze extends ScreenObject {
 		rand = new Random();
 	}
 	
+	public HauntedMaze(PApplet marker, int numBlueprints) {
+		super(200, 180, 500, 500);
+		this.marker = marker;
+		
+		protagonist = new Officer(marker, x+70, y+60);
+		villain = new Grinch(marker, x+260, y+200);
+		settingData = new MazeData();
+		
+		settingData.generateMaze();
+		settingData.draw(marker,(float)x, (float)y, (float)w, (float)h);
+		
+		items = new ArrayList<Item>(); 
+		rand = new Random();
+		audio = new AudioPlayer(".//assets//DeadForestMusic.wav"); 
+				
+		rand = new Random();
+		this.numBlueprints = numBlueprints; 
+
+	}
+	
 	
 	public void setup()
 	{
