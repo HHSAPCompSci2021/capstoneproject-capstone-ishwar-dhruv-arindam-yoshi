@@ -241,25 +241,30 @@ public class Officer extends Actor {
 	 */
 	public void adjustV(int codeX, int codeY)
 	{
-		if (codeX < 0)
-			vx = -axisV;
-		else if (codeX > 0)
-			vx = axisV;
-		else
-			vx = 0;
-		
-		if (codeY < 0)
-			vy = -axisV;
-		else if (codeY > 0)
-			vy = axisV;
-		else
-			vy = 0;
-		
-		if ((codeX != 0) && (codeY != 0))
-		{
-			vx *= 1/Math.sqrt(2);
-			vy *= 1/Math.sqrt(2);
+		try {
+			if (codeX < 0)
+				vx = -axisV;
+			else if (codeX > 0)
+				vx = axisV;
+			else
+				vx = 0;
+			
+			if (codeY < 0)
+				vy = -axisV;
+			else if (codeY > 0)
+				vy = axisV;
+			else
+				vy = 0;
+			
+			if ((codeX != 0) && (codeY != 0))
+			{
+				vx *= 1/Math.sqrt(2);
+				vy *= 1/Math.sqrt(2);
+			}
+		}catch (Exception e) {
+			return; 
 		}
+	
 	}
 	
 	/**
@@ -268,12 +273,17 @@ public class Officer extends Actor {
 	 * @return true if it was successful. 
 	 */
 	public boolean useTeleporter(HauntedMaze maze) {
-		if (teleporters.size() == 0)
-			return false;
+		try {
+			if (teleporters.size() == 0)
+				return false;
+			
+			Teleporter tUse = teleporters.remove(0);
+			tUse.use(maze);
+			return true;
+		}catch (Exception e) {
+			return false; 
+		}
 		
-		Teleporter tUse = teleporters.remove(0);
-		tUse.use(maze);
-		return true;
 	}
 	
 	/**
@@ -296,20 +306,25 @@ public class Officer extends Actor {
 	@Override
 	public void act(HauntedMaze maze)
 	{
-		if (accelerator)
-			health -= ACCELERATOR_DAMAGE * DrawingSurface.DT;
+		try {
+			if (accelerator)
+				health -= ACCELERATOR_DAMAGE * DrawingSurface.DT;
+				
+			gtool.use(maze);
 			
-		gtool.use(maze);
-		
-		changeHealth(Math.min(-0.01*gtool.getReading() + 0.1, 0));
-		
-		if (gtool.getReading() > LETHAL_RAD)
-			health = 0;
+			changeHealth(Math.min(-0.01*gtool.getReading() + 0.1, 0));
+			
+			if (gtool.getReading() > LETHAL_RAD)
+				health = 0;
 
-		// System.out.print("Officer: ");
-		if (!accelerator) 
-			super.wallImpact(maze);
+			// System.out.print("Officer: ");
+			if (!accelerator) 
+				super.wallImpact(maze);
+			
+			super.act(maze);
+		}catch (Exception e) {
+			return; 
+		}
 		
-		super.act(maze);
 	}
 }
