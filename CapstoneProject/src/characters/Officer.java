@@ -115,10 +115,15 @@ public class Officer extends Actor {
 	 */
 	public void takeBlueprint(HauntedMaze maze)
 	{
-		Blueprint e = nearBlueprint(maze);
-		if (e != null)
-			blueprints.add(e);
-		maze.items.remove(e);
+		try {
+			Blueprint e = nearBlueprint(maze);
+			if (e != null)
+				blueprints.add(e);
+			maze.items.remove(e);
+		}catch (Exception e) {
+			return; 
+		}
+
 	}
 	
 	/**
@@ -128,14 +133,18 @@ public class Officer extends Actor {
 	 */
 	public Blueprint nearBlueprint(HauntedMaze maze)
 	{
-		for (Item e : maze.items)
-		{
-			if (e instanceof Blueprint)
+		try {
+			for (Item e : maze.items)
 			{
-				double dist = Math.sqrt(Math.pow((x + w/2)-e.getX(), 2) + Math.pow((y + h/2)-e.getY(), 2));
-				if (dist < PICK_DIST)
-					return (Blueprint)e;
-			}
+				if (e instanceof Blueprint)
+				{
+					double dist = Math.sqrt(Math.pow((x + w/2)-e.getX(), 2) + Math.pow((y + h/2)-e.getY(), 2));
+					if (dist < PICK_DIST)
+						return (Blueprint)e;
+				}
+			}	
+		}catch (Exception e) {
+			return null;
 		}
 		return null;
 	}
@@ -147,12 +156,17 @@ public class Officer extends Actor {
 	 */
 	public boolean hasAllBlueprints(HauntedMaze maze)
 	{
-		for (Item i : maze.items)
-		{
-			if (i instanceof Blueprint)
-				return false;
+		try {
+			for (Item i : maze.items)
+			{
+				if (i instanceof Blueprint)
+					return false;
+			}
+			return true;
+		}catch (Exception e) {
+			return true; 
 		}
-		return true;
+
 	}
 	
 	/**
