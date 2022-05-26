@@ -22,6 +22,7 @@ public class GeigerCounter extends Item {
 		// should return distance between Grinch and Officer
 	
 	private double radiationReading; // radioactivity measured in Bq
+	private double prevRadiationReading;
 	private AudioPlayer soundEffects1; 
 	
 	// has damage intensity
@@ -34,7 +35,8 @@ public class GeigerCounter extends Item {
 	public GeigerCounter(double x, double y)
 	{
 		super(x, y, 205, 40);
-		soundEffects1 = new AudioPlayer(".//assets//heartbeat.wav"); 
+		soundEffects1 = new AudioPlayer(".//assets//heartbeat.wav", false); 
+		radiationReading = prevRadiationReading = 0;
 	}
 	
 	/**
@@ -52,9 +54,14 @@ public class GeigerCounter extends Item {
 	 * Plays the sound effect for this item
 	 */
 	public void playSound() {
-		if (getReading() > 11) {
-			soundEffects1.play(); 
-		}else {
+		if ((radiationReading > 12) && (prevRadiationReading <= 12)) {
+			if (!soundEffects1.hasMusicStarted) {
+				System.out.println("here");
+				soundEffects1.play();
+				soundEffects1.hasMusicStarted = true;
+			}
+		}
+		else if ((radiationReading < 12) && (prevRadiationReading >= 12)) {
 			soundEffects1.pause();
 			soundEffects1.reset(); 
 		}
@@ -68,7 +75,9 @@ public class GeigerCounter extends Item {
 		
 		double dist = Math.sqrt(Math.pow(gx - px, 2) + Math.pow(gy - py, 2));
 		
+		prevRadiationReading = radiationReading;
 		radiationReading = PROP_CONST/dist;
+		playSound();
 	}
 	
 

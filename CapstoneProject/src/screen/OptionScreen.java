@@ -35,6 +35,9 @@ public class OptionScreen extends Screen {
 	 */
 	public static final String OPTION_SCREEN_PATH = "assets/optionScreen.png";
 	
+	/**
+	 * Path to instructions button image
+	 */
 	public static final String INSTRUCTIONS_PATH = "assets/Instructions.png";
 	/**
 	 * Path to the starter screen image

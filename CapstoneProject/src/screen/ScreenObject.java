@@ -9,6 +9,9 @@ public abstract class ScreenObject {
 	
 	// has an x and y value for position
 	
+	/**
+	 * Variable for the position / dimensions of the ScreenObject
+	 */
 	protected double x, y, w, h;
 	
 	// public ScreenObject()

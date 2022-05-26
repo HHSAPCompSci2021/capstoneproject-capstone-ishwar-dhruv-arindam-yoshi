@@ -30,13 +30,15 @@ public class AudioPlayer {
 	 * hasMusicStarted represents whether the music has started playing or not. 
 	 */
 	public boolean hasMusicStarted; 
+	private boolean shouldLoop;
 	
 	
 	/**
 	 * Creates an object of the AudioPlayer class.
 	 * @param file represents the file from which the music is stored in, and to be played from. 
+	 * @param loop whether the AudioPlayer should loop the clip.
 	 */
-	public AudioPlayer(File file) {
+	public AudioPlayer(File file, boolean loop) {
 		this.file = file; 
 		try {
 			audioStream = AudioSystem.getAudioInputStream(file);
@@ -62,16 +64,19 @@ public class AudioPlayer {
 		}
 		
 		hasMusicStarted = false; 
+		shouldLoop = loop;
 	}
 	
 	
 	/**
 	 * Creates an object of the AudioPlayer class. 
-	 * @param s the string which is the path of the file from which the music is going to be played from. 
+	 * @param s the string which is the path of the file from which the music is going to be played from.
+	 * @param loop whether the AudioPlayer should loop the clip. 
 	 */
-	public AudioPlayer(String s) {
-		File music = new File(s); 
-		this.file = music; 
+	public AudioPlayer(String s, boolean loop) {
+		this(new File(s), loop); 
+		/*
+		this.file = new File(s); 
 		try {
 			audioStream = AudioSystem.getAudioInputStream(file);
 		} catch (UnsupportedAudioFileException e) {
@@ -87,12 +92,21 @@ public class AudioPlayer {
 		} catch (LineUnavailableException e) {
 			e.printStackTrace();
 		}  
+		*/
 	}
 	
 	/**
 	 * Plays the music, and loops it continuously.  
 	 */
 	public void play() {
+		try {
+			clip.start();
+			if (shouldLoop)
+				clip.loop(Clip.LOOP_CONTINUOUSLY);
+		} catch (NullPointerException e) {
+			e.printStackTrace();
+		}
+		/*
 		try {
 			clip.open(audioStream);
 			clip.start();
@@ -102,6 +116,7 @@ public class AudioPlayer {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		*/
 	}
 	
 	/**
@@ -116,5 +131,6 @@ public class AudioPlayer {
 	 */
 	public void reset() {
 		clip.setMicrosecondPosition(0);
+		hasMusicStarted = false;
 	}
 }

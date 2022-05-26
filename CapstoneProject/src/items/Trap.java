@@ -19,10 +19,12 @@ public class Trap extends Item {
 	
 	
 	/**
-	 * NEAR_DIST is a constant that represents the distance between the trap. 
-	 * DEFECT_CHANCE represents the chance the trap "malfunctions" and does not harm the officer. 
+	 * NEAR_DIST is a constant that represents the distance between the trap.  
 	 */
 	public static final double NEAR_DIST = 15;
+	/**
+	 * DEFECT_CHANCE represents the chance the trap "malfunctions" and appears on the screen.
+	 */
 	public static final double DEFECT_CHANCE = 0.01;
 	
 	// private double timeExposed = ;
@@ -46,7 +48,7 @@ public class Trap extends Item {
 	
 	/**
 	 * Gets the type of the trap
-	 * @return
+	 * @return the type of the trap
 	 */
 	public int getType() {
 		return type; 
@@ -103,7 +105,7 @@ public class Trap extends Item {
 	
 	/**
 	 * Traps are not visible to the player, so in essense this method is purposeless. 
-	 * @param marker
+	 * @param marker the PApplet object with which the Trap is being drawn
 	 */
 	public void draw(PApplet marker) {
 		double rand = Math.random();

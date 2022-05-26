@@ -11,6 +11,9 @@ import game.HauntedMaze;
  */
 public class Blueprint extends Item {
 	
+	/**
+	 * the image that represents the Blueprint
+	 */
 	protected PImage image;
 	
 	
@@ -18,10 +21,10 @@ public class Blueprint extends Item {
 	private String identifier;
 	
 	/**
-	 * 
+	 * Constructs a new Blueprint
+	 * @param marker the PApplet object with which image handling is performed
 	 * @param x is an x coordinate for blueprint
 	 * @param y is a y coordinate for blueprint
-	 * @param identify is the identification used to access img
 	 * @param identify the identifier of the blueprint
 	 */
 	public Blueprint(PApplet marker, double x, double y, String identify)
