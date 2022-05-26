@@ -332,22 +332,27 @@ public class HauntedMaze extends ScreenObject {
 	
 	private double[] findEndPt(double px, double py, double[] pt, double minX, double maxX, double minY, double maxY)
 	{	
-		double[] endPt = new double[2];
-		
-		double endX1 = (pt[0] - px > 0) ? maxX : minX;
-		double endY1 = py + (pt[1] - py)*Math.max((minX - px)/(pt[0] - px), (maxX - px)/(pt[0] - px));
+		try {
+			double[] endPt = new double[2];
 			
-		double endY2 = (pt[1] - py > 0) ? maxY : minY;
-		double endX2 = px + (pt[0] - px)*Math.max((minY - py)/(pt[1] - py), (maxY - py)/(pt[1] - py));
+			double endX1 = (pt[0] - px > 0) ? maxX : minX;
+			double endY1 = py + (pt[1] - py)*Math.max((minX - px)/(pt[0] - px), (maxX - px)/(pt[0] - px));
+				
+			double endY2 = (pt[1] - py > 0) ? maxY : minY;
+			double endX2 = px + (pt[0] - px)*Math.max((minY - py)/(pt[1] - py), (maxY - py)/(pt[1] - py));
+			
+			if ((endY1 <= maxY+0.01) && (endY1 >= minY-0.01))
+			{endPt[0] = endX1; endPt[1] = endY1;}
+			else if ((endX2 <= maxX+0.01) && (endX2 >= minX-0.01))
+			{endPt[0] = endX2; endPt[1] = endY2;}
+			else
+			{endPt[0] = 0; endPt[1] = 0;}
+			
+			return endPt;
+		}catch (Exception e) {
+			return null; 
+		}
 		
-		if ((endY1 <= maxY+0.01) && (endY1 >= minY-0.01))
-		{endPt[0] = endX1; endPt[1] = endY1;}
-		else if ((endX2 <= maxX+0.01) && (endX2 >= minX-0.01))
-		{endPt[0] = endX2; endPt[1] = endY2;}
-		else
-		{endPt[0] = 0; endPt[1] = 0;}
-		
-		return endPt;
 	}
 	
 	/**
@@ -366,26 +371,32 @@ public class HauntedMaze extends ScreenObject {
 	 */
 	public void update(double mouseX, double mouseY)
 	{
-		double px = protagonist.getX() + protagonist.getW()/2;
-		double py = protagonist.getY() + protagonist.getH()/2;
+		try {
+			double px = protagonist.getX() + protagonist.getW()/2;
+			double py = protagonist.getY() + protagonist.getH()/2;
+			
+			double relX = mouseX - px; double relY = mouseY - py;
+			double dist = Math.sqrt(Math.pow(relX, 2) + Math.pow(relY, 2));
+			
+			if (!audio.hasMusicStarted) {
+				audio.play(); 
+				audio.hasMusicStarted = true; 
+			}
+			
+			protagonist.direction = (relY > 0) ? Math.acos(relX/dist) : (2*Math.PI - Math.acos(relX/dist));
 		
-		double relX = mouseX - px; double relY = mouseY - py;
-		double dist = Math.sqrt(Math.pow(relX, 2) + Math.pow(relY, 2));
-		
-		if (!audio.hasMusicStarted) {
-			audio.play(); 
-			audio.hasMusicStarted = true; 
+			protagonist.act(this);
+			villain.act(this);
+			
+			for (Item i : items)
+			{
+				i.use(this);
+			}
+		}catch (Exception e) {
+			e.printStackTrace(); 
+			return; 
 		}
 		
-		protagonist.direction = (relY > 0) ? Math.acos(relX/dist) : (2*Math.PI - Math.acos(relX/dist));
-	
-		protagonist.act(this);
-		villain.act(this);
-		
-		for (Item i : items)
-		{
-			i.use(this);
-		}
 	}
 	
 	
